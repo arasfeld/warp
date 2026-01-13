@@ -9,8 +9,9 @@
     "./theme": "./src/theme/index.ts"
   },
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf node_modules",
+    "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
     "@warp/core": "workspace:*"
