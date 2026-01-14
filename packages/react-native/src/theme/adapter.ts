@@ -1,15 +1,6 @@
 import type { Theme, ThemeMode, ShadowDefinition } from "@warp/core";
 import { StyleSheet, type ViewStyle, type TextStyle } from "react-native";
-
-/**
- * Convert HSL color string to hex or rgba
- * For now, we'll use the HSL string directly as React Native supports it
- * React Native supports HSL strings like "hsl(222.2 47.4% 11.2%)"
- */
-function normalizeColor(color: string): string {
-  // React Native supports HSL strings directly
-  return color;
-}
+import { normalizeColor } from "./color-utils";
 
 /**
  * Convert spacing value to number (React Native prefers numbers for spacing)
@@ -43,7 +34,7 @@ function convertShadow(shadow: ShadowDefinition): {
 } {
   // Extract opacity from color if it's in the color string, otherwise use shadow.opacity
   const opacity = shadow.opacity ?? 1;
-  
+
   return {
     shadowColor: normalizeColor(shadow.color),
     shadowOffset: {
@@ -95,62 +86,66 @@ export interface RNTheme {
  */
 export function adaptTheme(theme: Theme, mode: ThemeMode = "light"): RNTheme {
   const colors = theme.colors[mode];
-  
+
   // Convert typography
   const fontSize: Record<string, number> = {};
   const lineHeight: Record<string, number> = {};
-  
+
   Object.entries(theme.typography.fontSize).forEach(([key, value]) => {
-    const size = typeof value.fontSize === "number" 
-      ? value.fontSize 
-      : normalizeSpacing(value.fontSize);
+    const size =
+      typeof value.fontSize === "number"
+        ? value.fontSize
+        : normalizeSpacing(value.fontSize);
     fontSize[key] = size;
-    
+
     if (value.lineHeight) {
-      const height = typeof value.lineHeight === "number"
-        ? value.lineHeight
-        : normalizeSpacing(value.lineHeight);
+      const height =
+        typeof value.lineHeight === "number"
+          ? value.lineHeight
+          : normalizeSpacing(value.lineHeight);
       lineHeight[key] = height;
     }
   });
-  
+
   // Convert font families (take first font from array)
   const fontFamily = {
     sans: theme.typography.fontFamily?.sans?.[0],
     serif: theme.typography.fontFamily?.serif?.[0],
     mono: theme.typography.fontFamily?.mono?.[0],
   };
-  
+
   // Convert spacing
   const spacing: Record<string, number> = {};
   Object.entries(theme.spacing).forEach(([key, value]) => {
     spacing[key] = normalizeSpacing(value);
   });
-  
+
   // Convert border radius
   const borderRadius: Record<string, number> = {};
   Object.entries(theme.borderRadius).forEach(([key, value]) => {
     borderRadius[key] = normalizeSpacing(value);
   });
-  
+
   // Convert shadows
   const shadows: Record<string, ReturnType<typeof convertShadow>> = {};
   Object.entries(theme.shadows).forEach(([key, shadow]) => {
     shadows[key] = convertShadow(shadow);
   });
-  
+
   return {
     colors: {
       primary: normalizeColor(colors.primary),
-      secondary: colors.secondary ? normalizeColor(colors.secondary) : undefined,
+      secondary: colors.secondary
+        ? normalizeColor(colors.secondary)
+        : undefined,
       success: colors.success ? normalizeColor(colors.success) : undefined,
       warning: colors.warning ? normalizeColor(colors.warning) : undefined,
       error: colors.error ? normalizeColor(colors.error) : undefined,
       info: colors.info ? normalizeColor(colors.info) : undefined,
       background: normalizeColor(colors.background),
       foreground: normalizeColor(colors.foreground),
-      mutedBackground: colors.mutedBackground 
-        ? normalizeColor(colors.mutedBackground) 
+      mutedBackground: colors.mutedBackground
+        ? normalizeColor(colors.mutedBackground)
         : undefined,
       mutedForeground: colors.mutedForeground
         ? normalizeColor(colors.mutedForeground)

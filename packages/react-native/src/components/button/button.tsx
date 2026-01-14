@@ -1,6 +1,15 @@
 import React from "react";
-import { Pressable, Text, type PressableProps, type TextStyle, type ViewStyle } from "react-native";
-import { useTheme, type RNTheme } from "../../theme";
+import {
+  ActivityIndicator,
+  Pressable,
+  Text as RNText,
+  type PressableProps,
+  type StyleProp,
+  type TextStyle,
+  type ViewStyle,
+} from "react-native";
+import { useTheme } from "../../theme";
+import { cn } from "../../utils/cn";
 
 /**
  * Button variant
@@ -17,22 +26,26 @@ export type ButtonSize = "sm" | "md" | "lg";
  */
 export interface ButtonProps extends Omit<PressableProps, "style"> {
   /** Button text/content */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /** Button variant */
   variant?: ButtonVariant;
   /** Button size */
   size?: ButtonSize;
   /** Custom style override */
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
   /** Custom text style override */
-  textStyle?: TextStyle;
+  textStyle?: StyleProp<TextStyle>;
   /** Whether button is disabled */
   disabled?: boolean;
+  /** Whether button is in loading state */
+  loading?: boolean;
 }
 
 /**
  * Button component
- * 
+ * Uses CSS variables via Tailwind classes (shadcn/ui approach)
+ * Uses NativeWind v4's `active:` pseudo-class for pressed states
+ *
  * @example
  * ```tsx
  * <Button variant="primary" size="md" onPress={() => console.log('pressed')}>
@@ -42,112 +55,84 @@ export interface ButtonProps extends Omit<PressableProps, "style"> {
  */
 export function Button({
   children,
-  variant = "primary",
+  disabled = false,
+  loading = false,
   size = "md",
   style,
   textStyle,
-  disabled = false,
-  ...pressableProps
+  variant = "primary",
+  ...props
 }: ButtonProps) {
   const { theme } = useTheme();
-  const styles = createStyles(theme);
 
-  const buttonStyle = [
-    styles.base,
-    styles[variant],
-    styles[`${size}Size`],
-    disabled && styles.disabled,
-    style,
-  ];
+  // Base classes - layout and structure
+  const baseClasses = "items-center justify-center flex-row rounded-md";
 
-  const textStyles = [
-    styles.text,
-    styles[`${variant}Text`],
-    styles[`${size}Text`],
-    disabled && styles.disabledText,
-    textStyle,
-  ];
+  // Variant classes using CSS variables (defined in tailwind.config.js)
+  // Use `active:` prefix for pressed state (NativeWind v4)
+  const variantClasses = {
+    primary: "bg-primary active:opacity-80",
+    secondary: "bg-secondary active:opacity-70",
+    outline:
+      "bg-background border border-border active:bg-muted active:opacity-90",
+  };
+
+  // Size classes
+  const sizeClasses = {
+    sm: "px-3 py-2 min-h-[32px]",
+    md: "px-4 py-3 min-h-[40px]",
+    lg: "px-6 py-4 min-h-[48px]",
+  };
+
+  // Text size classes
+  const textSizeClasses = {
+    sm: "text-sm",
+    md: "text-base",
+    lg: "text-lg",
+  };
+
+  // Text variant classes using CSS variables
+  const textVariantClasses = {
+    primary: "text-primary-foreground",
+    secondary: "text-secondary-foreground",
+    outline: "text-foreground",
+  };
+
+  const buttonClassName = cn(
+    baseClasses,
+    sizeClasses[size],
+    variantClasses[variant],
+    disabled && "opacity-50"
+  );
+
+  const textClassName = cn(
+    "font-medium text-center",
+    textSizeClasses[size],
+    textVariantClasses[variant],
+    disabled && "opacity-50"
+  );
 
   return (
     <Pressable
-      style={buttonStyle}
-      disabled={disabled}
-      {...pressableProps}
+      disabled={disabled || loading}
+      className={buttonClassName}
+      style={style}
+      {...props}
     >
-      {({ pressed }) => (
-        <Text
-          style={[
-            textStyles,
-            pressed && styles.pressed,
-          ]}
-        >
+      {loading ? (
+        <ActivityIndicator
+          color={
+            variant === "primary"
+              ? "#ffffff" // Primary buttons have white text, so use white spinner
+              : theme.colors.primary
+          }
+          size="small"
+        />
+      ) : (
+        <RNText className={textClassName} style={textStyle}>
           {children}
-        </Text>
+        </RNText>
       )}
     </Pressable>
   );
 }
-
-const createStyles = (theme: RNTheme) => ({
-  base: {
-    borderRadius: 8,
-    alignItems: "center" as const,
-    justifyContent: "center" as const,
-  },
-  primary: {
-    backgroundColor: theme.colors.primary,
-  },
-  secondary: {
-    backgroundColor: theme.colors.secondary || theme.colors.mutedBackground,
-  },
-  outline: {
-    backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: theme.colors.border || theme.colors.foreground,
-  },
-  smSize: {
-    paddingHorizontal: theme.spacing[3] || 12,
-    paddingVertical: theme.spacing[2] || 8,
-    minHeight: 32,
-  },
-  mdSize: {
-    paddingHorizontal: theme.spacing[4] || 16,
-    paddingVertical: theme.spacing[3] || 12,
-    minHeight: 40,
-  },
-  lgSize: {
-    paddingHorizontal: theme.spacing[6] || 24,
-    paddingVertical: theme.spacing[4] || 16,
-    minHeight: 48,
-  },
-  disabled: {
-    opacity: 0.5,
-  },
-  text: {
-    fontWeight: "600" as const,
-  },
-  primaryText: {
-    color: theme.colors.foreground, // Will need better contrast handling
-  },
-  secondaryText: {
-    color: theme.colors.foreground,
-  },
-  outlineText: {
-    color: theme.colors.foreground,
-  },
-  smText: {
-    fontSize: theme.typography.fontSize.sm || 14,
-  },
-  mdText: {
-    fontSize: theme.typography.fontSize.base || 16,
-  },
-  lgText: {
-    fontSize: theme.typography.fontSize.lg || 18,
-  },
-  disabledText: {
-    opacity: 0.7,
-  },
-  pressed: {
-    opacity: 0.8,
-  },
-});
