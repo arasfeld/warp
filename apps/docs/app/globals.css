@@ -149,4 +149,9 @@
   .btn-shimmer:hover::before {
     left: 100%;
   }
+
+  /* Scroll offset for anchor links to account for fixed header */
+  [id] {
+    scroll-margin-top: 6rem; /* 4rem header (h-16) + 2rem spacing for visibility */
+  }
 }

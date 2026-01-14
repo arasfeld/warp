@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <AnimatedBackground />
-      <Layout>
+      <Layout showSidebar={false}>
         <HeroSection />
         <FeaturesGrid />
         <ComponentsShowcase />
