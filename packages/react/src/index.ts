@@ -8,8 +8,26 @@ export { ThemeProvider, useTheme, updateCSSVariables } from "./theme";
 export type { ThemeProviderProps } from "./theme";
 
 // Export components
-export { Button } from "./components/button";
-export type { ButtonProps, ButtonVariant, ButtonSize } from "./components/button";
+// Import Button to ensure static properties are attached
+import { Button, ButtonGroup, ButtonGroupSection } from "./components/button";
+
+// Ensure static properties are attached (they should be from button/index.ts, but double-check)
+(Button as any).Group = ButtonGroup;
+(Button as any).GroupSection = ButtonGroupSection;
+
+export { Button, ButtonGroup, ButtonGroupSection };
+export type {
+  ButtonProps,
+  ButtonVariant,
+  ButtonSize,
+  MantineColor,
+  GradientConfig,
+  ButtonGroupProps,
+  ButtonGroupSectionProps,
+} from "./components/button";
+
+export { Loader } from "./components/loader";
+export type { LoaderProps, LoaderType } from "./components/loader";
 
 export {
   Card,
@@ -39,3 +57,6 @@ export type {
 
 export { Input } from "./components/input";
 export type { InputProps, InputSize, InputVariant } from "./components/input";
+
+// Export utilities
+export { cn } from "./utils/cn";
