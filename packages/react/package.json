@@ -1,20 +1,29 @@
 {
-  "name": "@warp/core",
+  "name": "@warp/react",
   "version": "0.0.0",
   "private": true,
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./theme": "./src/theme/index.ts",
-    "./types": "./src/types.ts"
+    "./theme": "./src/theme/index.ts"
   },
   "scripts": {
     "check-types": "tsc --noEmit",
     "clean": "rm -rf node_modules",
     "lint": "eslint . --max-warnings 0"
   },
+  "dependencies": {
+    "@warp/core": "workspace:*",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.4"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
   "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*"
   }
 }
