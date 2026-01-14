@@ -1,10 +1,17 @@
-import { DocsLayout } from "../docs-layout";
-import { Text, Heading } from "@warp/react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@warp/react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Heading,
+  Text,
+} from "@warp/react";
+import { Layout } from "@/components/layout";
 
 export default function TextPage() {
   return (
-    <DocsLayout>
+    <Layout>
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="space-y-2">
           <Heading level={1}>Text & Heading</Heading>
@@ -33,7 +40,9 @@ export default function TextPage() {
         <Card>
           <CardHeader>
             <CardTitle>Text Sizes</CardTitle>
-            <CardDescription>Different text sizes from xs to 4xl</CardDescription>
+            <CardDescription>
+              Different text sizes from xs to 4xl
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             <Text size="xs">Extra Small Text</Text>
@@ -77,6 +86,6 @@ export default function TextPage() {
           </CardContent>
         </Card>
       </div>
-    </DocsLayout>
+    </Layout>
   );
 }

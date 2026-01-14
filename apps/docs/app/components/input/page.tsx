@@ -1,11 +1,18 @@
-import { DocsLayout } from "../docs-layout";
-import { Input } from "@warp/react";
-import { Heading, Text } from "@warp/react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@warp/react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Heading,
+  Input,
+  Text,
+} from "@warp/react";
+import { Layout } from "@/components/layout";
 
 export default function InputPage() {
   return (
-    <DocsLayout>
+    <Layout>
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="space-y-2">
           <Heading level={1}>Input</Heading>
@@ -50,9 +57,21 @@ export default function InputPage() {
             <CardDescription>Different input style variants</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <Input variant="default" label="Default" placeholder="Default variant" />
-            <Input variant="outline" label="Outline" placeholder="Outline variant" />
-            <Input variant="filled" label="Filled" placeholder="Filled variant" />
+            <Input
+              variant="default"
+              label="Default"
+              placeholder="Default variant"
+            />
+            <Input
+              variant="outline"
+              label="Outline"
+              placeholder="Outline variant"
+            />
+            <Input
+              variant="filled"
+              label="Filled"
+              placeholder="Filled variant"
+            />
           </CardContent>
         </Card>
 
@@ -74,14 +93,10 @@ export default function InputPage() {
               error
               errorMessage="This field is required"
             />
-            <Input
-              label="Disabled"
-              placeholder="Cannot type here"
-              disabled
-            />
+            <Input label="Disabled" placeholder="Cannot type here" disabled />
           </CardContent>
         </Card>
       </div>
-    </DocsLayout>
+    </Layout>
   );
 }

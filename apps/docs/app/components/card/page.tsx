@@ -1,18 +1,19 @@
-import { DocsLayout } from "../docs-layout";
 import {
+  Button,
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-  Button,
+  Heading,
+  Text,
 } from "@warp/react";
-import { Heading, Text } from "@warp/react";
+import { Layout } from "@/components/layout";
 
 export default function CardPage() {
   return (
-    <DocsLayout>
+    <Layout>
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="space-y-2">
           <Heading level={1}>Card</Heading>
@@ -78,6 +79,6 @@ export default function CardPage() {
           </Card>
         </div>
       </div>
-    </DocsLayout>
+    </Layout>
   );
 }

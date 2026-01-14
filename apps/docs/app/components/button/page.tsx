@@ -1,11 +1,18 @@
-import { DocsLayout } from "../docs-layout";
-import { Button } from "@warp/react";
-import { Heading, Text } from "@warp/react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@warp/react";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Heading,
+  Text,
+} from "@warp/react";
+import { Layout } from "@/components/layout";
 
 export default function ButtonPage() {
   return (
-    <DocsLayout>
+    <Layout>
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="space-y-2">
           <Heading level={1}>Button</Heading>
@@ -62,6 +69,6 @@ export default function ButtonPage() {
           </CardContent>
         </Card>
       </div>
-    </DocsLayout>
+    </Layout>
   );
 }
