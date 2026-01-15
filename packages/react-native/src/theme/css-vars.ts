@@ -4,7 +4,7 @@
  */
 
 import { vars } from "nativewind";
-import type { ColorPalette } from "@warp/core";
+import type { Palette } from "@warp/core";
 
 /**
  * Extract HSL values from HSL string
@@ -16,49 +16,38 @@ function extractHslValues(hsl: string): string {
 }
 
 /**
- * Convert a color palette to NativeWind vars object
+ * Convert a palette to NativeWind vars object
  * This creates CSS variable values that can be applied via inline styles
  *
- * @param colors - Color palette to convert
- * @param isDark - Whether this is for dark mode (used for primary-foreground logic)
+ * @param palette - Palette to convert
  * @returns NativeWind vars object for CSS variables
  */
 export function createThemeVars(
-  colors: ColorPalette,
-  isDark: boolean = false
+  palette: Palette
 ): ReturnType<typeof vars> {
   // Determine primary-foreground based on mode
   // Light mode: primary is dark, so foreground should be light
   // Dark mode: primary is light, so foreground should be dark
-  // This matches shadcn/ui's approach where primary-foreground provides contrast
-  const primaryForeground = isDark
+  const primaryForeground = palette.mode === "dark"
     ? "222.2 47.4% 11.2%" // Dark mode: dark foreground for light primary
     : "210 40% 98%"; // Light mode: light foreground for dark primary
 
+  // Extract main color from ColorVariant if needed
+  const getMainColor = (color: string | { main: string }) => {
+    return typeof color === "string" ? color : color.main;
+  };
+
   return vars({
-    "--background": extractHslValues(colors.background),
-    "--foreground": extractHslValues(colors.foreground),
-    "--primary": extractHslValues(colors.primary),
+    "--background": extractHslValues(palette.background.default),
+    "--foreground": extractHslValues(palette.text.primary),
+    "--primary": extractHslValues(getMainColor(palette.primary)),
     "--primary-foreground": primaryForeground,
-    "--secondary": extractHslValues(
-      colors.secondary || colors.mutedBackground || colors.background
-    ),
-    "--secondary-foreground": extractHslValues(colors.foreground),
-    "--muted": extractHslValues(
-      colors.mutedBackground || colors.secondary || colors.background
-    ),
-    "--muted-foreground": extractHslValues(
-      colors.mutedForeground || colors.foreground
-    ),
-    "--border": extractHslValues(
-      colors.border || colors.mutedBackground || colors.foreground
-    ),
-    "--input": extractHslValues(
-      colors.input ||
-        colors.border ||
-        colors.mutedBackground ||
-        colors.foreground
-    ),
-    "--ring": extractHslValues(colors.ring || colors.primary),
+    "--secondary": extractHslValues(getMainColor(palette.secondary)),
+    "--secondary-foreground": extractHslValues(palette.secondary.contrastText || palette.text.primary),
+    "--muted": extractHslValues(palette.background.paper),
+    "--muted-foreground": extractHslValues(palette.text.secondary),
+    "--border": extractHslValues(palette.divider),
+    "--input": extractHslValues(palette.divider),
+    "--ring": extractHslValues(getMainColor(palette.primary)),
   });
 }

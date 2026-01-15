@@ -4,35 +4,98 @@ import React from "react";
 import { cn } from "../../utils/cn";
 
 /**
- * Text size variants
+ * Theme color type (theme color key or CSS color)
  */
-export type TextSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+export type ThemeColor = string;
 
 /**
- * Text weight variants
+ * Theme size type
  */
-export type TextWeight = "normal" | "medium" | "semibold" | "bold";
+export type ThemeSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 /**
- * Text color variants
+ * Text size variants (includes theme sizes plus extended sizes)
  */
-export type TextColor = "default" | "muted" | "primary" | "secondary" | "error" | "success";
+export type TextSize = ThemeSize | "2xl" | "3xl" | "4xl" | (string & {});
+
+/**
+ * Text truncate type
+ */
+export type TextTruncate = "start" | "end" | boolean;
+
+/**
+ * Gradient configuration
+ */
+export interface Gradient {
+  from: string;
+  to: string;
+  deg?: number;
+}
 
 /**
  * Text component props
+ * Comprehensive text component with polymorphic support
  */
-export interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
+export interface TextProps extends Omit<
+  React.HTMLAttributes<HTMLParagraphElement> &
+    React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  "color"
+> {
   /** Text content */
   children?: React.ReactNode;
   /** Text size */
   size?: TextSize;
-  /** Text weight */
-  weight?: TextWeight;
-  /** Text color variant */
-  color?: TextColor;
-  /** Render as different HTML element */
-  as?: "p" | "span" | "div" | "label";
+  /** Font weight (number like 400, 500, 700 or string) */
+  fw?: number | "normal" | "bold" | "lighter" | "bolder";
+  /** Font style */
+  fs?: "normal" | "italic" | "oblique";
+  /** Text decoration */
+  td?: "none" | "underline" | "line-through" | "overline";
+  /** Text color (theme color key or CSS color) */
+  c?: ThemeColor;
+  /** Deprecated: Use c prop instead */
+  color?: string;
+  /** Text transform */
+  tt?: "none" | "uppercase" | "lowercase" | "capitalize";
+  /** Text align */
+  ta?: "left" | "center" | "right" | "justify";
+  /** Variant */
+  variant?: "text" | "gradient";
+  /** Gradient configuration (only used when variant="gradient") */
+  gradient?: Gradient;
+  /** Truncate text (side or boolean) */
+  truncate?: TextTruncate;
+  /** Line clamp (max number of lines) */
+  lineClamp?: number;
+  /** Inherit font styles from parent */
+  inherit?: boolean;
+  /** Inline mode (sets line-height to 1) */
+  inline?: boolean;
+  /** Shorthand for component="span" */
+  span?: boolean;
+  /** Component to render as (polymorphic) */
+  component?: React.ElementType;
+  /** Additional className */
+  className?: string;
 }
+
+/**
+ * Text weight variants (kept for backward compatibility)
+ * @deprecated Use fw prop with number instead
+ */
+export type TextWeight = "normal" | "medium" | "semibold" | "bold";
+
+/**
+ * Text color variants (kept for backward compatibility)
+ * @deprecated Use c prop with ThemeColor instead
+ */
+export type TextColor =
+  | "default"
+  | "muted"
+  | "primary"
+  | "secondary"
+  | "error"
+  | "success";
 
 /**
  * Heading component props
@@ -42,19 +105,25 @@ export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children?: React.ReactNode;
   /** Heading level (h1-h6) */
   level?: 1 | 2 | 3 | 4 | 5 | 6;
-  /** Text weight */
+  /** Text weight (backward compatibility) */
   weight?: TextWeight;
-  /** Text color variant */
+  /** Font weight */
+  fw?: number | "normal" | "bold" | "lighter" | "bolder";
+  /** Text color variant (backward compatibility) */
   color?: TextColor;
+  /** Text color (theme color key or CSS color) */
+  c?: ThemeColor;
+  /** Additional className */
+  className?: string;
 }
 
 /**
  * Text component
- * Flexible text component with size, weight, and color variants
+ * Comprehensive text component with typography controls
  *
  * @example
  * ```tsx
- * <Text size="lg" weight="semibold" color="primary">
+ * <Text size="lg" fw={600} c="blue">
  *   Hello World
  * </Text>
  * ```
@@ -62,13 +131,30 @@ export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
 export function Text({
   children,
   size = "md",
-  weight = "normal",
-  color = "default",
-  as: Component = "p",
+  fw,
+  fs,
+  td,
+  c,
+  color, // Deprecated
+  tt,
+  ta,
+  variant = "text",
+  gradient,
+  truncate,
+  lineClamp,
+  inherit = false,
+  inline = false,
+  span = false,
+  component,
   className,
+  style,
   ...props
 }: TextProps) {
-  const sizeClasses = {
+  // Determine root element
+  const Component = span ? "span" : component || "p";
+
+  // Size classes
+  const sizeClasses: Record<string, string> = {
     xs: "text-xs",
     sm: "text-sm",
     md: "text-base",
@@ -79,91 +165,165 @@ export function Text({
     "4xl": "text-4xl",
   };
 
-  const weightClasses = {
-    normal: "font-normal",
-    medium: "font-medium",
-    semibold: "font-semibold",
-    bold: "font-bold",
-  };
+  // Build classes array
+  const classes: string[] = [];
 
-  const colorClasses = {
-    default: "text-foreground",
-    muted: "text-muted-foreground",
-    primary: "text-primary",
-    secondary: "text-secondary-foreground",
-    error: "text-error",
-    success: "text-success",
-  };
+  // Size (only if not inheriting)
+  if (!inherit && size) {
+    const sizeClass =
+      sizeClasses[size] || (typeof size === "string" ? `text-[${size}]` : "");
+    if (sizeClass) classes.push(sizeClass);
+  }
+
+  // Font weight
+  if (fw !== undefined) {
+    if (typeof fw === "number") {
+      classes.push(`font-[${fw}]`);
+    } else {
+      const fwMap: Record<string, string> = {
+        normal: "font-normal",
+        bold: "font-bold",
+        lighter: "font-light",
+        bolder: "font-extrabold",
+      };
+      if (fwMap[fw]) classes.push(fwMap[fw]);
+    }
+  }
+
+  // Font style
+  if (fs) {
+    const fsMap: Record<string, string> = {
+      normal: "not-italic",
+      italic: "italic",
+      oblique: "italic",
+    };
+    if (fsMap[fs]) classes.push(fsMap[fs]);
+  }
+
+  // Text decoration
+  if (td) {
+    const tdMap: Record<string, string> = {
+      none: "no-underline",
+      underline: "underline",
+      "line-through": "line-through",
+      overline: "overline",
+    };
+    if (tdMap[td]) classes.push(tdMap[td]);
+  }
+
+  // Text color (use c prop, fallback to deprecated color prop)
+  const colorValue = c || color;
+  if (colorValue && variant !== "gradient") {
+    // Handle special color values
+    if (colorValue === "dimmed") {
+      classes.push("text-muted-foreground");
+    } else if (colorValue.includes(".")) {
+      // Handle dot notation like "teal.4" - use as-is for now
+      classes.push(`text-[${colorValue}]`);
+    } else {
+      // Try common color mappings
+      const colorMap: Record<string, string> = {
+        default: "text-foreground",
+        muted: "text-muted-foreground",
+        dimmed: "text-muted-foreground",
+        primary: "text-primary",
+        secondary: "text-secondary-foreground",
+        error: "text-error",
+        success: "text-success",
+        warning: "text-warning",
+        info: "text-info",
+      };
+      if (colorMap[colorValue]) {
+        classes.push(colorMap[colorValue]);
+      } else {
+        // Use as CSS color
+        classes.push(`text-[${colorValue}]`);
+      }
+    }
+  }
+
+  // Text transform
+  if (tt) {
+    const ttMap: Record<string, string> = {
+      none: "normal-case",
+      uppercase: "uppercase",
+      lowercase: "lowercase",
+      capitalize: "capitalize",
+    };
+    if (ttMap[tt]) classes.push(ttMap[tt]);
+  }
+
+  // Text align
+  if (ta) {
+    const taMap: Record<string, string> = {
+      left: "text-left",
+      center: "text-center",
+      right: "text-right",
+      justify: "text-justify",
+    };
+    if (taMap[ta]) classes.push(taMap[ta]);
+  }
+
+  // Inline mode
+  if (inline) {
+    classes.push("leading-none");
+  }
+
+  // Truncate
+  if (truncate) {
+    if (truncate === "end" || truncate === true) {
+      classes.push("truncate");
+    } else if (truncate === "start") {
+      classes.push("truncate");
+      // Note: Tailwind doesn't have start truncate, would need custom CSS
+    }
+  }
+
+  // Line clamp
+  if (lineClamp) {
+    const clampMap: Record<number, string> = {
+      1: "line-clamp-1",
+      2: "line-clamp-2",
+      3: "line-clamp-3",
+      4: "line-clamp-4",
+      5: "line-clamp-5",
+      6: "line-clamp-6",
+    };
+    if (clampMap[lineClamp]) {
+      classes.push(clampMap[lineClamp]);
+    } else {
+      classes.push(`line-clamp-[${lineClamp}]`);
+    }
+  }
+
+  // Gradient variant
+  const gradientStyle: React.CSSProperties = {};
+  if (variant === "gradient" && gradient) {
+    const deg = gradient.deg ?? 45;
+    gradientStyle.backgroundImage = `linear-gradient(${deg}deg, ${gradient.from}, ${gradient.to})`;
+    gradientStyle.WebkitBackgroundClip = "text";
+    gradientStyle.backgroundClip = "text";
+    gradientStyle.WebkitTextFillColor = "transparent";
+    gradientStyle.color = "transparent";
+  }
+
+  // Inherit styles - remove font-size and line-height classes if inherit is true
+  const finalClasses = inherit
+    ? classes.filter(
+        (cls) =>
+          !cls.startsWith("text-") &&
+          !cls.startsWith("leading-") &&
+          !cls.startsWith("font-")
+      )
+    : classes;
 
   return (
     <Component
-      className={cn(
-        sizeClasses[size],
-        weightClasses[weight],
-        colorClasses[color],
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </Component>
-  );
-}
-
-/**
- * Heading component
- * Semantic heading component with automatic sizing based on level
- *
- * @example
- * ```tsx
- * <Heading level={1}>Main Title</Heading>
- * <Heading level={2}>Subtitle</Heading>
- * ```
- */
-export function Heading({
-  children,
-  level = 1,
-  weight = "bold",
-  color = "default",
-  className,
-  ...props
-}: HeadingProps) {
-  const Component = `h${level}` as keyof JSX.IntrinsicElements;
-
-  const sizeClasses = {
-    1: "text-4xl",
-    2: "text-3xl",
-    3: "text-2xl",
-    4: "text-xl",
-    5: "text-lg",
-    6: "text-base",
-  };
-
-  const weightClasses = {
-    normal: "font-normal",
-    medium: "font-medium",
-    semibold: "font-semibold",
-    bold: "font-bold",
-  };
-
-  const colorClasses = {
-    default: "text-foreground",
-    muted: "text-muted-foreground",
-    primary: "text-primary",
-    secondary: "text-secondary-foreground",
-    error: "text-error",
-    success: "text-success",
-  };
-
-  return (
-    <Component
-      className={cn(
-        sizeClasses[level],
-        weightClasses[weight],
-        colorClasses[color],
-        "leading-tight tracking-tight",
-        className
-      )}
+      className={cn(finalClasses, className)}
+      style={{
+        ...gradientStyle,
+        ...style,
+      }}
       {...props}
     >
       {children}

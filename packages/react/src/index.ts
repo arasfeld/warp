@@ -4,59 +4,87 @@
  */
 
 // Export theme system
-export { ThemeProvider, useTheme, updateCSSVariables } from "./theme";
+export {
+  ThemeProvider,
+  updatePaletteCSSVariables,
+  updateThemeCSSVariables,
+  useTheme,
+} from "./theme";
 export type { ThemeProviderProps } from "./theme";
 
 // Export components
-// Import Button to ensure static properties are attached
-import { Button, ButtonGroup, ButtonGroupSection } from "./components/button";
-
-// Ensure static properties are attached (they should be from button/index.ts, but double-check)
-(Button as any).Group = ButtonGroup;
-(Button as any).GroupSection = ButtonGroupSection;
-
-export { Button, ButtonGroup, ButtonGroupSection };
+// Button with static properties (already attached in button/index.ts)
+export { Button, ButtonGroup, ButtonGroupSection } from "./components/button";
 export type {
-  ButtonProps,
-  ButtonVariant,
-  ButtonSize,
-  MantineColor,
-  GradientConfig,
   ButtonGroupProps,
   ButtonGroupSectionProps,
+  ButtonProps,
+  ButtonSize,
+  ButtonVariant,
+  GradientConfig,
 } from "./components/button";
 
 export { Loader } from "./components/loader";
 export type { LoaderProps, LoaderType } from "./components/loader";
 
-export {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "./components/card";
-export type {
-  CardProps,
-  CardHeaderProps,
-  CardTitleProps,
-  CardDescriptionProps,
-  CardContentProps,
-  CardFooterProps,
-} from "./components/card";
+// Card with static properties (already attached in card/index.ts)
+export { Card, CardSection } from "./components/card";
+export type { CardProps, CardSectionProps } from "./components/card";
 
-export { Text, Heading } from "./components/text";
+export { Text } from "./components/text";
 export type {
-  TextProps,
-  HeadingProps,
-  TextSize,
-  TextWeight,
+  Gradient,
   TextColor,
+  TextProps,
+  TextSize,
+  TextTruncate,
+  TextWeight,
+  ThemeColor,
+  ThemeSize,
 } from "./components/text";
 
-export { Input } from "./components/input";
-export type { InputProps, InputSize, InputVariant } from "./components/input";
+export { Heading } from "./components/heading";
+export type {
+  Gradient as HeadingGradient,
+  HeadingOrder,
+  HeadingProps,
+  HeadingSize,
+  TextWrap,
+} from "./components/heading";
+
+// Chip with static properties (already attached in chip/index.ts)
+export { Chip, ChipGroup } from "./components/chip";
+export type {
+  ChipProps,
+  ChipGroupProps,
+  ChipVariant,
+} from "./components/chip";
+
+// Checkbox with static properties (already attached in checkbox/index.ts)
+export { Checkbox, CheckboxGroup, CheckboxIndicator } from "./components/checkbox";
+export type {
+  CheckboxProps,
+  CheckboxGroupProps,
+  CheckboxIndicatorProps,
+  CheckboxVariant,
+} from "./components/checkbox";
+
+// Input with static properties (already attached in input/index.ts)
+export {
+  Input,
+  InputClearButton,
+  InputDescription,
+  InputError,
+  InputLabel,
+  InputPlaceholder,
+  InputWrapper,
+} from "./components/input";
+export type {
+  InputProps,
+  InputSize,
+  InputVariant,
+  InputWrapperProps,
+} from "./components/input";
 
 // Export utilities
 export { cn } from "./utils/cn";

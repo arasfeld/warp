@@ -1,8 +1,11 @@
-export { Text, Heading } from "./text";
+export { Text } from "./text";
 export type {
   TextProps,
-  HeadingProps,
   TextSize,
   TextWeight,
   TextColor,
+  ThemeColor,
+  ThemeSize,
+  Gradient,
+  TextTruncate,
 } from "./text";

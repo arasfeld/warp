@@ -8,7 +8,12 @@ import { ButtonGroup, ButtonGroupSection } from "./button-group";
 /**
  * Button variant
  */
-export type ButtonVariant = "filled" | "light" | "outline" | "gradient" | "default";
+export type ButtonVariant =
+  | "filled"
+  | "light"
+  | "outline"
+  | "gradient"
+  | "default";
 
 /**
  * Button size (including compact variants)
@@ -26,9 +31,9 @@ export type ButtonSize =
   | "compact-xl";
 
 /**
- * Mantine color type (theme color key or CSS color)
+ * Theme color type (theme color key or CSS color)
  */
-export type MantineColor = string;
+export type ThemeColor = string;
 
 /**
  * Gradient configuration
@@ -49,10 +54,13 @@ export interface LoaderProps {
 
 /**
  * Button props
- * Similar API to Mantine Button
+ * Comprehensive button component
+ * Supports polymorphic components (button, anchor, div, etc.)
  */
-export interface ButtonProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "color"> {
+export interface ButtonProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement> & React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  "color"
+> {
   /** Button text/content */
   children?: React.ReactNode;
   /** Button variant */
@@ -60,7 +68,7 @@ export interface ButtonProps
   /** Button size */
   size?: ButtonSize;
   /** Color (theme color key or CSS color) */
-  color?: MantineColor;
+  color?: string;
   /** Border radius (theme key or CSS value) */
   radius?: string | number;
   /** Whether button takes full width */
@@ -89,13 +97,9 @@ export interface ButtonProps
   className?: string;
 }
 
-// Legacy type aliases for backward compatibility
-export type ButtonVariantLegacy = "primary" | "secondary" | "outline";
-export type ButtonSizeLegacy = "sm" | "md" | "lg";
-
 /**
  * Button component
- * Mantine-like API with full feature set
+ * Comprehensive button component with full feature set
  */
 export function Button({
   children,
@@ -117,32 +121,15 @@ export function Button({
   className,
   ...props
 }: ButtonProps) {
-  // Handle legacy variant names for backward compatibility
-  const normalizedVariant: ButtonVariant =
-    (variant as any) === "primary"
-      ? "filled"
-      : (variant as any) === "secondary"
-        ? "default"
-        : (variant as any) === "outline"
-          ? "outline"
-          : variant;
-
-  // Handle legacy size names
-  const normalizedSize: ButtonSize =
-    size === "sm" && !size.startsWith("compact-")
-      ? "sm"
-      : size === "md" && !size.startsWith("compact-")
-        ? "md"
-        : size === "lg" && !size.startsWith("compact-")
-          ? "lg"
-          : size;
+  const normalizedVariant: ButtonVariant = variant;
+  const normalizedSize: ButtonSize = size;
 
   const isDisabled = disabled || loading || dataDisabled;
   const isCompact = normalizedSize.startsWith("compact-");
 
   // Base classes
   const baseClasses =
-    "inline-flex items-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap relative";
+    "inline-flex items-center font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed whitespace-nowrap relative active:translate-y-[1px] disabled:active:translate-y-0";
 
   // Size classes
   const sizeClasses = {
@@ -180,18 +167,20 @@ export function Button({
     if (normalizedVariant === "gradient") {
       if (gradient) {
         const deg = gradient.deg || 90;
-        return `bg-gradient-to-r text-white`;
+        return `bg-gradient-to-r text-white hover:opacity-90 active:opacity-80`;
       }
-      return "bg-gradient-to-r from-primary to-primary/80 text-white";
+      return "bg-gradient-to-r from-primary to-primary/80 text-white hover:opacity-90 active:opacity-80";
     }
 
     const variantMap: Record<ButtonVariant, string> = {
-      filled: "bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80",
-      light: "bg-primary/10 text-primary hover:bg-primary/20 active:bg-primary/30",
+      filled:
+        "bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80",
+      light:
+        "bg-primary/10 text-primary hover:bg-primary/20 active:bg-primary/30",
       outline:
-        "border-2 border-border bg-transparent text-foreground hover:bg-muted active:bg-muted/90",
+        "border-2 border-divider bg-transparent text-foreground hover:bg-purple-500/10 hover:border-purple-500 active:bg-purple-500/15 active:border-purple-500/70",
       default:
-        "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:bg-secondary/70",
+        "bg-white/5 dark:bg-white/5 text-muted-foreground hover:bg-white/8 dark:hover:bg-white/8 hover:text-foreground active:bg-white/12 dark:active:bg-white/12",
       gradient: "", // Handled above
     };
 
@@ -206,13 +195,22 @@ export function Button({
     return "";
   };
 
+  // Disabled state - uses palette.action.disabledOpacity (default 0.38)
+  // Use CSS variable if available, fallback to 0.38
+  // Simply apply opacity and prevent interactions, keep all original styling
+  const disabledOpacity = "var(--action-disabled-opacity, var(--palette-action-disabled-opacity, 0.38))";
+  const disabledClasses = isDisabled
+    ? "cursor-not-allowed pointer-events-none"
+    : "";
+
   const buttonClassName = cn(
     baseClasses,
     sizeClasses[normalizedSize],
     getRadiusClass(),
-    getVariantClasses(),
+    !isDisabled && getVariantClasses(),
+    isDisabled && disabledClasses,
     getColorClasses(),
-    fullWidth && "w-full",
+    fullWidth && "w-full justify-center",
     className
   );
 
@@ -231,12 +229,19 @@ export function Button({
 
   const Component = component || "button";
 
+  // Apply disabled opacity via inline style if disabled
+  const buttonStyle: React.CSSProperties = {
+    ...(gradientStyle || {}),
+    ...(isDisabled ? { opacity: disabledOpacity } : {}),
+    ...props.style,
+  };
+
   return (
     <Component
       className={buttonClassName}
       disabled={isDisabled && Component === "button"}
       data-disabled={dataDisabled || (isDisabled && Component !== "button")}
-      style={gradientStyle}
+      style={buttonStyle}
       {...props}
     >
       {loading && (
@@ -275,6 +280,6 @@ export function Button({
   );
 }
 
-// Attach Group and GroupSection as static properties (like Mantine)
+// Attach Group and GroupSection as static properties
 (Button as any).Group = ButtonGroup;
 (Button as any).GroupSection = ButtonGroupSection;

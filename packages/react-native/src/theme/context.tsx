@@ -9,7 +9,7 @@ import React, {
 import { View } from "react-native";
 import { useColorScheme, colorScheme } from "nativewind";
 import type { Theme, ThemeMode } from "@warp/core";
-import { defaultTheme, getColors } from "@warp/core/theme";
+import { defaultTheme, getPalette } from "@warp/core/theme";
 import { adaptTheme, type RNTheme } from "./adapter";
 import { createThemeVars } from "./css-vars";
 
@@ -91,8 +91,8 @@ export function ThemeProvider({
 
   // Create CSS variables object using NativeWind's vars()
   const themeVars = useMemo(() => {
-    const colors = getColors(coreTheme, currentMode);
-    return createThemeVars(colors, currentMode === "dark");
+    const palette = getPalette(coreTheme, currentMode);
+    return createThemeVars(palette);
   }, [coreTheme, currentMode]);
 
   const setMode = (mode: ThemeMode) => {

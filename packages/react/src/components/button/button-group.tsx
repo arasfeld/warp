@@ -41,25 +41,43 @@ export function ButtonGroup({
 
         const isFirst = index === 0;
         const isLast = index === React.Children.count(children) - 1;
+        const childProps = child.props as any;
+        const existingClassName = childProps.className || "";
+        const variant = childProps.variant || "filled";
 
-        const existingClassName =
-          (child.props as { className?: string }).className || "";
+        // Add border to "default" variant buttons so they connect visually
+        // Other variants (outline, filled, etc.) handle their own borders
+        const needsBorder = variant === "default";
+        const borderClasses = needsBorder ? "border border-divider" : "";
+
+        // Remove border radius on connected sides
+        const radiusClasses =
+          orientation === "horizontal"
+            ? cn(!isFirst && "rounded-l-none", !isLast && "rounded-r-none")
+            : cn(!isFirst && "rounded-t-none", !isLast && "rounded-b-none");
+
+        // Remove inner borders and use negative margin to overlap for seamless connection
+        const connectionClasses =
+          orientation === "horizontal"
+            ? cn(!isFirst && "border-l-0 -ml-px", !isLast && "border-r-0")
+            : cn(!isFirst && "border-t-0 -mt-px", !isLast && "border-b-0");
 
         return React.cloneElement(child, {
-          ...(child.props as any),
+          ...childProps,
+          key: child.key || index,
           className: cn(
             existingClassName,
-            orientation === "horizontal"
-              ? cn(
-                  !isFirst && "rounded-l-none border-l-0",
-                  !isLast && "rounded-r-none border-r-0"
-                )
-              : cn(
-                  !isFirst && "rounded-t-none border-t-0",
-                  !isLast && "rounded-b-none border-b-0"
-                )
+            "relative",
+            borderClasses,
+            radiusClasses,
+            connectionClasses
           ),
-        } as any);
+          style: {
+            ...childProps.style,
+            zIndex: isLast ? 1 : index,
+            position: "relative",
+          },
+        });
       })}
     </div>
   );
@@ -88,7 +106,7 @@ export function ButtonGroupSection({
   const variantClasses = {
     filled: "bg-primary text-primary-foreground",
     light: "bg-primary/10 text-primary",
-    outline: "border-2 border-border bg-transparent text-foreground",
+    outline: "border-2 border-divider bg-transparent text-foreground",
     default: "bg-secondary text-secondary-foreground",
     gradient: "",
   };
@@ -96,7 +114,7 @@ export function ButtonGroupSection({
   return (
     <div
       className={cn(
-        "inline-flex items-center justify-center px-4 py-2 border border-border",
+        "inline-flex items-center justify-center px-4 py-2 border border-divider",
         variantClasses[variant],
         className
       )}

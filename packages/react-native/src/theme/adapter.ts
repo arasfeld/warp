@@ -1,5 +1,4 @@
 import type { Theme, ThemeMode, ShadowDefinition } from "@warp/core";
-import { StyleSheet, type ViewStyle, type TextStyle } from "react-native";
 import { normalizeColor } from "./color-utils";
 
 /**
