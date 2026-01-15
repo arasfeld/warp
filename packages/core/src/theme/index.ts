@@ -4,24 +4,43 @@
 
 // Types
 export type {
-  Theme,
-  ColorPalette,
-  ThemeMode,
+  CommonColors,
+  ColorVariant,
+  GreyScale,
+  Palette,
   ShadowDefinition,
+  Theme,
+  ThemeMode,
+  TypographyVariant,
 } from "../types";
 
 // Default theme tokens
 export { defaultTheme } from "./tokens";
 
-// Color palettes
-export { lightColors, darkColors } from "./colors";
+// Palette
+export {
+  commonColors,
+  createPalette,
+  darkPalette,
+  grey,
+  lightPalette,
+} from "./palette";
 
-// Token scales
-export { spacing } from "./spacing";
+// Typography
 export { typography } from "./typography";
-export { borderRadius } from "./borderRadius";
-export { shadows } from "./shadows";
+
+// Shadows
+export { shadows, shadowsArray } from "./shadows";
+
+// Breakpoints
 export { breakpoints } from "./breakpoints";
 
+// Transitions
+export { transitions } from "./transitions";
+
+// Z-index
+export { zIndex } from "./zIndex";
+
 // Utilities
-export { getColors, mergeThemes, validateTheme, createTheme } from "./utils";
+export { createSpacing } from "./spacing-utils";
+export { createTheme, getPalette, mergeThemes, validateTheme } from "./utils";

@@ -1,13 +1,14 @@
 /**
- * Breakpoints
- * Primarily for web use, but defined in core for consistency
- * Values represent minimum widths
+ * Breakpoint definitions
+ * Responsive breakpoint values for media queries
  */
 export const breakpoints = {
-  xs: "0px",
-  sm: "640px",
-  md: "768px",
-  lg: "1024px",
-  xl: "1280px",
-  "2xl": "1536px",
+  values: {
+    xs: 0,
+    sm: 600,
+    md: 900,
+    lg: 1200,
+    xl: 1536,
+  },
+  unit: "px",
 } as const;

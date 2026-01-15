@@ -5,10 +5,14 @@
 
 // Export all types
 export type {
-  Theme,
-  ColorPalette,
-  ThemeMode,
+  CommonColors,
+  ColorVariant,
+  GreyScale,
+  Palette,
   ShadowDefinition,
+  Theme,
+  ThemeMode,
+  TypographyVariant,
 } from "./types";
 
 // Export theme system
