@@ -2,156 +2,249 @@
 @config "../tailwind.config.js";
 
 @layer base {
+  /* 
+   * Theme values defined in CSS
+   * These are the source of truth - the theme system reads from these
+   */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 47.4% 11.2%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 47.4% 11.2%;
-    --radius: 0.5rem;
+    /* Common colors */
+    --palette-common-black: #000000;
+    --palette-common-white: #ffffff;
 
-    /* Warp UI brand colors */
-    --accent-purple: 271 91% 65%;
-    --accent-cyan: 187 85% 53%;
-    --accent-blue: 231 48% 48%;
+    /* Primary color (light mode) - Original HTML purple accent */
+    --palette-primary-main: 271 81% 56%; /* #a855f7 - accent-purple */
+    --palette-primary-light: 271 81% 70%; /* lighter purple */
+    --palette-primary-dark: 271 81% 45%; /* darker purple */
+    --palette-primary-contrast: #ffffff;
+
+    /* Secondary color */
+    --palette-secondary-main: 210 40% 96.1%;
+    --palette-secondary-light: 210 40% 98%;
+    --palette-secondary-dark: 210 40% 94%;
+    --palette-secondary-contrast: 222.2 47.4% 11.2%;
+
+    /* Error color */
+    --palette-error-main: 0 84.2% 60.2%;
+    --palette-error-light: 0 84.2% 70%;
+    --palette-error-dark: 0 84.2% 50%;
+    --palette-error-contrast: #ffffff;
+
+    /* Warning color */
+    --palette-warning-main: 38 92% 50%;
+    --palette-warning-light: 38 92% 60%;
+    --palette-warning-dark: 38 92% 40%;
+    --palette-warning-contrast: #000000;
+
+    /* Info color */
+    --palette-info-main: 199 89% 48%;
+    --palette-info-light: 199 89% 58%;
+    --palette-info-dark: 199 89% 38%;
+    --palette-info-contrast: #ffffff;
+
+    /* Success color */
+    --palette-success-main: 142.1 76.2% 36.3%;
+    --palette-success-light: 142.1 76.2% 46%;
+    --palette-success-dark: 142.1 76.2% 26%;
+    --palette-success-contrast: #ffffff;
+
+    /* Grey scale */
+    --palette-grey-50: #fafafa;
+    --palette-grey-100: #f5f5f5;
+    --palette-grey-200: #eeeeee;
+    --palette-grey-300: #e0e0e0;
+    --palette-grey-400: #bdbdbd;
+    --palette-grey-500: #9e9e9e;
+    --palette-grey-600: #757575;
+    --palette-grey-700: #616161;
+    --palette-grey-800: #424242;
+    --palette-grey-900: #212121;
+    --palette-grey-A100: #f5f5f5;
+    --palette-grey-A200: #eeeeee;
+    --palette-grey-A400: #bdbdbd;
+    --palette-grey-A700: #616161;
+
+    /* Text colors */
+    --palette-text-primary: rgba(0, 0, 0, 0.87);
+    --palette-text-secondary: rgba(0, 0, 0, 0.6);
+    --palette-text-disabled: rgba(0, 0, 0, 0.38);
+
+    /* Divider */
+    --palette-divider: rgba(0, 0, 0, 0.12);
+
+    /* Background */
+    --palette-background-default: 0 0% 100%;
+    --palette-background-paper: 0 0% 100%;
+
+    /* Action states */
+    --palette-action-active: rgba(0, 0, 0, 0.54);
+    --palette-action-hover: rgba(0, 0, 0, 0.04);
+    --palette-action-hover-opacity: 0.04;
+    --palette-action-selected: rgba(0, 0, 0, 0.08);
+    --palette-action-selected-opacity: 0.08;
+    --palette-action-disabled: rgba(0, 0, 0, 0.26);
+    --palette-action-disabled-background: rgba(0, 0, 0, 0.12);
+    --palette-action-disabled-opacity: 0.38;
+    --palette-action-focus: rgba(0, 0, 0, 0.12);
+    --palette-action-focus-opacity: 0.12;
+    --palette-action-activated-opacity: 0.12;
+
+    /* Border radius */
+    --radius: 4px;
+    --radius-xs: 0.125rem;
+    --radius-sm: 2px;
+    --radius-md: 3px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --radius-2xl: 16px;
+    --radius-full: 9999px;
   }
 
   .dark {
-    --background: 240 20% 6%;
-    --foreground: 240 20% 88%;
-    --primary: 271 91% 65%;
-    --primary-foreground: 240 20% 6%;
-    --secondary: 240 15% 13%;
-    --secondary-foreground: 240 20% 88%;
-    --muted: 240 15% 13%;
-    --muted-foreground: 240 10% 53%;
-    --border: 240 15% 18%;
-    --input: 240 15% 18%;
-    --ring: 271 91% 65%;
+    /* Common colors (same in dark mode) */
+    --palette-common-black: #000000;
+    --palette-common-white: #ffffff;
+
+    /* Primary color (dark mode) - Original HTML purple accent */
+    --palette-primary-main: 271 81% 56%; /* #a855f7 - accent-purple */
+    --palette-primary-light: 271 81% 70%; /* lighter purple */
+    --palette-primary-dark: 271 81% 45%; /* darker purple */
+    --palette-primary-contrast: #ffffff;
+
+    /* Secondary color (dark mode) */
+    --palette-secondary-main: 290 47% 72%; /* #ce93d8 */
+    --palette-secondary-light: 290 47% 95%; /* #f3e5f5 */
+    --palette-secondary-dark: 290 47% 58%; /* #ab47bc */
+    --palette-secondary-contrast: rgba(0, 0, 0, 0.87);
+
+    /* Error color (dark mode) */
+    --palette-error-main: 4 90% 58%; /* #f44336 */
+    --palette-error-light: 4 90% 75%; /* #e57373 */
+    --palette-error-dark: 4 90% 49%; /* #d32f2f */
+    --palette-error-contrast: #ffffff;
+
+    /* Warning color (dark mode) */
+    --palette-warning-main: 32 100% 60%; /* #ffa726 */
+    --palette-warning-light: 32 100% 75%; /* #ffb74d */
+    --palette-warning-dark: 32 100% 48%; /* #f57c00 */
+    --palette-warning-contrast: rgba(0, 0, 0, 0.87);
+
+    /* Info color (dark mode) */
+    --palette-info-main: 199 90% 56%; /* #29b6f6 */
+    --palette-info-light: 199 90% 75%; /* #4fc3f7 */
+    --palette-info-dark: 199 90% 45%; /* #0288d1 */
+    --palette-info-contrast: rgba(0, 0, 0, 0.87);
+
+    /* Success color (dark mode) */
+    --palette-success-main: 125 39% 56%; /* #66bb6a */
+    --palette-success-light: 125 39% 70%; /* #81c784 */
+    --palette-success-dark: 125 39% 47%; /* #388e3c */
+    --palette-success-contrast: rgba(0, 0, 0, 0.87);
+
+    /* Grey scale (same in dark mode) */
+    --palette-grey-50: #fafafa;
+    --palette-grey-100: #f5f5f5;
+    --palette-grey-200: #eeeeee;
+    --palette-grey-300: #e0e0e0;
+    --palette-grey-400: #bdbdbd;
+    --palette-grey-500: #9e9e9e;
+    --palette-grey-600: #757575;
+    --palette-grey-700: #616161;
+    --palette-grey-800: #424242;
+    --palette-grey-900: #212121;
+    --palette-grey-A100: #f5f5f5;
+    --palette-grey-A200: #eeeeee;
+    --palette-grey-A400: #bdbdbd;
+    --palette-grey-A700: #616161;
+
+    /* Text colors (dark mode) */
+    --palette-text-primary: #fff;
+    --palette-text-secondary: rgba(255, 255, 255, 0.7);
+    --palette-text-disabled: rgba(255, 255, 255, 0.5);
+
+    /* Divider (dark mode) */
+    --palette-divider: rgba(255, 255, 255, 0.12);
+
+    /* Background (dark mode) */
+    --palette-background-default: 0 0% 7%; /* #121212 */
+    --palette-background-paper: 0 0% 7%; /* #121212 */
+
+    /* Action states (dark mode) */
+    --palette-action-active: #fff;
+    --palette-action-hover: rgba(255, 255, 255, 0.08);
+    --palette-action-hover-opacity: 0.08;
+    --palette-action-selected: rgba(255, 255, 255, 0.16);
+    --palette-action-selected-opacity: 0.16;
+    --palette-action-disabled: rgba(255, 255, 255, 0.3);
+    --palette-action-disabled-background: rgba(255, 255, 255, 0.12);
+    --palette-action-disabled-opacity: 0.38;
+    --palette-action-focus: rgba(255, 255, 255, 0.12);
+    --palette-action-focus-opacity: 0.12;
+    --palette-action-activated-opacity: 0.24;
+  }
+
+  /* Docs-specific theme extensions */
+  :root {
+    /* Docs brand colors (can override base colors) */
+    --docs-primary: 271 91% 65%; /* Purple */
+    --docs-secondary: 187 85% 53%; /* Cyan */
+    --docs-accent: 231 48% 48%; /* Blue */
+
+    /* Docs gradient colors */
+    --docs-gradient-from: 271 91% 65%;
+    --docs-gradient-to: 187 85% 53%;
+    --docs-gradient-via: 231 48% 48%;
+
+    /* Docs animation durations */
+    --docs-animation-fast: 0.15s;
+    --docs-animation-normal: 0.3s;
+    --docs-animation-slow: 0.6s;
+
+    /* Docs shadows */
+    --docs-shadow-sm: 0 1px 2px 0 rgba(168, 85, 247, 0.05);
+    --docs-shadow-md: 0 4px 6px -1px rgba(168, 85, 247, 0.1);
+    --docs-shadow-lg: 0 10px 15px -3px rgba(168, 85, 247, 0.1);
+    --docs-shadow-xl: 0 20px 25px -5px rgba(168, 85, 247, 0.1);
+    --docs-shadow-2xl: 0 25px 50px -12px rgba(168, 85, 247, 0.25);
   }
 
   * {
-    border-color: hsl(var(--border));
+    border-color: var(--palette-divider);
   }
 
   body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
+    background-color: hsl(var(--palette-background-default));
+    color: var(--palette-text-primary);
+    font-family:
+      var(--font-space-grotesk),
+      "Space Grotesk",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+  }
+
+  code,
+  pre,
+  code *,
+  pre *,
+  .font-mono,
+  [class*="font-mono"] {
+    font-family:
+      var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace,
+      SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
   }
 }
 
 @layer utilities {
-  /* Animated background stars */
-  .stars {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image:
-      radial-gradient(2px 2px at 20% 30%, white, transparent),
-      radial-gradient(2px 2px at 60% 70%, white, transparent),
-      radial-gradient(1px 1px at 50% 50%, white, transparent),
-      radial-gradient(1px 1px at 80% 10%, white, transparent),
-      radial-gradient(2px 2px at 90% 60%, white, transparent),
-      radial-gradient(1px 1px at 33% 80%, white, transparent),
-      radial-gradient(2px 2px at 10% 50%, white, transparent),
-      radial-gradient(1px 1px at 70% 20%, white, transparent),
-      radial-gradient(2px 2px at 40% 90%, white, transparent);
-    background-size: 200% 200%;
-    animation: stars-drift 60s linear infinite;
-    opacity: 0.5;
-  }
-
-  @keyframes stars-drift {
-    0% {
-      background-position: 0% 0%;
-    }
-    100% {
-      background-position: 100% 100%;
-    }
-  }
-
-  /* Floating gradient orbs */
-  .gradient-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.3;
-    animation: float 20s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-    33% {
-      transform: translate(50px, -50px) scale(1.1);
-    }
-    66% {
-      transform: translate(-50px, 50px) scale(0.9);
-    }
-  }
-
-  /* Fade in up animation */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in-up {
-    animation: fadeInUp 0.8s ease-out both;
-  }
-
-  /* Bounce animation for scroll indicator */
-  @keyframes bounce {
-    0%,
-    100% {
-      transform: translate(-50%, 0);
-    }
-    50% {
-      transform: translate(-50%, 10px);
-    }
-  }
-
-  .animate-bounce-arrow {
-    animation: bounce 2s infinite;
-  }
-
-  /* Button shimmer effect */
-  .btn-shimmer::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.3),
-      transparent
-    );
-    transition: left 0.5s ease;
-  }
-
-  .btn-shimmer:hover::before {
-    left: 100%;
-  }
-
   /* Scroll offset for anchor links to account for fixed header */
   [id] {
     scroll-margin-top: 6rem; /* 4rem header (h-16) + 2rem spacing for visibility */
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .features-grid,
+    .components-grid {
+      grid-template-columns: 1fr;
+    }
   }
 }

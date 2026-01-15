@@ -1,14 +1,31 @@
+import { cn } from "@warp/react";
+
 import { Nav } from "./nav";
 import { Sidebar } from "./sidebar";
-import { cn } from "@warp/react";
 
 interface LayoutProps {
   children: React.ReactNode;
   /** Whether to show the sidebar (default: true) */
   showSidebar?: boolean;
+  /** Whether this is a component page with fixed sidebar/TOC layout */
+  isComponentPage?: boolean;
 }
 
-export function Layout({ children, showSidebar = true }: LayoutProps) {
+export function Layout({
+  children,
+  showSidebar = true,
+  isComponentPage = false,
+}: LayoutProps) {
+  if (isComponentPage) {
+    return (
+      <div className="min-h-screen relative overflow-x-hidden">
+        <Nav />
+        {showSidebar && <Sidebar />}
+        {children}
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen relative overflow-x-hidden">
       <Nav />
