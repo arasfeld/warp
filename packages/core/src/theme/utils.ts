@@ -28,39 +28,71 @@ export function mergeThemes(
     typography: {
       ...baseTheme.typography,
       ...overrideTheme.typography,
-      h1: { ...baseTheme.typography.h1, ...overrideTheme.typography?.h1 },
-      h2: { ...baseTheme.typography.h2, ...overrideTheme.typography?.h2 },
-      h3: { ...baseTheme.typography.h3, ...overrideTheme.typography?.h3 },
-      h4: { ...baseTheme.typography.h4, ...overrideTheme.typography?.h4 },
-      h5: { ...baseTheme.typography.h5, ...overrideTheme.typography?.h5 },
-      h6: { ...baseTheme.typography.h6, ...overrideTheme.typography?.h6 },
-      subtitle1: {
-        ...baseTheme.typography.subtitle1,
-        ...overrideTheme.typography?.subtitle1,
+      fontFamily: {
+        ...baseTheme.typography.fontFamily,
+        ...overrideTheme.typography?.fontFamily,
       },
-      subtitle2: {
-        ...baseTheme.typography.subtitle2,
-        ...overrideTheme.typography?.subtitle2,
+      fontSize: {
+        ...baseTheme.typography.fontSize,
+        ...overrideTheme.typography?.fontSize,
       },
-      body1: {
-        ...baseTheme.typography.body1,
-        ...overrideTheme.typography?.body1,
+      fontWeight: {
+        ...baseTheme.typography.fontWeight,
+        ...overrideTheme.typography?.fontWeight,
       },
-      body2: {
-        ...baseTheme.typography.body2,
-        ...overrideTheme.typography?.body2,
-      },
-      button: {
-        ...baseTheme.typography.button,
-        ...overrideTheme.typography?.button,
-      },
-      caption: {
-        ...baseTheme.typography.caption,
-        ...overrideTheme.typography?.caption,
-      },
-      overline: {
-        ...baseTheme.typography.overline,
-        ...overrideTheme.typography?.overline,
+      variants: {
+        h1: {
+          ...baseTheme.typography.variants.h1,
+          ...overrideTheme.typography?.variants?.h1,
+        },
+        h2: {
+          ...baseTheme.typography.variants.h2,
+          ...overrideTheme.typography?.variants?.h2,
+        },
+        h3: {
+          ...baseTheme.typography.variants.h3,
+          ...overrideTheme.typography?.variants?.h3,
+        },
+        h4: {
+          ...baseTheme.typography.variants.h4,
+          ...overrideTheme.typography?.variants?.h4,
+        },
+        h5: {
+          ...baseTheme.typography.variants.h5,
+          ...overrideTheme.typography?.variants?.h5,
+        },
+        h6: {
+          ...baseTheme.typography.variants.h6,
+          ...overrideTheme.typography?.variants?.h6,
+        },
+        subtitle1: {
+          ...baseTheme.typography.variants.subtitle1,
+          ...overrideTheme.typography?.variants?.subtitle1,
+        },
+        subtitle2: {
+          ...baseTheme.typography.variants.subtitle2,
+          ...overrideTheme.typography?.variants?.subtitle2,
+        },
+        body1: {
+          ...baseTheme.typography.variants.body1,
+          ...overrideTheme.typography?.variants?.body1,
+        },
+        body2: {
+          ...baseTheme.typography.variants.body2,
+          ...overrideTheme.typography?.variants?.body2,
+        },
+        button: {
+          ...baseTheme.typography.variants.button,
+          ...overrideTheme.typography?.variants?.button,
+        },
+        caption: {
+          ...baseTheme.typography.variants.caption,
+          ...overrideTheme.typography?.variants?.caption,
+        },
+        overline: {
+          ...baseTheme.typography.variants.overline,
+          ...overrideTheme.typography?.variants?.overline,
+        },
       },
     },
     shape: {

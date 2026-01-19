@@ -17,3 +17,6 @@ export type {
 
 // Export theme system
 export * from "./theme";
+
+// Export component types
+export * from "./components";

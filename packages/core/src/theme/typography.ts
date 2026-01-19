@@ -160,8 +160,8 @@ export const typography = {
   },
   /** HTML font size (default: 16px) */
   htmlFontSize: 16,
-  /** Default font size */
-  fontSize: 14,
+  /** Default base font size */
+  baseFontSize: 14,
   /** Font weights */
   fontWeightLight: 300,
   fontWeightRegular: 400,

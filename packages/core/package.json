@@ -15,6 +15,6 @@
     "lint": "eslint . --max-warnings 0"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*"
+    "@warp/typescript-config": "workspace:*"
   }
 }

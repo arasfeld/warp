@@ -105,27 +105,34 @@ export interface Theme {
   palette: Palette;
   /** Typography configuration */
   typography: {
+    fontFamily: {
+      sans: readonly string[];
+      serif: readonly string[];
+      mono: readonly string[];
+    };
+    fontSize: Record<string, { fontSize: string; lineHeight: string }>;
+    fontWeight: Record<string, string>;
+    variants: {
+      h1: TypographyVariant;
+      h2: TypographyVariant;
+      h3: TypographyVariant;
+      h4: TypographyVariant;
+      h5: TypographyVariant;
+      h6: TypographyVariant;
+      subtitle1: TypographyVariant;
+      subtitle2: TypographyVariant;
+      body1: TypographyVariant;
+      body2: TypographyVariant;
+      button: TypographyVariant;
+      caption: TypographyVariant;
+      overline: TypographyVariant;
+    };
     htmlFontSize: number;
-    fontFamily: string;
-    fontSize: number;
+    baseFontSize: number;
     fontWeightLight: number;
     fontWeightRegular: number;
     fontWeightMedium: number;
     fontWeightBold: number;
-    /** Typography variants */
-    h1: TypographyVariant;
-    h2: TypographyVariant;
-    h3: TypographyVariant;
-    h4: TypographyVariant;
-    h5: TypographyVariant;
-    h6: TypographyVariant;
-    subtitle1: TypographyVariant;
-    subtitle2: TypographyVariant;
-    body1: TypographyVariant;
-    body2: TypographyVariant;
-    button: TypographyVariant;
-    caption: TypographyVariant;
-    overline: TypographyVariant;
   };
   /** Spacing function multiplier (default: 8px) */
   spacing: number;
@@ -134,7 +141,7 @@ export interface Theme {
     borderRadius: number;
   };
   /** Shadow definitions */
-  shadows: string[];
+  shadows: readonly string[];
   /** Breakpoints */
   breakpoints: {
     values: {
