@@ -66,14 +66,14 @@
     /* Text colors */
     --palette-text-primary: rgba(0, 0, 0, 0.87);
     --palette-text-secondary: rgba(0, 0, 0, 0.6);
-    --palette-text-disabled: rgba(0, 0, 0, 0.38);
+    --palette-text-muted: rgba(0, 0, 0, 0.6);
 
     /* Divider */
     --palette-divider: rgba(0, 0, 0, 0.12);
 
     /* Background */
     --palette-background-default: 0 0% 100%;
-    --palette-background-paper: 0 0% 100%;
+    --palette-background-surface: 0 0% 100%;
 
     /* Action states */
     --palette-action-active: rgba(0, 0, 0, 0.54);
@@ -159,14 +159,14 @@
     /* Text colors (dark mode) */
     --palette-text-primary: #fff;
     --palette-text-secondary: rgba(255, 255, 255, 0.7);
-    --palette-text-disabled: rgba(255, 255, 255, 0.5);
+    --palette-text-muted: rgba(255, 255, 255, 0.7);
 
     /* Divider (dark mode) */
     --palette-divider: rgba(255, 255, 255, 0.12);
 
     /* Background (dark mode) */
     --palette-background-default: 0 0% 7%; /* #121212 */
-    --palette-background-paper: 0 0% 7%; /* #121212 */
+    --palette-background-surface: 0 0% 7%; /* #121212 */
 
     /* Action states (dark mode) */
     --palette-action-active: #fff;

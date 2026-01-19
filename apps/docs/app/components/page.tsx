@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Button, Card, Input } from "@warp/react";
+import { Button, Card, Input, Select } from "@warp/react";
 
 import { AnimatedBackground } from "@/components/animated-background";
 import { Layout } from "@/components/layout";
@@ -104,6 +104,55 @@ const components: Component[] = [
 
 <Input placeholder="Enter your email..." type="email" />
 <Input placeholder="Enter password..." type="password" />`,
+  },
+  {
+    title: "Select",
+    description: "Dropdown select with search, multiple selection, and keyboard navigation",
+    category: "inputs",
+    demo: (
+      <>
+        <Select
+          data={[
+            { value: "react", label: "React" },
+            { value: "vue", label: "Vue.js" },
+            { value: "angular", label: "Angular" },
+          ]}
+          placeholder="Select framework..."
+          variant="filled"
+          className="max-w-[350px]"
+          searchable
+          clearable
+        />
+        <Select
+          data={[
+            { value: "react", label: "React" },
+            { value: "vue", label: "Vue.js" },
+            { value: "angular", label: "Angular" },
+          ]}
+          placeholder="Select multiple..."
+          variant="filled"
+          className="max-w-[350px]"
+          multiple
+        />
+      </>
+    ),
+    code: `import { Select } from '@warp/react';
+
+<Select
+  data={[
+    { value: 'react', label: 'React' },
+    { value: 'vue', label: 'Vue.js' },
+  ]}
+  placeholder="Select framework..."
+  searchable
+  clearable
+/>
+
+<Select
+  data={data}
+  placeholder="Select multiple..."
+  multiple
+/>`,
   },
   {
     title: "Text",

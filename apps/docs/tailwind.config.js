@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+import coreConfig from "@warp/tailwind-config";
+
 export default {
-  darkMode: "class",
+  ...coreConfig,
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,94 +10,17 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: {
-          DEFAULT: "hsl(var(--palette-primary-main))",
-          light: "hsl(var(--palette-primary-light))",
-          dark: "hsl(var(--palette-primary-dark))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--palette-secondary-main))",
-          light: "hsl(var(--palette-secondary-light))",
-          dark: "hsl(var(--palette-secondary-dark))",
-        },
-        error: {
-          DEFAULT: "hsl(var(--palette-error-main))",
-          light: "hsl(var(--palette-error-light))",
-          dark: "hsl(var(--palette-error-dark))",
-          contrast: "var(--palette-error-contrast)",
-        },
-        warning: {
-          DEFAULT: "hsl(var(--palette-warning-main))",
-          light: "hsl(var(--palette-warning-light))",
-          dark: "hsl(var(--palette-warning-dark))",
-          contrast: "var(--palette-warning-contrast)",
-        },
-        info: {
-          DEFAULT: "hsl(var(--palette-info-main))",
-          light: "hsl(var(--palette-info-light))",
-          dark: "hsl(var(--palette-info-dark))",
-          contrast: "var(--palette-info-contrast)",
-        },
-        success: {
-          DEFAULT: "hsl(var(--palette-success-main))",
-          light: "hsl(var(--palette-success-light))",
-          dark: "hsl(var(--palette-success-dark))",
-          contrast: "var(--palette-success-contrast)",
-        },
-        grey: {
-          50: "var(--palette-grey-50)",
-          100: "var(--palette-grey-100)",
-          200: "var(--palette-grey-200)",
-          300: "var(--palette-grey-300)",
-          400: "var(--palette-grey-400)",
-          500: "var(--palette-grey-500)",
-          600: "var(--palette-grey-600)",
-          700: "var(--palette-grey-700)",
-          800: "var(--palette-grey-800)",
-          900: "var(--palette-grey-900)",
-          A100: "var(--palette-grey-A100)",
-          A200: "var(--palette-grey-A200)",
-          A400: "var(--palette-grey-A400)",
-          A700: "var(--palette-grey-A700)",
-        },
-        text: {
-          primary: "var(--palette-text-primary)",
-          secondary: "var(--palette-text-secondary)",
-        },
-        divider: "var(--palette-divider)",
-        background: {
-          DEFAULT: "hsl(var(--palette-background-default))",
-          paper: "hsl(var(--palette-background-paper))",
-        },
-      },
-      borderRadius: {
-        xs: "var(--radius-xs, 0.125rem)",
-        sm: "var(--radius-sm, 2px)",
-        md: "var(--radius-md, 3px)",
-        DEFAULT: "var(--radius, 4px)",
-        lg: "var(--radius-lg, 8px)",
-        xl: "var(--radius-xl, 12px)",
-        "2xl": "var(--radius-2xl, 16px)",
-        full: "var(--radius-full, 9999px)",
-      },
-      transitionTimingFunction: {
-        "ease-in-out":
-          "var(--transition-easing-easeInOut, cubic-bezier(0.4, 0, 0.2, 1))",
-        "ease-out":
-          "var(--transition-easing-easeOut, cubic-bezier(0.0, 0, 0.2, 1))",
-        "ease-in":
-          "var(--transition-easing-easeIn, cubic-bezier(0.4, 0, 1, 1))",
-        sharp: "var(--transition-easing-sharp, cubic-bezier(0.4, 0, 0.6, 1))",
-      },
+      // Merge core colors with docs-specific extensions
+      ...coreConfig.theme?.extend,
       transitionDuration: {
+        // Extend core with docs-specific timing
+        "entering-screen": "var(--transition-duration-enteringScreen, 225ms)",
+        "leaving-screen": "var(--transition-duration-leavingScreen, 195ms)",
         shortest: "var(--transition-duration-shortest, 150ms)",
         shorter: "var(--transition-duration-shorter, 200ms)",
         short: "var(--transition-duration-short, 250ms)",
         standard: "var(--transition-duration-standard, 300ms)",
         complex: "var(--transition-duration-complex, 375ms)",
-        "entering-screen": "var(--transition-duration-enteringScreen, 225ms)",
-        "leaving-screen": "var(--transition-duration-leavingScreen, 195ms)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

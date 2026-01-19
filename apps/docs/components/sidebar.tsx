@@ -10,39 +10,64 @@ import {
   ChevronDown,
   Container,
   CreditCard,
+  File,
   FileText,
   FormInput as InputIcon,
+  Hash,
+  KeyRound,
   Layers,
   LayoutDashboard,
+  Loader,
   MessageCircle,
   MessageSquare,
   MousePointerClick,
+  Search,
+  SlidersHorizontal,
   Square as ButtonIcon,
+  Star,
   Table,
+  Tags,
+  Text as TextIcon,
+  ToggleLeft,
+  ToggleRight,
   Type,
   Users,
+  Radio,
 } from "lucide-react";
 import { cn } from "@warp/react";
 
 import { List, ListItem } from "./ui";
 
 const componentIconMap: Record<string, typeof ButtonIcon> = {
-  Container,
-  Stack: Layers,
-  Group: Users,
-  Button: ButtonIcon,
-  Input: InputIcon,
-  Checkbox: CheckSquare,
-  Select: ChevronDown,
-  Card: CreditCard,
-  Text: Type,
-  Heading: Type,
-  Chip: CheckSquare,
-  Badge,
-  Table,
   Alert: AlertCircle,
-  Toast: Bell,
+  Autocomplete: Search,
+  Badge,
+  Button: ButtonIcon,
+  Card: CreditCard,
+  Checkbox: CheckSquare,
+  Chip: CheckSquare,
+  Container,
   Dialog: MessageCircle,
+  FileInput: File,
+  Group: Users,
+  Heading: Type,
+  Input: InputIcon,
+  NumberInput: Hash,
+  PasswordInput: KeyRound,
+  Radio,
+  Rating: Star,
+  SegmentedControl: ToggleLeft,
+  Select: ChevronDown,
+  Skeleton: Loader,
+  Slider: SlidersHorizontal,
+  Stack: Layers,
+  Switch: ToggleRight,
+  Table,
+  TagsInput: Tags,
+  Text: Type,
+  TextInput: TextIcon,
+  Textarea: TextIcon,
+  Toast: Bell,
 };
 
 const componentGroups = [
@@ -50,17 +75,31 @@ const componentGroups = [
     title: "Layout",
     icon: LayoutDashboard,
     items: [
-      { name: "Container", href: "/components/container", comingSoon: true },
-      { name: "Stack", href: "/components/stack", comingSoon: true },
-      { name: "Group", href: "/components/group", comingSoon: true },
+      { name: "Container", href: "/components/container" },
+      { name: "Stack", href: "/components/stack" },
+      { name: "Group", href: "/components/group" },
     ],
   },
   {
     title: "Inputs",
     icon: MousePointerClick,
     items: [
+      { name: "Autocomplete", href: "/components/autocomplete" },
       { name: "Button", href: "/components/button" },
-      { name: "Select", href: "/components/select", comingSoon: true },
+      { name: "Checkbox", href: "/components/checkbox" },
+      { name: "FileInput", href: "/components/file-input" },
+      { name: "Input", href: "/components/input" },
+      { name: "NumberInput", href: "/components/number-input" },
+      { name: "PasswordInput", href: "/components/password-input" },
+      { name: "Radio", href: "/components/radio" },
+      { name: "Rating", href: "/components/rating" },
+      { name: "SegmentedControl", href: "/components/segmented-control" },
+      { name: "Select", href: "/components/select" },
+      { name: "Slider", href: "/components/slider" },
+      { name: "Switch", href: "/components/switch" },
+      { name: "TagsInput", href: "/components/tags-input" },
+      { name: "TextInput", href: "/components/text-input" },
+      { name: "Textarea", href: "/components/textarea" },
     ],
   },
   {
@@ -71,27 +110,18 @@ const componentGroups = [
       { name: "Heading", href: "/components/heading" },
       { name: "Text", href: "/components/text" },
       { name: "Chip", href: "/components/chip" },
-      { name: "Badge", href: "/components/badge", comingSoon: true },
-      { name: "Table", href: "/components/table", comingSoon: true },
-    ],
-  },
-  {
-    title: "Form",
-    icon: CheckSquare,
-    items: [
-      { name: "Input", href: "/components/input" },
-      { name: "Checkbox", href: "/components/checkbox" },
-      { name: "Radio", href: "/components/radio", comingSoon: true },
-      { name: "Select", href: "/components/select", comingSoon: true },
+      { name: "Badge", href: "/components/badge" },
+      { name: "Table", href: "/components/table" },
     ],
   },
   {
     title: "Feedback",
     icon: MessageSquare,
     items: [
-      { name: "Alert", href: "/components/alert", comingSoon: true },
-      { name: "Toast", href: "/components/toast", comingSoon: true },
-      { name: "Dialog", href: "/components/dialog", comingSoon: true },
+      { name: "Alert", href: "/components/alert" },
+      { name: "Toast", href: "/components/toast" },
+      { name: "Dialog", href: "/components/dialog" },
+      { name: "Skeleton", href: "/components/skeleton" },
     ],
   },
 ];
@@ -141,13 +171,7 @@ export function Sidebar() {
                     const isActive = pathname === item.href;
                     const ItemIcon = componentIconMap[item.name];
                     return (
-                      <ListItem
-                        key={item.href}
-                        className={cn(
-                          "relative",
-                          item.comingSoon && "opacity-40"
-                        )}
-                      >
+                      <ListItem key={item.href} className="relative">
                         <Link
                           href={item.href}
                           className={cn(
@@ -166,11 +190,6 @@ export function Sidebar() {
                             <ItemIcon className="w-[18px] h-[18px] opacity-60" />
                           )}
                           <span>{item.name}</span>
-                          {item.comingSoon && (
-                            <span className="ml-auto text-[0.7rem] px-2 py-1 bg-black/10 dark:bg-white/10 rounded text-muted-foreground">
-                              Soon
-                            </span>
-                          )}
                         </Link>
                       </ListItem>
                     );
