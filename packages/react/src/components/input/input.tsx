@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { forwardRef } from "react";
+
 import { cn } from "../../utils/cn";
 
 /**
@@ -70,32 +71,36 @@ export interface InputProps extends Omit<
  * Base Input component
  * Comprehensive input component with polymorphic support and sections
  */
-export function Input({
-  size = "sm",
-  variant = "default",
-  radius,
-  disabled = false,
-  error = false,
-  withErrorStyles = true,
-  leftSection,
-  rightSection,
-  leftSectionWidth,
-  rightSectionWidth,
-  leftSectionPointerEvents = "none",
-  rightSectionPointerEvents = "none",
-  leftSectionProps,
-  rightSectionProps,
-  pointer = false,
-  multiline = false,
-  withAria = true,
-  component,
-  wrapperProps,
-  inputSize,
-  required = false,
-  className,
-  id,
-  ...props
-}: InputProps) {
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      size = "sm",
+      variant = "default",
+      radius,
+      disabled = false,
+      error = false,
+      withErrorStyles = true,
+      leftSection,
+      rightSection,
+      leftSectionWidth,
+      rightSectionWidth,
+      leftSectionPointerEvents = "none",
+      rightSectionPointerEvents = "none",
+      leftSectionProps,
+      rightSectionProps,
+      pointer = false,
+      multiline = false,
+      withAria = true,
+      component,
+      wrapperProps,
+      inputSize,
+      required = false,
+      className,
+      id,
+      ...props
+    },
+    ref
+  ) => {
   const normalizedSize: InputSize = size;
   const normalizedVariant: InputVariant = variant;
 
@@ -227,8 +232,7 @@ export function Input({
     getRadiusClass(),
     getVariantClasses(),
     errorClasses,
-    pointer && "cursor-pointer",
-    className
+    pointer && "cursor-pointer"
   );
 
   const hasError = !!error;
@@ -238,7 +242,7 @@ export function Input({
 
   const inputElement = (
     <div
-      className={cn("relative w-full", wrapperProps?.className)}
+      className={cn("relative", className, wrapperProps?.className)}
       {...wrapperProps}
     >
       {leftSection && (
@@ -278,6 +282,7 @@ export function Input({
         </div>
       )}
       <Component
+        ref={ref}
         id={id}
         className={inputClasses}
         style={{
@@ -297,7 +302,10 @@ export function Input({
   );
 
   return inputElement;
-}
+  }
+);
+
+Input.displayName = "Input";
 
 /**
  * Input.Wrapper component props

@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { forwardRef } from "react";
+
 import { cn } from "../../utils/cn";
 import { Loader } from "../loader";
 import { ButtonGroup, ButtonGroupSection } from "./button-group";
@@ -101,26 +102,30 @@ export interface ButtonProps extends Omit<
  * Button component
  * Comprehensive button component with full feature set
  */
-export function Button({
-  children,
-  variant = "filled",
-  size = "sm",
-  color,
-  radius,
-  fullWidth = false,
-  leftSection,
-  rightSection,
-  justify = "center",
-  disabled = false,
-  "data-disabled": dataDisabled,
-  loading = false,
-  loaderProps,
-  gradient,
-  autoContrast = false,
-  component,
-  className,
-  ...props
-}: ButtonProps) {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      children,
+      variant = "filled",
+      size = "sm",
+      color,
+      radius,
+      fullWidth = false,
+      leftSection,
+      rightSection,
+      justify = "center",
+      disabled = false,
+      "data-disabled": dataDisabled,
+      loading = false,
+      loaderProps,
+      gradient,
+      autoContrast = false,
+      component,
+      className,
+      ...props
+    },
+    ref
+  ) => {
   const normalizedVariant: ButtonVariant = variant;
   const normalizedSize: ButtonSize = size;
 
@@ -174,13 +179,13 @@ export function Button({
 
     const variantMap: Record<ButtonVariant, string> = {
       filled:
-        "bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80",
+        "bg-primary text-white hover:bg-primary/90 active:bg-primary/80",
       light:
-        "bg-primary/10 text-primary hover:bg-primary/20 active:bg-primary/30",
+        "bg-primary/20 text-primary hover:bg-primary/30 active:bg-primary/40",
       outline:
-        "border-2 border-divider bg-transparent text-foreground hover:bg-purple-500/10 hover:border-purple-500 active:bg-purple-500/15 active:border-purple-500/70",
+        "border-2 border-primary bg-transparent text-primary hover:bg-primary/10 active:bg-primary/20",
       default:
-        "bg-white/5 dark:bg-white/5 text-muted-foreground hover:bg-white/8 dark:hover:bg-white/8 hover:text-foreground active:bg-white/12 dark:active:bg-white/12",
+        "bg-grey-200 dark:bg-grey-800 text-text-primary hover:bg-grey-300 dark:hover:bg-grey-700 active:bg-grey-400 dark:active:bg-grey-600",
       gradient: "", // Handled above
     };
 
@@ -238,6 +243,7 @@ export function Button({
 
   return (
     <Component
+      ref={ref}
       className={buttonClassName}
       disabled={isDisabled && Component === "button"}
       data-disabled={dataDisabled || (isDisabled && Component !== "button")}
@@ -278,7 +284,10 @@ export function Button({
       </div>
     </Component>
   );
-}
+  }
+);
+
+Button.displayName = "Button";
 
 // Attach Group and GroupSection as static properties
 (Button as any).Group = ButtonGroup;

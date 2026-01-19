@@ -121,7 +121,7 @@ export function ThemeProvider({
     if (typeof window === "undefined") return;
 
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    
+
     const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
       setSystemColorScheme(e.matches ? "dark" : "light");
     };
@@ -162,7 +162,6 @@ export function ThemeProvider({
     setModeState(newMode);
     saveThemePreference({ mode: newMode });
   };
-
 
   const value: ThemeContextValue = useMemo(
     () => ({

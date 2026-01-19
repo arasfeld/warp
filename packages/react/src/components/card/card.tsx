@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { forwardRef } from "react";
+
 import { cn } from "../../utils/cn";
 
 /**
@@ -63,16 +64,20 @@ export interface CardSectionProps extends React.HTMLAttributes<HTMLDivElement> {
  * Card component
  * Comprehensive card component with padding, radius, shadow, and withBorder props
  */
-export function Card({
-  children,
-  padding = "md",
-  radius,
-  shadow,
-  withBorder = false,
-  component,
-  className,
-  ...props
-}: CardProps) {
+export const Card = forwardRef<HTMLDivElement, CardProps>(
+  (
+    {
+      children,
+      padding = "md",
+      radius,
+      shadow,
+      withBorder = false,
+      component,
+      className,
+      ...props
+    },
+    ref
+  ) => {
   const actualPadding = padding;
 
   // Convert padding to Tailwind class or inline style
@@ -207,63 +212,71 @@ export function Card({
   });
 
   return (
-    <Component className={baseClasses} style={style} {...props}>
+    <Component ref={ref} className={baseClasses} style={style} {...props}>
       {processedChildren}
     </Component>
   );
-}
+  }
+);
+
+Card.displayName = "Card";
 
 /**
  * Card Section component
  * Removes Card padding from its children using negative margins
  */
-export function CardSection({
-  children,
-  inheritPadding = false,
-  withBorder = false,
-  component,
-  className,
-  style,
-  ...props
-}: CardSectionProps) {
-  const Component = component || "div";
+export const CardSection = forwardRef<HTMLDivElement, CardSectionProps>(
+  (
+    {
+      children,
+      inheritPadding = false,
+      withBorder = false,
+      component,
+      className,
+      style,
+      ...props
+    },
+    ref
+  ) => {
+    const Component = component || "div";
 
-  // Get padding value from data attribute set by Card
-  const paddingValue = (props as any)["data-padding-value"] || 16;
-  const sectionPosition = (props as any)["data-section-position"];
+    // Get padding value from data attribute set by Card
+    const paddingValue = (props as any)["data-padding-value"] || 16;
+    const sectionPosition = (props as any)["data-section-position"];
 
-  // Apply borders based on position
-  const getBorderClasses = () => {
-    if (!withBorder) return "";
-    // First section has no top border, last has no bottom border
-    // Adjacent sections don't double up borders
-    if (sectionPosition === "first") return "border-b border-divider";
-    if (sectionPosition === "last") return "border-t border-divider";
-    return "border-t border-b border-divider";
-  };
-
-  // Apply inherited padding
-  const getInheritPaddingStyle = (): React.CSSProperties | undefined => {
-    if (!inheritPadding) return undefined;
-    return {
-      paddingLeft: `${paddingValue}px`,
-      paddingRight: `${paddingValue}px`,
+    // Apply borders based on position
+    const getBorderClasses = () => {
+      if (!withBorder) return "";
+      // First section has no top border, last has no bottom border
+      // Adjacent sections don't double up borders
+      if (sectionPosition === "first") return "border-b border-divider";
+      if (sectionPosition === "last") return "border-t border-divider";
+      return "border-t border-b border-divider";
     };
-  };
 
-  return (
-    <Component
-      className={cn(getBorderClasses(), className)}
-      style={{
-        ...getInheritPaddingStyle(),
-        ...style,
-      }}
-      {...props}
-    >
-      {children}
-    </Component>
-  );
-}
+    // Apply inherited padding
+    const getInheritPaddingStyle = (): React.CSSProperties | undefined => {
+      if (!inheritPadding) return undefined;
+      return {
+        paddingLeft: `${paddingValue}px`,
+        paddingRight: `${paddingValue}px`,
+      };
+    };
 
-// Mark CardSection for identification
-(CardSection as any).displayName = "CardSection";
+    return (
+      <Component
+        ref={ref}
+        className={cn(getBorderClasses(), className)}
+        style={{
+          ...getInheritPaddingStyle(),
+          ...style,
+        }}
+        {...props}
+      >
+        {children}
+      </Component>
+    );
+  }
+);
+
+CardSection.displayName = "CardSection";

@@ -23,7 +23,8 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*"
+    "@warp/eslint-config": "workspace:*",
+    "@warp/typescript-config": "workspace:*",
+    "@warp/tailwind-config": "workspace:*"
   }
 }
