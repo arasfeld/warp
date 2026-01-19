@@ -1,0 +1,26 @@
+{
+  "name": "@warp/primitives",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf node_modules",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "dependencies": {
+    "@warp/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@warp/eslint-config": "workspace:*",
+    "@warp/typescript-config": "workspace:*"
+  }
+}
