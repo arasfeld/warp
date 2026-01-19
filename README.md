@@ -21,8 +21,8 @@ This Turborepo includes the following packages/apps:
 - `@warp/react`: React (web) component library
 - `@warp/react-native`: React Native component library
 - `@warp/core`: Shared theme system and utilities
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `@warp/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
+- `@warp/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
