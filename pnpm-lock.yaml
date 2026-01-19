@@ -51,18 +51,18 @@ importers:
         specifier: ^16.1.0
         version: 16.1.0(react@19.1.0)
     devDependencies:
-      '@repo/eslint-config':
+      '@warp/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@repo/typescript-config':
+      '@warp/tailwind-config':
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config
+      '@warp/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
-      '@tailwindcss/postcss':
-        specifier: ^4.0.0
-        version: 4.1.18
-      '@types/react-syntax-highlighter':
-        specifier: ^15.5.13
-        version: 15.5.13
+      typescript:
+        specifier: 5.9.2
+        version: 5.9.2
 
   apps/mobile:
     dependencies:
@@ -119,19 +119,19 @@ importers:
         specifier: 19.1.0
         version: 19.1.0(react@19.1.0)
     devDependencies:
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../../packages/eslint-config
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/typescript-config
       '@tailwindcss/postcss':
         specifier: ^4.0.0
         version: 4.1.18
+      '@warp/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@warp/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
 
   packages/core:
     devDependencies:
-      '@repo/typescript-config':
+      '@warp/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
 
@@ -183,10 +183,13 @@ importers:
         specifier: ^2.5.4
         version: 2.6.0
     devDependencies:
-      '@repo/eslint-config':
+      '@warp/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@repo/typescript-config':
+      '@warp/tailwind-config':
+        specifier: workspace:*
+        version: link:../tailwind-config
+      '@warp/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
 
@@ -202,15 +205,24 @@ importers:
         specifier: '>=0.70.0'
         version: 0.81.5(@babel/core@7.28.6)(@types/react@19.2.8)(react@19.1.0)
     devDependencies:
-      '@repo/eslint-config':
+      '@warp/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@repo/typescript-config':
+      '@warp/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       nativewind:
         specifier: ^4.0.1
         version: 4.2.1(react-native-reanimated@4.1.6(@babel/core@7.28.6)(react-native-worklets@0.5.1(@babel/core@7.28.6)(react-native@0.81.5(@babel/core@7.28.6)(@types/react@19.2.8)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.6)(@types/react@19.2.8)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.6)(@types/react@19.2.8)(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.18)
+
+  packages/tailwind-config:
+    devDependencies:
+      postcss:
+        specifier: ^8.5.3
+        version: 8.5.6
+      tailwindcss:
+        specifier: ^4.1.5
+        version: 4.1.18
 
   packages/typescript-config: {}
 
@@ -1368,9 +1380,6 @@ packages:
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
     peerDependencies:
       '@types/react': ^19.2.0
-
-  '@types/react-syntax-highlighter@15.5.13':
-    resolution: {integrity: sha512-uLGJ87j6Sz8UaBAooU0T6lWJ0dBmjZgN1PZTrj05TNql2/XpC6+4HhMT5syIdFUUt+FASfCeLLv4kBygNU+8qA==}
 
   '@types/react@19.2.8':
     resolution: {integrity: sha512-3MbSL37jEchWZz2p2mjntRZtPt837ij10ApxKfgmXCTuHWagYg7iA5bqPw6C8BMPfwidlvfPI/fxOc42HLhcyg==}
@@ -5703,10 +5712,6 @@ snapshots:
   '@types/prismjs@1.26.5': {}
 
   '@types/react-dom@19.2.3(@types/react@19.2.8)':
-    dependencies:
-      '@types/react': 19.2.8
-
-  '@types/react-syntax-highlighter@15.5.13':
     dependencies:
       '@types/react': 19.2.8
 

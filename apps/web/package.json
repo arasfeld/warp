@@ -18,8 +18,8 @@
     "react-dom": "19.1.0"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@warp/eslint-config": "workspace:*",
+    "@warp/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "^4.0.0"
   }
 }
