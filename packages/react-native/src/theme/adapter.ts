@@ -83,8 +83,8 @@ export interface RNTheme {
 /**
  * Convert core theme to React Native theme
  */
-export function adaptTheme(theme: Theme, mode: ThemeMode = "light"): RNTheme {
-  const colors = theme.colors[mode];
+export function adaptTheme(theme: Theme, _mode: ThemeMode = "light"): RNTheme {
+  const palette = theme.palette;
 
   // Convert typography
   const fontSize: Record<string, number> = {};
@@ -113,45 +113,57 @@ export function adaptTheme(theme: Theme, mode: ThemeMode = "light"): RNTheme {
     mono: theme.typography.fontFamily?.mono?.[0],
   };
 
-  // Convert spacing
-  const spacing: Record<string, number> = {};
-  Object.entries(theme.spacing).forEach(([key, value]) => {
-    spacing[key] = normalizeSpacing(value);
-  });
+  // Convert spacing (base unit is a number, so we create a scale)
+  const spacingBase = theme.spacing;
+  const spacing: Record<string, number> = {
+    "0": 0,
+    "1": spacingBase * 0.25,
+    "2": spacingBase * 0.5,
+    "3": spacingBase * 0.75,
+    "4": spacingBase,
+    "5": spacingBase * 1.25,
+    "6": spacingBase * 1.5,
+    "8": spacingBase * 2,
+    "10": spacingBase * 2.5,
+    "12": spacingBase * 3,
+    "16": spacingBase * 4,
+    "20": spacingBase * 5,
+    "24": spacingBase * 6,
+  };
 
-  // Convert border radius
-  const borderRadius: Record<string, number> = {};
-  Object.entries(theme.borderRadius).forEach(([key, value]) => {
-    borderRadius[key] = normalizeSpacing(value);
-  });
+  // Convert border radius from shape
+  const borderRadius: Record<string, number> = {
+    none: 0,
+    sm: theme.shape.borderRadius * 0.5,
+    md: theme.shape.borderRadius,
+    lg: theme.shape.borderRadius * 2,
+    xl: theme.shape.borderRadius * 3,
+    full: 9999,
+  };
 
-  // Convert shadows
-  const shadows: Record<string, ReturnType<typeof convertShadow>> = {};
-  Object.entries(theme.shadows).forEach(([key, shadow]) => {
-    shadows[key] = convertShadow(shadow);
-  });
+  // Shadows are now strings in the array format, create placeholder for RN
+  const shadows: Record<string, ReturnType<typeof convertShadow>> = {
+    none: convertShadow({ color: "transparent", opacity: 0 }),
+    sm: convertShadow({ color: "rgba(0,0,0,0.1)", offsetY: 1, blur: 2, opacity: 0.1 }),
+    md: convertShadow({ color: "rgba(0,0,0,0.1)", offsetY: 4, blur: 6, opacity: 0.1 }),
+    lg: convertShadow({ color: "rgba(0,0,0,0.1)", offsetY: 10, blur: 15, opacity: 0.1 }),
+  };
 
   return {
     colors: {
-      primary: normalizeColor(colors.primary),
-      secondary: colors.secondary
-        ? normalizeColor(colors.secondary)
-        : undefined,
-      success: colors.success ? normalizeColor(colors.success) : undefined,
-      warning: colors.warning ? normalizeColor(colors.warning) : undefined,
-      error: colors.error ? normalizeColor(colors.error) : undefined,
-      info: colors.info ? normalizeColor(colors.info) : undefined,
-      background: normalizeColor(colors.background),
-      foreground: normalizeColor(colors.foreground),
-      mutedBackground: colors.mutedBackground
-        ? normalizeColor(colors.mutedBackground)
-        : undefined,
-      mutedForeground: colors.mutedForeground
-        ? normalizeColor(colors.mutedForeground)
-        : undefined,
-      border: colors.border ? normalizeColor(colors.border) : undefined,
-      input: colors.input ? normalizeColor(colors.input) : undefined,
-      ring: colors.ring ? normalizeColor(colors.ring) : undefined,
+      primary: normalizeColor(palette.primary.main),
+      secondary: normalizeColor(palette.secondary.main),
+      success: normalizeColor(palette.success.main),
+      warning: normalizeColor(palette.warning.main),
+      error: normalizeColor(palette.error.main),
+      info: normalizeColor(palette.info.main),
+      background: normalizeColor(palette.background.default),
+      foreground: normalizeColor(palette.text.primary),
+      mutedBackground: normalizeColor(palette.background.paper),
+      mutedForeground: normalizeColor(palette.text.secondary),
+      border: normalizeColor(palette.divider),
+      input: normalizeColor(palette.divider),
+      ring: normalizeColor(palette.primary.main),
     },
     spacing,
     typography: {
