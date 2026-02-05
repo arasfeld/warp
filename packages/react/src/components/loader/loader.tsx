@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React from "react";
-import { cn } from "../../utils/cn";
+import React from 'react';
+import { cn } from '../../utils/cn';
 
-export type LoaderType = "spinner" | "dots" | "bars";
+export type LoaderType = 'spinner' | 'dots' | 'bars';
 
 export interface LoaderProps {
   /** Size of the loader */
-  size?: "xs" | "sm" | "md" | "lg" | "xl" | number;
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | number;
   /** Color of the loader */
   color?: string;
   /** Type of loader animation */
@@ -17,34 +17,34 @@ export interface LoaderProps {
 }
 
 const sizeMap = {
-  xs: "h-3 w-3",
-  sm: "h-4 w-4",
-  md: "h-5 w-5",
-  lg: "h-6 w-6",
-  xl: "h-8 w-8",
+  xs: 'h-3 w-3',
+  sm: 'h-4 w-4',
+  md: 'h-5 w-5',
+  lg: 'h-6 w-6',
+  xl: 'h-8 w-8',
 };
 
 export function Loader({
-  size = "md",
-  color = "currentColor",
-  type = "spinner",
+  size = 'md',
+  color = 'currentColor',
+  type = 'spinner',
   className,
 }: LoaderProps) {
-  const sizeClass = typeof size === "number" ? "" : sizeMap[size];
-  const sizeValue = typeof size === "number" ? size : undefined;
+  const sizeClass = typeof size === 'number' ? '' : sizeMap[size];
+  const sizeValue = typeof size === 'number' ? size : undefined;
 
-  if (type === "dots") {
+  if (type === 'dots') {
     return (
       <div
-        className={cn("flex items-center gap-1", className)}
+        className={cn('flex items-center gap-1', className)}
         style={sizeValue ? { width: sizeValue, height: sizeValue } : undefined}
       >
         {[0, 1, 2].map((i) => (
           <div
             key={i}
             className={cn(
-              "rounded-full bg-current animate-pulse",
-              sizeClass || "h-1.5 w-1.5"
+              'rounded-full bg-current animate-pulse',
+              sizeClass || 'h-1.5 w-1.5',
             )}
             style={{
               animationDelay: `${i * 0.15}s`,
@@ -56,22 +56,19 @@ export function Loader({
     );
   }
 
-  if (type === "bars") {
+  if (type === 'bars') {
     return (
       <div
-        className={cn("flex items-end gap-0.5", className)}
+        className={cn('flex items-end gap-0.5', className)}
         style={sizeValue ? { width: sizeValue, height: sizeValue } : undefined}
       >
         {[0, 1, 2, 3].map((i) => (
           <div
             key={i}
-            className={cn(
-              "bg-current animate-pulse",
-              sizeClass || "h-3 w-0.5"
-            )}
+            className={cn('bg-current animate-pulse', sizeClass || 'h-3 w-0.5')}
             style={{
               animationDelay: `${i * 0.1}s`,
-              animationDuration: "0.6s",
+              animationDuration: '0.6s',
               color,
             }}
           />
@@ -83,7 +80,7 @@ export function Loader({
   // Default spinner
   return (
     <svg
-      className={cn("animate-spin", sizeClass, className)}
+      className={cn('animate-spin', sizeClass, className)}
       style={{ color, width: sizeValue, height: sizeValue }}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"

@@ -1,7 +1,7 @@
-import { cn } from "@warp/react";
+import { cn } from '@warp/react';
 
-import { Nav } from "./nav";
-import { Sidebar } from "./sidebar";
+import { Nav } from './nav';
+import { Sidebar } from './sidebar';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -31,7 +31,7 @@ export function Layout({
       <Nav />
       <div className="flex pt-16">
         {showSidebar && <Sidebar />}
-        <main className={cn("flex-1 min-w-0", showSidebar && "ml-64")}>
+        <main className={cn('flex-1 min-w-0', showSidebar && 'ml-64')}>
           {children}
         </main>
       </div>

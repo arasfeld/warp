@@ -57,12 +57,14 @@ The theme system uses CSS custom properties for runtime theming:
 3. **Apps define CSS variables** in `globals.css` using `@theme` directive (Tailwind v4) and `:root`/`.dark` overrides
 
 Theme variable naming convention:
+
 - `--palette-*` - Raw palette values (e.g., `--palette-error-main: 0 84.2% 60.2%`)
 - `--color-*` - Tailwind theme colors (e.g., `--color-error: hsl(var(--palette-error-main))`)
 
 ### Component Pattern
 
 Components in `@warp/react` follow this pattern:
+
 - Located in `packages/react/src/components/{name}/`
 - Use `cn()` utility (clsx + tailwind-merge) for class composition
 - Export component, props type, and variant types from index.ts
@@ -71,6 +73,7 @@ Components in `@warp/react` follow this pattern:
 ### Tailwind v4
 
 This project uses Tailwind CSS v4 with a hybrid JS + CSS approach:
+
 - `@warp/tailwind-config` defines colors referencing CSS variables (e.g., `hsl(var(--palette-error-main) / <alpha-value>)`)
 - `globals.css` defines actual values in `:root` and `.dark` for runtime theming
 - Colors support opacity modifiers (e.g., `bg-error/10`) via the `<alpha-value>` pattern
@@ -78,16 +81,19 @@ This project uses Tailwind CSS v4 with a hybrid JS + CSS approach:
 ## Design Philosophy
 
 Inspired by **Mantine**, **shadcn/ui**, and **Material UI**. Key principles:
+
 - Keep components lightweight and simple
 - Maximize customizability
 - Mantine's component API is the primary reference for prop naming and patterns
 - `@warp/react` and `@warp/react-native` components should look visually similar and share similar APIs
 
 ### Styling
+
 - All styling via Tailwind (web) and NativeWind (mobile) - no custom CSS
 - `globals.css` should only contain theme/design tokens, not component styles
 
 ### Docs App
+
 - The docs app is built with Warp + Tailwind CSS (dogfooding)
 - Always use `@warp/react` components when available - don't create custom versions
 - Extend Warp components with additional Tailwind classes when needed
@@ -95,8 +101,10 @@ Inspired by **Mantine**, **shadcn/ui**, and **Material UI**. Key principles:
 ## Code Conventions
 
 ### Imports
+
 - Package/npm imports first, then local imports below (separated by blank line)
 - Alphabetize imports within each group when order doesn't affect functionality
 
 ### TypeScript
+
 - Never use `any` type - use `unknown`, generics, or proper types instead

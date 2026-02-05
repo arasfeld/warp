@@ -1,7 +1,7 @@
-import "./global.css";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, ScrollView } from "react-native";
-import { ThemeProvider, Button } from "@warp/react-native";
+import './global.css';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { ThemeProvider, Button } from '@warp/react-native';
 
 export default function App() {
   return (
@@ -11,7 +11,7 @@ export default function App() {
           <Button
             variant="primary"
             size="md"
-            onPress={() => console.log("primary pressed")}
+            onPress={() => console.log('primary pressed')}
           >
             Primary Button
           </Button>
@@ -19,7 +19,7 @@ export default function App() {
           <Button
             variant="secondary"
             size="md"
-            onPress={() => console.log("secondary pressed")}
+            onPress={() => console.log('secondary pressed')}
           >
             Secondary Button
           </Button>
@@ -27,7 +27,7 @@ export default function App() {
           <Button
             variant="outline"
             size="md"
-            onPress={() => console.log("outline pressed")}
+            onPress={() => console.log('outline pressed')}
           >
             Outline Button
           </Button>
@@ -37,7 +37,7 @@ export default function App() {
           <Button
             variant="primary"
             size="sm"
-            onPress={() => console.log("small pressed")}
+            onPress={() => console.log('small pressed')}
           >
             Small Button
           </Button>
@@ -45,7 +45,7 @@ export default function App() {
           <Button
             variant="primary"
             size="md"
-            onPress={() => console.log("medium pressed")}
+            onPress={() => console.log('medium pressed')}
           >
             Medium Button
           </Button>
@@ -53,7 +53,7 @@ export default function App() {
           <Button
             variant="primary"
             size="lg"
-            onPress={() => console.log("large pressed")}
+            onPress={() => console.log('large pressed')}
           >
             Large Button
           </Button>
@@ -64,7 +64,7 @@ export default function App() {
             variant="primary"
             size="md"
             disabled
-            onPress={() => console.log("disabled pressed")}
+            onPress={() => console.log('disabled pressed')}
           >
             Disabled Button
           </Button>
@@ -78,15 +78,15 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 20,
     gap: 24,
   },
   buttonGroup: {
     gap: 16,
-    width: "100%",
-    alignItems: "center",
+    width: '100%',
+    alignItems: 'center',
   },
 });

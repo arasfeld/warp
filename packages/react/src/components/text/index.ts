@@ -1,4 +1,4 @@
-export { Text } from "./text";
+export { Text } from './text';
 export type {
   TextProps,
   TextSize,
@@ -8,4 +8,4 @@ export type {
   ThemeSize,
   Gradient,
   TextTruncate,
-} from "./text";
+} from './text';

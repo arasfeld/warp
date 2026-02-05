@@ -1,8 +1,8 @@
-export { Text, Heading } from "./text";
+export { Text, Heading } from './text';
 export type {
   TextProps,
   HeadingProps,
   TextSize,
   TextWeight,
   TextColor,
-} from "./text";
+} from './text';

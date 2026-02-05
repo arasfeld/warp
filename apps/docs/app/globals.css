@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @config "../tailwind.config.js";
 
 @layer base {
@@ -216,7 +216,7 @@
     color: var(--palette-text-primary);
     font-family:
       var(--font-space-grotesk),
-      "Space Grotesk",
+      'Space Grotesk',
       -apple-system,
       BlinkMacSystemFont,
       sans-serif;
@@ -227,9 +227,9 @@
   code *,
   pre *,
   .font-mono,
-  [class*="font-mono"] {
+  [class*='font-mono'] {
     font-family:
-      var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace,
+      var(--font-jetbrains-mono), 'JetBrains Mono', ui-monospace,
       SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
   }
 }

@@ -3,4 +3,4 @@ export type {
   TableVerticalSpacing,
   TableHorizontalSpacing,
   TableBaseProps,
-} from "./types";
+} from './types';

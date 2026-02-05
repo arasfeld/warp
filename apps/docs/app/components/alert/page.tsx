@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { AlertCircle, CheckCircle, Info, TriangleAlert, X } from "lucide-react";
-import { Alert } from "@warp/react";
+import { AlertCircle, CheckCircle, Info, TriangleAlert, X } from 'lucide-react';
+import { Alert } from '@warp/react';
 
 import {
   ComponentPageLayout,
@@ -9,16 +9,16 @@ import {
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function AlertPage() {
   const tocItems = [
-    { id: "variants", title: "Variants", level: 2 },
-    { id: "with-icon", title: "With Icon", level: 2 },
-    { id: "with-title", title: "With Title", level: 2 },
-    { id: "with-close-button", title: "With Close Button", level: 2 },
-    { id: "composition", title: "Composition", level: 2 },
-    { id: "api", title: "API", level: 2 },
+    { id: 'variants', title: 'Variants', level: 2 },
+    { id: 'with-icon', title: 'With Icon', level: 2 },
+    { id: 'with-title', title: 'With Title', level: 2 },
+    { id: 'with-close-button', title: 'With Close Button', level: 2 },
+    { id: 'composition', title: 'Composition', level: 2 },
+    { id: 'api', title: 'API', level: 2 },
   ];
 
   return (
@@ -63,10 +63,16 @@ export default function AlertPage() {
         />
         <DemoArea>
           <div className="grid gap-4">
-            <Alert variant="destructive" icon={<AlertCircle className="size-4" />}>
+            <Alert
+              variant="destructive"
+              icon={<AlertCircle className="size-4" />}
+            >
               Critical error occurred during operation.
             </Alert>
-            <Alert variant="warning" icon={<TriangleAlert className="size-4" />}>
+            <Alert
+              variant="warning"
+              icon={<TriangleAlert className="size-4" />}
+            >
               Please verify your email address.
             </Alert>
             <Alert variant="info" icon={<Info className="size-4" />}>
@@ -87,7 +93,8 @@ export default function AlertPage() {
         />
         <DemoArea>
           <Alert variant="default" title="System Update">
-            A new version is available. Please update to get latest features and security improvements.
+            A new version is available. Please update to get latest features and
+            security improvements.
           </Alert>
           <Alert variant="destructive" title="Authentication Failed">
             Invalid credentials. Please check your username and password.
@@ -107,18 +114,20 @@ export default function AlertPage() {
               variant="default"
               title="Dismissible Alert"
               withCloseButton
-              onClose={() => console.log("Alert closed")}
+              onClose={() => console.log('Alert closed')}
             >
-              This alert can be closed by clicking the × button in the top-right corner.
+              This alert can be closed by clicking the × button in the top-right
+              corner.
             </Alert>
             <Alert
               variant="default"
               title="Auto-dismiss Notification"
               withCloseButton
               closeButtonLabel="Got it"
-              onClose={() => console.log("Notification acknowledged")}
+              onClose={() => console.log('Notification acknowledged')}
             >
-              Settings have been saved. This notification will auto-dismiss in 5 seconds.
+              Settings have been saved. This notification will auto-dismiss in 5
+              seconds.
             </Alert>
           </div>
         </DemoArea>
@@ -133,7 +142,8 @@ export default function AlertPage() {
         <DemoArea>
           <div className="space-y-4">
             <Alert variant="default" title="Custom Layout Example">
-              This demonstrates using the title prop for emphasis and children for the main content.
+              This demonstrates using the title prop for emphasis and children
+              for the main content.
             </Alert>
           </div>
         </DemoArea>
@@ -159,13 +169,19 @@ export default function AlertPage() {
               <tbody>
                 <tr className="border-b border-divider">
                   <td className="p-3 font-mono text-sm">
-                    <code className="bg-muted px-1 py-0.5 rounded">variant</code>
+                    <code className="bg-muted px-1 py-0.5 rounded">
+                      variant
+                    </code>
                   </td>
                   <td className="p-3 text-sm">
-                    <code className="bg-muted px-1 py-0.5 rounded">AlertVariant</code>
+                    <code className="bg-muted px-1 py-0.5 rounded">
+                      AlertVariant
+                    </code>
                   </td>
                   <td className="p-3 text-sm">
-                    <code className="bg-muted px-1 py-0.5 rounded">"default"</code>
+                    <code className="bg-muted px-1 py-0.5 rounded">
+                      "default"
+                    </code>
                   </td>
                   <td className="p-3 text-sm text-text-secondary">
                     Default alert style with neutral styling
@@ -176,7 +192,9 @@ export default function AlertPage() {
                     <code className="bg-muted px-1 py-0.5 rounded">title</code>
                   </td>
                   <td className="p-3 text-sm">
-                    <code className="bg-muted px-1 py-0.5 rounded">ReactNode</code>
+                    <code className="bg-muted px-1 py-0.5 rounded">
+                      ReactNode
+                    </code>
                   </td>
                   <td className="p-3 text-sm">
                     <code className="bg-muted px-1 py-0.5 rounded">-</code>
@@ -187,10 +205,14 @@ export default function AlertPage() {
                 </tr>
                 <tr className="border-b border-divider">
                   <td className="p-3 font-mono text-sm">
-                    <code className="bg-muted px-1 py-0.5 rounded">children</code>
+                    <code className="bg-muted px-1 py-0.5 rounded">
+                      children
+                    </code>
                   </td>
                   <td className="p-3 text-sm">
-                    <code className="bg-muted px-1 py-0.5 rounded">ReactNode</code>
+                    <code className="bg-muted px-1 py-0.5 rounded">
+                      ReactNode
+                    </code>
                   </td>
                   <td className="p-3 text-sm">
                     <code className="bg-muted px-1 py-0.5 rounded">-</code>
@@ -201,10 +223,14 @@ export default function AlertPage() {
                 </tr>
                 <tr className="border-b border-divider">
                   <td className="p-3 font-mono text-sm">
-                    <code className="bg-muted px-1 py-0.5 rounded">withCloseButton</code>
+                    <code className="bg-muted px-1 py-0.5 rounded">
+                      withCloseButton
+                    </code>
                   </td>
                   <td className="p-3 text-sm">
-                    <code className="bg-muted px-1 py-0.5 rounded">boolean</code>
+                    <code className="bg-muted px-1 py-0.5 rounded">
+                      boolean
+                    </code>
                   </td>
                   <td className="p-3 text-sm">
                     <code className="bg-muted px-1 py-0.5 rounded">false</code>
@@ -215,10 +241,14 @@ export default function AlertPage() {
                 </tr>
                 <tr className="border-b border-divider">
                   <td className="p-3 font-mono text-sm">
-                    <code className="bg-muted px-1 py-0.5 rounded">onClose</code>
+                    <code className="bg-muted px-1 py-0.5 rounded">
+                      onClose
+                    </code>
                   </td>
                   <td className="p-3 text-sm">
-                    <code className="bg-muted px-1 py-0.5 rounded">() =&gt; void</code>
+                    <code className="bg-muted px-1 py-0.5 rounded">
+                      () =&gt; void
+                    </code>
                   </td>
                   <td className="p-3 text-sm">
                     <code className="bg-muted px-1 py-0.5 rounded">-</code>
@@ -232,7 +262,9 @@ export default function AlertPage() {
                     <code className="bg-muted px-1 py-0.5 rounded">icon</code>
                   </td>
                   <td className="p-3 text-sm">
-                    <code className="bg-muted px-1 py-0.5 rounded">ReactNode</code>
+                    <code className="bg-muted px-1 py-0.5 rounded">
+                      ReactNode
+                    </code>
                   </td>
                   <td className="p-3 text-sm">
                     <code className="bg-muted px-1 py-0.5 rounded">-</code>

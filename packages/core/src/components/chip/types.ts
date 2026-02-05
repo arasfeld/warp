@@ -6,22 +6,22 @@
 /**
  * Chip size variants
  */
-export type ChipSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type ChipSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Chip variant
  */
-export type ChipVariant = "filled" | "outline" | "light";
+export type ChipVariant = 'filled' | 'outline' | 'light';
 
 /**
  * Radius type (theme key or CSS value)
  */
-export type ChipRadius = "xs" | "sm" | "md" | "lg" | "xl" | "full" | number;
+export type ChipRadius = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' | number;
 
 /**
  * Chip input type
  */
-export type ChipType = "checkbox" | "radio";
+export type ChipType = 'checkbox' | 'radio';
 
 /**
  * Base Chip props (platform-agnostic)

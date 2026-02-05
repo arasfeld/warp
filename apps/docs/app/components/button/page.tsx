@@ -1,27 +1,27 @@
-import { ArrowRight, Download, Image } from "lucide-react";
-import { Button } from "@warp/react";
+import { ArrowRight, Download, Image } from 'lucide-react';
+import { Button } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function ButtonPage() {
   const tocItems = [
-    { id: "variants", title: "Variants", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
-    { id: "full-width", title: "Full Width", level: 2 },
-    { id: "left-right-sections", title: "Left and Right Sections", level: 2 },
-    { id: "sections-position", title: "Sections Position", level: 2 },
-    { id: "radius", title: "Radius", level: 2 },
-    { id: "gradient-variant", title: "Gradient Variant", level: 2 },
-    { id: "states", title: "States", level: 2 },
-    { id: "button-group", title: "Button Group", level: 2 },
-    { id: "polymorphic", title: "Polymorphic Component", level: 2 },
+    { id: 'variants', title: 'Variants', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
+    { id: 'full-width', title: 'Full Width', level: 2 },
+    { id: 'left-right-sections', title: 'Left and Right Sections', level: 2 },
+    { id: 'sections-position', title: 'Sections Position', level: 2 },
+    { id: 'radius', title: 'Radius', level: 2 },
+    { id: 'gradient-variant', title: 'Gradient Variant', level: 2 },
+    { id: 'states', title: 'States', level: 2 },
+    { id: 'button-group', title: 'Button Group', level: 2 },
+    { id: 'polymorphic', title: 'Polymorphic Component', level: 2 },
   ];
 
   return (
@@ -64,7 +64,7 @@ export default function ButtonPage() {
           </Button>
           <Button
             variant="gradient"
-            gradient={{ from: "blue", to: "cyan" }}
+            gradient={{ from: 'blue', to: 'cyan' }}
             className="shadow-[0_10px_30px_rgba(34,211,238,0.3)] hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(34,211,238,0.4)]"
           >
             Gradient
@@ -246,19 +246,19 @@ export default function ButtonPage() {
         <DemoArea>
           <Button
             variant="gradient"
-            gradient={{ from: "blue", to: "cyan", deg: 90 }}
+            gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
           >
             Gradient 90deg
           </Button>
           <Button
             variant="gradient"
-            gradient={{ from: "purple", to: "pink", deg: 45 }}
+            gradient={{ from: 'purple', to: 'pink', deg: 45 }}
           >
             Gradient 45deg
           </Button>
           <Button
             variant="gradient"
-            gradient={{ from: "orange", to: "red", deg: 180 }}
+            gradient={{ from: 'orange', to: 'red', deg: 180 }}
           >
             Gradient 180deg
           </Button>
@@ -293,10 +293,10 @@ export default function ButtonPage() {
         <DemoArea>
           <Button disabled>Disabled</Button>
           <Button loading>Loading</Button>
-          <Button loading loaderProps={{ type: "dots" }}>
+          <Button loading loaderProps={{ type: 'dots' }}>
             Loading (dots)
           </Button>
-          <Button loading loaderProps={{ type: "bars" }}>
+          <Button loading loaderProps={{ type: 'bars' }}>
             Loading (bars)
           </Button>
         </DemoArea>

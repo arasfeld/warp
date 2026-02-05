@@ -1,21 +1,21 @@
 /**
  * Badge size options
  */
-export type BadgeSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type BadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Badge variant options
  */
-export type BadgeVariant = "filled" | "outline" | "light" | "dot";
+export type BadgeVariant = 'filled' | 'outline' | 'light' | 'dot';
 
 /**
  * Badge position when used with children
  */
 export type BadgePosition =
-  | "top-right"
-  | "top-left"
-  | "bottom-right"
-  | "bottom-left";
+  | 'top-right'
+  | 'top-left'
+  | 'bottom-right'
+  | 'bottom-left';
 
 /**
  * Base Badge props (platform-agnostic)

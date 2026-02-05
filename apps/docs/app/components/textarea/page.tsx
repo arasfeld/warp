@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { Textarea, Stack } from "@warp/react";
+import { Textarea, Stack } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function TextareaPage() {
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "autosize", title: "Autosize", level: 2 },
-    { id: "rows", title: "Fixed Rows", level: 2 },
-    { id: "resize", title: "Resize", level: 2 },
-    { id: "error-state", title: "Error State", level: 2 },
-    { id: "disabled", title: "Disabled", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
-    { id: "variants", title: "Variants", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'autosize', title: 'Autosize', level: 2 },
+    { id: 'rows', title: 'Fixed Rows', level: 2 },
+    { id: 'resize', title: 'Resize', level: 2 },
+    { id: 'error-state', title: 'Error State', level: 2 },
+    { id: 'disabled', title: 'Disabled', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
+    { id: 'variants', title: 'Variants', level: 2 },
   ];
 
   return (
@@ -38,10 +38,7 @@ export default function TextareaPage() {
         />
         <DemoArea>
           <Stack gap="md" className="w-full max-w-md">
-            <Textarea
-              label="Description"
-              placeholder="Enter description..."
-            />
+            <Textarea label="Description" placeholder="Enter description..." />
             <Textarea
               label="Bio"
               placeholder="Tell us about yourself"
@@ -112,16 +109,8 @@ export default function TextareaPage() {
         />
         <DemoArea>
           <Stack gap="md" className="w-full max-w-md">
-            <Textarea
-              label="3 rows"
-              placeholder="Fixed 3 rows"
-              rows={3}
-            />
-            <Textarea
-              label="6 rows"
-              placeholder="Fixed 6 rows"
-              rows={6}
-            />
+            <Textarea label="3 rows" placeholder="Fixed 3 rows" rows={3} />
+            <Textarea label="6 rows" placeholder="Fixed 6 rows" rows={6} />
           </Stack>
         </DemoArea>
         <CodeBlock
@@ -141,10 +130,7 @@ export default function TextareaPage() {
 
       {/* Resize */}
       <Section id="resize">
-        <SectionHeader
-          title="Resize"
-          subtitle="Control resize behavior"
-        />
+        <SectionHeader title="Resize" subtitle="Control resize behavior" />
         <DemoArea>
           <Stack gap="md" className="w-full max-w-md">
             <Textarea
@@ -213,10 +199,7 @@ export default function TextareaPage() {
 
       {/* Disabled */}
       <Section id="disabled">
-        <SectionHeader
-          title="Disabled"
-          subtitle="Disabled textarea state"
-        />
+        <SectionHeader title="Disabled" subtitle="Disabled textarea state" />
         <DemoArea>
           <Textarea
             label="Description"
@@ -242,11 +225,21 @@ export default function TextareaPage() {
         />
         <DemoArea>
           <Stack gap="md" className="w-full max-w-md">
-            <Textarea size="xs" label="Extra small" placeholder="xs size" rows={2} />
+            <Textarea
+              size="xs"
+              label="Extra small"
+              placeholder="xs size"
+              rows={2}
+            />
             <Textarea size="sm" label="Small" placeholder="sm size" rows={2} />
             <Textarea size="md" label="Medium" placeholder="md size" rows={2} />
             <Textarea size="lg" label="Large" placeholder="lg size" rows={2} />
-            <Textarea size="xl" label="Extra large" placeholder="xl size" rows={2} />
+            <Textarea
+              size="xl"
+              label="Extra large"
+              placeholder="xl size"
+              rows={2}
+            />
           </Stack>
         </DemoArea>
         <CodeBlock
@@ -260,15 +253,27 @@ export default function TextareaPage() {
 
       {/* Variants */}
       <Section id="variants">
-        <SectionHeader
-          title="Variants"
-          subtitle="Different visual styles"
-        />
+        <SectionHeader title="Variants" subtitle="Different visual styles" />
         <DemoArea>
           <Stack gap="md" className="w-full max-w-md">
-            <Textarea variant="default" label="Default" placeholder="Default variant" rows={2} />
-            <Textarea variant="filled" label="Filled" placeholder="Filled variant" rows={2} />
-            <Textarea variant="unstyled" label="Unstyled" placeholder="Unstyled variant" rows={2} />
+            <Textarea
+              variant="default"
+              label="Default"
+              placeholder="Default variant"
+              rows={2}
+            />
+            <Textarea
+              variant="filled"
+              label="Filled"
+              placeholder="Filled variant"
+              rows={2}
+            />
+            <Textarea
+              variant="unstyled"
+              label="Unstyled"
+              placeholder="Unstyled variant"
+              rows={2}
+            />
           </Stack>
         </DemoArea>
         <CodeBlock

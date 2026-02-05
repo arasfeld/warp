@@ -1,20 +1,20 @@
-import type { Theme, ThemeMode, ShadowDefinition } from "@warp/core";
-import { normalizeColor } from "./color-utils";
+import type { Theme, ThemeMode, ShadowDefinition } from '@warp/core';
+import { normalizeColor } from './color-utils';
 
 /**
  * Convert spacing value to number (React Native prefers numbers for spacing)
  */
 function normalizeSpacing(value: string | number): number {
-  if (typeof value === "number") {
+  if (typeof value === 'number') {
     return value;
   }
   // Convert "1rem" to pixels (assuming 16px base)
   // For now, parse common values
-  if (value.endsWith("rem")) {
+  if (value.endsWith('rem')) {
     const num = parseFloat(value);
     return num * 16;
   }
-  if (value.endsWith("px")) {
+  if (value.endsWith('px')) {
     return parseFloat(value);
   }
   // Default fallback
@@ -83,7 +83,7 @@ export interface RNTheme {
 /**
  * Convert core theme to React Native theme
  */
-export function adaptTheme(theme: Theme, _mode: ThemeMode = "light"): RNTheme {
+export function adaptTheme(theme: Theme, _mode: ThemeMode = 'light'): RNTheme {
   const palette = theme.palette;
 
   // Convert typography
@@ -92,14 +92,14 @@ export function adaptTheme(theme: Theme, _mode: ThemeMode = "light"): RNTheme {
 
   Object.entries(theme.typography.fontSize).forEach(([key, value]) => {
     const size =
-      typeof value.fontSize === "number"
+      typeof value.fontSize === 'number'
         ? value.fontSize
         : normalizeSpacing(value.fontSize);
     fontSize[key] = size;
 
     if (value.lineHeight) {
       const height =
-        typeof value.lineHeight === "number"
+        typeof value.lineHeight === 'number'
           ? value.lineHeight
           : normalizeSpacing(value.lineHeight);
       lineHeight[key] = height;
@@ -116,19 +116,19 @@ export function adaptTheme(theme: Theme, _mode: ThemeMode = "light"): RNTheme {
   // Convert spacing (base unit is a number, so we create a scale)
   const spacingBase = theme.spacing;
   const spacing: Record<string, number> = {
-    "0": 0,
-    "1": spacingBase * 0.25,
-    "2": spacingBase * 0.5,
-    "3": spacingBase * 0.75,
-    "4": spacingBase,
-    "5": spacingBase * 1.25,
-    "6": spacingBase * 1.5,
-    "8": spacingBase * 2,
-    "10": spacingBase * 2.5,
-    "12": spacingBase * 3,
-    "16": spacingBase * 4,
-    "20": spacingBase * 5,
-    "24": spacingBase * 6,
+    '0': 0,
+    '1': spacingBase * 0.25,
+    '2': spacingBase * 0.5,
+    '3': spacingBase * 0.75,
+    '4': spacingBase,
+    '5': spacingBase * 1.25,
+    '6': spacingBase * 1.5,
+    '8': spacingBase * 2,
+    '10': spacingBase * 2.5,
+    '12': spacingBase * 3,
+    '16': spacingBase * 4,
+    '20': spacingBase * 5,
+    '24': spacingBase * 6,
   };
 
   // Convert border radius from shape
@@ -143,10 +143,25 @@ export function adaptTheme(theme: Theme, _mode: ThemeMode = "light"): RNTheme {
 
   // Shadows are now strings in the array format, create placeholder for RN
   const shadows: Record<string, ReturnType<typeof convertShadow>> = {
-    none: convertShadow({ color: "transparent", opacity: 0 }),
-    sm: convertShadow({ color: "rgba(0,0,0,0.1)", offsetY: 1, blur: 2, opacity: 0.1 }),
-    md: convertShadow({ color: "rgba(0,0,0,0.1)", offsetY: 4, blur: 6, opacity: 0.1 }),
-    lg: convertShadow({ color: "rgba(0,0,0,0.1)", offsetY: 10, blur: 15, opacity: 0.1 }),
+    none: convertShadow({ color: 'transparent', opacity: 0 }),
+    sm: convertShadow({
+      color: 'rgba(0,0,0,0.1)',
+      offsetY: 1,
+      blur: 2,
+      opacity: 0.1,
+    }),
+    md: convertShadow({
+      color: 'rgba(0,0,0,0.1)',
+      offsetY: 4,
+      blur: 6,
+      opacity: 0.1,
+    }),
+    lg: convertShadow({
+      color: 'rgba(0,0,0,0.1)',
+      offsetY: 10,
+      blur: 15,
+      opacity: 0.1,
+    }),
   };
 
   return {

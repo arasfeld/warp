@@ -1,6 +1,12 @@
-import React from "react";
-import { View, Text, type StyleProp, type ViewStyle, type TextStyle } from "react-native";
-import { cn } from "../../utils/cn";
+import React from 'react';
+import {
+  View,
+  Text,
+  type StyleProp,
+  type ViewStyle,
+  type TextStyle,
+} from 'react-native';
+import { cn } from '../../utils/cn';
 
 /**
  * Card component props
@@ -81,11 +87,9 @@ export function Card({
   style,
   ...props
 }: CardProps) {
-  const baseClasses = "rounded-lg border border-border bg-background";
-  const paddedClasses = padded ? "p-6" : "";
-  const interactiveClasses = interactive
-    ? "active:opacity-70"
-    : "";
+  const baseClasses = 'rounded-lg border border-border bg-background';
+  const paddedClasses = padded ? 'p-6' : '';
+  const interactiveClasses = interactive ? 'active:opacity-70' : '';
 
   return (
     <View
@@ -102,17 +106,9 @@ export function Card({
  * Card header component
  * Typically contains title and description
  */
-export function CardHeader({
-  children,
-  style,
-  ...props
-}: CardHeaderProps) {
+export function CardHeader({ children, style, ...props }: CardHeaderProps) {
   return (
-    <View
-      className="flex-col space-y-1.5 p-6"
-      style={style}
-      {...props}
-    >
+    <View className="flex-col space-y-1.5 p-6" style={style} {...props}>
       {children}
     </View>
   );
@@ -129,17 +125,20 @@ export function CardTitle({
   ...props
 }: CardTitleProps) {
   const levelClasses = {
-    1: "text-4xl font-bold",
-    2: "text-3xl font-bold",
-    3: "text-2xl font-semibold",
-    4: "text-xl font-semibold",
-    5: "text-lg font-semibold",
-    6: "text-base font-semibold",
+    1: 'text-4xl font-bold',
+    2: 'text-3xl font-bold',
+    3: 'text-2xl font-semibold',
+    4: 'text-xl font-semibold',
+    5: 'text-lg font-semibold',
+    6: 'text-base font-semibold',
   };
 
   return (
     <Text
-      className={cn(levelClasses[level], "leading-none tracking-tight text-foreground")}
+      className={cn(
+        levelClasses[level],
+        'leading-none tracking-tight text-foreground',
+      )}
       style={style}
       {...props}
     >
@@ -158,11 +157,7 @@ export function CardDescription({
   ...props
 }: CardDescriptionProps) {
   return (
-    <Text
-      className="text-sm text-muted-foreground"
-      style={style}
-      {...props}
-    >
+    <Text className="text-sm text-muted-foreground" style={style} {...props}>
       {children}
     </Text>
   );
@@ -172,17 +167,9 @@ export function CardDescription({
  * Card content component
  * Main content area of the card
  */
-export function CardContent({
-  children,
-  style,
-  ...props
-}: CardContentProps) {
+export function CardContent({ children, style, ...props }: CardContentProps) {
   return (
-    <View
-      className="p-6 pt-0"
-      style={style}
-      {...props}
-    >
+    <View className="p-6 pt-0" style={style} {...props}>
       {children}
     </View>
   );
@@ -192,17 +179,9 @@ export function CardContent({
  * Card footer component
  * Footer area of the card
  */
-export function CardFooter({
-  children,
-  style,
-  ...props
-}: CardFooterProps) {
+export function CardFooter({ children, style, ...props }: CardFooterProps) {
   return (
-    <View
-      className="flex-row items-center p-6 pt-0"
-      style={style}
-      {...props}
-    >
+    <View className="flex-row items-center p-6 pt-0" style={style} {...props}>
       {children}
     </View>
   );

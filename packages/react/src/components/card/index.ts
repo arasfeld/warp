@@ -1,5 +1,5 @@
 // Import Card and attach Section as static property
-import { Card as CardBase, CardSection } from "./card";
+import { Card as CardBase, CardSection } from './card';
 
 // Attach Section as static property
 const Card = Object.assign(CardBase, {
@@ -9,4 +9,4 @@ const Card = Object.assign(CardBase, {
 };
 
 export { Card, CardSection };
-export type { CardProps, CardSectionProps } from "./card";
+export type { CardProps, CardSectionProps } from './card';

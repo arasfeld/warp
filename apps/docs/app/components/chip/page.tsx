@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { X } from "lucide-react";
-import { Chip } from "@warp/react";
+import { useState } from 'react';
+import { X } from 'lucide-react';
+import { Chip } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function ChipPage() {
   const [checked, setChecked] = useState(false);
-  const [singleValue, setSingleValue] = useState<string>("react");
-  const [multipleValue, setMultipleValue] = useState<string[]>(["react"]);
+  const [singleValue, setSingleValue] = useState<string>('react');
+  const [multipleValue, setMultipleValue] = useState<string[]>(['react']);
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "controlled", title: "Controlled", level: 2 },
-    { id: "color", title: "Color", level: 2 },
-    { id: "variant", title: "Variant", level: 2 },
-    { id: "size", title: "Size", level: 2 },
-    { id: "radius", title: "Radius", level: 2 },
-    { id: "icon", title: "Change Checked Icon", level: 2 },
-    { id: "chip-group", title: "Chip.Group", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'controlled', title: 'Controlled', level: 2 },
+    { id: 'color', title: 'Color', level: 2 },
+    { id: 'variant', title: 'Variant', level: 2 },
+    { id: 'size', title: 'Size', level: 2 },
+    { id: 'radius', title: 'Radius', level: 2 },
+    { id: 'icon', title: 'Change Checked Icon', level: 2 },
+    { id: 'chip-group', title: 'Chip.Group', level: 2 },
   ];
 
   return (

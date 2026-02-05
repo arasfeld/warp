@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { createContext, useContext, useCallback, useMemo } from "react";
-import { cn } from "../../utils/cn";
+import React, { createContext, useContext, useCallback, useMemo } from 'react';
+import { cn } from '../../utils/cn';
 
 /**
  * Chip.Group context value
@@ -73,7 +73,7 @@ export function ChipGroup({
         return currentValue === chipValue;
       }
     },
-    [currentValue, multiple]
+    [currentValue, multiple],
   );
 
   const handleChange = useCallback(
@@ -81,7 +81,7 @@ export function ChipGroup({
       if (multiple) {
         const values = ((currentValue as string[]) || []).filter(Boolean);
         let newValue: string[];
-        
+
         if (checked) {
           newValue = [...values, chipValue];
         } else {
@@ -100,7 +100,7 @@ export function ChipGroup({
         onChange?.(newValue as string);
       }
     },
-    [currentValue, multiple, isControlled, onChange]
+    [currentValue, multiple, isControlled, onChange],
   );
 
   const contextValue = useMemo<ChipGroupContextValue>(
@@ -110,12 +110,12 @@ export function ChipGroup({
       onChange: handleChange,
       isChecked,
     }),
-    [currentValue, multiple, handleChange, isChecked]
+    [currentValue, multiple, handleChange, isChecked],
   );
 
   return (
     <ChipGroupContext.Provider value={contextValue}>
-      <div className={cn("inline-flex flex-wrap gap-2", className)}>
+      <div className={cn('inline-flex flex-wrap gap-2', className)}>
         {children}
       </div>
     </ChipGroupContext.Provider>

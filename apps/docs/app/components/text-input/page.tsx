@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import { TextInput, Stack, Group } from "@warp/react";
-import { Mail, Search, User } from "lucide-react";
+import { TextInput, Stack, Group } from '@warp/react';
+import { Mail, Search, User } from 'lucide-react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function TextInputPage() {
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "with-sections", title: "With Sections", level: 2 },
-    { id: "error-state", title: "Error State", level: 2 },
-    { id: "disabled", title: "Disabled", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
-    { id: "variants", title: "Variants", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'with-sections', title: 'With Sections', level: 2 },
+    { id: 'error-state', title: 'Error State', level: 2 },
+    { id: 'disabled', title: 'Disabled', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
+    { id: 'variants', title: 'Variants', level: 2 },
   ];
 
   return (
@@ -42,11 +42,7 @@ export default function TextInputPage() {
               placeholder="your@email.com"
               description="We'll never share your email"
             />
-            <TextInput
-              label="Username"
-              placeholder="Enter username"
-              required
-            />
+            <TextInput label="Username" placeholder="Enter username" required />
           </Stack>
         </DemoArea>
         <CodeBlock
@@ -143,10 +139,7 @@ export default function TextInputPage() {
 
       {/* Disabled */}
       <Section id="disabled">
-        <SectionHeader
-          title="Disabled"
-          subtitle="Disabled input state"
-        />
+        <SectionHeader title="Disabled" subtitle="Disabled input state" />
         <DemoArea>
           <TextInput
             label="Email"
@@ -190,15 +183,24 @@ export default function TextInputPage() {
 
       {/* Variants */}
       <Section id="variants">
-        <SectionHeader
-          title="Variants"
-          subtitle="Different visual styles"
-        />
+        <SectionHeader title="Variants" subtitle="Different visual styles" />
         <DemoArea>
           <Stack gap="md" className="w-full max-w-sm">
-            <TextInput variant="default" label="Default" placeholder="Default variant" />
-            <TextInput variant="filled" label="Filled" placeholder="Filled variant" />
-            <TextInput variant="unstyled" label="Unstyled" placeholder="Unstyled variant" />
+            <TextInput
+              variant="default"
+              label="Default"
+              placeholder="Default variant"
+            />
+            <TextInput
+              variant="filled"
+              label="Filled"
+              placeholder="Filled variant"
+            />
+            <TextInput
+              variant="unstyled"
+              label="Unstyled"
+              placeholder="Unstyled variant"
+            />
           </Stack>
         </DemoArea>
         <CodeBlock

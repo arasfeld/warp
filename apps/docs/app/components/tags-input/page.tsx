@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { TagsInput, Stack, Text } from "@warp/react";
-import { Tag } from "lucide-react";
+import { useState } from 'react';
+import { TagsInput, Stack, Text } from '@warp/react';
+import { Tag } from 'lucide-react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function TagsInputPage() {
-  const [tags, setTags] = useState<string[]>(["React", "TypeScript"]);
+  const [tags, setTags] = useState<string[]>(['React', 'TypeScript']);
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "controlled", title: "Controlled", level: 2 },
-    { id: "split-chars", title: "Split Characters", level: 2 },
-    { id: "max-tags", title: "Max Tags", level: 2 },
-    { id: "allow-duplicates", title: "Allow Duplicates", level: 2 },
-    { id: "clearable", title: "Clearable", level: 2 },
-    { id: "with-icon", title: "With Icon", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'controlled', title: 'Controlled', level: 2 },
+    { id: 'split-chars', title: 'Split Characters', level: 2 },
+    { id: 'max-tags', title: 'Max Tags', level: 2 },
+    { id: 'allow-duplicates', title: 'Allow Duplicates', level: 2 },
+    { id: 'clearable', title: 'Clearable', level: 2 },
+    { id: 'with-icon', title: 'With Icon', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
   ];
 
   return (
@@ -44,7 +44,7 @@ export default function TagsInputPage() {
           <TagsInput
             label="Technologies"
             placeholder="Add a tag..."
-            defaultValue={["React", "Next.js"]}
+            defaultValue={['React', 'Next.js']}
             className="max-w-sm"
           />
         </DemoArea>
@@ -72,7 +72,7 @@ export default function TagsInputPage() {
               onChange={setTags}
             />
             <Text size="sm" c="dimmed">
-              Tags: {tags.join(", ") || "None"}
+              Tags: {tags.join(', ') || 'None'}
             </Text>
           </Stack>
         </DemoArea>
@@ -102,13 +102,13 @@ export default function TagsInputPage() {
             <TagsInput
               label="Emails (comma or space separated)"
               placeholder="Enter emails..."
-              splitChars={[",", " "]}
+              splitChars={[',', ' ']}
               description="Type emails separated by commas or spaces"
             />
             <TagsInput
               label="Semicolon separated"
               placeholder="Enter values..."
-              splitChars={[";"]}
+              splitChars={[';']}
               description="Values are separated by semicolons"
             />
           </Stack>
@@ -132,10 +132,7 @@ export default function TagsInputPage() {
 
       {/* Max Tags */}
       <Section id="max-tags">
-        <SectionHeader
-          title="Max Tags"
-          subtitle="Limit the number of tags"
-        />
+        <SectionHeader title="Max Tags" subtitle="Limit the number of tags" />
         <DemoArea>
           <TagsInput
             label="Skills (max 3)"
@@ -194,15 +191,12 @@ export default function TagsInputPage() {
 
       {/* Clearable */}
       <Section id="clearable">
-        <SectionHeader
-          title="Clearable"
-          subtitle="Show a clear all button"
-        />
+        <SectionHeader title="Clearable" subtitle="Show a clear all button" />
         <DemoArea>
           <TagsInput
             label="Tags"
             placeholder="Add tags..."
-            defaultValue={["Tag 1", "Tag 2", "Tag 3"]}
+            defaultValue={['Tag 1', 'Tag 2', 'Tag 3']}
             clearable
             className="max-w-sm"
           />

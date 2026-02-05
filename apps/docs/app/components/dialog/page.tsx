@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Button,
   Dialog,
@@ -11,30 +11,32 @@ import {
   Text,
   TextInput,
   Textarea,
-} from "@warp/react";
+} from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function DialogPage() {
   const [basicOpened, setBasicOpened] = useState(false);
   const [confirmOpened, setConfirmOpened] = useState(false);
   const [formOpened, setFormOpened] = useState(false);
   const [sizeOpened, setSizeOpened] = useState(false);
-  const [currentSize, setCurrentSize] = useState<"xs" | "sm" | "md" | "lg" | "xl">("md");
+  const [currentSize, setCurrentSize] = useState<
+    'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  >('md');
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "confirmation", title: "Confirmation Dialog", level: 2 },
-    { id: "form", title: "Form Dialog", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
-    { id: "customization", title: "Customization", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'confirmation', title: 'Confirmation Dialog', level: 2 },
+    { id: 'form', title: 'Form Dialog', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
+    { id: 'customization', title: 'Customization', level: 2 },
   ];
 
   return (
@@ -151,7 +153,11 @@ export default function DialogPage() {
             <DialogBody className="px-0">
               <Stack gap="md">
                 <TextInput label="Name" placeholder="Enter your name" />
-                <TextInput label="Email" type="email" placeholder="Enter your email" />
+                <TextInput
+                  label="Email"
+                  type="email"
+                  placeholder="Enter your email"
+                />
                 <Textarea
                   label="Bio"
                   placeholder="Tell us about yourself"
@@ -203,7 +209,7 @@ export default function DialogPage() {
         />
         <DemoArea>
           <Group gap="sm" wrap="wrap">
-            {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+            {(['xs', 'sm', 'md', 'lg', 'xl'] as const).map((size) => (
               <Button
                 key={size}
                 variant="outline"
@@ -251,13 +257,28 @@ export default function DialogPage() {
               Props for customizing dialog behavior:
             </Text>
             <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-              <li><code>closeOnEscape</code> - Close on Escape key (default: true)</li>
-              <li><code>closeOnClickOutside</code> - Close on overlay click (default: true)</li>
-              <li><code>withCloseButton</code> - Show close button (default: true)</li>
-              <li><code>centered</code> - Center vertically (default: true)</li>
-              <li><code>withOverlay</code> - Show overlay (default: true)</li>
-              <li><code>overlayOpacity</code> - Overlay opacity (default: 0.5)</li>
-              <li><code>overlayBlur</code> - Overlay blur in px (default: 0)</li>
+              <li>
+                <code>closeOnEscape</code> - Close on Escape key (default: true)
+              </li>
+              <li>
+                <code>closeOnClickOutside</code> - Close on overlay click
+                (default: true)
+              </li>
+              <li>
+                <code>withCloseButton</code> - Show close button (default: true)
+              </li>
+              <li>
+                <code>centered</code> - Center vertically (default: true)
+              </li>
+              <li>
+                <code>withOverlay</code> - Show overlay (default: true)
+              </li>
+              <li>
+                <code>overlayOpacity</code> - Overlay opacity (default: 0.5)
+              </li>
+              <li>
+                <code>overlayBlur</code> - Overlay blur in px (default: 0)
+              </li>
             </ul>
           </Stack>
         </DemoArea>

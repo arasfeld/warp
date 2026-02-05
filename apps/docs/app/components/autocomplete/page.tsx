@@ -1,50 +1,50 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Autocomplete, Stack, Text } from "@warp/react";
-import { Search, MapPin } from "lucide-react";
+import { useState } from 'react';
+import { Autocomplete, Stack, Text } from '@warp/react';
+import { Search, MapPin } from 'lucide-react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 const frameworks = [
-  { value: "react", label: "React" },
-  { value: "angular", label: "Angular" },
-  { value: "vue", label: "Vue" },
-  { value: "svelte", label: "Svelte" },
-  { value: "solid", label: "Solid" },
-  { value: "preact", label: "Preact" },
-  { value: "qwik", label: "Qwik" },
+  { value: 'react', label: 'React' },
+  { value: 'angular', label: 'Angular' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'solid', label: 'Solid' },
+  { value: 'preact', label: 'Preact' },
+  { value: 'qwik', label: 'Qwik' },
 ];
 
 const cities = [
-  { value: "new-york", label: "New York" },
-  { value: "los-angeles", label: "Los Angeles" },
-  { value: "chicago", label: "Chicago" },
-  { value: "houston", label: "Houston" },
-  { value: "phoenix", label: "Phoenix" },
-  { value: "philadelphia", label: "Philadelphia" },
-  { value: "san-antonio", label: "San Antonio" },
-  { value: "san-diego", label: "San Diego" },
+  { value: 'new-york', label: 'New York' },
+  { value: 'los-angeles', label: 'Los Angeles' },
+  { value: 'chicago', label: 'Chicago' },
+  { value: 'houston', label: 'Houston' },
+  { value: 'phoenix', label: 'Phoenix' },
+  { value: 'philadelphia', label: 'Philadelphia' },
+  { value: 'san-antonio', label: 'San Antonio' },
+  { value: 'san-diego', label: 'San Diego' },
 ];
 
 export default function AutocompletePage() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "controlled", title: "Controlled", level: 2 },
-    { id: "with-icon", title: "With Icon", level: 2 },
-    { id: "max-dropdown-height", title: "Dropdown Height", level: 2 },
-    { id: "disabled", title: "Disabled", level: 2 },
-    { id: "error-state", title: "Error State", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'controlled', title: 'Controlled', level: 2 },
+    { id: 'with-icon', title: 'With Icon', level: 2 },
+    { id: 'max-dropdown-height', title: 'Dropdown Height', level: 2 },
+    { id: 'disabled', title: 'Disabled', level: 2 },
+    { id: 'error-state', title: 'Error State', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
   ];
 
   return (
@@ -101,7 +101,7 @@ export default function AutocompletePage() {
               onChange={setValue}
             />
             <Text size="sm" c="dimmed">
-              Input value: {value || "(empty)"}
+              Input value: {value || '(empty)'}
             </Text>
           </Stack>
         </DemoArea>
@@ -261,11 +261,36 @@ export default function AutocompletePage() {
         />
         <DemoArea>
           <Stack gap="md" className="w-full max-w-sm">
-            <Autocomplete size="xs" label="Extra small" placeholder="xs size" data={frameworks} />
-            <Autocomplete size="sm" label="Small" placeholder="sm size" data={frameworks} />
-            <Autocomplete size="md" label="Medium" placeholder="md size" data={frameworks} />
-            <Autocomplete size="lg" label="Large" placeholder="lg size" data={frameworks} />
-            <Autocomplete size="xl" label="Extra large" placeholder="xl size" data={frameworks} />
+            <Autocomplete
+              size="xs"
+              label="Extra small"
+              placeholder="xs size"
+              data={frameworks}
+            />
+            <Autocomplete
+              size="sm"
+              label="Small"
+              placeholder="sm size"
+              data={frameworks}
+            />
+            <Autocomplete
+              size="md"
+              label="Medium"
+              placeholder="md size"
+              data={frameworks}
+            />
+            <Autocomplete
+              size="lg"
+              label="Large"
+              placeholder="lg size"
+              data={frameworks}
+            />
+            <Autocomplete
+              size="xl"
+              label="Extra large"
+              placeholder="xl size"
+              data={frameworks}
+            />
           </Stack>
         </DemoArea>
         <CodeBlock

@@ -8,7 +8,7 @@ export {
   TableTd,
   TableCaption,
   TableScrollContainer,
-} from "./table";
+} from './table';
 
 export type {
   TableProps,
@@ -22,4 +22,4 @@ export type {
   TableTdProps,
   TableCaptionProps,
   TableScrollContainerProps,
-} from "./table";
+} from './table';

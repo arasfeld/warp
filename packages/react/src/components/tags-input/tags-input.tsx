@@ -1,18 +1,29 @@
-"use client";
+'use client';
 
-import React, { forwardRef, useState, useCallback, useRef, KeyboardEvent } from "react";
-import { X } from "lucide-react";
+import React, {
+  forwardRef,
+  useState,
+  useCallback,
+  useRef,
+  KeyboardEvent,
+} from 'react';
+import { X } from 'lucide-react';
 
-import { cn } from "../../utils/cn";
-import { InputWrapper } from "../input/input";
-import type { InputSize, InputVariant, InputWrapperProps } from "../input/input";
+import { cn } from '../../utils/cn';
+import { InputWrapper } from '../input/input';
+import type {
+  InputSize,
+  InputVariant,
+  InputWrapperProps,
+} from '../input/input';
 
 /**
  * TagsInput component props
  */
 export interface TagsInputProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange">,
-    Omit<InputWrapperProps, "children" | "id" | "size" | "error"> {
+  extends
+    Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'>,
+    Omit<InputWrapperProps, 'children' | 'id' | 'size' | 'error'> {
   /** Input size */
   size?: InputSize;
   /** Input variant */
@@ -84,17 +95,17 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
       errorProps,
       inputContainer,
       // TagsInput-specific props
-      size = "sm",
-      variant = "default",
+      size = 'sm',
+      variant = 'default',
       radius,
       error,
       value: controlledValue,
       defaultValue = [],
       onChange,
-      placeholder = "Add tag...",
+      placeholder = 'Add tag...',
       maxTags,
       allowDuplicates = false,
-      splitChars = [",", "Enter", "Tab"],
+      splitChars = [',', 'Enter', 'Tab'],
       disabled = false,
       clearable = true,
       renderTag,
@@ -105,11 +116,11 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
       id,
       ...props
     },
-    ref
+    ref,
   ) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [internalTags, setInternalTags] = useState<string[]>(defaultValue);
-    const [inputValue, setInputValue] = useState("");
+    const [inputValue, setInputValue] = useState('');
     const [isFocused, setIsFocused] = useState(false);
 
     const isControlled = controlledValue !== undefined;
@@ -126,7 +137,7 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
         }
         onChange?.(newTags);
       },
-      [isControlled, onChange]
+      [isControlled, onChange],
     );
 
     // Add a tag
@@ -145,7 +156,7 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
         setTags([...tags, transformed]);
         return true;
       },
-      [tags, allowDuplicates, maxTags, validateTag, transformTag, setTags]
+      [tags, allowDuplicates, maxTags, validateTag, transformTag, setTags],
     );
 
     // Remove a tag
@@ -155,14 +166,14 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
         const newTags = tags.filter((_, i) => i !== index);
         setTags(newTags);
       },
-      [disabled, tags, setTags]
+      [disabled, tags, setTags],
     );
 
     // Clear all tags
     const clearTags = useCallback(() => {
       if (disabled) return;
       setTags([]);
-      setInputValue("");
+      setInputValue('');
     }, [disabled, setTags]);
 
     // Handle input change
@@ -171,7 +182,9 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
         const value = e.target.value;
 
         // Check for split characters (excluding Enter and Tab which are handled by keydown)
-        const charSplitters = splitChars.filter((c) => c !== "Enter" && c !== "Tab");
+        const charSplitters = splitChars.filter(
+          (c) => c !== 'Enter' && c !== 'Tab',
+        );
         for (const char of charSplitters) {
           if (value.includes(char)) {
             const parts = value.split(char);
@@ -180,16 +193,16 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
                 addTag(part);
               }
             });
-            const firstSplitter = charSplitters[0] ?? ",";
-            const lastPart = parts[parts.length - 1] ?? "";
-            setInputValue(value.endsWith(firstSplitter) ? "" : lastPart);
+            const firstSplitter = charSplitters[0] ?? ',';
+            const lastPart = parts[parts.length - 1] ?? '';
+            setInputValue(value.endsWith(firstSplitter) ? '' : lastPart);
             return;
           }
         }
 
         setInputValue(value);
       },
-      [splitChars, addTag]
+      [splitChars, addTag],
     );
 
     // Handle key down
@@ -198,44 +211,50 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
         if (disabled) return;
 
         // Handle Enter and Tab
-        if ((splitChars.includes("Enter") && e.key === "Enter") ||
-            (splitChars.includes("Tab") && e.key === "Tab")) {
+        if (
+          (splitChars.includes('Enter') && e.key === 'Enter') ||
+          (splitChars.includes('Tab') && e.key === 'Tab')
+        ) {
           if (inputValue.trim()) {
             e.preventDefault();
             if (addTag(inputValue)) {
-              setInputValue("");
+              setInputValue('');
             }
           }
           return;
         }
 
         // Handle Backspace to remove last tag
-        if (e.key === "Backspace" && inputValue === "" && tags.length > 0) {
+        if (e.key === 'Backspace' && inputValue === '' && tags.length > 0) {
           removeTag(tags.length - 1);
         }
       },
-      [disabled, splitChars, inputValue, tags, addTag, removeTag]
+      [disabled, splitChars, inputValue, tags, addTag, removeTag],
     );
 
     // Handle paste
     const handlePaste = useCallback(
       (e: React.ClipboardEvent<HTMLInputElement>) => {
-        const pasted = e.clipboardData.getData("text");
-        const charSplitters = splitChars.filter((c) => c !== "Enter" && c !== "Tab");
+        const pasted = e.clipboardData.getData('text');
+        const charSplitters = splitChars.filter(
+          (c) => c !== 'Enter' && c !== 'Tab',
+        );
 
         // Check if pasted content contains split chars
-        const hasSplitChar = charSplitters.some((char) => pasted.includes(char));
+        const hasSplitChar = charSplitters.some((char) =>
+          pasted.includes(char),
+        );
         if (hasSplitChar) {
           e.preventDefault();
           let remaining = pasted;
           for (const char of charSplitters) {
             const parts = remaining.split(char);
             parts.forEach((part) => addTag(part));
-            remaining = "";
+            remaining = '';
           }
         }
       },
-      [splitChars, addTag]
+      [splitChars, addTag],
     );
 
     // Handle container click
@@ -246,65 +265,90 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
     const hasWrapper = label || description || error;
 
     // Size classes
-    const sizeConfig: Record<InputSize, { minHeight: string; padding: string; text: string; tagPadding: string }> = {
-      xs: { minHeight: "min-h-7", padding: "p-1", text: "text-xs", tagPadding: "px-1.5 py-0.5" },
-      sm: { minHeight: "min-h-9", padding: "p-1.5", text: "text-sm", tagPadding: "px-2 py-0.5" },
-      md: { minHeight: "min-h-10", padding: "p-2", text: "text-sm", tagPadding: "px-2.5 py-1" },
-      lg: { minHeight: "min-h-11", padding: "p-2", text: "text-base", tagPadding: "px-3 py-1" },
-      xl: { minHeight: "min-h-12", padding: "p-2.5", text: "text-base", tagPadding: "px-3 py-1.5" },
+    const sizeConfig: Record<
+      InputSize,
+      { minHeight: string; padding: string; text: string; tagPadding: string }
+    > = {
+      xs: {
+        minHeight: 'min-h-7',
+        padding: 'p-1',
+        text: 'text-xs',
+        tagPadding: 'px-1.5 py-0.5',
+      },
+      sm: {
+        minHeight: 'min-h-9',
+        padding: 'p-1.5',
+        text: 'text-sm',
+        tagPadding: 'px-2 py-0.5',
+      },
+      md: {
+        minHeight: 'min-h-10',
+        padding: 'p-2',
+        text: 'text-sm',
+        tagPadding: 'px-2.5 py-1',
+      },
+      lg: {
+        minHeight: 'min-h-11',
+        padding: 'p-2',
+        text: 'text-base',
+        tagPadding: 'px-3 py-1',
+      },
+      xl: {
+        minHeight: 'min-h-12',
+        padding: 'p-2.5',
+        text: 'text-base',
+        tagPadding: 'px-3 py-1.5',
+      },
     };
 
     // Radius classes
     const getRadiusClass = () => {
-      if (radius === undefined) return "rounded-md";
-      if (typeof radius === "number") return "";
+      if (radius === undefined) return 'rounded-md';
+      if (typeof radius === 'number') return '';
       const radiusMap: Record<string, string> = {
-        xs: "rounded-sm",
-        sm: "rounded",
-        md: "rounded-md",
-        lg: "rounded-lg",
-        xl: "rounded-xl",
-        full: "rounded-full",
+        xs: 'rounded-sm',
+        sm: 'rounded',
+        md: 'rounded-md',
+        lg: 'rounded-lg',
+        xl: 'rounded-xl',
+        full: 'rounded-full',
       };
-      return radiusMap[radius] || "rounded-md";
+      return radiusMap[radius] || 'rounded-md';
     };
 
     // Variant classes
     const getVariantClasses = () => {
-      if (variant === "unstyled") {
-        return "border-0 bg-transparent p-0";
+      if (variant === 'unstyled') {
+        return 'border-0 bg-transparent p-0';
       }
 
       const variantMap: Record<InputVariant, string> = {
-        default: "border border-divider bg-background-default",
-        filled: "border-0 bg-background-paper",
-        unstyled: "",
+        default: 'border border-divider bg-background-default',
+        filled: 'border-0 bg-background-paper',
+        unstyled: '',
       };
 
       return variantMap[variant];
     };
 
     // Error classes
-    const errorClasses = error
-      ? "border-error"
-      : "";
+    const errorClasses = error ? 'border-error' : '';
 
     // Focus classes
-    const focusClasses = isFocused && !error
-      ? "ring-2 ring-primary ring-offset-2"
-      : "";
+    const focusClasses =
+      isFocused && !error ? 'ring-2 ring-primary ring-offset-2' : '';
 
     const radiusStyle: React.CSSProperties =
-      typeof radius === "number" ? { borderRadius: `${radius}px` } : {};
+      typeof radius === 'number' ? { borderRadius: `${radius}px` } : {};
 
     // Render default tag
     const defaultRenderTag = (tag: string, onRemove: () => void) => (
       <span
         className={cn(
-          "inline-flex items-center gap-1 rounded",
-          "bg-primary/10 text-primary",
+          'inline-flex items-center gap-1 rounded',
+          'bg-primary/10 text-primary',
           sizeConfig[size].tagPadding,
-          sizeConfig[size].text
+          sizeConfig[size].text,
         )}
       >
         <span className="truncate max-w-[150px]">{tag}</span>
@@ -327,24 +371,22 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
     const inputElement = (
       <div
         className={cn(
-          "flex flex-wrap items-center gap-1.5 cursor-text transition-all",
+          'flex flex-wrap items-center gap-1.5 cursor-text transition-all',
           sizeConfig[size].minHeight,
           sizeConfig[size].padding,
           getRadiusClass(),
           getVariantClasses(),
           errorClasses,
           focusClasses,
-          disabled && "opacity-50 cursor-not-allowed",
-          className
+          disabled && 'opacity-50 cursor-not-allowed',
+          className,
         )}
         style={radiusStyle}
         onClick={handleContainerClick}
         {...props}
       >
         {/* Left section */}
-        {leftSection && (
-          <span className="flex-shrink-0">{leftSection}</span>
-        )}
+        {leftSection && <span className="flex-shrink-0">{leftSection}</span>}
 
         {/* Tags */}
         {tags.map((tag, index) => (
@@ -359,8 +401,10 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
         {!isMaxReached && (
           <input
             ref={(node) => {
-              (inputRef as React.MutableRefObject<HTMLInputElement | null>).current = node;
-              if (typeof ref === "function") {
+              (
+                inputRef as React.MutableRefObject<HTMLInputElement | null>
+              ).current = node;
+              if (typeof ref === 'function') {
                 ref(node);
               } else if (ref) {
                 ref.current = node;
@@ -378,16 +422,16 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
               // Add remaining input as tag on blur
               if (inputValue.trim()) {
                 addTag(inputValue);
-                setInputValue("");
+                setInputValue('');
               }
             }}
-            placeholder={tags.length === 0 ? placeholder : ""}
+            placeholder={tags.length === 0 ? placeholder : ''}
             disabled={disabled}
             className={cn(
-              "flex-1 min-w-[60px] bg-transparent border-0 outline-none",
-              "placeholder:text-text-secondary",
+              'flex-1 min-w-[60px] bg-transparent border-0 outline-none',
+              'placeholder:text-text-secondary',
               sizeConfig[size].text,
-              disabled && "cursor-not-allowed"
+              disabled && 'cursor-not-allowed',
             )}
           />
         )}
@@ -418,7 +462,7 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
         id={id}
         label={label}
         description={description}
-        error={typeof error === "boolean" ? undefined : error}
+        error={typeof error === 'boolean' ? undefined : error}
         required={required}
         withAsterisk={withAsterisk}
         size={size}
@@ -432,7 +476,7 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
         {inputElement}
       </InputWrapper>
     );
-  }
+  },
 );
 
-TagsInput.displayName = "TagsInput";
+TagsInput.displayName = 'TagsInput';

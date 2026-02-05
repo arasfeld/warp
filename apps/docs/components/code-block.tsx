@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Check, Copy } from "lucide-react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { useState } from 'react';
+import { Check, Copy } from 'lucide-react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {
   oneDark,
   oneLight,
-} from "react-syntax-highlighter/dist/esm/styles/prism";
-import { useTheme } from "@warp/react";
+} from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { useTheme } from '@warp/react';
 
 interface CodeBlockProps {
   code: string;
   language?: string;
 }
 
-export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
+export function CodeBlock({ code, language = 'tsx' }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const { mode } = useTheme();
-  const isDark = mode === "dark";
+  const isDark = mode === 'dark';
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(code);
@@ -80,8 +80,8 @@ export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
               style={isDark ? oneDark : oneLight}
               customStyle={{
                 margin: 0,
-                padding: "1rem",
-                background: isDark ? "#1e1e2e" : "#ffffff",
+                padding: '1rem',
+                background: isDark ? '#1e1e2e' : '#ffffff',
               }}
               codeTagProps={{
                 style: {

@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React, { forwardRef } from "react";
+import React, { forwardRef } from 'react';
 
-import { cn } from "../../utils/cn";
+import { cn } from '../../utils/cn';
 
 /**
  * Skeleton animation type
  */
-export type SkeletonAnimation = "pulse" | "wave" | false;
+export type SkeletonAnimation = 'pulse' | 'wave' | false;
 
 /**
  * Skeleton component props
@@ -52,13 +52,13 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
       radius,
       circle = false,
       visible = true,
-      animate = "pulse",
+      animate = 'pulse',
       className,
       children,
       style,
       ...props
     },
-    ref
+    ref,
   ) => {
     // If not visible, render children
     if (!visible) {
@@ -67,63 +67,64 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
 
     // Radius classes
     const getRadiusClass = () => {
-      if (circle) return "rounded-full";
-      if (radius === undefined) return "rounded-md";
-      if (typeof radius === "number") return "";
+      if (circle) return 'rounded-full';
+      if (radius === undefined) return 'rounded-md';
+      if (typeof radius === 'number') return '';
       const radiusMap: Record<string, string> = {
-        xs: "rounded-sm",
-        sm: "rounded",
-        md: "rounded-md",
-        lg: "rounded-lg",
-        xl: "rounded-xl",
-        full: "rounded-full",
+        xs: 'rounded-sm',
+        sm: 'rounded',
+        md: 'rounded-md',
+        lg: 'rounded-lg',
+        xl: 'rounded-xl',
+        full: 'rounded-full',
       };
-      return radiusMap[radius] || "rounded-md";
+      return radiusMap[radius] || 'rounded-md';
     };
 
     // Animation classes
     const getAnimationClass = () => {
-      if (animate === false) return "";
-      if (animate === "pulse") return "animate-pulse";
-      if (animate === "wave") return "skeleton-wave";
-      return "animate-pulse";
+      if (animate === false) return '';
+      if (animate === 'pulse') return 'animate-pulse';
+      if (animate === 'wave') return 'skeleton-wave';
+      return 'animate-pulse';
     };
 
     // Calculate styles
     const computedStyle: React.CSSProperties = {
       ...style,
-      width: typeof width === "number" ? `${width}px` : width,
-      height: typeof height === "number" ? `${height}px` : height,
-      ...(typeof radius === "number" && { borderRadius: `${radius}px` }),
-      ...(circle && width && {
-        width: typeof width === "number" ? `${width}px` : width,
-        height: typeof width === "number" ? `${width}px` : width,
-      }),
+      width: typeof width === 'number' ? `${width}px` : width,
+      height: typeof height === 'number' ? `${height}px` : height,
+      ...(typeof radius === 'number' && { borderRadius: `${radius}px` }),
+      ...(circle &&
+        width && {
+          width: typeof width === 'number' ? `${width}px` : width,
+          height: typeof width === 'number' ? `${width}px` : width,
+        }),
     };
 
     return (
       <div
         ref={ref}
         className={cn(
-          "bg-gray-300 dark:bg-gray-600",
+          'bg-gray-300 dark:bg-gray-600',
           getRadiusClass(),
           getAnimationClass(),
-          className
+          className,
         )}
         style={computedStyle}
         aria-hidden="true"
         {...props}
       />
     );
-  }
+  },
 );
 
-Skeleton.displayName = "Skeleton";
+Skeleton.displayName = 'Skeleton';
 
 /**
  * Skeleton.Text component props
  */
-export interface SkeletonTextProps extends Omit<SkeletonProps, "height"> {
+export interface SkeletonTextProps extends Omit<SkeletonProps, 'height'> {
   /** Number of lines to render */
   lines?: number;
   /** Height of each line */
@@ -144,20 +145,20 @@ export const SkeletonText = forwardRef<HTMLDivElement, SkeletonTextProps>(
       lines = 3,
       lineHeight = 16,
       gap = 8,
-      lastLineWidth = "70%",
-      width = "100%",
-      animate = "pulse",
+      lastLineWidth = '70%',
+      width = '100%',
+      animate = 'pulse',
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
         ref={ref}
-        className={cn("flex flex-col", className)}
+        className={cn('flex flex-col', className)}
         style={{
-          gap: typeof gap === "number" ? `${gap}px` : gap,
+          gap: typeof gap === 'number' ? `${gap}px` : gap,
         }}
         {...props}
       >
@@ -171,15 +172,18 @@ export const SkeletonText = forwardRef<HTMLDivElement, SkeletonTextProps>(
         ))}
       </div>
     );
-  }
+  },
 );
 
-SkeletonText.displayName = "SkeletonText";
+SkeletonText.displayName = 'SkeletonText';
 
 /**
  * Skeleton.Circle component props
  */
-export interface SkeletonCircleProps extends Omit<SkeletonProps, "circle" | "width" | "height"> {
+export interface SkeletonCircleProps extends Omit<
+  SkeletonProps,
+  'circle' | 'width' | 'height'
+> {
   /** Size (diameter) of the circle */
   size?: string | number;
 }
@@ -189,7 +193,7 @@ export interface SkeletonCircleProps extends Omit<SkeletonProps, "circle" | "wid
  * Display a circular skeleton (avatar placeholder)
  */
 export const SkeletonCircle = forwardRef<HTMLDivElement, SkeletonCircleProps>(
-  ({ size = 40, animate = "pulse", className, ...props }, ref) => {
+  ({ size = 40, animate = 'pulse', className, ...props }, ref) => {
     return (
       <Skeleton
         ref={ref}
@@ -201,7 +205,7 @@ export const SkeletonCircle = forwardRef<HTMLDivElement, SkeletonCircleProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
-SkeletonCircle.displayName = "SkeletonCircle";
+SkeletonCircle.displayName = 'SkeletonCircle';

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, {
   forwardRef,
@@ -7,12 +7,17 @@ import React, {
   useRef,
   useImperativeHandle,
   useEffect,
-} from "react";
-import { ChevronUp, ChevronDown } from "lucide-react";
+} from 'react';
+import { ChevronUp, ChevronDown } from 'lucide-react';
 
-import { cn } from "../../utils/cn";
-import { Input, InputWrapper } from "../input/input";
-import type { InputProps, InputSize, InputVariant, InputWrapperProps } from "../input/input";
+import { cn } from '../../utils/cn';
+import { Input, InputWrapper } from '../input/input';
+import type {
+  InputProps,
+  InputSize,
+  InputVariant,
+  InputWrapperProps,
+} from '../input/input';
 
 /**
  * NumberInput handlers ref type
@@ -26,8 +31,18 @@ export interface NumberInputHandlers {
  * NumberInput component props
  */
 export interface NumberInputProps
-  extends Omit<InputProps, "component" | "multiline" | "type" | "rightSection" | "onChange" | "value" | "defaultValue">,
-    Omit<InputWrapperProps, "children" | "id" | "size" | "error"> {
+  extends
+    Omit<
+      InputProps,
+      | 'component'
+      | 'multiline'
+      | 'type'
+      | 'rightSection'
+      | 'onChange'
+      | 'value'
+      | 'defaultValue'
+    >,
+    Omit<InputWrapperProps, 'children' | 'id' | 'size' | 'error'> {
   /** Input size */
   size?: InputSize;
   /** Input variant */
@@ -57,7 +72,7 @@ export interface NumberInputProps
   /** Hide increment/decrement controls */
   hideControls?: boolean;
   /** Clamp value on blur */
-  clampBehavior?: "strict" | "blur" | "none";
+  clampBehavior?: 'strict' | 'blur' | 'none';
   /** Prefix string */
   prefix?: string;
   /** Suffix string */
@@ -77,10 +92,13 @@ export interface NumberInputProps
 /**
  * Parse string to number, handling edge cases
  */
-function parseNumber(value: string | number | undefined, decimalSeparator: string): number | undefined {
-  if (value === undefined || value === "" || value === "-") return undefined;
-  if (typeof value === "number") return value;
-  const normalized = value.replace(decimalSeparator, ".");
+function parseNumber(
+  value: string | number | undefined,
+  decimalSeparator: string,
+): number | undefined {
+  if (value === undefined || value === '' || value === '-') return undefined;
+  if (typeof value === 'number') return value;
+  const normalized = value.replace(decimalSeparator, '.');
   const parsed = parseFloat(normalized);
   return isNaN(parsed) ? undefined : parsed;
 }
@@ -97,17 +115,17 @@ function formatNumber(
     thousandSeparator?: string | boolean;
     prefix?: string;
     suffix?: string;
-  }
+  },
 ): string {
-  if (value === undefined) return "";
+  if (value === undefined) return '';
 
   const {
     decimalScale,
     fixedDecimalScale,
-    decimalSeparator = ".",
+    decimalSeparator = '.',
     thousandSeparator,
-    prefix = "",
-    suffix = "",
+    prefix = '',
+    suffix = '',
   } = options;
 
   let numStr: string;
@@ -123,18 +141,21 @@ function formatNumber(
   }
 
   // Replace decimal separator
-  if (decimalSeparator !== ".") {
-    numStr = numStr.replace(".", decimalSeparator);
+  if (decimalSeparator !== '.') {
+    numStr = numStr.replace('.', decimalSeparator);
   }
 
   // Add thousands separator
   if (thousandSeparator) {
-    const sep = typeof thousandSeparator === "string" ? thousandSeparator : ",";
+    const sep = typeof thousandSeparator === 'string' ? thousandSeparator : ',';
     const parts = numStr.split(decimalSeparator);
-    const intPart = parts[0] ?? "";
+    const intPart = parts[0] ?? '';
     const decPart = parts[1];
     const formattedInt = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, sep);
-    numStr = decPart !== undefined ? `${formattedInt}${decimalSeparator}${decPart}` : formattedInt;
+    numStr =
+      decPart !== undefined
+        ? `${formattedInt}${decimalSeparator}${decPart}`
+        : formattedInt;
   }
 
   return `${prefix}${numStr}${suffix}`;
@@ -187,17 +208,17 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       allowNegative = true,
       allowDecimal = true,
       hideControls = false,
-      clampBehavior = "blur",
-      prefix = "",
-      suffix = "",
-      decimalSeparator = ".",
+      clampBehavior = 'blur',
+      prefix = '',
+      suffix = '',
+      decimalSeparator = '.',
       thousandSeparator,
       handlersRef,
       stepHoldDelay = 500,
       stepHoldInterval = 50,
       // Input props
-      size = "sm",
-      variant = "default",
+      size = 'sm',
+      variant = 'default',
       radius,
       disabled,
       error,
@@ -219,11 +240,15 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       onKeyDown,
       ...props
     },
-    ref
+    ref,
   ) => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const holdIntervalRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
-    const holdTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+    const holdIntervalRef = useRef<ReturnType<typeof setInterval> | undefined>(
+      undefined,
+    );
+    const holdTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
+      undefined,
+    );
     const stepCountRef = useRef(0);
 
     // Forward ref
@@ -233,7 +258,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     const [internalValue, setInternalValue] = useState<number | string>(() => {
       if (controlledValue !== undefined) return controlledValue;
       if (defaultValue !== undefined) return defaultValue;
-      return "";
+      return '';
     });
 
     const isControlled = controlledValue !== undefined;
@@ -248,7 +273,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         if (max !== undefined && clamped > max) clamped = max;
         return clamped;
       },
-      [min, max]
+      [min, max],
     );
 
     // Update value
@@ -259,7 +284,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         }
         onChange?.(newValue);
       },
-      [isControlled, onChange]
+      [isControlled, onChange],
     );
 
     // Increment handler
@@ -279,7 +304,9 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     // Expose handlers ref
     useEffect(() => {
       if (handlersRef) {
-        (handlersRef as React.MutableRefObject<NumberInputHandlers | null>).current = {
+        (
+          handlersRef as React.MutableRefObject<NumberInputHandlers | null>
+        ).current = {
           increment,
           decrement,
         };
@@ -293,20 +320,23 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         action();
 
         holdTimeoutRef.current = setTimeout(() => {
-          holdIntervalRef.current = setInterval(() => {
-            stepCountRef.current += 1;
-            action();
+          holdIntervalRef.current = setInterval(
+            () => {
+              stepCountRef.current += 1;
+              action();
 
-            // Adjust interval if function provided
-            if (typeof stepHoldInterval === "function") {
-              clearInterval(holdIntervalRef.current);
-              const newInterval = stepHoldInterval(stepCountRef.current);
-              holdIntervalRef.current = setInterval(action, newInterval);
-            }
-          }, typeof stepHoldInterval === "number" ? stepHoldInterval : 50);
+              // Adjust interval if function provided
+              if (typeof stepHoldInterval === 'function') {
+                clearInterval(holdIntervalRef.current);
+                const newInterval = stepHoldInterval(stepCountRef.current);
+                holdIntervalRef.current = setInterval(action, newInterval);
+              }
+            },
+            typeof stepHoldInterval === 'number' ? stepHoldInterval : 50,
+          );
         }, stepHoldDelay);
       },
-      [stepHoldDelay, stepHoldInterval]
+      [stepHoldDelay, stepHoldInterval],
     );
 
     // Stop hold interval
@@ -337,23 +367,27 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
         // Remove thousands separator
         if (thousandSeparator) {
-          const sep = typeof thousandSeparator === "string" ? thousandSeparator : ",";
-          inputValue = inputValue.split(sep).join("");
+          const sep =
+            typeof thousandSeparator === 'string' ? thousandSeparator : ',';
+          inputValue = inputValue.split(sep).join('');
         }
 
         // Allow empty, minus sign, or valid number patterns
-        if (inputValue === "" || inputValue === "-") {
+        if (inputValue === '' || inputValue === '-') {
           setValue(inputValue);
           return;
         }
 
         // Validate input
-        let pattern = allowNegative ? "^-?" : "^";
+        let pattern = allowNegative ? '^-?' : '^';
         if (allowDecimal) {
-          const escapedSep = decimalSeparator.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+          const escapedSep = decimalSeparator.replace(
+            /[.*+?^${}()|[\]\\]/g,
+            '\\$&',
+          );
           pattern += `\\d*${escapedSep}?\\d*$`;
         } else {
-          pattern += "\\d*$";
+          pattern += '\\d*$';
         }
 
         if (!new RegExp(pattern).test(inputValue)) {
@@ -362,21 +396,35 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
         const parsed = parseNumber(inputValue, decimalSeparator);
 
-        if (clampBehavior === "strict" && parsed !== undefined) {
-          if ((min !== undefined && parsed < min) || (max !== undefined && parsed > max)) {
+        if (clampBehavior === 'strict' && parsed !== undefined) {
+          if (
+            (min !== undefined && parsed < min) ||
+            (max !== undefined && parsed > max)
+          ) {
             return;
           }
         }
 
         setValue(parsed !== undefined ? parsed : inputValue);
       },
-      [allowNegative, allowDecimal, decimalSeparator, thousandSeparator, prefix, suffix, clampBehavior, min, max, setValue]
+      [
+        allowNegative,
+        allowDecimal,
+        decimalSeparator,
+        thousandSeparator,
+        prefix,
+        suffix,
+        clampBehavior,
+        min,
+        max,
+        setValue,
+      ],
     );
 
     // Handle blur - clamp value
     const handleBlur = useCallback(
       (e: React.FocusEvent<HTMLInputElement>) => {
-        if (clampBehavior === "blur" && numericValue !== undefined) {
+        if (clampBehavior === 'blur' && numericValue !== undefined) {
           const clamped = clamp(numericValue);
           if (clamped !== numericValue) {
             setValue(clamped);
@@ -384,22 +432,22 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         }
         onBlur?.(e);
       },
-      [clampBehavior, numericValue, clamp, setValue, onBlur]
+      [clampBehavior, numericValue, clamp, setValue, onBlur],
     );
 
     // Handle keyboard
     const handleKeyDown = useCallback(
       (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "ArrowUp") {
+        if (e.key === 'ArrowUp') {
           e.preventDefault();
           increment();
-        } else if (e.key === "ArrowDown") {
+        } else if (e.key === 'ArrowDown') {
           e.preventDefault();
           decrement();
         }
         onKeyDown?.(e);
       },
-      [increment, decrement, onKeyDown]
+      [increment, decrement, onKeyDown],
     );
 
     const hasWrapper = label || description || error;
@@ -421,10 +469,10 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           type="button"
           tabIndex={-1}
           className={cn(
-            "flex-1 flex items-center justify-center px-1",
-            "text-text-secondary hover:text-text-primary hover:bg-action-hover",
-            "transition-colors border-l border-divider",
-            "focus:outline-none"
+            'flex-1 flex items-center justify-center px-1',
+            'text-text-secondary hover:text-text-primary hover:bg-action-hover',
+            'transition-colors border-l border-divider',
+            'focus:outline-none',
           )}
           onMouseDown={() => startHold(increment)}
           onMouseUp={stopHold}
@@ -437,10 +485,10 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           type="button"
           tabIndex={-1}
           className={cn(
-            "flex-1 flex items-center justify-center px-1",
-            "text-text-secondary hover:text-text-primary hover:bg-action-hover",
-            "transition-colors border-l border-t border-divider",
-            "focus:outline-none"
+            'flex-1 flex items-center justify-center px-1',
+            'text-text-secondary hover:text-text-primary hover:bg-action-hover',
+            'transition-colors border-l border-t border-divider',
+            'focus:outline-none',
           )}
           onMouseDown={() => startHold(decrement)}
           onMouseUp={stopHold}
@@ -467,7 +515,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         leftSection={leftSection}
         rightSection={controls}
         leftSectionWidth={leftSectionWidth}
-        rightSectionWidth={hideControls ? rightSectionWidth : "32px"}
+        rightSectionWidth={hideControls ? rightSectionWidth : '32px'}
         leftSectionPointerEvents={leftSectionPointerEvents}
         rightSectionPointerEvents="auto"
         leftSectionProps={leftSectionProps}
@@ -481,7 +529,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         inputSize={inputSize}
         required={required}
         className={className}
-        value={currentValue === "" ? "" : displayValue}
+        value={currentValue === '' ? '' : displayValue}
         onChange={handleChange}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
@@ -498,7 +546,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         id={id}
         label={label}
         description={description}
-        error={typeof error === "boolean" ? undefined : error}
+        error={typeof error === 'boolean' ? undefined : error}
         required={required}
         withAsterisk={withAsterisk}
         size={size}
@@ -512,7 +560,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         {inputElement}
       </InputWrapper>
     );
-  }
+  },
 );
 
-NumberInput.displayName = "NumberInput";
+NumberInput.displayName = 'NumberInput';

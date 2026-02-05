@@ -1,38 +1,38 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Checkbox } from "@warp/react";
+import { useState } from 'react';
+import { Checkbox } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function CheckboxPage() {
   const [checked, setChecked] = useState(false);
   const [groupValue, setGroupValue] = useState<string[]>([]);
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "controlled", title: "Controlled", level: 2 },
-    { id: "label-position", title: "Label Position", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'controlled', title: 'Controlled', level: 2 },
+    { id: 'label-position', title: 'Label Position', level: 2 },
     {
-      id: "label-description-error",
-      title: "Label, Description, Error",
+      id: 'label-description-error',
+      title: 'Label, Description, Error',
       level: 2,
     },
-    { id: "color", title: "Color", level: 2 },
-    { id: "variant", title: "Variant", level: 2 },
-    { id: "size", title: "Size", level: 2 },
-    { id: "radius", title: "Radius", level: 2 },
-    { id: "disabled", title: "Disabled", level: 2 },
-    { id: "indeterminate", title: "Indeterminate", level: 2 },
-    { id: "checkbox-group", title: "Checkbox.Group", level: 2 },
-    { id: "checkbox-indicator", title: "Checkbox.Indicator", level: 2 },
+    { id: 'color', title: 'Color', level: 2 },
+    { id: 'variant', title: 'Variant', level: 2 },
+    { id: 'size', title: 'Size', level: 2 },
+    { id: 'radius', title: 'Radius', level: 2 },
+    { id: 'disabled', title: 'Disabled', level: 2 },
+    { id: 'indeterminate', title: 'Indeterminate', level: 2 },
+    { id: 'checkbox-group', title: 'Checkbox.Group', level: 2 },
+    { id: 'checkbox-indicator', title: 'Checkbox.Indicator', level: 2 },
   ];
 
   return (

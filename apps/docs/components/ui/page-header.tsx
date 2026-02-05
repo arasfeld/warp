@@ -1,7 +1,7 @@
-import { cn } from "@warp/react";
+import { cn } from '@warp/react';
 
-import { Heading } from "./heading";
-import { Text } from "./text";
+import { Heading } from './heading';
+import { Text } from './text';
 
 interface PageHeaderProps {
   title: string;
@@ -14,9 +14,9 @@ export function PageHeader({ title, description }: PageHeaderProps) {
       <Heading
         level={1}
         className={cn(
-          "text-[clamp(3rem,8vw,5rem)] mb-6 leading-tight",
-          "bg-gradient-to-r from-text-primary via-purple-500 to-cyan-400 bg-clip-text text-transparent",
-          "dark:from-white dark:via-purple-500 dark:to-cyan-400"
+          'text-[clamp(3rem,8vw,5rem)] mb-6 leading-tight',
+          'bg-gradient-to-r from-text-primary via-purple-500 to-cyan-400 bg-clip-text text-transparent',
+          'dark:from-white dark:via-purple-500 dark:to-cyan-400',
         )}
       >
         {title}

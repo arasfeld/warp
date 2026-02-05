@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import { Badge, Stack, Group, Text } from "@warp/react";
-import { Bell, Mail, ShoppingCart, User } from "lucide-react";
+import { Badge, Stack, Group, Text } from '@warp/react';
+import { Bell, Mail, ShoppingCart, User } from 'lucide-react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function BadgePage() {
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "variants", title: "Variants", level: 2 },
-    { id: "colors", title: "Colors", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
-    { id: "with-sections", title: "With Sections", level: 2 },
-    { id: "circle", title: "Circle Badge", level: 2 },
-    { id: "dot-variant", title: "Dot Variant", level: 2 },
-    { id: "max-value", title: "Max Value", level: 2 },
-    { id: "processing", title: "Processing State", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'variants', title: 'Variants', level: 2 },
+    { id: 'colors', title: 'Colors', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
+    { id: 'with-sections', title: 'With Sections', level: 2 },
+    { id: 'circle', title: 'Circle Badge', level: 2 },
+    { id: 'dot-variant', title: 'Dot Variant', level: 2 },
+    { id: 'max-value', title: 'Max Value', level: 2 },
+    { id: 'processing', title: 'Processing State', level: 2 },
   ];
 
   return (
@@ -67,9 +67,15 @@ export default function BadgePage() {
                 Filled (default)
               </Text>
               <Group gap="sm">
-                <Badge variant="filled" color="primary">Primary</Badge>
-                <Badge variant="filled" color="blue">Blue</Badge>
-                <Badge variant="filled" color="red">Red</Badge>
+                <Badge variant="filled" color="primary">
+                  Primary
+                </Badge>
+                <Badge variant="filled" color="blue">
+                  Blue
+                </Badge>
+                <Badge variant="filled" color="red">
+                  Red
+                </Badge>
               </Group>
             </div>
             <div>
@@ -77,9 +83,15 @@ export default function BadgePage() {
                 Outline
               </Text>
               <Group gap="sm">
-                <Badge variant="outline" color="primary">Primary</Badge>
-                <Badge variant="outline" color="blue">Blue</Badge>
-                <Badge variant="outline" color="red">Red</Badge>
+                <Badge variant="outline" color="primary">
+                  Primary
+                </Badge>
+                <Badge variant="outline" color="blue">
+                  Blue
+                </Badge>
+                <Badge variant="outline" color="red">
+                  Red
+                </Badge>
               </Group>
             </div>
             <div>
@@ -87,9 +99,15 @@ export default function BadgePage() {
                 Light
               </Text>
               <Group gap="sm">
-                <Badge variant="light" color="primary">Primary</Badge>
-                <Badge variant="light" color="blue">Blue</Badge>
-                <Badge variant="light" color="red">Red</Badge>
+                <Badge variant="light" color="primary">
+                  Primary
+                </Badge>
+                <Badge variant="light" color="blue">
+                  Blue
+                </Badge>
+                <Badge variant="light" color="red">
+                  Red
+                </Badge>
               </Group>
             </div>
           </Stack>
@@ -166,16 +184,10 @@ export default function BadgePage() {
         />
         <DemoArea>
           <Group gap="sm">
-            <Badge
-              leftSection={<Mail className="h-3 w-3" />}
-              color="blue"
-            >
+            <Badge leftSection={<Mail className="h-3 w-3" />} color="blue">
               Email
             </Badge>
-            <Badge
-              leftSection={<Bell className="h-3 w-3" />}
-              color="orange"
-            >
+            <Badge leftSection={<Bell className="h-3 w-3" />} color="orange">
               Notifications
             </Badge>
             <Badge
@@ -207,11 +219,21 @@ export default function BadgePage() {
         />
         <DemoArea>
           <Group gap="sm" align="center">
-            <Badge circle size="xs">1</Badge>
-            <Badge circle size="sm">5</Badge>
-            <Badge circle size="md" color="red">9</Badge>
-            <Badge circle size="lg" color="blue">!</Badge>
-            <Badge circle size="xl" color="green">A</Badge>
+            <Badge circle size="xs">
+              1
+            </Badge>
+            <Badge circle size="sm">
+              5
+            </Badge>
+            <Badge circle size="md" color="red">
+              9
+            </Badge>
+            <Badge circle size="lg" color="blue">
+              !
+            </Badge>
+            <Badge circle size="xl" color="green">
+              A
+            </Badge>
           </Group>
         </DemoArea>
         <CodeBlock
@@ -231,10 +253,18 @@ export default function BadgePage() {
         />
         <DemoArea>
           <Stack gap="sm">
-            <Badge variant="dot" color="green">Online</Badge>
-            <Badge variant="dot" color="yellow">Away</Badge>
-            <Badge variant="dot" color="red">Offline</Badge>
-            <Badge variant="dot" color="gray">Unknown</Badge>
+            <Badge variant="dot" color="green">
+              Online
+            </Badge>
+            <Badge variant="dot" color="yellow">
+              Away
+            </Badge>
+            <Badge variant="dot" color="red">
+              Offline
+            </Badge>
+            <Badge variant="dot" color="gray">
+              Unknown
+            </Badge>
           </Stack>
         </DemoArea>
         <CodeBlock
@@ -254,15 +284,21 @@ export default function BadgePage() {
         <DemoArea>
           <Group gap="md">
             <div className="flex items-center gap-2">
-              <Text size="sm" className="text-muted-foreground">Count: 5</Text>
+              <Text size="sm" className="text-muted-foreground">
+                Count: 5
+              </Text>
               <Badge circle color="red" label={5} max={99} />
             </div>
             <div className="flex items-center gap-2">
-              <Text size="sm" className="text-muted-foreground">Count: 150</Text>
+              <Text size="sm" className="text-muted-foreground">
+                Count: 150
+              </Text>
               <Badge circle color="red" label={150} max={99} />
             </div>
             <div className="flex items-center gap-2">
-              <Text size="sm" className="text-muted-foreground">Count: 1000</Text>
+              <Text size="sm" className="text-muted-foreground">
+                Count: 1000
+              </Text>
               <Badge color="red" label={1000} max={999} />
             </div>
           </Group>
@@ -287,9 +323,15 @@ export default function BadgePage() {
         />
         <DemoArea>
           <Group gap="sm">
-            <Badge processing color="blue">Loading</Badge>
-            <Badge processing variant="dot" color="green">Syncing</Badge>
-            <Badge processing variant="outline" color="orange">Processing</Badge>
+            <Badge processing color="blue">
+              Loading
+            </Badge>
+            <Badge processing variant="dot" color="green">
+              Syncing
+            </Badge>
+            <Badge processing variant="outline" color="orange">
+              Processing
+            </Badge>
           </Group>
         </DemoArea>
         <CodeBlock

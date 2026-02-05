@@ -1,7 +1,7 @@
 /**
  * Dialog size options
  */
-export type DialogSize = "xs" | "sm" | "md" | "lg" | "xl" | "full";
+export type DialogSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
 /**
  * Base Dialog props (platform-agnostic)

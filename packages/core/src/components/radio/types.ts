@@ -6,17 +6,17 @@
 /**
  * Radio size variants
  */
-export type RadioSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type RadioSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Radio variant
  */
-export type RadioVariant = "filled" | "outline";
+export type RadioVariant = 'filled' | 'outline';
 
 /**
  * Label position relative to the radio
  */
-export type RadioLabelPosition = "left" | "right";
+export type RadioLabelPosition = 'left' | 'right';
 
 /**
  * Base Radio props (platform-agnostic)

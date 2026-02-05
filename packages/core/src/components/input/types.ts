@@ -6,17 +6,17 @@
 /**
  * Input size variants
  */
-export type InputSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type InputSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Input variant styles
  */
-export type InputVariant = "default" | "filled" | "unstyled";
+export type InputVariant = 'default' | 'filled' | 'unstyled';
 
 /**
  * Radius type (theme key or CSS value)
  */
-export type InputRadius = "xs" | "sm" | "md" | "lg" | "xl" | "full" | number;
+export type InputRadius = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' | number;
 
 /**
  * Base Input props (platform-agnostic)
@@ -48,7 +48,7 @@ export interface InputBaseProps {
 /**
  * Input Wrapper order options
  */
-export type InputWrapperOrderItem = "label" | "description" | "input" | "error";
+export type InputWrapperOrderItem = 'label' | 'description' | 'input' | 'error';
 
 /**
  * Size configuration for Input heights

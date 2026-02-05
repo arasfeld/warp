@@ -1,17 +1,28 @@
-"use client";
+'use client';
 
-import React, { forwardRef, useRef, useEffect, useCallback, useImperativeHandle } from "react";
+import React, {
+  forwardRef,
+  useRef,
+  useEffect,
+  useCallback,
+  useImperativeHandle,
+} from 'react';
 
-import { cn } from "../../utils/cn";
-import { InputWrapper } from "../input/input";
-import type { InputSize, InputVariant, InputWrapperProps } from "../input/input";
+import { cn } from '../../utils/cn';
+import { InputWrapper } from '../input/input';
+import type {
+  InputSize,
+  InputVariant,
+  InputWrapperProps,
+} from '../input/input';
 
 /**
  * Textarea component props
  */
 export interface TextareaProps
-  extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "size">,
-    Omit<InputWrapperProps, "children" | "id" | "size" | "error"> {
+  extends
+    Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'>,
+    Omit<InputWrapperProps, 'children' | 'id' | 'size' | 'error'> {
   /** Input size */
   size?: InputSize;
   /** Input variant */
@@ -31,7 +42,7 @@ export interface TextareaProps
   /** Fixed number of rows (when not using autosize) */
   rows?: number;
   /** Resize behavior */
-  resize?: "none" | "both" | "horizontal" | "vertical";
+  resize?: 'none' | 'both' | 'horizontal' | 'vertical';
 }
 
 /**
@@ -69,8 +80,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       errorProps,
       inputContainer,
       // Textarea-specific props
-      size = "sm",
-      variant = "default",
+      size = 'sm',
+      variant = 'default',
       radius,
       error,
       withErrorStyles = true,
@@ -78,7 +89,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       minRows = 1,
       maxRows,
       rows,
-      resize = "vertical",
+      resize = 'vertical',
       // Native textarea props
       disabled,
       className,
@@ -88,7 +99,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       defaultValue,
       ...props
     },
-    ref
+    ref,
   ) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -113,15 +124,26 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       if (!textarea || !autosize) return;
 
       const lineHeight = getLineHeight();
-      const paddingY = size === "xs" ? 6 : size === "sm" ? 8 : size === "md" ? 10 : size === "lg" ? 12 : 14;
+      const paddingY =
+        size === 'xs'
+          ? 6
+          : size === 'sm'
+            ? 8
+            : size === 'md'
+              ? 10
+              : size === 'lg'
+                ? 12
+                : 14;
       const borderWidth = 2; // 1px top + 1px bottom
 
       // Reset height to get scrollHeight
-      textarea.style.height = "auto";
+      textarea.style.height = 'auto';
 
       // Calculate min and max heights
       const minHeight = lineHeight * minRows + paddingY * 2 + borderWidth;
-      const maxHeight = maxRows ? lineHeight * maxRows + paddingY * 2 + borderWidth : Infinity;
+      const maxHeight = maxRows
+        ? lineHeight * maxRows + paddingY * 2 + borderWidth
+        : Infinity;
 
       // Set new height
       const scrollHeight = textarea.scrollHeight;
@@ -129,7 +151,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       textarea.style.height = `${newHeight}px`;
 
       // Add overflow if content exceeds maxHeight
-      textarea.style.overflowY = scrollHeight > maxHeight ? "auto" : "hidden";
+      textarea.style.overflowY = scrollHeight > maxHeight ? 'auto' : 'hidden';
     }, [autosize, minRows, maxRows, size]);
 
     // Adjust height on mount and value change
@@ -145,46 +167,46 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           adjustHeight();
         }
       },
-      [onChange, autosize, adjustHeight]
+      [onChange, autosize, adjustHeight],
     );
 
     const hasWrapper = label || description || error;
 
     // Size classes
     const sizeClasses: Record<InputSize, string> = {
-      xs: "text-xs py-1.5 px-2",
-      sm: "text-sm py-2 px-3",
-      md: "text-base py-2.5 px-4",
-      lg: "text-base py-3 px-4",
-      xl: "text-lg py-3.5 px-5",
+      xs: 'text-xs py-1.5 px-2',
+      sm: 'text-sm py-2 px-3',
+      md: 'text-base py-2.5 px-4',
+      lg: 'text-base py-3 px-4',
+      xl: 'text-lg py-3.5 px-5',
     };
 
     // Radius classes
     const getRadiusClass = () => {
-      if (radius === undefined) return "rounded-md";
-      if (typeof radius === "number") return "";
+      if (radius === undefined) return 'rounded-md';
+      if (typeof radius === 'number') return '';
       const radiusMap: Record<string, string> = {
-        xs: "rounded-sm",
-        sm: "rounded",
-        md: "rounded-md",
-        lg: "rounded-lg",
-        xl: "rounded-xl",
+        xs: 'rounded-sm',
+        sm: 'rounded',
+        md: 'rounded-md',
+        lg: 'rounded-lg',
+        xl: 'rounded-xl',
       };
-      return radiusMap[radius] || "rounded-md";
+      return radiusMap[radius] || 'rounded-md';
     };
 
     // Variant classes
     const getVariantClasses = () => {
-      if (variant === "unstyled") {
-        return "border-0 bg-transparent p-0";
+      if (variant === 'unstyled') {
+        return 'border-0 bg-transparent p-0';
       }
 
       const variantMap: Record<InputVariant, string> = {
         default:
-          "border border-divider bg-background-default focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+          'border border-divider bg-background-default focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
         filled:
-          "border-0 bg-background-paper focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-        unstyled: "",
+          'border-0 bg-background-paper focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+        unstyled: '',
       };
 
       return variantMap[variant];
@@ -193,32 +215,32 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     // Error classes
     const errorClasses =
       error && withErrorStyles
-        ? "border-error focus-visible:ring-error focus-visible:border-error"
-        : "";
+        ? 'border-error focus-visible:ring-error focus-visible:border-error'
+        : '';
 
     // Resize classes
     const resizeClasses: Record<string, string> = {
-      none: "resize-none",
-      both: "resize",
-      horizontal: "resize-x",
-      vertical: "resize-y",
+      none: 'resize-none',
+      both: 'resize',
+      horizontal: 'resize-x',
+      vertical: 'resize-y',
     };
 
     const textareaClasses = cn(
-      "w-full transition-colors",
-      "placeholder:text-muted-foreground",
-      "disabled:cursor-not-allowed disabled:opacity-50",
-      "focus-visible:outline-none",
+      'w-full transition-colors',
+      'placeholder:text-muted-foreground',
+      'disabled:cursor-not-allowed disabled:opacity-50',
+      'focus-visible:outline-none',
       sizeClasses[size],
       getRadiusClass(),
       getVariantClasses(),
       errorClasses,
-      autosize ? "resize-none overflow-hidden" : resizeClasses[resize],
-      className
+      autosize ? 'resize-none overflow-hidden' : resizeClasses[resize],
+      className,
     );
 
     const radiusStyle: React.CSSProperties =
-      typeof radius === "number" ? { borderRadius: `${radius}px` } : {};
+      typeof radius === 'number' ? { borderRadius: `${radius}px` } : {};
 
     // Calculate min-height for non-autosize
     const minHeightStyle: React.CSSProperties = autosize
@@ -240,7 +262,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         value={value}
         defaultValue={defaultValue}
         aria-invalid={error ? true : undefined}
-        aria-describedby={error && typeof error === "string" ? `${id}-error` : undefined}
+        aria-describedby={
+          error && typeof error === 'string' ? `${id}-error` : undefined
+        }
         {...props}
       />
     );
@@ -254,7 +278,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         id={id}
         label={label}
         description={description}
-        error={typeof error === "boolean" ? undefined : error}
+        error={typeof error === 'boolean' ? undefined : error}
         required={required}
         withAsterisk={withAsterisk}
         size={size}
@@ -268,7 +292,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {textareaElement}
       </InputWrapper>
     );
-  }
+  },
 );
 
-Textarea.displayName = "Textarea";
+Textarea.displayName = 'Textarea';

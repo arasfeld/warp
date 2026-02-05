@@ -1,9 +1,14 @@
-import React from "react";
-import { View, type StyleProp, type ViewStyle } from "react-native";
+import React from 'react';
+import { View, type StyleProp, type ViewStyle } from 'react-native';
 
-import type { StackAlign, StackBaseProps, StackJustify, StackSpacing } from "@warp/core";
+import type {
+  StackAlign,
+  StackBaseProps,
+  StackJustify,
+  StackSpacing,
+} from '@warp/core';
 
-import { cn } from "../../utils/cn";
+import { cn } from '../../utils/cn';
 
 export interface StackProps extends StackBaseProps {
   /**
@@ -25,34 +30,34 @@ export interface StackProps extends StackBaseProps {
  * Maps semantic sizes to NativeWind gap utilities
  */
 const gapClasses: Record<Exclude<StackSpacing, number>, string> = {
-  xs: "gap-1",   // 0.25rem (4px)
-  sm: "gap-2",   // 0.5rem (8px)
-  md: "gap-4",   // 1rem (16px)
-  lg: "gap-6",   // 1.5rem (24px)
-  xl: "gap-8",   // 2rem (32px)
+  xs: 'gap-1', // 0.25rem (4px)
+  sm: 'gap-2', // 0.5rem (8px)
+  md: 'gap-4', // 1rem (16px)
+  lg: 'gap-6', // 1.5rem (24px)
+  xl: 'gap-8', // 2rem (32px)
 };
 
 /**
  * Alignment classes mapping
  */
 const alignClasses: Record<StackAlign, string> = {
-  stretch: "items-stretch",
-  center: "items-center",
-  "flex-start": "items-start",
-  "flex-end": "items-end",
-  baseline: "items-baseline",
+  stretch: 'items-stretch',
+  center: 'items-center',
+  'flex-start': 'items-start',
+  'flex-end': 'items-end',
+  baseline: 'items-baseline',
 };
 
 /**
  * Justify classes mapping
  */
 const justifyClasses: Record<StackJustify, string> = {
-  "flex-start": "justify-start",
-  center: "justify-center",
-  "flex-end": "justify-end",
-  "space-between": "justify-between",
-  "space-around": "justify-around",
-  "space-evenly": "justify-evenly",
+  'flex-start': 'justify-start',
+  center: 'justify-center',
+  'flex-end': 'justify-end',
+  'space-between': 'justify-between',
+  'space-around': 'justify-around',
+  'space-evenly': 'justify-evenly',
 };
 
 /**
@@ -77,25 +82,25 @@ const justifyClasses: Record<StackJustify, string> = {
  */
 export function Stack({
   children,
-  gap = "md",
-  align = "stretch",
-  justify = "flex-start",
+  gap = 'md',
+  align = 'stretch',
+  justify = 'flex-start',
   className,
   style,
 }: StackProps) {
   // Handle numeric gap values with inline style
-  const isNumericGap = typeof gap === "number";
+  const isNumericGap = typeof gap === 'number';
   const gapClass = !isNumericGap ? gapClasses[gap] : undefined;
   const gapStyle = isNumericGap ? { gap: gap * 4 } : undefined; // RN uses pixels, so multiply by 4 (base 16px / 4 = 4px per unit)
 
   return (
     <View
       className={cn(
-        "flex flex-col",
+        'flex flex-col',
         gapClass,
         alignClasses[align],
         justifyClasses[justify],
-        className
+        className,
       )}
       style={[gapStyle, style]}
     >

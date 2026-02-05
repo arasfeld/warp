@@ -1,51 +1,51 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Select, InputWrapper } from "@warp/react";
+import { useState } from 'react';
+import { Select, InputWrapper } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 const sampleData = [
-  { value: "react", label: "React" },
-  { value: "vue", label: "Vue.js" },
-  { value: "angular", label: "Angular" },
-  { value: "svelte", label: "Svelte" },
-  { value: "next", label: "Next.js" },
-  { value: "nuxt", label: "Nuxt.js" },
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue.js' },
+  { value: 'angular', label: 'Angular' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'next', label: 'Next.js' },
+  { value: 'nuxt', label: 'Nuxt.js' },
 ];
 
 const countries = [
-  { value: "us", label: "United States" },
-  { value: "uk", label: "United Kingdom" },
-  { value: "ca", label: "Canada" },
-  { value: "au", label: "Australia" },
-  { value: "de", label: "Germany" },
-  { value: "fr", label: "France" },
-  { value: "jp", label: "Japan" },
+  { value: 'us', label: 'United States' },
+  { value: 'uk', label: 'United Kingdom' },
+  { value: 'ca', label: 'Canada' },
+  { value: 'au', label: 'Australia' },
+  { value: 'de', label: 'Germany' },
+  { value: 'fr', label: 'France' },
+  { value: 'jp', label: 'Japan' },
 ];
 
 export default function SelectPage() {
   const [singleValue, setSingleValue] = useState<string | null>(null);
   const [multipleValue, setMultipleValue] = useState<string[]>([]);
   const [searchableValue, setSearchableValue] = useState<string | null>(null);
-  const [clearableValue, setClearableValue] = useState<string | null>("react");
+  const [clearableValue, setClearableValue] = useState<string | null>('react');
 
   const tocItems = [
-    { id: "basic", title: "Basic Select", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
-    { id: "variants", title: "Variants", level: 2 },
-    { id: "multiple", title: "Multiple Selection", level: 2 },
-    { id: "searchable", title: "Searchable", level: 2 },
-    { id: "clearable", title: "Clearable", level: 2 },
-    { id: "states", title: "States", level: 2 },
-    { id: "with-wrapper", title: "With Input Wrapper", level: 2 },
+    { id: 'basic', title: 'Basic Select', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
+    { id: 'variants', title: 'Variants', level: 2 },
+    { id: 'multiple', title: 'Multiple Selection', level: 2 },
+    { id: 'searchable', title: 'Searchable', level: 2 },
+    { id: 'clearable', title: 'Clearable', level: 2 },
+    { id: 'states', title: 'States', level: 2 },
+    { id: 'with-wrapper', title: 'With Input Wrapper', level: 2 },
   ];
 
   return (
@@ -210,7 +210,7 @@ function MyComponent() {
           </InputWrapper>
           {multipleValue.length > 0 && (
             <div className="text-sm text-muted-foreground">
-              Selected: {multipleValue.join(", ")}
+              Selected: {multipleValue.join(', ')}
             </div>
           )}
         </DemoArea>
@@ -295,27 +295,13 @@ function MyComponent() {
 
       {/* States */}
       <Section id="states">
-        <SectionHeader
-          title="States"
-          subtitle="Error and disabled states"
-        />
+        <SectionHeader title="States" subtitle="Error and disabled states" />
         <DemoArea className="flex-col items-stretch gap-4">
-          <InputWrapper
-            label="With Error"
-            error="Please select an option"
-          >
-            <Select
-              data={sampleData}
-              error
-              placeholder="Select option..."
-            />
+          <InputWrapper label="With Error" error="Please select an option">
+            <Select data={sampleData} error placeholder="Select option..." />
           </InputWrapper>
           <InputWrapper label="Disabled">
-            <Select
-              data={sampleData}
-              disabled
-              placeholder="Cannot select..."
-            />
+            <Select data={sampleData} disabled placeholder="Cannot select..." />
           </InputWrapper>
           <InputWrapper label="Disabled with Value">
             <Select
@@ -353,21 +339,14 @@ function MyComponent() {
             description="Select your country of residence"
             required
           >
-            <Select
-              data={countries}
-              placeholder="Select country..."
-            />
+            <Select data={countries} placeholder="Select country..." />
           </InputWrapper>
           <InputWrapper
             label="Framework"
             description="Choose your preferred framework"
             error="This field is required"
           >
-            <Select
-              data={sampleData}
-              error
-              placeholder="Select framework..."
-            />
+            <Select data={sampleData} error placeholder="Select framework..." />
           </InputWrapper>
         </DemoArea>
         <CodeBlock

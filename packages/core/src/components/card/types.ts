@@ -6,17 +6,17 @@
 /**
  * Spacing type (theme key or CSS value)
  */
-export type CardSpacing = "xs" | "sm" | "md" | "lg" | "xl" | number;
+export type CardSpacing = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | number;
 
 /**
  * Radius type (theme key or CSS value)
  */
-export type CardRadius = "xs" | "sm" | "md" | "lg" | "xl" | "full" | number;
+export type CardRadius = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' | number;
 
 /**
  * Shadow type (theme key or CSS value)
  */
-export type CardShadow = "xs" | "sm" | "md" | "lg" | "xl" | string;
+export type CardShadow = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | string;
 
 /**
  * Base Card props (platform-agnostic)

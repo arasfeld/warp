@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { Button, Toast, Toaster, toast, Stack, Group } from "@warp/react";
+import { Button, Toast, Toaster, toast, Stack, Group } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function ToastPage() {
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "variants", title: "Variants", level: 2 },
-    { id: "with-title", title: "With Title", level: 2 },
-    { id: "loading", title: "Loading State", level: 2 },
-    { id: "positions", title: "Positions", level: 2 },
-    { id: "programmatic", title: "Programmatic API", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'variants', title: 'Variants', level: 2 },
+    { id: 'with-title', title: 'With Title', level: 2 },
+    { id: 'loading', title: 'Loading State', level: 2 },
+    { id: 'positions', title: 'Positions', level: 2 },
+    { id: 'programmatic', title: 'Programmatic API', level: 2 },
   ];
 
   return (
@@ -45,7 +45,14 @@ export default function ToastPage() {
         <DemoArea>
           <Stack gap="md">
             <Toast message="This is a default toast notification" />
-            <Button onClick={() => toast.show({ message: "Hello from toast!", position: "top-right" })}>
+            <Button
+              onClick={() =>
+                toast.show({
+                  message: 'Hello from toast!',
+                  position: 'top-right',
+                })
+              }
+            >
               Show Toast
             </Button>
           </Stack>
@@ -73,9 +80,15 @@ export default function ToastPage() {
         <DemoArea>
           <Stack gap="sm">
             <Toast variant="default" message="Default notification" />
-            <Toast variant="success" message="Operation completed successfully" />
+            <Toast
+              variant="success"
+              message="Operation completed successfully"
+            />
             <Toast variant="error" message="Something went wrong" />
-            <Toast variant="warning" message="Please review before continuing" />
+            <Toast
+              variant="warning"
+              message="Please review before continuing"
+            />
             <Toast variant="info" message="Here's some helpful information" />
           </Stack>
         </DemoArea>
@@ -141,11 +154,13 @@ toast.show({
             <Toast loading message="Uploading files..." />
             <Button
               onClick={() => {
-                const id = toast.loading("Processing...", { position: "top-right" });
+                const id = toast.loading('Processing...', {
+                  position: 'top-right',
+                });
                 setTimeout(() => {
                   toast.update(id, {
-                    message: "Completed!",
-                    variant: "success",
+                    message: 'Completed!',
+                    variant: 'success',
                     loading: false,
                     autoClose: 3000,
                     withCloseButton: true,
@@ -182,42 +197,72 @@ toast.update(id, {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => toast.info("Top left!", { autoClose: 2000, position: "top-left" })}
+              onClick={() =>
+                toast.info('Top left!', {
+                  autoClose: 2000,
+                  position: 'top-left',
+                })
+              }
             >
               Top Left
             </Button>
             <Button
               variant="outline"
               size="sm"
-              onClick={() => toast.info("Top center!", { autoClose: 2000, position: "top-center" })}
+              onClick={() =>
+                toast.info('Top center!', {
+                  autoClose: 2000,
+                  position: 'top-center',
+                })
+              }
             >
               Top Center
             </Button>
             <Button
               variant="outline"
               size="sm"
-              onClick={() => toast.info("Top right!", { autoClose: 2000, position: "top-right" })}
+              onClick={() =>
+                toast.info('Top right!', {
+                  autoClose: 2000,
+                  position: 'top-right',
+                })
+              }
             >
               Top Right
             </Button>
             <Button
               variant="outline"
               size="sm"
-              onClick={() => toast.info("Bottom left!", { autoClose: 2000, position: "bottom-left" })}
+              onClick={() =>
+                toast.info('Bottom left!', {
+                  autoClose: 2000,
+                  position: 'bottom-left',
+                })
+              }
             >
               Bottom Left
             </Button>
             <Button
               variant="outline"
               size="sm"
-              onClick={() => toast.info("Bottom center!", { autoClose: 2000, position: "bottom-center" })}
+              onClick={() =>
+                toast.info('Bottom center!', {
+                  autoClose: 2000,
+                  position: 'bottom-center',
+                })
+              }
             >
               Bottom Center
             </Button>
             <Button
               variant="outline"
               size="sm"
-              onClick={() => toast.info("Bottom right!", { autoClose: 2000, position: "bottom-right" })}
+              onClick={() =>
+                toast.info('Bottom right!', {
+                  autoClose: 2000,
+                  position: 'bottom-right',
+                })
+              }
             >
               Bottom Right
             </Button>
@@ -243,10 +288,30 @@ toast.success("Bottom right!", { position: "bottom-right" })`}
         />
         <DemoArea>
           <Group gap="sm" wrap="wrap">
-            <Button onClick={() => toast.success("Success!", { position: "top-right" })}>Success</Button>
-            <Button onClick={() => toast.error("Error!", { position: "top-right" })}>Error</Button>
-            <Button onClick={() => toast.warning("Warning!", { position: "top-right" })}>Warning</Button>
-            <Button onClick={() => toast.info("Info!", { position: "top-right" })}>Info</Button>
+            <Button
+              onClick={() =>
+                toast.success('Success!', { position: 'top-right' })
+              }
+            >
+              Success
+            </Button>
+            <Button
+              onClick={() => toast.error('Error!', { position: 'top-right' })}
+            >
+              Error
+            </Button>
+            <Button
+              onClick={() =>
+                toast.warning('Warning!', { position: 'top-right' })
+              }
+            >
+              Warning
+            </Button>
+            <Button
+              onClick={() => toast.info('Info!', { position: 'top-right' })}
+            >
+              Info
+            </Button>
             <Button variant="outline" onClick={() => toast.dismissAll()}>
               Dismiss All
             </Button>

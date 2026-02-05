@@ -12,7 +12,7 @@ function hslToHex(hsl: string): string {
   const match = hsl.match(/hsl\(([\d.]+)[,\s]+([\d.]+)%[,\s]+([\d.]+)%\)/);
   if (!match || !match[1] || !match[2] || !match[3]) {
     // If it's already a hex color, return it
-    if (hsl.startsWith("#")) {
+    if (hsl.startsWith('#')) {
       return hsl;
     }
     // Fallback to the original string
@@ -48,7 +48,7 @@ function hslToHex(hsl: string): string {
   // Convert to hex
   const toHex = (x: number) => {
     const hex = Math.round(x * 255).toString(16);
-    return hex.length === 1 ? "0" + hex : hex;
+    return hex.length === 1 ? '0' + hex : hex;
   };
 
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
@@ -58,7 +58,7 @@ function hslToHex(hsl: string): string {
  * Normalize color for React Native (convert HSL to hex if needed)
  */
 export function normalizeColor(color: string): string {
-  if (color.startsWith("hsl(")) {
+  if (color.startsWith('hsl(')) {
     return hslToHex(color);
   }
   // Already hex or other format, return as-is

@@ -1,14 +1,19 @@
-"use client";
+'use client';
 
-import React, { Children, forwardRef } from "react";
+import React, { Children, forwardRef } from 'react';
 
-import type { GroupBaseProps, GroupWrap, StackAlign, StackJustify, StackSpacing } from "@warp/core";
+import type {
+  GroupBaseProps,
+  GroupWrap,
+  StackAlign,
+  StackJustify,
+  StackSpacing,
+} from '@warp/core';
 
-import { cn } from "../../utils/cn";
+import { cn } from '../../utils/cn';
 
 export interface GroupProps
-  extends GroupBaseProps,
-    Omit<React.HTMLAttributes<HTMLDivElement>, "align"> {
+  extends GroupBaseProps, Omit<React.HTMLAttributes<HTMLDivElement>, 'align'> {
   /**
    * Children to render
    */
@@ -27,43 +32,43 @@ export interface GroupProps
  * Gap classes mapping (same as Stack)
  */
 const gapClasses: Record<Exclude<StackSpacing, number>, string> = {
-  xs: "gap-1",
-  sm: "gap-2",
-  md: "gap-4",
-  lg: "gap-6",
-  xl: "gap-8",
+  xs: 'gap-1',
+  sm: 'gap-2',
+  md: 'gap-4',
+  lg: 'gap-6',
+  xl: 'gap-8',
 };
 
 /**
  * Alignment classes mapping
  */
 const alignClasses: Record<StackAlign, string> = {
-  stretch: "items-stretch",
-  center: "items-center",
-  "flex-start": "items-start",
-  "flex-end": "items-end",
-  baseline: "items-baseline",
+  stretch: 'items-stretch',
+  center: 'items-center',
+  'flex-start': 'items-start',
+  'flex-end': 'items-end',
+  baseline: 'items-baseline',
 };
 
 /**
  * Justify classes mapping
  */
 const justifyClasses: Record<StackJustify, string> = {
-  "flex-start": "justify-start",
-  center: "justify-center",
-  "flex-end": "justify-end",
-  "space-between": "justify-between",
-  "space-around": "justify-around",
-  "space-evenly": "justify-evenly",
+  'flex-start': 'justify-start',
+  center: 'justify-center',
+  'flex-end': 'justify-end',
+  'space-between': 'justify-between',
+  'space-around': 'justify-around',
+  'space-evenly': 'justify-evenly',
 };
 
 /**
  * Wrap classes mapping
  */
 const wrapClasses: Record<GroupWrap, string> = {
-  wrap: "flex-wrap",
-  nowrap: "flex-nowrap",
-  "wrap-reverse": "flex-wrap-reverse",
+  wrap: 'flex-wrap',
+  nowrap: 'flex-nowrap',
+  'wrap-reverse': 'flex-wrap-reverse',
 };
 
 /**
@@ -103,10 +108,10 @@ export const Group = forwardRef<HTMLDivElement, GroupProps>(
   (
     {
       children,
-      gap = "md",
-      align = "center",
-      justify = "flex-start",
-      wrap = "wrap",
+      gap = 'md',
+      align = 'center',
+      justify = 'flex-start',
+      wrap = 'wrap',
       grow = false,
       preventGrowOverflow = true,
       className,
@@ -114,12 +119,12 @@ export const Group = forwardRef<HTMLDivElement, GroupProps>(
       style,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const Component = component || "div";
+    const Component = component || 'div';
 
     // Handle numeric gap values with inline style
-    const isNumericGap = typeof gap === "number";
+    const isNumericGap = typeof gap === 'number';
     const gapClass = !isNumericGap ? gapClasses[gap] : undefined;
     const gapStyle = isNumericGap ? { gap: `${gap * 0.25}rem` } : undefined;
 
@@ -134,7 +139,11 @@ export const Group = forwardRef<HTMLDivElement, GroupProps>(
       if (preventGrowOverflow && childCount > 0) {
         // Calculate max-width to prevent overflow
         // Account for gap between items
-        const gapValue = isNumericGap ? gap * 0.25 : { xs: 0.25, sm: 0.5, md: 1, lg: 1.5, xl: 2 }[gap as Exclude<StackSpacing, number>];
+        const gapValue = isNumericGap
+          ? gap * 0.25
+          : { xs: 0.25, sm: 0.5, md: 1, lg: 1.5, xl: 2 }[
+              gap as Exclude<StackSpacing, number>
+            ];
         const totalGap = gapValue * (childCount - 1);
         return {
           flexGrow: 1,
@@ -151,12 +160,12 @@ export const Group = forwardRef<HTMLDivElement, GroupProps>(
       <Component
         ref={ref}
         className={cn(
-          "flex flex-row",
+          'flex flex-row',
           gapClass,
           alignClasses[align],
           justifyClasses[justify],
           wrapClasses[wrap],
-          className
+          className,
         )}
         style={{ ...gapStyle, ...style }}
         {...props}
@@ -170,7 +179,7 @@ export const Group = forwardRef<HTMLDivElement, GroupProps>(
           : children}
       </Component>
     );
-  }
+  },
 );
 
-Group.displayName = "Group";
+Group.displayName = 'Group';

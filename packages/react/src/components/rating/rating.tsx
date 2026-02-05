@@ -1,20 +1,22 @@
-"use client";
+'use client';
 
-import React, { forwardRef, useState, useCallback } from "react";
-import { Star } from "lucide-react";
+import React, { forwardRef, useState, useCallback } from 'react';
+import { Star } from 'lucide-react';
 
-import { cn } from "../../utils/cn";
+import { cn } from '../../utils/cn';
 
 /**
  * Rating size options
  */
-export type RatingSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type RatingSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Rating component props
  */
-export interface RatingProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+export interface RatingProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'onChange'
+> {
   /** Current value (controlled) */
   value?: number;
   /** Default value (uncontrolled) */
@@ -69,7 +71,7 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
       defaultValue = 0,
       onChange,
       count = 5,
-      size = "md",
+      size = 'md',
       color,
       emptyColor,
       readOnly = false,
@@ -82,7 +84,7 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [internalValue, setInternalValue] = useState(defaultValue);
     const [hoverValue, setHoverValue] = useState<number | null>(null);
@@ -100,7 +102,7 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
         }
         onChange?.(newValue);
       },
-      [isControlled, onChange, readOnly]
+      [isControlled, onChange, readOnly],
     );
 
     // Handle click on symbol
@@ -111,7 +113,7 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
         // Allow clicking same value to reset to 0
         setValue(newValue === currentValue ? 0 : newValue);
       },
-      [readOnly, fractions, currentValue, setValue]
+      [readOnly, fractions, currentValue, setValue],
     );
 
     // Handle hover
@@ -120,7 +122,7 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
         if (readOnly) return;
         setHoverValue(index + fraction / fractions);
       },
-      [readOnly, fractions]
+      [readOnly, fractions],
     );
 
     // Handle mouse leave
@@ -137,21 +139,21 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
         let newValue = currentValue;
 
         switch (e.key) {
-          case "ArrowRight":
-          case "ArrowUp":
+          case 'ArrowRight':
+          case 'ArrowUp':
             e.preventDefault();
             newValue = Math.min(currentValue + step, count);
             break;
-          case "ArrowLeft":
-          case "ArrowDown":
+          case 'ArrowLeft':
+          case 'ArrowDown':
             e.preventDefault();
             newValue = Math.max(currentValue - step, 0);
             break;
-          case "Home":
+          case 'Home':
             e.preventDefault();
             newValue = 0;
             break;
-          case "End":
+          case 'End':
             e.preventDefault();
             newValue = count;
             break;
@@ -161,35 +163,36 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
 
         setValue(newValue);
       },
-      [readOnly, currentValue, fractions, count, setValue]
+      [readOnly, currentValue, fractions, count, setValue],
     );
 
     // Size configuration
     const sizeConfig: Record<RatingSize, { icon: string; gap: string }> = {
-      xs: { icon: "h-3 w-3", gap: "gap-0.5" },
-      sm: { icon: "h-4 w-4", gap: "gap-1" },
-      md: { icon: "h-5 w-5", gap: "gap-1" },
-      lg: { icon: "h-6 w-6", gap: "gap-1.5" },
-      xl: { icon: "h-8 w-8", gap: "gap-2" },
+      xs: { icon: 'h-3 w-3', gap: 'gap-0.5' },
+      sm: { icon: 'h-4 w-4', gap: 'gap-1' },
+      md: { icon: 'h-5 w-5', gap: 'gap-1' },
+      lg: { icon: 'h-6 w-6', gap: 'gap-1.5' },
+      xl: { icon: 'h-8 w-8', gap: 'gap-2' },
     };
 
     // Color classes for theme colors
     const getFilledColorClass = () => {
-      if (!color) return "text-yellow-400";
+      if (!color) return 'text-yellow-400';
       const colorMap: Record<string, string> = {
-        primary: "text-primary",
-        secondary: "text-secondary",
-        success: "text-success",
-        warning: "text-warning",
-        error: "text-error",
+        primary: 'text-primary',
+        secondary: 'text-secondary',
+        success: 'text-success',
+        warning: 'text-warning',
+        error: 'text-error',
       };
-      return colorMap[color] || "text-yellow-400";
+      return colorMap[color] || 'text-yellow-400';
     };
 
     const filledColorClass = getFilledColorClass();
 
     // Default symbol label
-    const defaultGetSymbolLabel = (value: number) => `${value} star${value !== 1 ? "s" : ""}`;
+    const defaultGetSymbolLabel = (value: number) =>
+      `${value} star${value !== 1 ? 's' : ''}`;
 
     // Render a single symbol
     const renderSymbol = (index: number) => {
@@ -200,7 +203,8 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
         const isActive = highlightSelectedOnly
           ? displayValue === symbolValue
           : displayValue >= symbolValue;
-        const isFractional = !highlightSelectedOnly &&
+        const isFractional =
+          !highlightSelectedOnly &&
           displayValue > index + (fraction - 1) / fractions &&
           displayValue < symbolValue;
 
@@ -215,12 +219,12 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
             key={`${index}-${fraction}`}
             type="button"
             className={cn(
-              "relative focus:outline-none",
-              !readOnly && "cursor-pointer",
-              readOnly && "cursor-default"
+              'relative focus:outline-none',
+              !readOnly && 'cursor-pointer',
+              readOnly && 'cursor-default',
             )}
             style={{
-              width: fractions > 1 ? `${100 / fractions}%` : "100%",
+              width: fractions > 1 ? `${100 / fractions}%` : '100%',
             }}
             onClick={() => handleClick(index, fraction)}
             onMouseEnter={() => handleHover(index, fraction)}
@@ -230,9 +234,9 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
             {/* Background (empty) symbol */}
             <span
               className={cn(
-                "block",
+                'block',
                 sizeConfig[size].icon,
-                emptyColor ? "" : "text-gray-300 dark:text-gray-600"
+                emptyColor ? '' : 'text-gray-300 dark:text-gray-600',
               )}
               style={emptyColor ? { color: emptyColor } : {}}
             >
@@ -242,9 +246,9 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
             {/* Foreground (filled) symbol - clipped */}
             <span
               className={cn(
-                "absolute inset-0 overflow-hidden",
+                'absolute inset-0 overflow-hidden',
                 sizeConfig[size].icon,
-                filledColorClass
+                filledColorClass,
               )}
               style={{
                 width: `${fillPercent}%`,
@@ -252,17 +256,14 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
             >
               {fullSymbol || <Star className="h-full w-full fill-current" />}
             </span>
-          </button>
+          </button>,
         );
       }
 
-      const iconWidth = sizeConfig[size].icon.split(" ")[0]?.replace("h-", "") ?? "5";
+      const iconWidth =
+        sizeConfig[size].icon.split(' ')[0]?.replace('h-', '') ?? '5';
       return (
-        <div
-          key={index}
-          className="relative flex"
-          style={{ width: iconWidth }}
-        >
+        <div key={index} className="relative flex" style={{ width: iconWidth }}>
           {symbolElements}
         </div>
       );
@@ -275,17 +276,16 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
         aria-valuemin={0}
         aria-valuemax={count}
         aria-valuenow={currentValue}
-        aria-valuetext={
-          (getSymbolLabel || defaultGetSymbolLabel)(currentValue)
-        }
+        aria-valuetext={(getSymbolLabel || defaultGetSymbolLabel)(currentValue)}
         aria-readonly={readOnly}
         tabIndex={readOnly ? -1 : 0}
         className={cn(
-          "inline-flex",
+          'inline-flex',
           sizeConfig[size].gap,
-          readOnly ? "pointer-events-none" : "",
-          !readOnly && "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded",
-          className
+          readOnly ? 'pointer-events-none' : '',
+          !readOnly &&
+            'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded',
+          className,
         )}
         onMouseLeave={handleMouseLeave}
         onKeyDown={handleKeyDown}
@@ -294,16 +294,10 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
         {Array.from({ length: count }, (_, index) => renderSymbol(index))}
 
         {/* Hidden input for form submission */}
-        {name && (
-          <input
-            type="hidden"
-            name={name}
-            value={currentValue}
-          />
-        )}
+        {name && <input type="hidden" name={name} value={currentValue} />}
       </div>
     );
-  }
+  },
 );
 
-Rating.displayName = "Rating";
+Rating.displayName = 'Rating';

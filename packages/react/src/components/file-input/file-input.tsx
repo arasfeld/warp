@@ -1,18 +1,26 @@
-"use client";
+'use client';
 
-import React, { forwardRef, useRef, useState, useCallback } from "react";
-import { Upload, X, File } from "lucide-react";
+import React, { forwardRef, useRef, useState, useCallback } from 'react';
+import { Upload, X, File } from 'lucide-react';
 
-import { cn } from "../../utils/cn";
-import { InputWrapper } from "../input/input";
-import type { InputSize, InputVariant, InputWrapperProps } from "../input/input";
+import { cn } from '../../utils/cn';
+import { InputWrapper } from '../input/input';
+import type {
+  InputSize,
+  InputVariant,
+  InputWrapperProps,
+} from '../input/input';
 
 /**
  * FileInput component props
  */
 export interface FileInputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "value" | "onChange">,
-    Omit<InputWrapperProps, "children" | "id" | "size" | "error"> {
+  extends
+    Omit<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      'size' | 'value' | 'onChange'
+    >,
+    Omit<InputWrapperProps, 'children' | 'id' | 'size' | 'error'> {
   /** Input size */
   size?: InputSize;
   /** Input variant */
@@ -105,13 +113,13 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
       errorProps,
       inputContainer,
       // FileInput-specific props
-      size = "sm",
-      variant = "default",
+      size = 'sm',
+      variant = 'default',
       radius,
       error,
       value,
       onChange,
-      placeholder = "Select file",
+      placeholder = 'Select file',
       accept,
       multiple = false,
       clearable = true,
@@ -123,14 +131,18 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
       id,
       ...props
     },
-    ref
+    ref,
   ) => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const [internalValue, setInternalValue] = useState<File | File[] | null>(null);
+    const [internalValue, setInternalValue] = useState<File | File[] | null>(
+      null,
+    );
 
     const isControlled = value !== undefined;
     const currentValue = isControlled ? value : internalValue;
-    const hasValue = currentValue && (Array.isArray(currentValue) ? currentValue.length > 0 : true);
+    const hasValue =
+      currentValue &&
+      (Array.isArray(currentValue) ? currentValue.length > 0 : true);
 
     // Handle file selection
     const handleChange = useCallback(
@@ -150,7 +162,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
         }
         onChange?.(newValue ?? null);
       },
-      [isControlled, multiple, onChange]
+      [isControlled, multiple, onChange],
     );
 
     // Handle clear
@@ -158,14 +170,14 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
       (e: React.MouseEvent) => {
         e.stopPropagation();
         if (inputRef.current) {
-          inputRef.current.value = "";
+          inputRef.current.value = '';
         }
         if (!isControlled) {
           setInternalValue(null);
         }
         onChange?.(null);
       },
-      [isControlled, onChange]
+      [isControlled, onChange],
     );
 
     // Handle button click
@@ -179,52 +191,52 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
     const handleKeyDown = useCallback(
       (e: React.KeyboardEvent) => {
         if (disabled) return;
-        if (e.key === "Enter" || e.key === " ") {
+        if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           inputRef.current?.click();
         }
       },
-      [disabled]
+      [disabled],
     );
 
     const hasWrapper = label || description || error;
 
     // Size classes
     const sizeClasses: Record<InputSize, string> = {
-      xs: "h-7 text-xs px-2",
-      sm: "h-9 text-sm px-3",
-      md: "h-10 text-base px-4",
-      lg: "h-11 text-base px-4",
-      xl: "h-12 text-lg px-5",
+      xs: 'h-7 text-xs px-2',
+      sm: 'h-9 text-sm px-3',
+      md: 'h-10 text-base px-4',
+      lg: 'h-11 text-base px-4',
+      xl: 'h-12 text-lg px-5',
     };
 
     // Radius classes
     const getRadiusClass = () => {
-      if (radius === undefined) return "rounded-md";
-      if (typeof radius === "number") return "";
+      if (radius === undefined) return 'rounded-md';
+      if (typeof radius === 'number') return '';
       const radiusMap: Record<string, string> = {
-        xs: "rounded-sm",
-        sm: "rounded",
-        md: "rounded-md",
-        lg: "rounded-lg",
-        xl: "rounded-xl",
-        full: "rounded-full",
+        xs: 'rounded-sm',
+        sm: 'rounded',
+        md: 'rounded-md',
+        lg: 'rounded-lg',
+        xl: 'rounded-xl',
+        full: 'rounded-full',
       };
-      return radiusMap[radius] || "rounded-md";
+      return radiusMap[radius] || 'rounded-md';
     };
 
     // Variant classes
     const getVariantClasses = () => {
-      if (variant === "unstyled") {
-        return "border-0 bg-transparent p-0";
+      if (variant === 'unstyled') {
+        return 'border-0 bg-transparent p-0';
       }
 
       const variantMap: Record<InputVariant, string> = {
         default:
-          "border border-divider bg-background-default focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2",
+          'border border-divider bg-background-default focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
         filled:
-          "border-0 bg-background-paper focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2",
-        unstyled: "",
+          'border-0 bg-background-paper focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
+        unstyled: '',
       };
 
       return variantMap[variant];
@@ -232,19 +244,21 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
 
     // Error classes
     const errorClasses = error
-      ? "border-error focus-within:ring-error focus-within:border-error"
-      : "";
+      ? 'border-error focus-within:ring-error focus-within:border-error'
+      : '';
 
     const radiusStyle: React.CSSProperties =
-      typeof radius === "number" ? { borderRadius: `${radius}px` } : {};
+      typeof radius === 'number' ? { borderRadius: `${radius}px` } : {};
 
     const inputElement = (
-      <div className={cn("relative", className)}>
+      <div className={cn('relative', className)}>
         {/* Hidden file input */}
         <input
           ref={(node) => {
-            (inputRef as React.MutableRefObject<HTMLInputElement | null>).current = node;
-            if (typeof ref === "function") {
+            (
+              inputRef as React.MutableRefObject<HTMLInputElement | null>
+            ).current = node;
+            if (typeof ref === 'function') {
               ref(node);
             } else if (ref) {
               ref.current = node;
@@ -267,12 +281,12 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           className={cn(
-            "flex items-center justify-between w-full cursor-pointer transition-colors",
+            'flex items-center justify-between w-full cursor-pointer transition-colors',
             sizeClasses[size],
             getRadiusClass(),
             getVariantClasses(),
             errorClasses,
-            disabled && "opacity-50 cursor-not-allowed"
+            disabled && 'opacity-50 cursor-not-allowed',
           )}
           style={radiusStyle}
           aria-disabled={disabled}
@@ -281,15 +295,18 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
             {leftSection && (
               <span className="flex-shrink-0">{leftSection}</span>
             )}
-            {!leftSection && (icon !== undefined ? (
-              icon
-            ) : (
-              <Upload className="h-4 w-4 flex-shrink-0 text-text-secondary" />
-            ))}
+            {!leftSection &&
+              (icon !== undefined ? (
+                icon
+              ) : (
+                <Upload className="h-4 w-4 flex-shrink-0 text-text-secondary" />
+              ))}
             {hasValue ? (
               <ValueComponent value={currentValue} />
             ) : (
-              <span className="text-text-secondary truncate">{placeholder}</span>
+              <span className="text-text-secondary truncate">
+                {placeholder}
+              </span>
             )}
           </div>
 
@@ -317,7 +334,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
         id={id}
         label={label}
         description={description}
-        error={typeof error === "boolean" ? undefined : error}
+        error={typeof error === 'boolean' ? undefined : error}
         required={required}
         withAsterisk={withAsterisk}
         size={size}
@@ -331,7 +348,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
         {inputElement}
       </InputWrapper>
     );
-  }
+  },
 );
 
-FileInput.displayName = "FileInput";
+FileInput.displayName = 'FileInput';

@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { Button, Group, Text } from "@warp/react";
+import { Button, Group, Text } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function GroupPage() {
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "gap", title: "Gap", level: 2 },
-    { id: "justify", title: "Justify", level: 2 },
-    { id: "align", title: "Align", level: 2 },
-    { id: "wrap", title: "Wrap", level: 2 },
-    { id: "grow", title: "Grow", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'gap', title: 'Gap', level: 2 },
+    { id: 'justify', title: 'Justify', level: 2 },
+    { id: 'align', title: 'Align', level: 2 },
+    { id: 'wrap', title: 'Wrap', level: 2 },
+    { id: 'grow', title: 'Grow', level: 2 },
   ];
 
   return (
@@ -49,10 +49,15 @@ export default function GroupPage() {
 
       {/* Gap */}
       <Section id="gap">
-        <SectionHeader title="Gap" subtitle="Different gap sizes between items" />
+        <SectionHeader
+          title="Gap"
+          subtitle="Different gap sizes between items"
+        />
         <DemoArea className="flex-col items-start gap-8">
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">xs</Text>
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              xs
+            </Text>
             <Group gap="xs" className="bg-surface/50 p-2 rounded">
               <div className="h-8 w-12 bg-primary/30 rounded" />
               <div className="h-8 w-12 bg-primary/30 rounded" />
@@ -60,7 +65,9 @@ export default function GroupPage() {
             </Group>
           </div>
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">sm</Text>
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              sm
+            </Text>
             <Group gap="sm" className="bg-surface/50 p-2 rounded">
               <div className="h-8 w-12 bg-primary/30 rounded" />
               <div className="h-8 w-12 bg-primary/30 rounded" />
@@ -68,7 +75,9 @@ export default function GroupPage() {
             </Group>
           </div>
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">md (default)</Text>
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              md (default)
+            </Text>
             <Group gap="md" className="bg-surface/50 p-2 rounded">
               <div className="h-8 w-12 bg-primary/30 rounded" />
               <div className="h-8 w-12 bg-primary/30 rounded" />
@@ -76,7 +85,9 @@ export default function GroupPage() {
             </Group>
           </div>
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">lg</Text>
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              lg
+            </Text>
             <Group gap="lg" className="bg-surface/50 p-2 rounded">
               <div className="h-8 w-12 bg-primary/30 rounded" />
               <div className="h-8 w-12 bg-primary/30 rounded" />
@@ -84,7 +95,9 @@ export default function GroupPage() {
             </Group>
           </div>
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">xl</Text>
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              xl
+            </Text>
             <Group gap="xl" className="bg-surface/50 p-2 rounded">
               <div className="h-8 w-12 bg-primary/30 rounded" />
               <div className="h-8 w-12 bg-primary/30 rounded" />
@@ -103,32 +116,59 @@ export default function GroupPage() {
 
       {/* Justify */}
       <Section id="justify">
-        <SectionHeader title="Justify" subtitle="Main-axis alignment (justify-content)" />
+        <SectionHeader
+          title="Justify"
+          subtitle="Main-axis alignment (justify-content)"
+        />
         <DemoArea className="flex-col items-stretch gap-8 w-full">
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">flex-start (default)</Text>
-            <Group gap="sm" justify="flex-start" className="bg-surface/50 p-4 rounded">
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              flex-start (default)
+            </Text>
+            <Group
+              gap="sm"
+              justify="flex-start"
+              className="bg-surface/50 p-4 rounded"
+            >
               <div className="h-8 w-16 bg-primary/30 rounded" />
               <div className="h-8 w-16 bg-primary/30 rounded" />
             </Group>
           </div>
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">center</Text>
-            <Group gap="sm" justify="center" className="bg-surface/50 p-4 rounded">
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              center
+            </Text>
+            <Group
+              gap="sm"
+              justify="center"
+              className="bg-surface/50 p-4 rounded"
+            >
               <div className="h-8 w-16 bg-primary/30 rounded" />
               <div className="h-8 w-16 bg-primary/30 rounded" />
             </Group>
           </div>
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">flex-end</Text>
-            <Group gap="sm" justify="flex-end" className="bg-surface/50 p-4 rounded">
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              flex-end
+            </Text>
+            <Group
+              gap="sm"
+              justify="flex-end"
+              className="bg-surface/50 p-4 rounded"
+            >
               <div className="h-8 w-16 bg-primary/30 rounded" />
               <div className="h-8 w-16 bg-primary/30 rounded" />
             </Group>
           </div>
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">space-between</Text>
-            <Group gap="sm" justify="space-between" className="bg-surface/50 p-4 rounded">
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              space-between
+            </Text>
+            <Group
+              gap="sm"
+              justify="space-between"
+              className="bg-surface/50 p-4 rounded"
+            >
               <div className="h-8 w-16 bg-primary/30 rounded" />
               <div className="h-8 w-16 bg-primary/30 rounded" />
             </Group>
@@ -144,35 +184,62 @@ export default function GroupPage() {
 
       {/* Align */}
       <Section id="align">
-        <SectionHeader title="Align" subtitle="Cross-axis alignment (align-items)" />
+        <SectionHeader
+          title="Align"
+          subtitle="Cross-axis alignment (align-items)"
+        />
         <DemoArea className="flex-col items-stretch gap-8 w-full">
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">center (default)</Text>
-            <Group gap="sm" align="center" className="bg-surface/50 p-4 rounded h-20">
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              center (default)
+            </Text>
+            <Group
+              gap="sm"
+              align="center"
+              className="bg-surface/50 p-4 rounded h-20"
+            >
               <div className="h-8 w-16 bg-primary/30 rounded" />
               <div className="h-12 w-16 bg-primary/30 rounded" />
               <div className="h-6 w-16 bg-primary/30 rounded" />
             </Group>
           </div>
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">flex-start</Text>
-            <Group gap="sm" align="flex-start" className="bg-surface/50 p-4 rounded h-20">
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              flex-start
+            </Text>
+            <Group
+              gap="sm"
+              align="flex-start"
+              className="bg-surface/50 p-4 rounded h-20"
+            >
               <div className="h-8 w-16 bg-primary/30 rounded" />
               <div className="h-12 w-16 bg-primary/30 rounded" />
               <div className="h-6 w-16 bg-primary/30 rounded" />
             </Group>
           </div>
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">flex-end</Text>
-            <Group gap="sm" align="flex-end" className="bg-surface/50 p-4 rounded h-20">
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              flex-end
+            </Text>
+            <Group
+              gap="sm"
+              align="flex-end"
+              className="bg-surface/50 p-4 rounded h-20"
+            >
               <div className="h-8 w-16 bg-primary/30 rounded" />
               <div className="h-12 w-16 bg-primary/30 rounded" />
               <div className="h-6 w-16 bg-primary/30 rounded" />
             </Group>
           </div>
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">stretch</Text>
-            <Group gap="sm" align="stretch" className="bg-surface/50 p-4 rounded h-20">
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              stretch
+            </Text>
+            <Group
+              gap="sm"
+              align="stretch"
+              className="bg-surface/50 p-4 rounded h-20"
+            >
               <div className="w-16 bg-primary/30 rounded" />
               <div className="w-16 bg-primary/30 rounded" />
               <div className="w-16 bg-primary/30 rounded" />
@@ -189,11 +256,20 @@ export default function GroupPage() {
 
       {/* Wrap */}
       <Section id="wrap">
-        <SectionHeader title="Wrap" subtitle="Control how items wrap to new lines" />
+        <SectionHeader
+          title="Wrap"
+          subtitle="Control how items wrap to new lines"
+        />
         <DemoArea className="flex-col items-stretch gap-8 w-full">
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">wrap (default)</Text>
-            <Group gap="sm" wrap="wrap" className="bg-surface/50 p-4 rounded max-w-xs">
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              wrap (default)
+            </Text>
+            <Group
+              gap="sm"
+              wrap="wrap"
+              className="bg-surface/50 p-4 rounded max-w-xs"
+            >
               <div className="h-8 w-20 bg-primary/30 rounded" />
               <div className="h-8 w-20 bg-primary/30 rounded" />
               <div className="h-8 w-20 bg-primary/30 rounded" />
@@ -201,8 +277,14 @@ export default function GroupPage() {
             </Group>
           </div>
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">nowrap</Text>
-            <Group gap="sm" wrap="nowrap" className="bg-surface/50 p-4 rounded max-w-xs overflow-hidden">
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              nowrap
+            </Text>
+            <Group
+              gap="sm"
+              wrap="nowrap"
+              className="bg-surface/50 p-4 rounded max-w-xs overflow-hidden"
+            >
               <div className="h-8 w-20 flex-shrink-0 bg-primary/30 rounded" />
               <div className="h-8 w-20 flex-shrink-0 bg-primary/30 rounded" />
               <div className="h-8 w-20 flex-shrink-0 bg-primary/30 rounded" />
@@ -219,22 +301,37 @@ export default function GroupPage() {
 
       {/* Grow */}
       <Section id="grow">
-        <SectionHeader title="Grow" subtitle="Make children grow to fill available space" />
+        <SectionHeader
+          title="Grow"
+          subtitle="Make children grow to fill available space"
+        />
         <DemoArea className="flex-col items-stretch gap-8 w-full">
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">Without grow</Text>
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              Without grow
+            </Text>
             <Group gap="sm" className="bg-surface/50 p-4 rounded">
               <Button size="sm">First</Button>
-              <Button size="sm" variant="outline">Second</Button>
-              <Button size="sm" variant="light">Third</Button>
+              <Button size="sm" variant="outline">
+                Second
+              </Button>
+              <Button size="sm" variant="light">
+                Third
+              </Button>
             </Group>
           </div>
           <div>
-            <Text size="sm" className="mb-2 text-muted-foreground">With grow</Text>
+            <Text size="sm" className="mb-2 text-muted-foreground">
+              With grow
+            </Text>
             <Group gap="sm" grow className="bg-surface/50 p-4 rounded">
               <Button size="sm">First</Button>
-              <Button size="sm" variant="outline">Second</Button>
-              <Button size="sm" variant="light">Third</Button>
+              <Button size="sm" variant="outline">
+                Second
+              </Button>
+              <Button size="sm" variant="light">
+                Third
+              </Button>
             </Group>
           </div>
         </DemoArea>

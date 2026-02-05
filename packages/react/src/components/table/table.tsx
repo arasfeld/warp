@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import React, { forwardRef, createContext, useContext } from "react";
+import React, { forwardRef, createContext, useContext } from 'react';
 
-import { cn } from "../../utils/cn";
+import { cn } from '../../utils/cn';
 
 /**
  * Table layout options
  */
-export type TableLayout = "auto" | "fixed";
+export type TableLayout = 'auto' | 'fixed';
 
 /**
  * Table spacing options
  */
-export type TableSpacing = "xs" | "sm" | "md" | "lg" | "xl";
+export type TableSpacing = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Table context for sharing props with sub-components
  */
 interface TableContextValue {
-  striped?: boolean | "odd" | "even";
+  striped?: boolean | 'odd' | 'even';
   highlightOnHover?: boolean;
   withColumnBorders?: boolean;
   withRowBorders?: boolean;
@@ -41,7 +41,7 @@ export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> 
   /** Vertical padding of each cell */
   verticalSpacing?: TableSpacing;
   /** Font size of table content */
-  fontSize?: "xs" | "sm" | "md" | "lg" | "xl";
+  fontSize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   /** If true, table will have border */
   withTableBorder?: boolean;
   /** If true, table will have borders between columns */
@@ -49,7 +49,7 @@ export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> 
   /** If true, table will have borders between rows */
   withRowBorders?: boolean;
   /** If true, table rows will have striped background */
-  striped?: boolean | "odd" | "even";
+  striped?: boolean | 'odd' | 'even';
   /** If true, table rows will be highlighted on hover */
   highlightOnHover?: boolean;
   /** Table layout algorithm */
@@ -89,15 +89,15 @@ export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> 
 export const Table = forwardRef<HTMLTableElement, TableProps>(
   (
     {
-      horizontalSpacing = "md",
-      verticalSpacing = "sm",
-      fontSize = "sm",
+      horizontalSpacing = 'md',
+      verticalSpacing = 'sm',
+      fontSize = 'sm',
       withTableBorder = false,
       withColumnBorders = false,
       withRowBorders = true,
       striped = false,
       highlightOnHover = false,
-      layout = "auto",
+      layout = 'auto',
       stickyHeader = false,
       stickyHeaderOffset = 0,
       className,
@@ -105,15 +105,15 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
       style,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Font size classes
     const fontSizeClasses: Record<string, string> = {
-      xs: "text-xs",
-      sm: "text-sm",
-      md: "text-base",
-      lg: "text-lg",
-      xl: "text-xl",
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-base',
+      lg: 'text-lg',
+      xl: 'text-xl',
     };
 
     const contextValue: TableContextValue = {
@@ -127,24 +127,22 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
 
     return (
       <TableContext.Provider value={contextValue}>
-        <div
-          className={cn(
-            "w-full overflow-auto",
-            stickyHeader && "relative"
-          )}
-        >
+        <div className={cn('w-full overflow-auto', stickyHeader && 'relative')}>
           <table
             ref={ref}
             className={cn(
-              "w-full border-collapse",
+              'w-full border-collapse',
               fontSizeClasses[fontSize],
-              layout === "fixed" && "table-fixed",
-              withTableBorder && "border border-divider",
-              className
+              layout === 'fixed' && 'table-fixed',
+              withTableBorder && 'border border-divider',
+              className,
             )}
             style={{
               ...style,
-              ...(stickyHeader && { "--sticky-header-offset": `${stickyHeaderOffset}px` } as React.CSSProperties),
+              ...(stickyHeader &&
+                ({
+                  '--sticky-header-offset': `${stickyHeaderOffset}px`,
+                } as React.CSSProperties)),
             }}
             {...props}
           >
@@ -153,16 +151,15 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
         </div>
       </TableContext.Provider>
     );
-  }
+  },
 );
 
-Table.displayName = "Table";
+Table.displayName = 'Table';
 
 /**
  * Table.Thead component props
  */
-export interface TableTheadProps
-  extends React.HTMLAttributes<HTMLTableSectionElement> {
+export interface TableTheadProps extends React.HTMLAttributes<HTMLTableSectionElement> {
   /** Additional className */
   className?: string;
   /** Children (tr elements) */
@@ -178,25 +175,24 @@ export const TableThead = forwardRef<HTMLTableSectionElement, TableTheadProps>(
       <thead
         ref={ref}
         className={cn(
-          "bg-background-paper",
-          "[&_th]:font-semibold [&_th]:text-muted-foreground",
-          className
+          'bg-background-paper',
+          '[&_th]:font-semibold [&_th]:text-muted-foreground',
+          className,
         )}
         {...props}
       >
         {children}
       </thead>
     );
-  }
+  },
 );
 
-TableThead.displayName = "TableThead";
+TableThead.displayName = 'TableThead';
 
 /**
  * Table.Tbody component props
  */
-export interface TableTbodyProps
-  extends React.HTMLAttributes<HTMLTableSectionElement> {
+export interface TableTbodyProps extends React.HTMLAttributes<HTMLTableSectionElement> {
   /** Additional className */
   className?: string;
   /** Children (tr elements) */
@@ -214,30 +210,30 @@ export const TableTbody = forwardRef<HTMLTableSectionElement, TableTbodyProps>(
       <tbody
         ref={ref}
         className={cn(
-          withRowBorders && "[&_tr]:border-b [&_tr]:border-divider [&_tr:last-child]:border-0",
-          striped === true || striped === "odd"
-            ? "[&_tr:nth-child(odd)]:bg-action-hover/50"
-            : striped === "even"
-              ? "[&_tr:nth-child(even)]:bg-action-hover/50"
-              : "",
-          highlightOnHover && "[&_tr:hover]:bg-action-hover",
-          className
+          withRowBorders &&
+            '[&_tr]:border-b [&_tr]:border-divider [&_tr:last-child]:border-0',
+          striped === true || striped === 'odd'
+            ? '[&_tr:nth-child(odd)]:bg-action-hover/50'
+            : striped === 'even'
+              ? '[&_tr:nth-child(even)]:bg-action-hover/50'
+              : '',
+          highlightOnHover && '[&_tr:hover]:bg-action-hover',
+          className,
         )}
         {...props}
       >
         {children}
       </tbody>
     );
-  }
+  },
 );
 
-TableTbody.displayName = "TableTbody";
+TableTbody.displayName = 'TableTbody';
 
 /**
  * Table.Tfoot component props
  */
-export interface TableTfootProps
-  extends React.HTMLAttributes<HTMLTableSectionElement> {
+export interface TableTfootProps extends React.HTMLAttributes<HTMLTableSectionElement> {
   /** Additional className */
   className?: string;
   /** Children (tr elements) */
@@ -253,25 +249,24 @@ export const TableTfoot = forwardRef<HTMLTableSectionElement, TableTfootProps>(
       <tfoot
         ref={ref}
         className={cn(
-          "bg-background-paper border-t border-divider",
-          "[&_td]:font-medium",
-          className
+          'bg-background-paper border-t border-divider',
+          '[&_td]:font-medium',
+          className,
         )}
         {...props}
       >
         {children}
       </tfoot>
     );
-  }
+  },
 );
 
-TableTfoot.displayName = "TableTfoot";
+TableTfoot.displayName = 'TableTfoot';
 
 /**
  * Table.Tr component props
  */
-export interface TableTrProps
-  extends React.HTMLAttributes<HTMLTableRowElement> {
+export interface TableTrProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /** Additional className */
   className?: string;
   /** Children (th or td elements) */
@@ -284,24 +279,19 @@ export interface TableTrProps
 export const TableTr = forwardRef<HTMLTableRowElement, TableTrProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <tr
-        ref={ref}
-        className={cn("transition-colors", className)}
-        {...props}
-      >
+      <tr ref={ref} className={cn('transition-colors', className)} {...props}>
         {children}
       </tr>
     );
-  }
+  },
 );
 
-TableTr.displayName = "TableTr";
+TableTr.displayName = 'TableTr';
 
 /**
  * Table.Th component props
  */
-export interface TableThProps
-  extends React.ThHTMLAttributes<HTMLTableCellElement> {
+export interface TableThProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
   /** Additional className */
   className?: string;
   /** Children content */
@@ -318,46 +308,46 @@ export const TableTh = forwardRef<HTMLTableCellElement, TableThProps>(
 
     // Spacing classes
     const vSpacingClasses: Record<TableSpacing, string> = {
-      xs: "py-1",
-      sm: "py-2",
-      md: "py-3",
-      lg: "py-4",
-      xl: "py-5",
+      xs: 'py-1',
+      sm: 'py-2',
+      md: 'py-3',
+      lg: 'py-4',
+      xl: 'py-5',
     };
 
     const hSpacingClasses: Record<TableSpacing, string> = {
-      xs: "px-2",
-      sm: "px-3",
-      md: "px-4",
-      lg: "px-5",
-      xl: "px-6",
+      xs: 'px-2',
+      sm: 'px-3',
+      md: 'px-4',
+      lg: 'px-5',
+      xl: 'px-6',
     };
 
     return (
       <th
         ref={ref}
         className={cn(
-          "text-left",
-          vSpacingClasses[verticalSpacing || "sm"],
-          hSpacingClasses[horizontalSpacing || "md"],
-          withColumnBorders && "border-x border-divider first:border-l-0 last:border-r-0",
-          className
+          'text-left',
+          vSpacingClasses[verticalSpacing || 'sm'],
+          hSpacingClasses[horizontalSpacing || 'md'],
+          withColumnBorders &&
+            'border-x border-divider first:border-l-0 last:border-r-0',
+          className,
         )}
         {...props}
       >
         {children}
       </th>
     );
-  }
+  },
 );
 
-TableTh.displayName = "TableTh";
+TableTh.displayName = 'TableTh';
 
 /**
  * Table.Td component props
  */
-export interface TableTdProps
-  extends React.TdHTMLAttributes<HTMLTableCellElement> {
+export interface TableTdProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
   /** Additional className */
   className?: string;
   /** Children content */
@@ -374,45 +364,45 @@ export const TableTd = forwardRef<HTMLTableCellElement, TableTdProps>(
 
     // Spacing classes
     const vSpacingClasses: Record<TableSpacing, string> = {
-      xs: "py-1",
-      sm: "py-2",
-      md: "py-3",
-      lg: "py-4",
-      xl: "py-5",
+      xs: 'py-1',
+      sm: 'py-2',
+      md: 'py-3',
+      lg: 'py-4',
+      xl: 'py-5',
     };
 
     const hSpacingClasses: Record<TableSpacing, string> = {
-      xs: "px-2",
-      sm: "px-3",
-      md: "px-4",
-      lg: "px-5",
-      xl: "px-6",
+      xs: 'px-2',
+      sm: 'px-3',
+      md: 'px-4',
+      lg: 'px-5',
+      xl: 'px-6',
     };
 
     return (
       <td
         ref={ref}
         className={cn(
-          vSpacingClasses[verticalSpacing || "sm"],
-          hSpacingClasses[horizontalSpacing || "md"],
-          withColumnBorders && "border-x border-divider first:border-l-0 last:border-r-0",
-          className
+          vSpacingClasses[verticalSpacing || 'sm'],
+          hSpacingClasses[horizontalSpacing || 'md'],
+          withColumnBorders &&
+            'border-x border-divider first:border-l-0 last:border-r-0',
+          className,
         )}
         {...props}
       >
         {children}
       </td>
     );
-  }
+  },
 );
 
-TableTd.displayName = "TableTd";
+TableTd.displayName = 'TableTd';
 
 /**
  * Table.Caption component props
  */
-export interface TableCaptionProps
-  extends React.HTMLAttributes<HTMLTableCaptionElement> {
+export interface TableCaptionProps extends React.HTMLAttributes<HTMLTableCaptionElement> {
   /** Additional className */
   className?: string;
   /** Children content */
@@ -429,7 +419,7 @@ export const TableCaption = forwardRef<
   return (
     <caption
       ref={ref}
-      className={cn("mt-4 text-sm text-muted-foreground", className)}
+      className={cn('mt-4 text-sm text-muted-foreground', className)}
       {...props}
     >
       {children}
@@ -437,13 +427,12 @@ export const TableCaption = forwardRef<
   );
 });
 
-TableCaption.displayName = "TableCaption";
+TableCaption.displayName = 'TableCaption';
 
 /**
  * Table.ScrollContainer component props
  */
-export interface TableScrollContainerProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface TableScrollContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Minimum width for the table */
   minWidth?: number | string;
   /** Additional className */
@@ -463,7 +452,7 @@ export const TableScrollContainer = forwardRef<
   return (
     <div
       ref={ref}
-      className={cn("w-full overflow-x-auto", className)}
+      className={cn('w-full overflow-x-auto', className)}
       style={style}
       {...props}
     >
@@ -472,4 +461,4 @@ export const TableScrollContainer = forwardRef<
   );
 });
 
-TableScrollContainer.displayName = "TableScrollContainer";
+TableScrollContainer.displayName = 'TableScrollContainer';

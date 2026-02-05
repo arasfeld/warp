@@ -1,4 +1,4 @@
-import { Heading, Text, cn } from "@warp/react";
+import { Heading, Text, cn } from '@warp/react';
 
 interface ContentHeaderProps {
   title: string;
@@ -11,8 +11,8 @@ export function ContentHeader({ title, description }: ContentHeaderProps) {
       <Heading
         order={1}
         className={cn(
-          "text-5xl md:text-6xl lg:text-7xl mb-4 font-extrabold",
-          "bg-gradient-to-r from-text-primary to-purple-500 bg-clip-text text-transparent"
+          'text-5xl md:text-6xl lg:text-7xl mb-4 font-extrabold',
+          'bg-gradient-to-r from-text-primary to-purple-500 bg-clip-text text-transparent',
         )}
       >
         {title}

@@ -2,17 +2,17 @@
  * Toast position options
  */
 export type ToastPosition =
-  | "top-left"
-  | "top-center"
-  | "top-right"
-  | "bottom-left"
-  | "bottom-center"
-  | "bottom-right";
+  | 'top-left'
+  | 'top-center'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-center'
+  | 'bottom-right';
 
 /**
  * Toast variant/type
  */
-export type ToastVariant = "default" | "success" | "error" | "warning" | "info";
+export type ToastVariant = 'default' | 'success' | 'error' | 'warning' | 'info';
 
 /**
  * Base Toast props (platform-agnostic)

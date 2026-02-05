@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useMemo, useState } from "react";
-import { Button, Card, Input, Select } from "@warp/react";
+import { useMemo, useState } from 'react';
+import { Button, Card, Input, Select } from '@warp/react';
 
-import { AnimatedBackground } from "@/components/animated-background";
-import { Layout } from "@/components/layout";
+import { AnimatedBackground } from '@/components/animated-background';
+import { Layout } from '@/components/layout';
 import {
   ComponentCard,
   FilterTags,
   PageHeader,
   SearchBox,
-} from "@/components/ui";
+} from '@/components/ui';
 
 interface Component {
   title: string;
@@ -22,9 +22,9 @@ interface Component {
 
 const components: Component[] = [
   {
-    title: "Button",
-    description: "Interactive buttons with multiple variants and states",
-    category: "buttons",
+    title: 'Button',
+    description: 'Interactive buttons with multiple variants and states',
+    category: 'buttons',
     demo: (
       <>
         <Button
@@ -54,9 +54,9 @@ const components: Component[] = [
 <Button variant="outline">Outline</Button>`,
   },
   {
-    title: "Card",
-    description: "Container with header, content, and footer sections",
-    category: "feedback",
+    title: 'Card',
+    description: 'Container with header, content, and footer sections',
+    category: 'feedback',
     demo: (
       <Card
         className="max-w-[300px] bg-background-paper dark:bg-[#1e1e2e] border border-divider dark:border-white/8 rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 hover:border-purple-500 hover:shadow-[0_15px_40px_rgba(168,85,247,0.2)]"
@@ -82,9 +82,9 @@ const components: Component[] = [
 </Card>`,
   },
   {
-    title: "Input",
-    description: "Text input with validation and helper text support",
-    category: "inputs",
+    title: 'Input',
+    description: 'Text input with validation and helper text support',
+    category: 'inputs',
     demo: (
       <>
         <Input
@@ -106,16 +106,17 @@ const components: Component[] = [
 <Input placeholder="Enter password..." type="password" />`,
   },
   {
-    title: "Select",
-    description: "Dropdown select with search, multiple selection, and keyboard navigation",
-    category: "inputs",
+    title: 'Select',
+    description:
+      'Dropdown select with search, multiple selection, and keyboard navigation',
+    category: 'inputs',
     demo: (
       <>
         <Select
           data={[
-            { value: "react", label: "React" },
-            { value: "vue", label: "Vue.js" },
-            { value: "angular", label: "Angular" },
+            { value: 'react', label: 'React' },
+            { value: 'vue', label: 'Vue.js' },
+            { value: 'angular', label: 'Angular' },
           ]}
           placeholder="Select framework..."
           variant="filled"
@@ -125,9 +126,9 @@ const components: Component[] = [
         />
         <Select
           data={[
-            { value: "react", label: "React" },
-            { value: "vue", label: "Vue.js" },
-            { value: "angular", label: "Angular" },
+            { value: 'react', label: 'React' },
+            { value: 'vue', label: 'Vue.js' },
+            { value: 'angular', label: 'Angular' },
           ]}
           placeholder="Select multiple..."
           variant="filled"
@@ -155,9 +156,9 @@ const components: Component[] = [
 />`,
   },
   {
-    title: "Text",
-    description: "Typography component with size and weight variants",
-    category: "feedback",
+    title: 'Text',
+    description: 'Typography component with size and weight variants',
+    category: 'feedback',
     demo: (
       <div className="space-y-2">
         <h1 className="text-4xl font-bold text-foreground">Heading 1</h1>
@@ -176,25 +177,25 @@ const components: Component[] = [
 ];
 
 const filterTags = [
-  { id: "all", label: "All" },
-  { id: "inputs", label: "Inputs" },
-  { id: "buttons", label: "Buttons" },
-  { id: "feedback", label: "Feedback" },
+  { id: 'all', label: 'All' },
+  { id: 'inputs', label: 'Inputs' },
+  { id: 'buttons', label: 'Buttons' },
+  { id: 'feedback', label: 'Feedback' },
 ];
 
 export default function ComponentsPage() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeFilter, setActiveFilter] = useState('all');
 
   const filteredComponents = useMemo(() => {
     return components.filter((component) => {
       const matchesSearch =
-        searchTerm === "" ||
+        searchTerm === '' ||
         component.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         component.description.toLowerCase().includes(searchTerm.toLowerCase());
 
       const matchesFilter =
-        activeFilter === "all" || component.category === activeFilter;
+        activeFilter === 'all' || component.category === activeFilter;
 
       return matchesSearch && matchesFilter;
     });

@@ -6,7 +6,7 @@
 /**
  * Switch size variants
  */
-export type SwitchSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type SwitchSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Theme color type (theme color key or CSS color)
@@ -16,7 +16,7 @@ export type SwitchColor = string;
 /**
  * Label position relative to the switch
  */
-export type SwitchLabelPosition = "left" | "right";
+export type SwitchLabelPosition = 'left' | 'right';
 
 /**
  * Base Switch props (platform-agnostic)

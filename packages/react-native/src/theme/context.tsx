@@ -5,13 +5,13 @@ import React, {
   useMemo,
   useEffect,
   type ReactNode,
-} from "react";
-import { View } from "react-native";
-import { useColorScheme, colorScheme } from "nativewind";
-import type { Theme, ThemeMode } from "@warp/core";
-import { defaultTheme, getPalette } from "@warp/core/theme";
-import { adaptTheme, type RNTheme } from "./adapter";
-import { createThemeVars } from "./css-vars";
+} from 'react';
+import { View } from 'react-native';
+import { useColorScheme, colorScheme } from 'nativewind';
+import type { Theme, ThemeMode } from '@warp/core';
+import { defaultTheme, getPalette } from '@warp/core/theme';
+import { adaptTheme, type RNTheme } from './adapter';
+import { createThemeVars } from './css-vars';
 
 /**
  * Theme context value
@@ -28,7 +28,7 @@ interface ThemeContextValue {
   /** Set core theme */
   setCoreTheme: (theme: Theme) => void;
   /** NativeWind color scheme value */
-  colorScheme: "light" | "dark" | null;
+  colorScheme: 'light' | 'dark' | null;
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
@@ -63,10 +63,10 @@ export function ThemeProvider({
 
   // Determine initial mode: use defaultMode if provided, otherwise follow system
   const initialMode =
-    defaultMode || (systemColorScheme === "dark" ? "dark" : "light");
+    defaultMode || (systemColorScheme === 'dark' ? 'dark' : 'light');
 
   const [manualMode, setManualMode] = useState<ThemeMode | null>(
-    enableManualToggle ? null : initialMode
+    enableManualToggle ? null : initialMode,
   );
   const [coreTheme, setCoreTheme] = useState<Theme>(theme);
 
@@ -75,7 +75,7 @@ export function ThemeProvider({
     if (manualMode !== null) {
       return manualMode;
     }
-    return systemColorScheme === "dark" ? "dark" : "light";
+    return systemColorScheme === 'dark' ? 'dark' : 'light';
   }, [manualMode, systemColorScheme]);
 
   // Sync NativeWind colorScheme with our mode
@@ -110,7 +110,7 @@ export function ThemeProvider({
       setCoreTheme,
       colorScheme: systemColorScheme ?? null,
     }),
-    [adaptedTheme, currentMode, coreTheme, systemColorScheme]
+    [adaptedTheme, currentMode, coreTheme, systemColorScheme],
   );
 
   // Apply theme vars via inline styles (NativeWind v4 recommended approach)
@@ -129,7 +129,7 @@ export function ThemeProvider({
 export function useTheme(): ThemeContextValue {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
 }

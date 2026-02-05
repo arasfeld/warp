@@ -1,39 +1,36 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { FileInput, Stack, Text } from "@warp/react";
-import { Upload, Image, FileText } from "lucide-react";
+import { useState } from 'react';
+import { FileInput, Stack, Text } from '@warp/react';
+import { Upload, Image, FileText } from 'lucide-react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function FileInputPage() {
   const [file, setFile] = useState<File | null>(null);
   const [files, setFiles] = useState<File[]>([]);
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "controlled", title: "Controlled", level: 2 },
-    { id: "multiple", title: "Multiple Files", level: 2 },
-    { id: "accept", title: "Accept Types", level: 2 },
-    { id: "with-icon", title: "With Icon", level: 2 },
-    { id: "clearable", title: "Clearable", level: 2 },
-    { id: "custom-value", title: "Custom Value Display", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'controlled', title: 'Controlled', level: 2 },
+    { id: 'multiple', title: 'Multiple Files', level: 2 },
+    { id: 'accept', title: 'Accept Types', level: 2 },
+    { id: 'with-icon', title: 'With Icon', level: 2 },
+    { id: 'clearable', title: 'Clearable', level: 2 },
+    { id: 'custom-value', title: 'Custom Value Display', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
   ];
 
   return (
     <ComponentPageLayout tocItems={tocItems}>
-      <ContentHeader
-        title="FileInput"
-        description="Capture files from user"
-      />
+      <ContentHeader title="FileInput" description="Capture files from user" />
 
       {/* Usage */}
       <Section id="usage">
@@ -71,7 +68,7 @@ export default function FileInputPage() {
               onChange={(v) => setFile(v as File | null)}
             />
             <Text size="sm" c="dimmed">
-              Selected: {file ? file.name : "No file selected"}
+              Selected: {file ? file.name : 'No file selected'}
             </Text>
           </Stack>
         </DemoArea>
@@ -188,7 +185,9 @@ export default function FileInputPage() {
               label="Upload document"
               placeholder="Select document"
               accept=".pdf,.doc,.docx"
-              leftSection={<FileText className="h-4 w-4 text-muted-foreground" />}
+              leftSection={
+                <FileText className="h-4 w-4 text-muted-foreground" />
+              }
             />
           </Stack>
         </DemoArea>
@@ -250,7 +249,11 @@ export default function FileInputPage() {
               const fileList = Array.isArray(value) ? value : [value];
               return (
                 <span className="text-sm">
-                  {fileList.length} file(s) - {Math.round(fileList.reduce((acc, f) => acc + f.size, 0) / 1024)} KB
+                  {fileList.length} file(s) -{' '}
+                  {Math.round(
+                    fileList.reduce((acc, f) => acc + f.size, 0) / 1024,
+                  )}{' '}
+                  KB
                 </span>
               );
             }}

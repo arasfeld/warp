@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useCallback } from "react";
-import { createPortal } from "react-dom";
+import React, { useEffect, useState, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 
-import { cn } from "../../utils/cn";
-import { Toast, ToastVariant } from "./toast";
+import { cn } from '../../utils/cn';
+import { Toast, ToastVariant } from './toast';
 
 /**
  * Toast position options
  */
 export type ToastPosition =
-  | "top-left"
-  | "top-center"
-  | "top-right"
-  | "bottom-left"
-  | "bottom-center"
-  | "bottom-right";
+  | 'top-left'
+  | 'top-center'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-center'
+  | 'bottom-right';
 
 /**
  * Toast data for the notification system
@@ -52,7 +52,7 @@ export const toast = {
   /**
    * Show a toast notification
    */
-  show: (options: Omit<ToastData, "id">): string => {
+  show: (options: Omit<ToastData, 'id'>): string => {
     const id = `toast-${++toastIdCounter}`;
     const newToast: ToastData = {
       id,
@@ -70,9 +70,9 @@ export const toast = {
    */
   success: (
     message: React.ReactNode,
-    options?: Omit<ToastData, "id" | "message" | "variant">
+    options?: Omit<ToastData, 'id' | 'message' | 'variant'>,
   ): string => {
-    return toast.show({ message, variant: "success", ...options });
+    return toast.show({ message, variant: 'success', ...options });
   },
 
   /**
@@ -80,9 +80,9 @@ export const toast = {
    */
   error: (
     message: React.ReactNode,
-    options?: Omit<ToastData, "id" | "message" | "variant">
+    options?: Omit<ToastData, 'id' | 'message' | 'variant'>,
   ): string => {
-    return toast.show({ message, variant: "error", ...options });
+    return toast.show({ message, variant: 'error', ...options });
   },
 
   /**
@@ -90,9 +90,9 @@ export const toast = {
    */
   warning: (
     message: React.ReactNode,
-    options?: Omit<ToastData, "id" | "message" | "variant">
+    options?: Omit<ToastData, 'id' | 'message' | 'variant'>,
   ): string => {
-    return toast.show({ message, variant: "warning", ...options });
+    return toast.show({ message, variant: 'warning', ...options });
   },
 
   /**
@@ -100,9 +100,9 @@ export const toast = {
    */
   info: (
     message: React.ReactNode,
-    options?: Omit<ToastData, "id" | "message" | "variant">
+    options?: Omit<ToastData, 'id' | 'message' | 'variant'>,
   ): string => {
-    return toast.show({ message, variant: "info", ...options });
+    return toast.show({ message, variant: 'info', ...options });
   },
 
   /**
@@ -110,7 +110,7 @@ export const toast = {
    */
   loading: (
     message: React.ReactNode,
-    options?: Omit<ToastData, "id" | "message" | "loading">
+    options?: Omit<ToastData, 'id' | 'message' | 'loading'>,
   ): string => {
     return toast.show({
       message,
@@ -124,9 +124,9 @@ export const toast = {
   /**
    * Update an existing toast
    */
-  update: (id: string, options: Partial<Omit<ToastData, "id">>): void => {
+  update: (id: string, options: Partial<Omit<ToastData, 'id'>>): void => {
     toastState = toastState.map((t) =>
-      t.id === id ? { ...t, ...options } : t
+      t.id === id ? { ...t, ...options } : t,
     );
     notifyListeners();
   },
@@ -193,14 +193,14 @@ export interface ToasterProps {
  * ```
  */
 export function Toaster({
-  position = "top-right",
+  position = 'top-right',
   limit = 5,
   className,
 }: ToasterProps) {
   const toasts = useToastState();
   // Filter toasts by position - toasts without position go to default, or match this Toaster's position
   const filteredToasts = toasts.filter(
-    (t) => t.position === position || (!t.position && position === "top-right")
+    (t) => t.position === position || (!t.position && position === 'top-right'),
   );
   const visibleToasts = filteredToasts.slice(-limit);
   const [mounted, setMounted] = useState(false);
@@ -216,7 +216,7 @@ export function Toaster({
     const timers: NodeJS.Timeout[] = [];
 
     visibleToasts.forEach((t) => {
-      if (typeof t.autoClose === "number" && t.autoClose > 0) {
+      if (typeof t.autoClose === 'number' && t.autoClose > 0) {
         const timer = setTimeout(() => {
           toast.dismiss(t.id);
         }, t.autoClose);
@@ -235,22 +235,22 @@ export function Toaster({
 
   // Position classes - using inset properties for proper positioning
   const positionClasses: Record<ToastPosition, string> = {
-    "top-left": "top-4 left-4",
-    "top-center": "top-4 left-1/2 -translate-x-1/2",
-    "top-right": "top-4 right-4",
-    "bottom-left": "bottom-4 left-4",
-    "bottom-center": "bottom-4 left-1/2 -translate-x-1/2",
-    "bottom-right": "bottom-4 right-4",
+    'top-left': 'top-4 left-4',
+    'top-center': 'top-4 left-1/2 -translate-x-1/2',
+    'top-right': 'top-4 right-4',
+    'bottom-left': 'bottom-4 left-4',
+    'bottom-center': 'bottom-4 left-1/2 -translate-x-1/2',
+    'bottom-right': 'bottom-4 right-4',
   };
 
   // Flex alignment for toast stacking
   const alignmentClasses: Record<ToastPosition, string> = {
-    "top-left": "items-start",
-    "top-center": "items-center",
-    "top-right": "items-end",
-    "bottom-left": "items-start",
-    "bottom-center": "items-center",
-    "bottom-right": "items-end",
+    'top-left': 'items-start',
+    'top-center': 'items-center',
+    'top-right': 'items-end',
+    'bottom-left': 'items-start',
+    'bottom-center': 'items-center',
+    'bottom-right': 'items-end',
   };
 
   if (!mounted || visibleToasts.length === 0) {
@@ -260,10 +260,10 @@ export function Toaster({
   const toasterContent = (
     <div
       className={cn(
-        "fixed flex flex-col gap-2 pointer-events-none",
+        'fixed flex flex-col gap-2 pointer-events-none',
         positionClasses[position],
         alignmentClasses[position],
-        className
+        className,
       )}
       style={{ zIndex: 99999 }}
       aria-live="polite"

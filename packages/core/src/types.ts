@@ -46,7 +46,7 @@ export interface CommonColors {
  */
 export interface Palette {
   /** Theme mode */
-  mode: "light" | "dark";
+  mode: 'light' | 'dark';
   /** Common colors (black, white) */
   common: CommonColors;
   /** Primary color */
@@ -95,7 +95,7 @@ export interface Palette {
 /**
  * Theme mode (light or dark)
  */
-export type ThemeMode = "light" | "dark";
+export type ThemeMode = 'light' | 'dark';
 
 /**
  * Complete theme configuration
@@ -193,7 +193,7 @@ export interface TypographyVariant {
   fontSize?: string | number;
   lineHeight?: string | number;
   letterSpacing?: string | number;
-  textTransform?: "none" | "uppercase" | "lowercase" | "capitalize";
+  textTransform?: 'none' | 'uppercase' | 'lowercase' | 'capitalize';
 }
 
 /**

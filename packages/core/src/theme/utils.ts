@@ -1,6 +1,6 @@
-import type { Palette, Theme, ThemeMode } from "../types";
-import { createPalette } from "./palette";
-import { defaultTheme } from "./tokens";
+import type { Palette, Theme, ThemeMode } from '../types';
+import { createPalette } from './palette';
+import { defaultTheme } from './tokens';
 
 /**
  * Get palette for a specific theme mode
@@ -20,7 +20,7 @@ export function getPalette(theme: Theme, mode: ThemeMode): Palette {
  */
 export function mergeThemes(
   baseTheme: Theme,
-  overrideTheme: Partial<Theme>
+  overrideTheme: Partial<Theme>,
 ): Theme {
   return {
     palette: overrideTheme.palette ?? baseTheme.palette,
@@ -133,31 +133,31 @@ export function mergeThemes(
  */
 export function validateTheme(theme: Theme): theme is Theme {
   if (!theme.palette) {
-    throw new Error("Theme must have palette");
+    throw new Error('Theme must have palette');
   }
   if (!theme.palette.mode) {
-    throw new Error("Theme palette must have mode");
+    throw new Error('Theme palette must have mode');
   }
   if (!theme.spacing) {
-    throw new Error("Theme must have spacing");
+    throw new Error('Theme must have spacing');
   }
   if (!theme.typography) {
-    throw new Error("Theme must have typography");
+    throw new Error('Theme must have typography');
   }
   if (!theme.shape) {
-    throw new Error("Theme must have shape");
+    throw new Error('Theme must have shape');
   }
   if (!theme.shadows) {
-    throw new Error("Theme must have shadows");
+    throw new Error('Theme must have shadows');
   }
   if (!theme.breakpoints) {
-    throw new Error("Theme must have breakpoints");
+    throw new Error('Theme must have breakpoints');
   }
   if (!theme.transitions) {
-    throw new Error("Theme must have transitions");
+    throw new Error('Theme must have transitions');
   }
   if (!theme.zIndex) {
-    throw new Error("Theme must have zIndex");
+    throw new Error('Theme must have zIndex');
   }
   return true;
 }

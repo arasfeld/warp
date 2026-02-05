@@ -1,1 +1,1 @@
-export type { DialogSize, DialogBaseProps } from "./types";
+export type { DialogSize, DialogBaseProps } from './types';

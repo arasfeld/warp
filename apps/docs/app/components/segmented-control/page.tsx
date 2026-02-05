@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { SegmentedControl, Stack, Text } from "@warp/react";
+import { useState } from 'react';
+import { SegmentedControl, Stack, Text } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function SegmentedControlPage() {
-  const [value, setValue] = useState("react");
+  const [value, setValue] = useState('react');
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "controlled", title: "Controlled", level: 2 },
-    { id: "disabled", title: "Disabled", level: 2 },
-    { id: "full-width", title: "Full Width", level: 2 },
-    { id: "orientation", title: "Orientation", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
-    { id: "colors", title: "Colors", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'controlled', title: 'Controlled', level: 2 },
+    { id: 'disabled', title: 'Disabled', level: 2 },
+    { id: 'full-width', title: 'Full Width', level: 2 },
+    { id: 'orientation', title: 'Orientation', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
+    { id: 'colors', title: 'Colors', level: 2 },
   ];
 
   return (
@@ -41,9 +41,9 @@ export default function SegmentedControlPage() {
         <DemoArea>
           <SegmentedControl
             data={[
-              { label: "React", value: "react" },
-              { label: "Angular", value: "angular" },
-              { label: "Vue", value: "vue" },
+              { label: 'React', value: 'react' },
+              { label: 'Angular', value: 'angular' },
+              { label: 'Vue', value: 'vue' },
             ]}
             defaultValue="react"
           />
@@ -70,15 +70,17 @@ export default function SegmentedControlPage() {
           <Stack gap="md" align="flex-start">
             <SegmentedControl
               data={[
-                { label: "React", value: "react" },
-                { label: "Angular", value: "angular" },
-                { label: "Vue", value: "vue" },
-                { label: "Svelte", value: "svelte" },
+                { label: 'React', value: 'react' },
+                { label: 'Angular', value: 'angular' },
+                { label: 'Vue', value: 'vue' },
+                { label: 'Svelte', value: 'svelte' },
               ]}
               value={value}
               onChange={setValue}
             />
-            <Text size="sm" c="dimmed">Selected: {value}</Text>
+            <Text size="sm" c="dimmed">
+              Selected: {value}
+            </Text>
           </Stack>
         </DemoArea>
         <CodeBlock
@@ -107,24 +109,28 @@ export default function SegmentedControlPage() {
         <DemoArea>
           <Stack gap="md" align="flex-start">
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Fully disabled</Text>
+              <Text size="sm" fw={500}>
+                Fully disabled
+              </Text>
               <SegmentedControl
                 data={[
-                  { label: "React", value: "react" },
-                  { label: "Angular", value: "angular" },
-                  { label: "Vue", value: "vue" },
+                  { label: 'React', value: 'react' },
+                  { label: 'Angular', value: 'angular' },
+                  { label: 'Vue', value: 'vue' },
                 ]}
                 defaultValue="react"
                 disabled
               />
             </Stack>
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Individual item disabled</Text>
+              <Text size="sm" fw={500}>
+                Individual item disabled
+              </Text>
               <SegmentedControl
                 data={[
-                  { label: "React", value: "react" },
-                  { label: "Angular", value: "angular", disabled: true },
-                  { label: "Vue", value: "vue" },
+                  { label: 'React', value: 'react' },
+                  { label: 'Angular', value: 'angular', disabled: true },
+                  { label: 'Vue', value: 'vue' },
                 ]}
                 defaultValue="react"
               />
@@ -164,9 +170,9 @@ export default function SegmentedControlPage() {
         <DemoArea>
           <SegmentedControl
             data={[
-              { label: "Daily", value: "daily" },
-              { label: "Weekly", value: "weekly" },
-              { label: "Monthly", value: "monthly" },
+              { label: 'Daily', value: 'daily' },
+              { label: 'Weekly', value: 'weekly' },
+              { label: 'Monthly', value: 'monthly' },
             ]}
             defaultValue="weekly"
             fullWidth
@@ -188,16 +194,13 @@ export default function SegmentedControlPage() {
 
       {/* Orientation */}
       <Section id="orientation">
-        <SectionHeader
-          title="Orientation"
-          subtitle="Display vertically"
-        />
+        <SectionHeader title="Orientation" subtitle="Display vertically" />
         <DemoArea>
           <SegmentedControl
             data={[
-              { label: "Preview", value: "preview" },
-              { label: "Code", value: "code" },
-              { label: "Export", value: "export" },
+              { label: 'Preview', value: 'preview' },
+              { label: 'Code', value: 'code' },
+              { label: 'Export', value: 'export' },
             ]}
             defaultValue="preview"
             orientation="vertical"
@@ -225,61 +228,71 @@ export default function SegmentedControlPage() {
         <DemoArea>
           <Stack gap="md" align="flex-start">
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Extra small</Text>
+              <Text size="sm" fw={500}>
+                Extra small
+              </Text>
               <SegmentedControl
                 size="xs"
                 data={[
-                  { label: "A", value: "a" },
-                  { label: "B", value: "b" },
-                  { label: "C", value: "c" },
+                  { label: 'A', value: 'a' },
+                  { label: 'B', value: 'b' },
+                  { label: 'C', value: 'c' },
                 ]}
                 defaultValue="a"
               />
             </Stack>
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Small</Text>
+              <Text size="sm" fw={500}>
+                Small
+              </Text>
               <SegmentedControl
                 size="sm"
                 data={[
-                  { label: "A", value: "a" },
-                  { label: "B", value: "b" },
-                  { label: "C", value: "c" },
+                  { label: 'A', value: 'a' },
+                  { label: 'B', value: 'b' },
+                  { label: 'C', value: 'c' },
                 ]}
                 defaultValue="a"
               />
             </Stack>
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Medium (default)</Text>
+              <Text size="sm" fw={500}>
+                Medium (default)
+              </Text>
               <SegmentedControl
                 size="md"
                 data={[
-                  { label: "A", value: "a" },
-                  { label: "B", value: "b" },
-                  { label: "C", value: "c" },
+                  { label: 'A', value: 'a' },
+                  { label: 'B', value: 'b' },
+                  { label: 'C', value: 'c' },
                 ]}
                 defaultValue="a"
               />
             </Stack>
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Large</Text>
+              <Text size="sm" fw={500}>
+                Large
+              </Text>
               <SegmentedControl
                 size="lg"
                 data={[
-                  { label: "A", value: "a" },
-                  { label: "B", value: "b" },
-                  { label: "C", value: "c" },
+                  { label: 'A', value: 'a' },
+                  { label: 'B', value: 'b' },
+                  { label: 'C', value: 'c' },
                 ]}
                 defaultValue="a"
               />
             </Stack>
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Extra large</Text>
+              <Text size="sm" fw={500}>
+                Extra large
+              </Text>
               <SegmentedControl
                 size="xl"
                 data={[
-                  { label: "A", value: "a" },
-                  { label: "B", value: "b" },
-                  { label: "C", value: "c" },
+                  { label: 'A', value: 'a' },
+                  { label: 'B', value: 'b' },
+                  { label: 'C', value: 'c' },
                 ]}
                 defaultValue="a"
               />
@@ -306,27 +319,27 @@ export default function SegmentedControlPage() {
             <SegmentedControl
               color="primary"
               data={[
-                { label: "Option 1", value: "1" },
-                { label: "Option 2", value: "2" },
-                { label: "Option 3", value: "3" },
+                { label: 'Option 1', value: '1' },
+                { label: 'Option 2', value: '2' },
+                { label: 'Option 3', value: '3' },
               ]}
               defaultValue="1"
             />
             <SegmentedControl
               color="secondary"
               data={[
-                { label: "Option 1", value: "1" },
-                { label: "Option 2", value: "2" },
-                { label: "Option 3", value: "3" },
+                { label: 'Option 1', value: '1' },
+                { label: 'Option 2', value: '2' },
+                { label: 'Option 3', value: '3' },
               ]}
               defaultValue="1"
             />
             <SegmentedControl
               color="success"
               data={[
-                { label: "Option 1", value: "1" },
-                { label: "Option 2", value: "2" },
-                { label: "Option 3", value: "3" },
+                { label: 'Option 1', value: '1' },
+                { label: 'Option 2', value: '2' },
+                { label: 'Option 3', value: '3' },
               ]}
               defaultValue="1"
             />

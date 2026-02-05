@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Slider, Stack, Text, Group } from "@warp/react";
+import { useState } from 'react';
+import { Slider, Stack, Text, Group } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function SliderPage() {
   const [value, setValue] = useState(50);
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "controlled", title: "Controlled", level: 2 },
-    { id: "min-max-step", title: "Min, Max & Step", level: 2 },
-    { id: "marks", title: "Marks", level: 2 },
-    { id: "label", title: "Label", level: 2 },
-    { id: "disabled", title: "Disabled", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
-    { id: "colors", title: "Colors", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'controlled', title: 'Controlled', level: 2 },
+    { id: 'min-max-step', title: 'Min, Max & Step', level: 2 },
+    { id: 'marks', title: 'Marks', level: 2 },
+    { id: 'label', title: 'Label', level: 2 },
+    { id: 'disabled', title: 'Disabled', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
+    { id: 'colors', title: 'Colors', level: 2 },
   ];
 
   return (
@@ -42,9 +42,7 @@ export default function SliderPage() {
         <DemoArea>
           <Slider defaultValue={40} className="w-full max-w-md" />
         </DemoArea>
-        <CodeBlock
-          code={`<Slider defaultValue={40} />`}
-        />
+        <CodeBlock code={`<Slider defaultValue={40} />`} />
       </Section>
 
       {/* Controlled */}
@@ -56,7 +54,9 @@ export default function SliderPage() {
         <DemoArea>
           <Stack gap="md" className="w-full max-w-md">
             <Slider value={value} onChange={setValue} />
-            <Text size="sm" c="dimmed">Value: {value}</Text>
+            <Text size="sm" c="dimmed">
+              Value: {value}
+            </Text>
           </Stack>
         </DemoArea>
         <CodeBlock
@@ -76,15 +76,21 @@ export default function SliderPage() {
         <DemoArea>
           <Stack gap="lg" className="w-full max-w-md">
             <Stack gap="xs">
-              <Text size="sm" fw={500}>Range 0-100, Step 10</Text>
+              <Text size="sm" fw={500}>
+                Range 0-100, Step 10
+              </Text>
               <Slider min={0} max={100} step={10} defaultValue={50} />
             </Stack>
             <Stack gap="xs">
-              <Text size="sm" fw={500}>Range 0-1000, Step 100</Text>
+              <Text size="sm" fw={500}>
+                Range 0-1000, Step 100
+              </Text>
               <Slider min={0} max={1000} step={100} defaultValue={500} />
             </Stack>
             <Stack gap="xs">
-              <Text size="sm" fw={500}>Decimal: Step 0.1</Text>
+              <Text size="sm" fw={500}>
+                Decimal: Step 0.1
+              </Text>
               <Slider min={0} max={1} step={0.1} defaultValue={0.5} />
             </Stack>
           </Stack>
@@ -107,11 +113,11 @@ export default function SliderPage() {
             <Slider
               defaultValue={40}
               marks={[
-                { value: 0, label: "0%" },
-                { value: 25, label: "25%" },
-                { value: 50, label: "50%" },
-                { value: 75, label: "75%" },
-                { value: 100, label: "100%" },
+                { value: 0, label: '0%' },
+                { value: 25, label: '25%' },
+                { value: 50, label: '50%' },
+                { value: 75, label: '75%' },
+                { value: 100, label: '100%' },
               ]}
             />
             <Slider
@@ -160,11 +166,15 @@ export default function SliderPage() {
         <DemoArea>
           <Stack gap="lg" className="w-full max-w-md">
             <Stack gap="xs">
-              <Text size="sm" fw={500}>Always visible</Text>
+              <Text size="sm" fw={500}>
+                Always visible
+              </Text>
               <Slider defaultValue={50} label={(v) => `${v}%`} labelAlwaysOn />
             </Stack>
             <Stack gap="xs">
-              <Text size="sm" fw={500}>On hover</Text>
+              <Text size="sm" fw={500}>
+                On hover
+              </Text>
               <Slider defaultValue={50} label={(v) => `${v}%`} />
             </Stack>
           </Stack>
@@ -184,9 +194,7 @@ export default function SliderPage() {
         <DemoArea>
           <Slider defaultValue={60} disabled className="w-full max-w-md" />
         </DemoArea>
-        <CodeBlock
-          code={`<Slider defaultValue={60} disabled />`}
-        />
+        <CodeBlock code={`<Slider defaultValue={60} disabled />`} />
       </Section>
 
       {/* Sizes */}
@@ -198,23 +206,33 @@ export default function SliderPage() {
         <DemoArea>
           <Stack gap="xl" className="w-full max-w-md">
             <Stack gap="xs">
-              <Text size="sm" fw={500}>Extra small</Text>
+              <Text size="sm" fw={500}>
+                Extra small
+              </Text>
               <Slider size="xs" defaultValue={40} />
             </Stack>
             <Stack gap="xs">
-              <Text size="sm" fw={500}>Small</Text>
+              <Text size="sm" fw={500}>
+                Small
+              </Text>
               <Slider size="sm" defaultValue={40} />
             </Stack>
             <Stack gap="xs">
-              <Text size="sm" fw={500}>Medium (default)</Text>
+              <Text size="sm" fw={500}>
+                Medium (default)
+              </Text>
               <Slider size="md" defaultValue={40} />
             </Stack>
             <Stack gap="xs">
-              <Text size="sm" fw={500}>Large</Text>
+              <Text size="sm" fw={500}>
+                Large
+              </Text>
               <Slider size="lg" defaultValue={40} />
             </Stack>
             <Stack gap="xs">
-              <Text size="sm" fw={500}>Extra large</Text>
+              <Text size="sm" fw={500}>
+                Extra large
+              </Text>
               <Slider size="xl" defaultValue={40} />
             </Stack>
           </Stack>
@@ -230,10 +248,7 @@ export default function SliderPage() {
 
       {/* Colors */}
       <Section id="colors">
-        <SectionHeader
-          title="Colors"
-          subtitle="Customize the slider color"
-        />
+        <SectionHeader title="Colors" subtitle="Customize the slider color" />
         <DemoArea>
           <Stack gap="lg" className="w-full max-w-md">
             <Slider color="primary" defaultValue={40} />

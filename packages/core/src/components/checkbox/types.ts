@@ -6,22 +6,22 @@
 /**
  * Checkbox size variants
  */
-export type CheckboxSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type CheckboxSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Checkbox variant
  */
-export type CheckboxVariant = "filled" | "outline";
+export type CheckboxVariant = 'filled' | 'outline';
 
 /**
  * Radius type (theme key or CSS value)
  */
-export type CheckboxRadius = "xs" | "sm" | "md" | "lg" | "xl" | "full" | number;
+export type CheckboxRadius = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' | number;
 
 /**
  * Label position relative to the checkbox
  */
-export type CheckboxLabelPosition = "left" | "right";
+export type CheckboxLabelPosition = 'left' | 'right';
 
 /**
  * Base Checkbox props (platform-agnostic)

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   Table,
@@ -13,35 +13,65 @@ import {
   Stack,
   Text,
   Badge,
-} from "@warp/react";
+} from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 // Sample data
 const users = [
-  { id: 1, name: "John Doe", email: "john@example.com", role: "Admin", status: "Active" },
-  { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Editor", status: "Active" },
-  { id: 3, name: "Bob Johnson", email: "bob@example.com", role: "Viewer", status: "Inactive" },
-  { id: 4, name: "Alice Brown", email: "alice@example.com", role: "Editor", status: "Active" },
-  { id: 5, name: "Charlie Wilson", email: "charlie@example.com", role: "Viewer", status: "Pending" },
+  {
+    id: 1,
+    name: 'John Doe',
+    email: 'john@example.com',
+    role: 'Admin',
+    status: 'Active',
+  },
+  {
+    id: 2,
+    name: 'Jane Smith',
+    email: 'jane@example.com',
+    role: 'Editor',
+    status: 'Active',
+  },
+  {
+    id: 3,
+    name: 'Bob Johnson',
+    email: 'bob@example.com',
+    role: 'Viewer',
+    status: 'Inactive',
+  },
+  {
+    id: 4,
+    name: 'Alice Brown',
+    email: 'alice@example.com',
+    role: 'Editor',
+    status: 'Active',
+  },
+  {
+    id: 5,
+    name: 'Charlie Wilson',
+    email: 'charlie@example.com',
+    role: 'Viewer',
+    status: 'Pending',
+  },
 ];
 
 export default function TablePage() {
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "striped", title: "Striped Rows", level: 2 },
-    { id: "hover", title: "Hover Highlight", level: 2 },
-    { id: "borders", title: "Borders", level: 2 },
-    { id: "spacing", title: "Spacing", level: 2 },
-    { id: "with-elements", title: "With Elements", level: 2 },
-    { id: "responsive", title: "Responsive", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'striped', title: 'Striped Rows', level: 2 },
+    { id: 'hover', title: 'Hover Highlight', level: 2 },
+    { id: 'borders', title: 'Borders', level: 2 },
+    { id: 'spacing', title: 'Spacing', level: 2 },
+    { id: 'with-elements', title: 'With Elements', level: 2 },
+    { id: 'responsive', title: 'Responsive', level: 2 },
   ];
 
   return (
@@ -277,17 +307,18 @@ export default function TablePage() {
 
       {/* Spacing */}
       <Section id="spacing">
-        <SectionHeader
-          title="Spacing"
-          subtitle="Control cell padding"
-        />
+        <SectionHeader title="Spacing" subtitle="Control cell padding" />
         <DemoArea>
           <Stack gap="lg">
             <div>
               <Text size="sm" className="mb-2 text-muted-foreground">
                 Compact (xs spacing)
               </Text>
-              <Table verticalSpacing="xs" horizontalSpacing="xs" withTableBorder>
+              <Table
+                verticalSpacing="xs"
+                horizontalSpacing="xs"
+                withTableBorder
+              >
                 <TableThead>
                   <TableTr>
                     <TableTh>Name</TableTh>
@@ -310,7 +341,11 @@ export default function TablePage() {
               <Text size="sm" className="mb-2 text-muted-foreground">
                 Spacious (lg spacing)
               </Text>
-              <Table verticalSpacing="lg" horizontalSpacing="lg" withTableBorder>
+              <Table
+                verticalSpacing="lg"
+                horizontalSpacing="lg"
+                withTableBorder
+              >
                 <TableThead>
                   <TableTr>
                     <TableTh>Name</TableTh>
@@ -364,17 +399,19 @@ export default function TablePage() {
               {users.map((user) => (
                 <TableTr key={user.id}>
                   <TableTd className="font-medium">{user.name}</TableTd>
-                  <TableTd className="text-muted-foreground">{user.email}</TableTd>
+                  <TableTd className="text-muted-foreground">
+                    {user.email}
+                  </TableTd>
                   <TableTd>{user.role}</TableTd>
                   <TableTd>
                     <Badge
                       size="sm"
                       color={
-                        user.status === "Active"
-                          ? "success"
-                          : user.status === "Pending"
-                            ? "warning"
-                            : "gray"
+                        user.status === 'Active'
+                          ? 'success'
+                          : user.status === 'Pending'
+                            ? 'warning'
+                            : 'gray'
                       }
                       variant="light"
                     >

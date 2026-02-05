@@ -1,13 +1,19 @@
-"use client";
+'use client';
 
-import React, { forwardRef, useState, useRef, useEffect, useCallback } from "react";
+import React, {
+  forwardRef,
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+} from 'react';
 
-import { cn } from "../../utils/cn";
+import { cn } from '../../utils/cn';
 
 /**
  * SegmentedControl size options
  */
-export type SegmentedControlSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type SegmentedControlSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * SegmentedControl item definition
@@ -21,8 +27,10 @@ export interface SegmentedControlItem {
 /**
  * SegmentedControl component props
  */
-export interface SegmentedControlProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+export interface SegmentedControlProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'onChange'
+> {
   /** Data array for segments */
   data: (string | SegmentedControlItem)[];
   /** Current value (controlled) */
@@ -42,7 +50,7 @@ export interface SegmentedControlProps
   /** Full width control */
   fullWidth?: boolean;
   /** Orientation */
-  orientation?: "horizontal" | "vertical";
+  orientation?: 'horizontal' | 'vertical';
   /** Animate indicator movement */
   transitionDuration?: number;
   /** Whether to animate */
@@ -58,8 +66,10 @@ export interface SegmentedControlProps
 /**
  * Normalize data item to SegmentedControlItem format
  */
-function normalizeItem(item: string | SegmentedControlItem): SegmentedControlItem {
-  if (typeof item === "string") {
+function normalizeItem(
+  item: string | SegmentedControlItem,
+): SegmentedControlItem {
+  if (typeof item === 'string') {
     return { value: item, label: item };
   }
   return item;
@@ -85,33 +95,38 @@ function normalizeItem(item: string | SegmentedControlItem): SegmentedControlIte
  * />
  * ```
  */
-export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps>(
+export const SegmentedControl = forwardRef<
+  HTMLDivElement,
+  SegmentedControlProps
+>(
   (
     {
       data,
       value: controlledValue,
       defaultValue,
       onChange,
-      size = "sm",
+      size = 'sm',
       radius,
       color,
       disabled = false,
       fullWidth = false,
-      orientation = "horizontal",
+      orientation = 'horizontal',
       transitionDuration = 200,
-      transitionTimingFunction = "ease",
+      transitionTimingFunction = 'ease',
       name,
       readOnly = false,
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     const normalizedData = data.map(normalizeItem);
-    const initialValue = defaultValue ?? normalizedData[0]?.value ?? "";
+    const initialValue = defaultValue ?? normalizedData[0]?.value ?? '';
 
     const [internalValue, setInternalValue] = useState(initialValue);
-    const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>({});
+    const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>(
+      {},
+    );
     const controlRef = useRef<HTMLDivElement>(null);
     const itemRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
@@ -131,7 +146,7 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
       const containerRect = container.getBoundingClientRect();
       const itemRect = activeItem.getBoundingClientRect();
 
-      if (orientation === "horizontal") {
+      if (orientation === 'horizontal') {
         setIndicatorStyle({
           width: itemRect.width,
           height: itemRect.height,
@@ -156,8 +171,8 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
     // Update on resize
     useEffect(() => {
       const handleResize = () => updateIndicator();
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
     }, [updateIndicator]);
 
     // Handle item click
@@ -173,7 +188,7 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
         }
         onChange?.(value);
       },
-      [disabled, readOnly, normalizedData, isControlled, onChange]
+      [disabled, readOnly, normalizedData, isControlled, onChange],
     );
 
     // Handle keyboard navigation
@@ -182,13 +197,15 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
         if (disabled || readOnly) return;
 
         const enabledItems = normalizedData.filter((item) => !item.disabled);
-        const currentIndex = enabledItems.findIndex((item) => item.value === currentValue);
+        const currentIndex = enabledItems.findIndex(
+          (item) => item.value === currentValue,
+        );
 
         let newIndex = currentIndex;
 
-        const isHorizontal = orientation === "horizontal";
-        const nextKey = isHorizontal ? "ArrowRight" : "ArrowDown";
-        const prevKey = isHorizontal ? "ArrowLeft" : "ArrowUp";
+        const isHorizontal = orientation === 'horizontal';
+        const nextKey = isHorizontal ? 'ArrowRight' : 'ArrowDown';
+        const prevKey = isHorizontal ? 'ArrowLeft' : 'ArrowUp';
 
         switch (e.key) {
           case nextKey:
@@ -197,13 +214,14 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
             break;
           case prevKey:
             e.preventDefault();
-            newIndex = (currentIndex - 1 + enabledItems.length) % enabledItems.length;
+            newIndex =
+              (currentIndex - 1 + enabledItems.length) % enabledItems.length;
             break;
-          case "Home":
+          case 'Home':
             e.preventDefault();
             newIndex = 0;
             break;
-          case "End":
+          case 'End':
             e.preventDefault();
             newIndex = enabledItems.length - 1;
             break;
@@ -217,50 +235,60 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
           itemRefs.current.get(newValue)?.focus();
         }
       },
-      [disabled, readOnly, normalizedData, currentValue, orientation, handleClick]
+      [
+        disabled,
+        readOnly,
+        normalizedData,
+        currentValue,
+        orientation,
+        handleClick,
+      ],
     );
 
     // Size configuration
-    const sizeConfig: Record<SegmentedControlSize, { padding: string; text: string; height: string }> = {
-      xs: { padding: "px-2 py-1", text: "text-xs", height: "h-7" },
-      sm: { padding: "px-3 py-1.5", text: "text-sm", height: "h-9" },
-      md: { padding: "px-4 py-2", text: "text-sm", height: "h-10" },
-      lg: { padding: "px-5 py-2.5", text: "text-base", height: "h-11" },
-      xl: { padding: "px-6 py-3", text: "text-base", height: "h-12" },
+    const sizeConfig: Record<
+      SegmentedControlSize,
+      { padding: string; text: string; height: string }
+    > = {
+      xs: { padding: 'px-2 py-1', text: 'text-xs', height: 'h-7' },
+      sm: { padding: 'px-3 py-1.5', text: 'text-sm', height: 'h-9' },
+      md: { padding: 'px-4 py-2', text: 'text-sm', height: 'h-10' },
+      lg: { padding: 'px-5 py-2.5', text: 'text-base', height: 'h-11' },
+      xl: { padding: 'px-6 py-3', text: 'text-base', height: 'h-12' },
     };
 
     // Radius classes
     const getRadiusClass = () => {
-      if (radius === undefined) return "rounded-lg";
-      if (typeof radius === "number") return "";
+      if (radius === undefined) return 'rounded-lg';
+      if (typeof radius === 'number') return '';
       const radiusMap: Record<string, string> = {
-        xs: "rounded-sm",
-        sm: "rounded",
-        md: "rounded-md",
-        lg: "rounded-lg",
-        xl: "rounded-xl",
-        full: "rounded-full",
+        xs: 'rounded-sm',
+        sm: 'rounded',
+        md: 'rounded-md',
+        lg: 'rounded-lg',
+        xl: 'rounded-xl',
+        full: 'rounded-full',
       };
-      return radiusMap[radius] || "rounded-lg";
+      return radiusMap[radius] || 'rounded-lg';
     };
 
     // Color classes for selected text
     const getSelectedColorClass = () => {
-      if (!color) return "text-foreground";
+      if (!color) return 'text-foreground';
       const colorMap: Record<string, string> = {
-        primary: "text-primary",
-        secondary: "text-secondary",
-        success: "text-success",
-        warning: "text-warning",
-        error: "text-error",
+        primary: 'text-primary',
+        secondary: 'text-secondary',
+        success: 'text-success',
+        warning: 'text-warning',
+        error: 'text-error',
       };
-      return colorMap[color] || "text-foreground";
+      return colorMap[color] || 'text-foreground';
     };
 
     const selectedColorClass = getSelectedColorClass();
 
     const radiusStyle: React.CSSProperties =
-      typeof radius === "number" ? { borderRadius: `${radius}px` } : {};
+      typeof radius === 'number' ? { borderRadius: `${radius}px` } : {};
 
     return (
       <div
@@ -268,13 +296,13 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
         role="radiogroup"
         aria-orientation={orientation}
         className={cn(
-          "relative inline-flex p-1",
-          "bg-gray-100 dark:bg-gray-800",
+          'relative inline-flex p-1',
+          'bg-gray-100 dark:bg-gray-800',
           getRadiusClass(),
-          orientation === "vertical" && "flex-col",
-          fullWidth && "w-full",
-          disabled && "opacity-50 cursor-not-allowed",
-          className
+          orientation === 'vertical' && 'flex-col',
+          fullWidth && 'w-full',
+          disabled && 'opacity-50 cursor-not-allowed',
+          className,
         )}
         style={radiusStyle}
         onKeyDown={handleKeyDown}
@@ -283,8 +311,8 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
         {/* Animated indicator */}
         <div
           className={cn(
-            "absolute bg-white dark:bg-gray-700 shadow-sm",
-            getRadiusClass()
+            'absolute bg-white dark:bg-gray-700 shadow-sm',
+            getRadiusClass(),
           )}
           style={{
             ...radiusStyle,
@@ -298,9 +326,9 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
         <div
           ref={controlRef}
           className={cn(
-            "relative flex",
-            orientation === "vertical" && "flex-col",
-            fullWidth && "w-full"
+            'relative flex',
+            orientation === 'vertical' && 'flex-col',
+            fullWidth && 'w-full',
           )}
         >
           {normalizedData.map((item) => {
@@ -324,17 +352,17 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
                 tabIndex={isSelected ? 0 : -1}
                 disabled={isDisabled}
                 className={cn(
-                  "relative z-10 flex items-center justify-center font-medium",
-                  "transition-colors duration-150",
+                  'relative z-10 flex items-center justify-center font-medium',
+                  'transition-colors duration-150',
                   sizeConfig[size].padding,
                   sizeConfig[size].text,
                   getRadiusClass(),
-                  fullWidth && "flex-1",
+                  fullWidth && 'flex-1',
                   isSelected
                     ? selectedColorClass
-                    : "text-text-secondary hover:text-text-primary",
-                  isDisabled && "cursor-not-allowed opacity-50",
-                  !isDisabled && !readOnly && "cursor-pointer"
+                    : 'text-text-secondary hover:text-text-primary',
+                  isDisabled && 'cursor-not-allowed opacity-50',
+                  !isDisabled && !readOnly && 'cursor-pointer',
                 )}
                 onClick={() => handleClick(item.value)}
               >
@@ -345,12 +373,10 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
         </div>
 
         {/* Hidden input for form submission */}
-        {name && (
-          <input type="hidden" name={name} value={currentValue} />
-        )}
+        {name && <input type="hidden" name={name} value={currentValue} />}
       </div>
     );
-  }
+  },
 );
 
-SegmentedControl.displayName = "SegmentedControl";
+SegmentedControl.displayName = 'SegmentedControl';

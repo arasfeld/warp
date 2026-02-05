@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Skeleton,
   SkeletonText,
@@ -10,28 +10,28 @@ import {
   Text,
   Card,
   Button,
-} from "@warp/react";
+} from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function SkeletonPage() {
   const [loading, setLoading] = useState(true);
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
-    { id: "shapes", title: "Shapes", level: 2 },
-    { id: "text", title: "Text Lines", level: 2 },
-    { id: "animation", title: "Animation", level: 2 },
-    { id: "content", title: "With Content", level: 2 },
-    { id: "card-example", title: "Card Example", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
+    { id: 'shapes', title: 'Shapes', level: 2 },
+    { id: 'text', title: 'Text Lines', level: 2 },
+    { id: 'animation', title: 'Animation', level: 2 },
+    { id: 'content', title: 'With Content', level: 2 },
+    { id: 'card-example', title: 'Card Example', level: 2 },
   ];
 
   return (
@@ -43,10 +43,7 @@ export default function SkeletonPage() {
 
       {/* Usage */}
       <Section id="usage">
-        <SectionHeader
-          title="Usage"
-          subtitle="Basic skeleton placeholder"
-        />
+        <SectionHeader title="Usage" subtitle="Basic skeleton placeholder" />
         <DemoArea>
           <Stack gap="sm" className="w-full max-w-md">
             <Skeleton height={20} width="100%" />
@@ -63,10 +60,7 @@ export default function SkeletonPage() {
 
       {/* Sizes */}
       <Section id="sizes">
-        <SectionHeader
-          title="Sizes"
-          subtitle="Different skeleton dimensions"
-        />
+        <SectionHeader title="Sizes" subtitle="Different skeleton dimensions" />
         <DemoArea>
           <Stack gap="md">
             <Skeleton height={10} width={100} />
@@ -93,15 +87,21 @@ export default function SkeletonPage() {
           <Group gap="lg" align="center">
             <Stack gap="sm" align="center">
               <Skeleton height={100} width={100} radius="md" />
-              <Text size="sm" className="text-muted-foreground">Rectangle</Text>
+              <Text size="sm" className="text-muted-foreground">
+                Rectangle
+              </Text>
             </Stack>
             <Stack gap="sm" align="center">
               <Skeleton height={100} width={100} radius="xl" />
-              <Text size="sm" className="text-muted-foreground">Rounded</Text>
+              <Text size="sm" className="text-muted-foreground">
+                Rounded
+              </Text>
             </Stack>
             <Stack gap="sm" align="center">
               <SkeletonCircle size={100} />
-              <Text size="sm" className="text-muted-foreground">Circle</Text>
+              <Text size="sm" className="text-muted-foreground">
+                Circle
+              </Text>
             </Stack>
           </Group>
         </DemoArea>
@@ -153,10 +153,7 @@ export default function SkeletonPage() {
 
       {/* Animation */}
       <Section id="animation">
-        <SectionHeader
-          title="Animation"
-          subtitle="Skeleton animation styles"
-        />
+        <SectionHeader title="Animation" subtitle="Skeleton animation styles" />
         <DemoArea>
           <Stack gap="lg">
             <div>
@@ -191,7 +188,7 @@ export default function SkeletonPage() {
         <DemoArea>
           <Stack gap="md">
             <Button onClick={() => setLoading(!loading)}>
-              Toggle Loading: {loading ? "On" : "Off"}
+              Toggle Loading: {loading ? 'On' : 'Off'}
             </Button>
             <Group gap="md" align="center">
               <Skeleton visible={loading} circle width={50} height={50}>
@@ -203,7 +200,12 @@ export default function SkeletonPage() {
                 <Skeleton visible={loading} height={20} width={150}>
                   <Text weight="bold">John Doe</Text>
                 </Skeleton>
-                <Skeleton visible={loading} height={16} width={200} className="mt-1">
+                <Skeleton
+                  visible={loading}
+                  height={16}
+                  width={200}
+                  className="mt-1"
+                >
                   <Text size="sm" className="text-muted-foreground">
                     Software Engineer
                   </Text>

@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import React, { forwardRef } from "react";
+import React, { forwardRef } from 'react';
 
-import { cn } from "../../utils/cn";
+import { cn } from '../../utils/cn';
 
 /**
  * Input size variants
  */
-export type InputSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type InputSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Input variant styles
  */
-export type InputVariant = "default" | "filled" | "unstyled";
+export type InputVariant = 'default' | 'filled' | 'unstyled';
 
 /**
  * Base Input component props
  */
 export interface InputProps extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
-  "size"
+  'size'
 > {
   /** Input size */
   size?: InputSize;
@@ -38,17 +38,17 @@ export interface InputProps extends Omit<
   /** Content displayed on the right side */
   rightSection?: React.ReactNode;
   /** Left section width */
-  leftSectionWidth?: React.CSSProperties["width"];
+  leftSectionWidth?: React.CSSProperties['width'];
   /** Right section width */
-  rightSectionWidth?: React.CSSProperties["width"];
+  rightSectionWidth?: React.CSSProperties['width'];
   /** Left section pointer events */
-  leftSectionPointerEvents?: React.CSSProperties["pointerEvents"];
+  leftSectionPointerEvents?: React.CSSProperties['pointerEvents'];
   /** Right section pointer events */
-  rightSectionPointerEvents?: React.CSSProperties["pointerEvents"];
+  rightSectionPointerEvents?: React.CSSProperties['pointerEvents'];
   /** Props passed to left section */
-  leftSectionProps?: React.ComponentPropsWithoutRef<"div">;
+  leftSectionProps?: React.ComponentPropsWithoutRef<'div'>;
   /** Props passed to right section */
-  rightSectionProps?: React.ComponentPropsWithoutRef<"div">;
+  rightSectionProps?: React.ComponentPropsWithoutRef<'div'>;
   /** Whether input has cursor: pointer */
   pointer?: boolean;
   /** Whether input is multiline (for textarea) */
@@ -58,7 +58,7 @@ export interface InputProps extends Omit<
   /** Component to render as (polymorphic) */
   component?: React.ElementType;
   /** Wrapper props */
-  wrapperProps?: React.ComponentPropsWithoutRef<"div">;
+  wrapperProps?: React.ComponentPropsWithoutRef<'div'>;
   /** Input size attribute */
   inputSize?: string;
   /** Whether input is required */
@@ -74,8 +74,8 @@ export interface InputProps extends Omit<
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
-      size = "sm",
-      variant = "default",
+      size = 'sm',
+      variant = 'default',
       radius,
       disabled = false,
       error = false,
@@ -84,8 +84,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       rightSection,
       leftSectionWidth,
       rightSectionWidth,
-      leftSectionPointerEvents = "none",
-      rightSectionPointerEvents = "none",
+      leftSectionPointerEvents = 'none',
+      rightSectionPointerEvents = 'none',
       leftSectionProps,
       rightSectionProps,
       pointer = false,
@@ -99,213 +99,214 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       id,
       ...props
     },
-    ref
+    ref,
   ) => {
-  const normalizedSize: InputSize = size;
-  const normalizedVariant: InputVariant = variant;
+    const normalizedSize: InputSize = size;
+    const normalizedVariant: InputVariant = variant;
 
-  // Size classes
-  const sizeClasses = {
-    xs: "h-7 text-xs",
-    sm: "h-9 text-sm",
-    md: "h-10 text-base",
-    lg: "h-11 text-base",
-    xl: "h-12 text-lg",
-  };
-
-  // Section width calculation
-  const getSectionWidth = (width?: React.CSSProperties["width"]) => {
-    if (width) return width;
-    // Default section width matches input height
-    const heightMap: Record<InputSize, string> = {
-      xs: "28px",
-      sm: "36px",
-      md: "40px",
-      lg: "44px",
-      xl: "48px",
-    };
-    return heightMap[normalizedSize];
-  };
-
-  const leftSectionWidthValue = getSectionWidth(leftSectionWidth);
-  const rightSectionWidthValue = getSectionWidth(rightSectionWidth);
-
-  // Padding classes based on size and sections
-  const getPaddingClasses = () => {
-    const basePadding = {
-      xs: "px-2",
-      sm: "px-3",
-      md: "px-4",
-      lg: "px-4",
-      xl: "px-5",
+    // Size classes
+    const sizeClasses = {
+      xs: 'h-7 text-xs',
+      sm: 'h-9 text-sm',
+      md: 'h-10 text-base',
+      lg: 'h-11 text-base',
+      xl: 'h-12 text-lg',
     };
 
-    if (!leftSection && !rightSection) {
-      return basePadding[normalizedSize];
-    }
-
-    // When sections are present, we use inline styles for padding
-    // Return empty string to avoid class conflicts
-    return "";
-  };
-
-  // Get padding styles for inline style when sections are present
-  const getPaddingStyles = (): React.CSSProperties => {
-    if (!leftSection && !rightSection) {
-      return {};
-    }
-
-    const basePaddingMap: Record<InputSize, { left: string; right: string }> = {
-      xs: { left: "8px", right: "8px" },
-      sm: { left: "12px", right: "12px" },
-      md: { left: "16px", right: "16px" },
-      lg: { left: "16px", right: "16px" },
-      xl: { left: "20px", right: "20px" },
+    // Section width calculation
+    const getSectionWidth = (width?: React.CSSProperties['width']) => {
+      if (width) return width;
+      // Default section width matches input height
+      const heightMap: Record<InputSize, string> = {
+        xs: '28px',
+        sm: '36px',
+        md: '40px',
+        lg: '44px',
+        xl: '48px',
+      };
+      return heightMap[normalizedSize];
     };
 
-    const basePadding = basePaddingMap[normalizedSize];
-    const styles: React.CSSProperties = {};
+    const leftSectionWidthValue = getSectionWidth(leftSectionWidth);
+    const rightSectionWidthValue = getSectionWidth(rightSectionWidth);
 
-    if (leftSection) {
-      styles.paddingLeft = leftSectionWidthValue;
-    } else {
-      styles.paddingLeft = basePadding.left;
-    }
+    // Padding classes based on size and sections
+    const getPaddingClasses = () => {
+      const basePadding = {
+        xs: 'px-2',
+        sm: 'px-3',
+        md: 'px-4',
+        lg: 'px-4',
+        xl: 'px-5',
+      };
 
-    if (rightSection) {
-      styles.paddingRight = rightSectionWidthValue;
-    } else {
-      styles.paddingRight = basePadding.right;
-    }
+      if (!leftSection && !rightSection) {
+        return basePadding[normalizedSize];
+      }
 
-    return styles;
-  };
-
-  // Radius classes
-  const getRadiusClass = () => {
-    if (radius === undefined) return "rounded-md";
-    if (typeof radius === "number") {
-      return `rounded-[${radius}px]`;
-    }
-    const radiusMap: Record<string, string> = {
-      xs: "rounded-sm",
-      sm: "rounded",
-      md: "rounded-md",
-      lg: "rounded-lg",
-      xl: "rounded-xl",
-      full: "rounded-full",
-    };
-    return radiusMap[radius] || `rounded-[${radius}]`;
-  };
-
-  // Variant classes
-  const getVariantClasses = () => {
-    if (normalizedVariant === "unstyled") {
-      return "border-0 bg-transparent p-0";
-    }
-
-    const variantMap: Record<InputVariant, string> = {
-      default:
-        "border border-divider bg-background-default focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-      filled:
-        "border-0 bg-background-paper focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-      unstyled: "", // Handled above
+      // When sections are present, we use inline styles for padding
+      // Return empty string to avoid class conflicts
+      return '';
     };
 
-    return variantMap[normalizedVariant] || variantMap.default;
-  };
+    // Get padding styles for inline style when sections are present
+    const getPaddingStyles = (): React.CSSProperties => {
+      if (!leftSection && !rightSection) {
+        return {};
+      }
 
-  // Error classes
-  const errorClasses =
-    error && withErrorStyles
-      ? "border-error focus-visible:ring-error focus-visible:border-error"
-      : "";
+      const basePaddingMap: Record<InputSize, { left: string; right: string }> =
+        {
+          xs: { left: '8px', right: '8px' },
+          sm: { left: '12px', right: '12px' },
+          md: { left: '16px', right: '16px' },
+          lg: { left: '16px', right: '16px' },
+          xl: { left: '20px', right: '20px' },
+        };
 
-  const inputClasses = cn(
-    "flex w-full transition-colors",
-    "file:border-0 file:bg-transparent file:text-sm file:font-medium",
-    "placeholder:text-muted-foreground",
-    "disabled:cursor-not-allowed disabled:opacity-50",
-    "focus-visible:outline-none",
-    sizeClasses[normalizedSize],
-    getPaddingClasses(),
-    getRadiusClass(),
-    getVariantClasses(),
-    errorClasses,
-    pointer && "cursor-pointer"
-  );
+      const basePadding = basePaddingMap[normalizedSize];
+      const styles: React.CSSProperties = {};
 
-  const hasError = !!error;
-  const errorMessage = typeof error === "string" ? error : undefined;
+      if (leftSection) {
+        styles.paddingLeft = leftSectionWidthValue;
+      } else {
+        styles.paddingLeft = basePadding.left;
+      }
 
-  const Component = component || "input";
+      if (rightSection) {
+        styles.paddingRight = rightSectionWidthValue;
+      } else {
+        styles.paddingRight = basePadding.right;
+      }
 
-  const inputElement = (
-    <div
-      className={cn("relative", className, wrapperProps?.className)}
-      {...wrapperProps}
-    >
-      {leftSection && (
-        <div
-          className="absolute left-0 top-0 bottom-0 flex items-center justify-center z-10"
+      return styles;
+    };
+
+    // Radius classes
+    const getRadiusClass = () => {
+      if (radius === undefined) return 'rounded-md';
+      if (typeof radius === 'number') {
+        return `rounded-[${radius}px]`;
+      }
+      const radiusMap: Record<string, string> = {
+        xs: 'rounded-sm',
+        sm: 'rounded',
+        md: 'rounded-md',
+        lg: 'rounded-lg',
+        xl: 'rounded-xl',
+        full: 'rounded-full',
+      };
+      return radiusMap[radius] || `rounded-[${radius}]`;
+    };
+
+    // Variant classes
+    const getVariantClasses = () => {
+      if (normalizedVariant === 'unstyled') {
+        return 'border-0 bg-transparent p-0';
+      }
+
+      const variantMap: Record<InputVariant, string> = {
+        default:
+          'border border-divider bg-background-default focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+        filled:
+          'border-0 bg-background-paper focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+        unstyled: '', // Handled above
+      };
+
+      return variantMap[normalizedVariant] || variantMap.default;
+    };
+
+    // Error classes
+    const errorClasses =
+      error && withErrorStyles
+        ? 'border-error focus-visible:ring-error focus-visible:border-error'
+        : '';
+
+    const inputClasses = cn(
+      'flex w-full transition-colors',
+      'file:border-0 file:bg-transparent file:text-sm file:font-medium',
+      'placeholder:text-muted-foreground',
+      'disabled:cursor-not-allowed disabled:opacity-50',
+      'focus-visible:outline-none',
+      sizeClasses[normalizedSize],
+      getPaddingClasses(),
+      getRadiusClass(),
+      getVariantClasses(),
+      errorClasses,
+      pointer && 'cursor-pointer',
+    );
+
+    const hasError = !!error;
+    const errorMessage = typeof error === 'string' ? error : undefined;
+
+    const Component = component || 'input';
+
+    const inputElement = (
+      <div
+        className={cn('relative', className, wrapperProps?.className)}
+        {...wrapperProps}
+      >
+        {leftSection && (
+          <div
+            className="absolute left-0 top-0 bottom-0 flex items-center justify-center z-10"
+            style={{
+              width: leftSectionWidthValue,
+              paddingLeft:
+                normalizedSize === 'xs'
+                  ? '8px'
+                  : normalizedSize === 'sm'
+                    ? '12px'
+                    : '16px',
+              pointerEvents: leftSectionPointerEvents,
+            }}
+            {...leftSectionProps}
+          >
+            {leftSection}
+          </div>
+        )}
+        {rightSection && (
+          <div
+            className="absolute right-0 top-0 bottom-0 flex items-center justify-center z-10"
+            style={{
+              width: rightSectionWidthValue,
+              paddingRight:
+                normalizedSize === 'xs'
+                  ? '8px'
+                  : normalizedSize === 'sm'
+                    ? '12px'
+                    : '16px',
+              pointerEvents: rightSectionPointerEvents,
+            }}
+            {...rightSectionProps}
+          >
+            {rightSection}
+          </div>
+        )}
+        <Component
+          ref={ref}
+          id={id}
+          className={inputClasses}
           style={{
-            width: leftSectionWidthValue,
-            paddingLeft:
-              normalizedSize === "xs"
-                ? "8px"
-                : normalizedSize === "sm"
-                  ? "12px"
-                  : "16px",
-            pointerEvents: leftSectionPointerEvents,
+            ...getPaddingStyles(),
+            ...props.style,
           }}
-          {...leftSectionProps}
-        >
-          {leftSection}
-        </div>
-      )}
-      {rightSection && (
-        <div
-          className="absolute right-0 top-0 bottom-0 flex items-center justify-center z-10"
-          style={{
-            width: rightSectionWidthValue,
-            paddingRight:
-              normalizedSize === "xs"
-                ? "8px"
-                : normalizedSize === "sm"
-                  ? "12px"
-                  : "16px",
-            pointerEvents: rightSectionPointerEvents,
-          }}
-          {...rightSectionProps}
-        >
-          {rightSection}
-        </div>
-      )}
-      <Component
-        ref={ref}
-        id={id}
-        className={inputClasses}
-        style={{
-          ...getPaddingStyles(),
-          ...props.style,
-        }}
-        disabled={disabled}
-        required={required}
-        size={inputSize}
-        aria-invalid={withAria && hasError ? true : undefined}
-        aria-describedby={
-          withAria && errorMessage ? `${id || "input"}-error` : undefined
-        }
-        {...props}
-      />
-    </div>
-  );
+          disabled={disabled}
+          required={required}
+          size={inputSize}
+          aria-invalid={withAria && hasError ? true : undefined}
+          aria-describedby={
+            withAria && errorMessage ? `${id || 'input'}-error` : undefined
+          }
+          {...props}
+        />
+      </div>
+    );
 
-  return inputElement;
-  }
+    return inputElement;
+  },
 );
 
-Input.displayName = "Input";
+Input.displayName = 'Input';
 
 /**
  * Input.Wrapper component props
@@ -326,15 +327,15 @@ export interface InputWrapperProps {
   /** Size for label, description, error */
   size?: InputSize;
   /** Order of elements */
-  inputWrapperOrder?: ("label" | "description" | "input" | "error")[];
+  inputWrapperOrder?: ('label' | 'description' | 'input' | 'error')[];
   /** Label element type */
-  labelElement?: "div" | "label";
+  labelElement?: 'div' | 'label';
   /** Props for label */
-  labelProps?: React.ComponentPropsWithoutRef<"label">;
+  labelProps?: React.ComponentPropsWithoutRef<'label'>;
   /** Props for description */
-  descriptionProps?: React.ComponentPropsWithoutRef<"div">;
+  descriptionProps?: React.ComponentPropsWithoutRef<'div'>;
   /** Props for error */
-  errorProps?: React.ComponentPropsWithoutRef<"div">;
+  errorProps?: React.ComponentPropsWithoutRef<'div'>;
   /** Input container render function */
   inputContainer?: (children: React.ReactNode) => React.ReactNode;
   /** Children (should be Input component) */
@@ -354,9 +355,9 @@ function InputWrapper({
   id,
   required = false,
   withAsterisk = false,
-  size = "sm",
-  inputWrapperOrder = ["label", "description", "input", "error"],
-  labelElement = "label",
+  size = 'sm',
+  inputWrapperOrder = ['label', 'description', 'input', 'error'],
+  labelElement = 'label',
   labelProps,
   descriptionProps,
   errorProps,
@@ -370,11 +371,11 @@ function InputWrapper({
 
   if (label) {
     const labelClassName = cn(
-      "block text-sm font-medium text-foreground mb-1.5",
-      labelProps?.className
+      'block text-sm font-medium text-foreground mb-1.5',
+      labelProps?.className,
     );
 
-    if (labelElement === "label") {
+    if (labelElement === 'label') {
       elements.label = (
         <label
           htmlFor={id}
@@ -410,8 +411,8 @@ function InputWrapper({
     elements.description = (
       <div
         className={cn(
-          "text-sm text-muted-foreground mb-1.5",
-          descriptionProps?.className
+          'text-sm text-muted-foreground mb-1.5',
+          descriptionProps?.className,
         )}
         {...descriptionProps}
       >
@@ -423,11 +424,11 @@ function InputWrapper({
   elements.input = inputContainer(children);
 
   if (error) {
-    const errorMessage = typeof error === "string" ? error : error;
+    const errorMessage = typeof error === 'string' ? error : error;
     elements.error = (
       <div
         id={id ? `${id}-error` : undefined}
-        className={cn("text-sm text-error mt-1.5", errorProps?.className)}
+        className={cn('text-sm text-error mt-1.5', errorProps?.className)}
         role="alert"
         {...errorProps}
       >
@@ -437,7 +438,7 @@ function InputWrapper({
   }
 
   return (
-    <div className={cn("w-full", className)}>
+    <div className={cn('w-full', className)}>
       {inputWrapperOrder.map((key) => {
         const element = elements[key];
         return element ? (
@@ -454,20 +455,23 @@ function InputWrapper({
 function InputLabel({
   children,
   required = false,
-  size = "sm",
-  labelElement = "label",
+  size = 'sm',
+  labelElement = 'label',
   className,
   ...props
 }: {
   children: React.ReactNode;
   required?: boolean;
   size?: InputSize;
-  labelElement?: "div" | "label";
+  labelElement?: 'div' | 'label';
   className?: string;
-} & React.ComponentPropsWithoutRef<"label">) {
-  const labelClassName = cn("block text-sm font-medium text-foreground", className);
+} & React.ComponentPropsWithoutRef<'label'>) {
+  const labelClassName = cn(
+    'block text-sm font-medium text-foreground',
+    className,
+  );
 
-  if (labelElement === "label") {
+  if (labelElement === 'label') {
     return (
       <label
         className={labelClassName}
@@ -503,16 +507,16 @@ function InputLabel({
  */
 function InputDescription({
   children,
-  size = "sm",
+  size = 'sm',
   className,
   ...props
 }: {
   children: React.ReactNode;
   size?: InputSize;
   className?: string;
-} & React.ComponentPropsWithoutRef<"div">) {
+} & React.ComponentPropsWithoutRef<'div'>) {
   return (
-    <div className={cn("text-sm text-muted-foreground", className)} {...props}>
+    <div className={cn('text-sm text-muted-foreground', className)} {...props}>
       {children}
     </div>
   );
@@ -523,17 +527,17 @@ function InputDescription({
  */
 function InputError({
   children,
-  size = "sm",
+  size = 'sm',
   className,
   ...props
 }: {
   children: React.ReactNode;
   size?: InputSize;
   className?: string;
-} & React.ComponentPropsWithoutRef<"div">) {
+} & React.ComponentPropsWithoutRef<'div'>) {
   return (
     <div
-      className={cn("text-sm text-error", className)}
+      className={cn('text-sm text-error', className)}
       role="alert"
       {...props}
     >
@@ -552,10 +556,10 @@ function InputPlaceholder({
 }: {
   children: React.ReactNode;
   className?: string;
-} & React.ComponentPropsWithoutRef<"div">) {
+} & React.ComponentPropsWithoutRef<'div'>) {
   return (
     <div
-      className={cn("text-muted-foreground pointer-events-none", className)}
+      className={cn('text-muted-foreground pointer-events-none', className)}
       {...props}
     >
       {children}
@@ -575,13 +579,13 @@ function InputClearButton({
   onClick?: () => void;
   size?: InputSize;
   className?: string;
-} & React.ComponentPropsWithoutRef<"button">) {
+} & React.ComponentPropsWithoutRef<'button'>) {
   const sizeClasses = {
-    xs: "w-4 h-4",
-    sm: "w-4 h-4",
-    md: "w-5 h-5",
-    lg: "w-5 h-5",
-    xl: "w-6 h-6",
+    xs: 'w-4 h-4',
+    sm: 'w-4 h-4',
+    md: 'w-5 h-5',
+    lg: 'w-5 h-5',
+    xl: 'w-6 h-6',
   };
 
   return (
@@ -589,9 +593,9 @@ function InputClearButton({
       type="button"
       onClick={onClick}
       className={cn(
-        "flex items-center justify-center rounded-full hover:bg-action-hover transition-colors text-muted-foreground hover:text-foreground",
-        sizeClasses[size || "sm"],
-        className
+        'flex items-center justify-center rounded-full hover:bg-action-hover transition-colors text-muted-foreground hover:text-foreground',
+        sizeClasses[size || 'sm'],
+        className,
       )}
       aria-label="Clear input"
       {...props}

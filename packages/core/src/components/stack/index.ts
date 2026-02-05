@@ -3,5 +3,5 @@ export type {
   StackBaseProps,
   StackJustify,
   StackSpacing,
-} from "./types";
-export { STACK_SPACING_MAP } from "./types";
+} from './types';
+export { STACK_SPACING_MAP } from './types';

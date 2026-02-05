@@ -1,21 +1,27 @@
-import React from "react";
-import { Text as RNText, type StyleProp, type TextStyle } from "react-native";
-import { cn } from "../../utils/cn";
+import React from 'react';
+import { Text as RNText, type StyleProp, type TextStyle } from 'react-native';
+import { cn } from '../../utils/cn';
 
 /**
  * Text size variants
  */
-export type TextSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+export type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
 
 /**
  * Text weight variants
  */
-export type TextWeight = "normal" | "medium" | "semibold" | "bold";
+export type TextWeight = 'normal' | 'medium' | 'semibold' | 'bold';
 
 /**
  * Text color variants
  */
-export type TextColor = "default" | "muted" | "primary" | "secondary" | "error" | "success";
+export type TextColor =
+  | 'default'
+  | 'muted'
+  | 'primary'
+  | 'secondary'
+  | 'error'
+  | 'success';
 
 /**
  * Text component props
@@ -66,38 +72,38 @@ export interface HeadingProps {
  */
 export function Text({
   children,
-  size = "md",
-  weight = "normal",
-  color = "default",
+  size = 'md',
+  weight = 'normal',
+  color = 'default',
   style,
   numberOfLines,
   ...props
 }: TextProps) {
   const sizeClasses = {
-    xs: "text-xs",
-    sm: "text-sm",
-    md: "text-base",
-    lg: "text-lg",
-    xl: "text-xl",
-    "2xl": "text-2xl",
-    "3xl": "text-3xl",
-    "4xl": "text-4xl",
+    xs: 'text-xs',
+    sm: 'text-sm',
+    md: 'text-base',
+    lg: 'text-lg',
+    xl: 'text-xl',
+    '2xl': 'text-2xl',
+    '3xl': 'text-3xl',
+    '4xl': 'text-4xl',
   };
 
   const weightClasses = {
-    normal: "font-normal",
-    medium: "font-medium",
-    semibold: "font-semibold",
-    bold: "font-bold",
+    normal: 'font-normal',
+    medium: 'font-medium',
+    semibold: 'font-semibold',
+    bold: 'font-bold',
   };
 
   const colorClasses = {
-    default: "text-foreground",
-    muted: "text-muted-foreground",
-    primary: "text-primary",
-    secondary: "text-secondary-foreground",
-    error: "text-error",
-    success: "text-success",
+    default: 'text-foreground',
+    muted: 'text-muted-foreground',
+    primary: 'text-primary',
+    secondary: 'text-secondary-foreground',
+    error: 'text-error',
+    success: 'text-success',
   };
 
   return (
@@ -105,7 +111,7 @@ export function Text({
       className={cn(
         sizeClasses[size],
         weightClasses[weight],
-        colorClasses[color]
+        colorClasses[color],
       )}
       style={style}
       numberOfLines={numberOfLines}
@@ -129,35 +135,35 @@ export function Text({
 export function Heading({
   children,
   level = 1,
-  weight = "bold",
-  color = "default",
+  weight = 'bold',
+  color = 'default',
   style,
   numberOfLines,
   ...props
 }: HeadingProps) {
   const sizeClasses = {
-    1: "text-4xl",
-    2: "text-3xl",
-    3: "text-2xl",
-    4: "text-xl",
-    5: "text-lg",
-    6: "text-base",
+    1: 'text-4xl',
+    2: 'text-3xl',
+    3: 'text-2xl',
+    4: 'text-xl',
+    5: 'text-lg',
+    6: 'text-base',
   };
 
   const weightClasses = {
-    normal: "font-normal",
-    medium: "font-medium",
-    semibold: "font-semibold",
-    bold: "font-bold",
+    normal: 'font-normal',
+    medium: 'font-medium',
+    semibold: 'font-semibold',
+    bold: 'font-bold',
   };
 
   const colorClasses = {
-    default: "text-foreground",
-    muted: "text-muted-foreground",
-    primary: "text-primary",
-    secondary: "text-secondary-foreground",
-    error: "text-error",
-    success: "text-success",
+    default: 'text-foreground',
+    muted: 'text-muted-foreground',
+    primary: 'text-primary',
+    secondary: 'text-secondary-foreground',
+    error: 'text-error',
+    success: 'text-success',
   };
 
   return (
@@ -166,7 +172,7 @@ export function Heading({
         sizeClasses[level],
         weightClasses[weight],
         colorClasses[color],
-        "leading-tight tracking-tight"
+        'leading-tight tracking-tight',
       )}
       style={style}
       numberOfLines={numberOfLines}

@@ -3,12 +3,12 @@
  * Platform-agnostic type definitions for Group layout component
  */
 
-import type { StackAlign, StackJustify, StackSpacing } from "../stack";
+import type { StackAlign, StackJustify, StackSpacing } from '../stack';
 
 /**
  * Wrap options for the group
  */
-export type GroupWrap = "wrap" | "nowrap" | "wrap-reverse";
+export type GroupWrap = 'wrap' | 'nowrap' | 'wrap-reverse';
 
 /**
  * Base props shared between web and native Group implementations
@@ -53,4 +53,8 @@ export interface GroupBaseProps {
 }
 
 // Re-export spacing types for convenience
-export type { StackAlign as GroupAlign, StackJustify as GroupJustify, StackSpacing as GroupSpacing };
+export type {
+  StackAlign as GroupAlign,
+  StackJustify as GroupJustify,
+  StackSpacing as GroupSpacing,
+};

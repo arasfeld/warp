@@ -1,6 +1,6 @@
-import React from "react";
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import React from 'react';
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 /**
  * Merge class names using clsx and tailwind-merge
@@ -12,7 +12,7 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * Generate a unique ID for component instances
  */
-export function generateId(prefix = "warp") {
+export function generateId(prefix = 'warp') {
   return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
 }
 

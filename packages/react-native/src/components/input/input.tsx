@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   TextInput,
   View,
@@ -7,24 +7,24 @@ import {
   type StyleProp,
   type ViewStyle,
   type TextStyle,
-} from "react-native";
-import { useTheme } from "../../theme";
-import { cn } from "../../utils/cn";
+} from 'react-native';
+import { useTheme } from '../../theme';
+import { cn } from '../../utils/cn';
 
 /**
  * Input size variants
  */
-export type InputSize = "sm" | "md" | "lg";
+export type InputSize = 'sm' | 'md' | 'lg';
 
 /**
  * Input variant styles
  */
-export type InputVariant = "default" | "outline" | "filled";
+export type InputVariant = 'default' | 'outline' | 'filled';
 
 /**
  * Input component props
  */
-export interface InputProps extends Omit<TextInputProps, "style"> {
+export interface InputProps extends Omit<TextInputProps, 'style'> {
   /** Input size */
   size?: InputSize;
   /** Input variant */
@@ -59,8 +59,8 @@ export interface InputProps extends Omit<TextInputProps, "style"> {
  * ```
  */
 export function Input({
-  size = "md",
-  variant = "default",
+  size = 'md',
+  variant = 'default',
   error = false,
   errorMessage,
   label,
@@ -72,32 +72,30 @@ export function Input({
   const { theme } = useTheme();
 
   const sizeClasses = {
-    sm: "px-3 py-2 min-h-[36px] text-sm",
-    md: "px-4 py-3 min-h-[40px] text-base",
-    lg: "px-4 py-4 min-h-[44px] text-lg",
+    sm: 'px-3 py-2 min-h-[36px] text-sm',
+    md: 'px-4 py-3 min-h-[40px] text-base',
+    lg: 'px-4 py-4 min-h-[44px] text-lg',
   };
 
   const variantClasses = {
-    default:
-      "border border-input bg-background",
-    outline:
-      "border-2 border-border bg-transparent",
-    filled:
-      "border-0 bg-muted",
+    default: 'border border-input bg-background',
+    outline: 'border-2 border-border bg-transparent',
+    filled: 'border-0 bg-muted',
   };
 
-  const errorClasses = error ? "border-error" : "";
+  const errorClasses = error ? 'border-error' : '';
 
   const inputClasses = cn(
-    "flex w-full rounded-md text-foreground",
-    "placeholder:text-muted-foreground",
+    'flex w-full rounded-md text-foreground',
+    'placeholder:text-muted-foreground',
     sizeClasses[size],
     variantClasses[variant],
-    errorClasses
+    errorClasses,
   );
 
   // Get placeholder color from theme (already normalized)
-  const placeholderColor = theme.colors.mutedForeground || theme.colors.foreground;
+  const placeholderColor =
+    theme.colors.mutedForeground || theme.colors.foreground;
 
   return (
     <View style={containerStyle} className="w-full">
@@ -113,9 +111,7 @@ export function Input({
         {...props}
       />
       {error && errorMessage && (
-        <Text className="mt-1.5 text-sm text-error">
-          {errorMessage}
-        </Text>
+        <Text className="mt-1.5 text-sm text-error">{errorMessage}</Text>
       )}
       {!error && helperText && (
         <Text className="mt-1.5 text-sm text-muted-foreground">

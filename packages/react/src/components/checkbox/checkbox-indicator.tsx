@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import React from "react";
-import { cn } from "../../utils/cn";
+import React from 'react';
+import { cn } from '../../utils/cn';
 import type {
   ThemeColor,
   ThemeSize,
   Radius,
   CheckboxVariant,
   CheckboxIconProps,
-} from "./checkbox";
+} from './checkbox';
 
 /**
  * Checkbox.Indicator props
@@ -46,10 +46,10 @@ export function CheckboxIndicator({
   checked = false,
   disabled = false,
   indeterminate = false,
-  color = "primary",
-  variant = "filled",
-  size = "sm",
-  radius = "sm",
+  color = 'primary',
+  variant = 'filled',
+  size = 'sm',
+  radius = 'sm',
   icon: IconComponent,
   iconColor,
   autoContrast = false,
@@ -58,30 +58,30 @@ export function CheckboxIndicator({
   // Size classes
   const sizeClasses: Record<string, { container: string; icon: string }> = {
     xs: {
-      container: "h-4 w-4",
-      icon: "w-2.5 h-2.5",
+      container: 'h-4 w-4',
+      icon: 'w-2.5 h-2.5',
     },
     sm: {
-      container: "h-5 w-5",
-      icon: "w-3 h-3",
+      container: 'h-5 w-5',
+      icon: 'w-3 h-3',
     },
     md: {
-      container: "h-6 w-6",
-      icon: "w-4 h-4",
+      container: 'h-6 w-6',
+      icon: 'w-4 h-4',
     },
     lg: {
-      container: "h-7 w-7",
-      icon: "w-5 h-5",
+      container: 'h-7 w-7',
+      icon: 'w-5 h-5',
     },
     xl: {
-      container: "h-8 w-8",
-      icon: "w-6 h-6",
+      container: 'h-8 w-8',
+      icon: 'w-6 h-6',
     },
   };
 
-  const sizeKey = typeof size === "string" ? size : "sm";
+  const sizeKey = typeof size === 'string' ? size : 'sm';
   const sizeConfig = sizeClasses[sizeKey] || sizeClasses.sm;
-  
+
   if (!sizeConfig) {
     // Fallback if somehow sizeConfig is still undefined
     return null;
@@ -89,84 +89,89 @@ export function CheckboxIndicator({
 
   // Radius classes
   const getRadiusClass = () => {
-    if (typeof radius === "number") {
-      return "";
+    if (typeof radius === 'number') {
+      return '';
     }
     const radiusMap: Record<string, string> = {
-      xs: "rounded-sm",
-      sm: "rounded",
-      md: "rounded-md",
-      lg: "rounded-lg",
-      xl: "rounded-xl",
-      "2xl": "rounded-2xl",
-      full: "rounded-full",
+      xs: 'rounded-sm',
+      sm: 'rounded',
+      md: 'rounded-md',
+      lg: 'rounded-lg',
+      xl: 'rounded-xl',
+      '2xl': 'rounded-2xl',
+      full: 'rounded-full',
     };
-    return radiusMap[radius] || "";
+    return radiusMap[radius] || '';
   };
 
   const radiusClass = getRadiusClass();
   const radiusStyle: React.CSSProperties =
-    typeof radius === "number" ? { borderRadius: `${radius}px` } : {};
+    typeof radius === 'number' ? { borderRadius: `${radius}px` } : {};
 
   // Variant and color classes
   const getVariantClasses = () => {
-    const baseClasses = "inline-flex items-center justify-center transition-all duration-200 border-2";
+    const baseClasses =
+      'inline-flex items-center justify-center transition-all duration-200 border-2';
 
     const isChecked = indeterminate || checked;
 
-    if (variant === "filled") {
+    if (variant === 'filled') {
       const colorMap: Record<string, { checked: string; unchecked: string }> = {
         primary: {
-          checked: "bg-primary border-primary",
-          unchecked: "bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600",
+          checked: 'bg-primary border-primary',
+          unchecked:
+            'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600',
         },
         blue: {
-          checked: "bg-blue-500 border-blue-500",
-          unchecked: "bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600",
+          checked: 'bg-blue-500 border-blue-500',
+          unchecked:
+            'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600',
         },
         red: {
-          checked: "bg-red-500 border-red-500",
-          unchecked: "bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600",
+          checked: 'bg-red-500 border-red-500',
+          unchecked:
+            'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600',
         },
       };
 
       const colorConfig = colorMap[color] || {
         checked: `bg-[${color}] border-[${color}]`,
-        unchecked: "bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600",
+        unchecked:
+          'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600',
       };
 
       return cn(
         baseClasses,
         isChecked ? colorConfig.checked : colorConfig.unchecked,
-        disabled && "opacity-50"
+        disabled && 'opacity-50',
       );
     }
 
-    if (variant === "outline") {
+    if (variant === 'outline') {
       const colorMap: Record<string, { checked: string; unchecked: string }> = {
         primary: {
-          checked: "bg-primary/10 border-primary",
-          unchecked: "bg-transparent border-gray-300 dark:border-gray-600",
+          checked: 'bg-primary/10 border-primary',
+          unchecked: 'bg-transparent border-gray-300 dark:border-gray-600',
         },
         blue: {
-          checked: "bg-blue-500/10 border-blue-500",
-          unchecked: "bg-transparent border-gray-300 dark:border-gray-600",
+          checked: 'bg-blue-500/10 border-blue-500',
+          unchecked: 'bg-transparent border-gray-300 dark:border-gray-600',
         },
         red: {
-          checked: "bg-red-500/10 border-red-500",
-          unchecked: "bg-transparent border-gray-300 dark:border-gray-600",
+          checked: 'bg-red-500/10 border-red-500',
+          unchecked: 'bg-transparent border-gray-300 dark:border-gray-600',
         },
       };
 
       const colorConfig = colorMap[color] || {
         checked: `bg-[${color}]/10 border-[${color}]`,
-        unchecked: "bg-transparent border-gray-300 dark:border-gray-600",
+        unchecked: 'bg-transparent border-gray-300 dark:border-gray-600',
       };
 
       return cn(
         baseClasses,
         isChecked ? colorConfig.checked : colorConfig.unchecked,
-        disabled && "opacity-50"
+        disabled && 'opacity-50',
       );
     }
 
@@ -211,7 +216,11 @@ export function CheckboxIndicator({
   const iconColorStyle: React.CSSProperties = iconColor
     ? { color: iconColor }
     : {
-        color: isChecked ? (variant === "filled" ? "#ffffff" : undefined) : undefined,
+        color: isChecked
+          ? variant === 'filled'
+            ? '#ffffff'
+            : undefined
+          : undefined,
       };
 
   return (
@@ -220,17 +229,20 @@ export function CheckboxIndicator({
         getVariantClasses(),
         radiusClass,
         sizeConfig.container,
-        disabled && "cursor-not-allowed",
-        className
+        disabled && 'cursor-not-allowed',
+        className,
       )}
       style={radiusStyle}
     >
       {isChecked && (
         <div
-          className={cn(sizeConfig.icon, "flex items-center justify-center")}
+          className={cn(sizeConfig.icon, 'flex items-center justify-center')}
           style={iconColorStyle}
         >
-          <IconToRender indeterminate={indeterminate} className="w-full h-full" />
+          <IconToRender
+            indeterminate={indeterminate}
+            className="w-full h-full"
+          />
         </div>
       )}
     </div>

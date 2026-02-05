@@ -1,7 +1,7 @@
 /**
  * Skeleton animation type
  */
-export type SkeletonAnimation = "pulse" | "wave" | false;
+export type SkeletonAnimation = 'pulse' | 'wave' | false;
 
 /**
  * Base Skeleton props (platform-agnostic)

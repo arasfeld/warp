@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Radio, RadioGroup, Stack, Text } from "@warp/react";
+import { useState } from 'react';
+import { Radio, RadioGroup, Stack, Text } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function RadioPage() {
-  const [controlled, setControlled] = useState<string>("react");
-  const [framework, setFramework] = useState<string>("next");
+  const [controlled, setControlled] = useState<string>('react');
+  const [framework, setFramework] = useState<string>('next');
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "group", title: "Radio.Group", level: 2 },
-    { id: "controlled", title: "Controlled", level: 2 },
-    { id: "orientation", title: "Orientation", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
-    { id: "variants", title: "Variants", level: 2 },
-    { id: "colors", title: "Colors", level: 2 },
-    { id: "disabled", title: "Disabled", level: 2 },
-    { id: "label-position", title: "Label Position", level: 2 },
-    { id: "with-description", title: "With Description", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'group', title: 'Radio.Group', level: 2 },
+    { id: 'controlled', title: 'Controlled', level: 2 },
+    { id: 'orientation', title: 'Orientation', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
+    { id: 'variants', title: 'Variants', level: 2 },
+    { id: 'colors', title: 'Colors', level: 2 },
+    { id: 'disabled', title: 'Disabled', level: 2 },
+    { id: 'label-position', title: 'Label Position', level: 2 },
+    { id: 'with-description', title: 'With Description', level: 2 },
   ];
 
   return (
@@ -38,10 +38,7 @@ export default function RadioPage() {
 
       {/* Usage */}
       <Section id="usage">
-        <SectionHeader
-          title="Usage"
-          subtitle="Basic radio button with label"
-        />
+        <SectionHeader title="Usage" subtitle="Basic radio button with label" />
         <DemoArea>
           <Radio value="option1" label="I agree to the terms" />
         </DemoArea>
@@ -57,7 +54,10 @@ export default function RadioPage() {
           subtitle="Group radios together for single selection"
         />
         <DemoArea>
-          <RadioGroup label="Select your favorite framework" defaultValue="react">
+          <RadioGroup
+            label="Select your favorite framework"
+            defaultValue="react"
+          >
             <Radio value="react" label="React" />
             <Radio value="vue" label="Vue" />
             <Radio value="angular" label="Angular" />
@@ -161,10 +161,7 @@ export default function RadioPage() {
 
       {/* Sizes */}
       <Section id="sizes">
-        <SectionHeader
-          title="Sizes"
-          subtitle="Different radio sizes"
-        />
+        <SectionHeader title="Sizes" subtitle="Different radio sizes" />
         <DemoArea>
           <RadioGroup defaultValue="md">
             <Radio value="xs" label="Extra small (xs)" size="xs" />
@@ -243,10 +240,7 @@ export default function RadioPage() {
 
       {/* Disabled */}
       <Section id="disabled">
-        <SectionHeader
-          title="Disabled"
-          subtitle="Disabled radio buttons"
-        />
+        <SectionHeader title="Disabled" subtitle="Disabled radio buttons" />
         <DemoArea>
           <RadioGroup label="Disabled group" disabled defaultValue="option1">
             <Radio value="option1" label="Option 1" />
@@ -273,7 +267,11 @@ export default function RadioPage() {
         />
         <DemoArea>
           <Stack gap="md">
-            <Radio value="right" label="Label on right (default)" labelPosition="right" />
+            <Radio
+              value="right"
+              label="Label on right (default)"
+              labelPosition="right"
+            />
             <Radio value="left" label="Label on left" labelPosition="left" />
           </Stack>
         </DemoArea>

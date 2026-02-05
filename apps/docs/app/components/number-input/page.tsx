@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import { useState, useRef } from "react";
-import { NumberInput, Stack, Group, Button } from "@warp/react";
-import type { NumberInputHandlers } from "@warp/react";
-import { DollarSign } from "lucide-react";
+import { useState, useRef } from 'react';
+import { NumberInput, Stack, Group, Button } from '@warp/react';
+import type { NumberInputHandlers } from '@warp/react';
+import { DollarSign } from 'lucide-react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function NumberInputPage() {
   const [value, setValue] = useState<number | string>(0);
   const handlersRef = useRef<NumberInputHandlers>(null);
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "min-max", title: "Min & Max", level: 2 },
-    { id: "step", title: "Step", level: 2 },
-    { id: "decimal", title: "Decimal Numbers", level: 2 },
-    { id: "formatting", title: "Formatting", level: 2 },
-    { id: "handlers-ref", title: "Handlers Ref", level: 2 },
-    { id: "hide-controls", title: "Hide Controls", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'min-max', title: 'Min & Max', level: 2 },
+    { id: 'step', title: 'Step', level: 2 },
+    { id: 'decimal', title: 'Decimal Numbers', level: 2 },
+    { id: 'formatting', title: 'Formatting', level: 2 },
+    { id: 'handlers-ref', title: 'Handlers Ref', level: 2 },
+    { id: 'hide-controls', title: 'Hide Controls', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
   ];
 
   return (
@@ -44,10 +44,7 @@ export default function NumberInputPage() {
         />
         <DemoArea>
           <Stack gap="md" className="w-full max-w-sm">
-            <NumberInput
-              label="Quantity"
-              placeholder="Enter quantity"
-            />
+            <NumberInput label="Quantity" placeholder="Enter quantity" />
             <NumberInput
               label="Age"
               placeholder="Enter your age"
@@ -116,11 +113,7 @@ export default function NumberInputPage() {
         />
         <DemoArea>
           <Stack gap="md" className="w-full max-w-sm">
-            <NumberInput
-              label="Step of 5"
-              step={5}
-              defaultValue={0}
-            />
+            <NumberInput label="Step of 5" step={5} defaultValue={0} />
             <NumberInput
               label="Step of 0.1"
               step={0.1}
@@ -197,13 +190,11 @@ export default function NumberInputPage() {
               fixedDecimalScale
               thousandSeparator
               defaultValue={1234.56}
-              leftSection={<DollarSign className="h-4 w-4 text-muted-foreground" />}
+              leftSection={
+                <DollarSign className="h-4 w-4 text-muted-foreground" />
+              }
             />
-            <NumberInput
-              label="Weight"
-              suffix=" kg"
-              decimalScale={1}
-            />
+            <NumberInput label="Weight" suffix=" kg" decimalScale={1} />
             <NumberInput
               label="With thousands separator"
               thousandSeparator=","
@@ -250,10 +241,16 @@ export default function NumberInputPage() {
               handlersRef={handlersRef}
             />
             <Group gap="sm">
-              <Button size="sm" onClick={() => handlersRef.current?.decrement()}>
+              <Button
+                size="sm"
+                onClick={() => handlersRef.current?.decrement()}
+              >
                 - Decrement
               </Button>
-              <Button size="sm" onClick={() => handlersRef.current?.increment()}>
+              <Button
+                size="sm"
+                onClick={() => handlersRef.current?.increment()}
+              >
                 + Increment
               </Button>
             </Group>

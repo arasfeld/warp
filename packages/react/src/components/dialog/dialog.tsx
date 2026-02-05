@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, {
   forwardRef,
@@ -6,21 +6,24 @@ import React, {
   useCallback,
   useRef,
   useState,
-} from "react";
-import { createPortal } from "react-dom";
-import { X } from "lucide-react";
+} from 'react';
+import { createPortal } from 'react-dom';
+import { X } from 'lucide-react';
 
-import { cn } from "../../utils/cn";
+import { cn } from '../../utils/cn';
 
 /**
  * Dialog size options
  */
-export type DialogSize = "xs" | "sm" | "md" | "lg" | "xl" | "full";
+export type DialogSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
 /**
  * Dialog component props
  */
-export interface DialogProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+export interface DialogProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'title'
+> {
   /** Whether dialog is open */
   opened: boolean;
   /** Called when dialog should close */
@@ -74,9 +77,9 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       withCloseButton = true,
       closeOnEscape = true,
       closeOnClickOutside = true,
-      size = "md",
+      size = 'md',
       centered = true,
-      radius = "lg",
+      radius = 'lg',
       withOverlay = true,
       overlayOpacity = 0.5,
       overlayBlur = 0,
@@ -84,7 +87,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const dialogRef = useRef<HTMLDivElement>(null);
     const [mounted, setMounted] = useState(false);
@@ -100,20 +103,20 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       if (!opened || !closeOnEscape) return;
 
       const handleEscape = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
+        if (e.key === 'Escape') {
           onClose();
         }
       };
 
-      document.addEventListener("keydown", handleEscape);
-      return () => document.removeEventListener("keydown", handleEscape);
+      document.addEventListener('keydown', handleEscape);
+      return () => document.removeEventListener('keydown', handleEscape);
     }, [opened, closeOnEscape, onClose]);
 
     // Lock body scroll when open
     useEffect(() => {
       if (opened) {
         const originalOverflow = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
+        document.body.style.overflow = 'hidden';
         return () => {
           document.body.style.overflow = originalOverflow;
         };
@@ -129,7 +132,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
 
       // Focus the dialog or first focusable element
       const focusableElements = dialog.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       );
 
       if (focusableElements.length > 0 && focusableElements[0]) {
@@ -145,34 +148,34 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           onClose();
         }
       },
-      [closeOnClickOutside, onClose]
+      [closeOnClickOutside, onClose],
     );
 
     // Size classes
     const sizeClasses: Record<DialogSize, string> = {
-      xs: "max-w-xs",
-      sm: "max-w-sm",
-      md: "max-w-md",
-      lg: "max-w-lg",
-      xl: "max-w-xl",
-      full: "max-w-[calc(100vw-2rem)] max-h-[calc(100vh-2rem)]",
+      xs: 'max-w-xs',
+      sm: 'max-w-sm',
+      md: 'max-w-md',
+      lg: 'max-w-lg',
+      xl: 'max-w-xl',
+      full: 'max-w-[calc(100vw-2rem)] max-h-[calc(100vh-2rem)]',
     };
 
     // Radius classes
     const getRadiusClass = () => {
-      if (typeof radius === "number") return "";
+      if (typeof radius === 'number') return '';
       const radiusMap: Record<string, string> = {
-        xs: "rounded-sm",
-        sm: "rounded",
-        md: "rounded-md",
-        lg: "rounded-lg",
-        xl: "rounded-xl",
+        xs: 'rounded-sm',
+        sm: 'rounded',
+        md: 'rounded-md',
+        lg: 'rounded-lg',
+        xl: 'rounded-xl',
       };
-      return radiusMap[radius] || "rounded-lg";
+      return radiusMap[radius] || 'rounded-lg';
     };
 
     const radiusStyle: React.CSSProperties =
-      typeof radius === "number" ? { borderRadius: `${radius}px` } : {};
+      typeof radius === 'number' ? { borderRadius: `${radius}px` } : {};
 
     if (!mounted || !opened) {
       return null;
@@ -186,13 +189,13 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     const dialogContent = (
       <div
         className={cn(
-          "fixed inset-0 z-[9999] flex",
-          centered ? "items-center" : "items-start pt-[10vh]",
-          "justify-center p-4"
+          'fixed inset-0 z-[9999] flex',
+          centered ? 'items-center' : 'items-start pt-[10vh]',
+          'justify-center p-4',
         )}
         aria-modal="true"
         role="dialog"
-        aria-labelledby={title ? "dialog-title" : undefined}
+        aria-labelledby={title ? 'dialog-title' : undefined}
       >
         {/* Overlay - clickable to close */}
         {withOverlay && (
@@ -200,7 +203,9 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
             className="absolute inset-0 transition-opacity"
             style={{
               backgroundColor: `rgba(0, 0, 0, ${overlayOpacity})`,
-              ...(overlayBlur > 0 && { backdropFilter: `blur(${overlayBlur}px)` }),
+              ...(overlayBlur > 0 && {
+                backdropFilter: `blur(${overlayBlur}px)`,
+              }),
             }}
             onClick={closeOnClickOutside ? onClose : undefined}
             aria-hidden="true"
@@ -211,20 +216,22 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         <div
           ref={(node) => {
             // Handle both refs
-            (dialogRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
-            if (typeof ref === "function") {
+            (
+              dialogRef as React.MutableRefObject<HTMLDivElement | null>
+            ).current = node;
+            if (typeof ref === 'function') {
               ref(node);
             } else if (ref) {
               ref.current = node;
             }
           }}
           className={cn(
-            "relative w-full bg-white dark:bg-gray-900 shadow-xl",
-            "transform transition-all",
-            "focus:outline-none",
+            'relative w-full bg-white dark:bg-gray-900 shadow-xl',
+            'transform transition-all',
+            'focus:outline-none',
             sizeClasses[size],
             getRadiusClass(),
-            className
+            className,
           )}
           style={radiusStyle}
           tabIndex={-1}
@@ -246,10 +253,10 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
                   type="button"
                   onClick={onClose}
                   className={cn(
-                    "p-2 -mr-2 rounded-md transition-colors",
-                    "text-muted-foreground hover:text-foreground",
-                    "hover:bg-action-hover",
-                    !title && "ml-auto"
+                    'p-2 -mr-2 rounded-md transition-colors',
+                    'text-muted-foreground hover:text-foreground',
+                    'hover:bg-action-hover',
+                    !title && 'ml-auto',
                   )}
                   aria-label="Close dialog"
                 >
@@ -266,10 +273,10 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     );
 
     return createPortal(dialogContent, document.body);
-  }
+  },
 );
 
-Dialog.displayName = "Dialog";
+Dialog.displayName = 'Dialog';
 
 /**
  * Dialog.Header component props
@@ -286,18 +293,14 @@ export interface DialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
 export const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
   ({ children, className, ...props }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={cn("px-6 pt-6 pb-2", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn('px-6 pt-6 pb-2', className)} {...props}>
         {children}
       </div>
     );
-  }
+  },
 );
 
-DialogHeader.displayName = "DialogHeader";
+DialogHeader.displayName = 'DialogHeader';
 
 /**
  * Dialog.Body component props
@@ -316,16 +319,16 @@ export const DialogBody = forwardRef<HTMLDivElement, DialogBodyProps>(
     return (
       <div
         ref={ref}
-        className={cn("px-6 py-4 overflow-y-auto", className)}
+        className={cn('px-6 py-4 overflow-y-auto', className)}
         {...props}
       >
         {children}
       </div>
     );
-  }
+  },
 );
 
-DialogBody.displayName = "DialogBody";
+DialogBody.displayName = 'DialogBody';
 
 /**
  * Dialog.Footer component props
@@ -345,16 +348,16 @@ export const DialogFooter = forwardRef<HTMLDivElement, DialogFooterProps>(
       <div
         ref={ref}
         className={cn(
-          "px-6 py-4 flex items-center justify-end gap-3",
-          "border-t border-divider",
-          className
+          'px-6 py-4 flex items-center justify-end gap-3',
+          'border-t border-divider',
+          className,
         )}
         {...props}
       >
         {children}
       </div>
     );
-  }
+  },
 );
 
-DialogFooter.displayName = "DialogFooter";
+DialogFooter.displayName = 'DialogFooter';

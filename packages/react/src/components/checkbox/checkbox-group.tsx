@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React, { createContext, useContext, useCallback, useMemo } from "react";
-import { cn } from "../../utils/cn";
+import React, { createContext, useContext, useCallback, useMemo } from 'react';
+import { cn } from '../../utils/cn';
 import {
   InputWrapper,
   InputLabel,
   InputDescription,
   InputError,
-} from "../input/input";
+} from '../input/input';
 
 /**
  * Checkbox.Group context value
@@ -26,7 +26,7 @@ interface CheckboxGroupContextValue {
 }
 
 const CheckboxGroupContext = createContext<CheckboxGroupContextValue | null>(
-  null
+  null,
 );
 
 /**
@@ -58,7 +58,7 @@ export interface CheckboxGroupProps {
   /** Sets disabled attribute on all checkboxes */
   disabled?: boolean;
   /** Controls size of the Input.Wrapper */
-  size?: "xs" | "sm" | "md" | "lg" | "xl" | (string & {});
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | (string & {});
   /** Adds required attribute to the input and a red asterisk on the right side of label */
   required?: boolean;
   /** If set, the required asterisk is displayed next to the label */
@@ -80,13 +80,13 @@ export function CheckboxGroup({
   description,
   error,
   disabled = false,
-  size = "sm",
+  size = 'sm',
   required = false,
   withAsterisk = false,
   className,
 }: CheckboxGroupProps) {
   const [uncontrolledValue, setUncontrolledValue] = React.useState<string[]>(
-    defaultValue || []
+    defaultValue || [],
   );
 
   const isControlled = controlledValue !== undefined;
@@ -96,7 +96,7 @@ export function CheckboxGroup({
     (checkboxValue: string): boolean => {
       return currentValue.includes(checkboxValue);
     },
-    [currentValue]
+    [currentValue],
   );
 
   const handleChange = useCallback(
@@ -114,7 +114,7 @@ export function CheckboxGroup({
       }
       onChange?.(newValue);
     },
-    [currentValue, isControlled, onChange]
+    [currentValue, isControlled, onChange],
   );
 
   const contextValue = useMemo<CheckboxGroupContextValue>(
@@ -123,22 +123,25 @@ export function CheckboxGroup({
       onChange: handleChange,
       isChecked,
       disabled,
-      size: typeof size === "string" ? size : "sm",
+      size: typeof size === 'string' ? size : 'sm',
     }),
-    [currentValue, handleChange, isChecked, disabled, size]
+    [currentValue, handleChange, isChecked, disabled, size],
   );
 
   const showAsterisk = withAsterisk || required;
 
   const content = (
     <CheckboxGroupContext.Provider value={contextValue}>
-      <div className={cn("space-y-2", className)}>{children}</div>
+      <div className={cn('space-y-2', className)}>{children}</div>
     </CheckboxGroupContext.Provider>
   );
 
   // If we have label, description, or error, wrap with InputWrapper
   if (label || description || error) {
-    const normalizedSize = typeof size === "string" ? (size as "xs" | "sm" | "md" | "lg" | "xl") : "sm";
+    const normalizedSize =
+      typeof size === 'string'
+        ? (size as 'xs' | 'sm' | 'md' | 'lg' | 'xl')
+        : 'sm';
     return (
       <InputWrapper
         id={undefined}
@@ -147,10 +150,7 @@ export function CheckboxGroup({
         description={description}
       >
         {label && (
-          <InputLabel
-            required={showAsterisk || required}
-            labelElement="div"
-          >
+          <InputLabel required={showAsterisk || required} labelElement="div">
             {label}
           </InputLabel>
         )}

@@ -6,22 +6,27 @@
 /**
  * Button variant
  */
-export type ButtonVariant = "filled" | "light" | "outline" | "gradient" | "default";
+export type ButtonVariant =
+  | 'filled'
+  | 'light'
+  | 'outline'
+  | 'gradient'
+  | 'default';
 
 /**
  * Button size (including compact variants)
  */
 export type ButtonSize =
-  | "xs"
-  | "sm"
-  | "md"
-  | "lg"
-  | "xl"
-  | "compact-xs"
-  | "compact-sm"
-  | "compact-md"
-  | "compact-lg"
-  | "compact-xl";
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | 'compact-xs'
+  | 'compact-sm'
+  | 'compact-md'
+  | 'compact-lg'
+  | 'compact-xl';
 
 /**
  * Gradient configuration for gradient variant
@@ -36,14 +41,18 @@ export interface GradientConfig {
  * Loader props for Button loading state
  */
 export interface ButtonLoaderProps {
-  type?: "spinner" | "dots" | "bars";
-  size?: "xs" | "sm" | "md" | "lg" | "xl" | number;
+  type?: 'spinner' | 'dots' | 'bars';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | number;
 }
 
 /**
  * Button justify options
  */
-export type ButtonJustify = "flex-start" | "center" | "flex-end" | "space-between";
+export type ButtonJustify =
+  | 'flex-start'
+  | 'center'
+  | 'flex-end'
+  | 'space-between';
 
 /**
  * Base Button props (platform-agnostic)

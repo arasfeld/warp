@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Rating, Stack, Text, Group } from "@warp/react";
-import { Heart, ThumbsUp } from "lucide-react";
+import { useState } from 'react';
+import { Rating, Stack, Text, Group } from '@warp/react';
+import { Heart, ThumbsUp } from 'lucide-react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function RatingPage() {
   const [value, setValue] = useState(3);
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "controlled", title: "Controlled", level: 2 },
-    { id: "fractions", title: "Fractions", level: 2 },
-    { id: "count", title: "Symbol Count", level: 2 },
-    { id: "custom-symbols", title: "Custom Symbols", level: 2 },
-    { id: "read-only", title: "Read Only", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
-    { id: "colors", title: "Colors", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'controlled', title: 'Controlled', level: 2 },
+    { id: 'fractions', title: 'Fractions', level: 2 },
+    { id: 'count', title: 'Symbol Count', level: 2 },
+    { id: 'custom-symbols', title: 'Custom Symbols', level: 2 },
+    { id: 'read-only', title: 'Read Only', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
+    { id: 'colors', title: 'Colors', level: 2 },
   ];
 
   return (
@@ -36,16 +36,11 @@ export default function RatingPage() {
 
       {/* Usage */}
       <Section id="usage">
-        <SectionHeader
-          title="Usage"
-          subtitle="Basic rating input with stars"
-        />
+        <SectionHeader title="Usage" subtitle="Basic rating input with stars" />
         <DemoArea>
           <Rating defaultValue={3} />
         </DemoArea>
-        <CodeBlock
-          code={`<Rating defaultValue={3} />`}
-        />
+        <CodeBlock code={`<Rating defaultValue={3} />`} />
       </Section>
 
       {/* Controlled */}
@@ -57,7 +52,9 @@ export default function RatingPage() {
         <DemoArea>
           <Stack gap="md" align="flex-start">
             <Rating value={value} onChange={setValue} />
-            <Text size="sm" c="dimmed">Rating: {value} / 5</Text>
+            <Text size="sm" c="dimmed">
+              Rating: {value} / 5
+            </Text>
           </Stack>
         </DemoArea>
         <CodeBlock
@@ -77,11 +74,15 @@ export default function RatingPage() {
         <DemoArea>
           <Stack gap="md" align="flex-start">
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Fractions: 2 (half stars)</Text>
+              <Text size="sm" fw={500}>
+                Fractions: 2 (half stars)
+              </Text>
               <Rating defaultValue={2.5} fractions={2} />
             </Stack>
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Fractions: 4 (quarter stars)</Text>
+              <Text size="sm" fw={500}>
+                Fractions: 4 (quarter stars)
+              </Text>
               <Rating defaultValue={3.25} fractions={4} />
             </Stack>
           </Stack>
@@ -101,11 +102,15 @@ export default function RatingPage() {
         <DemoArea>
           <Stack gap="md" align="flex-start">
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>3 stars</Text>
+              <Text size="sm" fw={500}>
+                3 stars
+              </Text>
               <Rating defaultValue={2} count={3} />
             </Stack>
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>10 stars</Text>
+              <Text size="sm" fw={500}>
+                10 stars
+              </Text>
               <Rating defaultValue={7} count={10} />
             </Stack>
           </Stack>
@@ -125,7 +130,9 @@ export default function RatingPage() {
         <DemoArea>
           <Stack gap="md" align="flex-start">
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Hearts</Text>
+              <Text size="sm" fw={500}>
+                Hearts
+              </Text>
               <Rating
                 defaultValue={3}
                 emptySymbol={<Heart className="w-6 h-6" />}
@@ -133,7 +140,9 @@ export default function RatingPage() {
               />
             </Stack>
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Thumbs up</Text>
+              <Text size="sm" fw={500}>
+                Thumbs up
+              </Text>
               <Rating
                 defaultValue={4}
                 emptySymbol={<ThumbsUp className="w-6 h-6" />}
@@ -168,11 +177,15 @@ export default function RatingPage() {
         <DemoArea>
           <Group gap="lg">
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>4.5 stars</Text>
+              <Text size="sm" fw={500}>
+                4.5 stars
+              </Text>
               <Rating value={4.5} fractions={2} readOnly />
             </Stack>
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>3 stars</Text>
+              <Text size="sm" fw={500}>
+                3 stars
+              </Text>
               <Rating value={3} readOnly />
             </Stack>
           </Group>
@@ -192,23 +205,33 @@ export default function RatingPage() {
         <DemoArea>
           <Stack gap="md" align="flex-start">
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Extra small</Text>
+              <Text size="sm" fw={500}>
+                Extra small
+              </Text>
               <Rating size="xs" defaultValue={3} />
             </Stack>
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Small</Text>
+              <Text size="sm" fw={500}>
+                Small
+              </Text>
               <Rating size="sm" defaultValue={3} />
             </Stack>
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Medium (default)</Text>
+              <Text size="sm" fw={500}>
+                Medium (default)
+              </Text>
               <Rating size="md" defaultValue={3} />
             </Stack>
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Large</Text>
+              <Text size="sm" fw={500}>
+                Large
+              </Text>
               <Rating size="lg" defaultValue={3} />
             </Stack>
             <Stack gap="xs" align="flex-start">
-              <Text size="sm" fw={500}>Extra large</Text>
+              <Text size="sm" fw={500}>
+                Extra large
+              </Text>
               <Rating size="xl" defaultValue={3} />
             </Stack>
           </Stack>
@@ -224,10 +247,7 @@ export default function RatingPage() {
 
       {/* Colors */}
       <Section id="colors">
-        <SectionHeader
-          title="Colors"
-          subtitle="Customize the rating color"
-        />
+        <SectionHeader title="Colors" subtitle="Customize the rating color" />
         <DemoArea>
           <Stack gap="md" align="flex-start">
             <Rating color="primary" defaultValue={4} />

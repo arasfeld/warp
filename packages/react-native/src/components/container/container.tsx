@@ -1,10 +1,15 @@
-import React from "react";
-import { View, useWindowDimensions, type StyleProp, type ViewStyle } from "react-native";
+import React from 'react';
+import {
+  View,
+  useWindowDimensions,
+  type StyleProp,
+  type ViewStyle,
+} from 'react-native';
 
-import type { ContainerBaseProps, ContainerSize } from "@warp/core";
-import { CONTAINER_SIZE_MAP } from "@warp/core";
+import type { ContainerBaseProps, ContainerSize } from '@warp/core';
+import { CONTAINER_SIZE_MAP } from '@warp/core';
 
-import { cn } from "../../utils/cn";
+import { cn } from '../../utils/cn';
 
 export interface ContainerProps extends ContainerBaseProps {
   /**
@@ -24,13 +29,13 @@ export interface ContainerProps extends ContainerBaseProps {
 /**
  * Horizontal padding classes
  */
-const pxClasses: Record<NonNullable<ContainerBaseProps["px"]>, string> = {
-  none: "px-0",
-  xs: "px-2",    // 0.5rem (8px)
-  sm: "px-4",    // 1rem (16px)
-  md: "px-6",    // 1.5rem (24px)
-  lg: "px-8",    // 2rem (32px)
-  xl: "px-12",   // 3rem (48px)
+const pxClasses: Record<NonNullable<ContainerBaseProps['px']>, string> = {
+  none: 'px-0',
+  xs: 'px-2', // 0.5rem (8px)
+  sm: 'px-4', // 1rem (16px)
+  md: 'px-6', // 1.5rem (24px)
+  lg: 'px-8', // 2rem (32px)
+  xl: 'px-12', // 3rem (48px)
 };
 
 /**
@@ -55,9 +60,9 @@ const pxClasses: Record<NonNullable<ContainerBaseProps["px"]>, string> = {
  */
 export function Container({
   children,
-  size = "md",
+  size = 'md',
   fluid = false,
-  px = "md",
+  px = 'md',
   className,
   style,
 }: ContainerProps) {
@@ -65,21 +70,15 @@ export function Container({
 
   // Calculate max width based on size
   const maxWidthValue = CONTAINER_SIZE_MAP[size];
-  const maxWidth = fluid || maxWidthValue === "100%"
-    ? undefined
-    : Math.min(maxWidthValue, screenWidth);
+  const maxWidth =
+    fluid || maxWidthValue === '100%'
+      ? undefined
+      : Math.min(maxWidthValue, screenWidth);
 
   return (
     <View
-      className={cn(
-        "w-full self-center",
-        pxClasses[px],
-        className
-      )}
-      style={[
-        maxWidth ? { maxWidth } : undefined,
-        style,
-      ]}
+      className={cn('w-full self-center', pxClasses[px], className)}
+      style={[maxWidth ? { maxWidth } : undefined, style]}
     >
       {children}
     </View>

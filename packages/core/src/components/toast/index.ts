@@ -3,4 +3,4 @@ export type {
   ToastVariant,
   ToastBaseProps,
   ToastData,
-} from "./types";
+} from './types';

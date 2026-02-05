@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, {
   createContext,
@@ -7,15 +7,15 @@ import React, {
   useState,
   useContext,
   type ReactNode,
-} from "react";
-import type { Theme } from "@warp/core";
-import { defaultTheme } from "@warp/core/theme";
-import { getThemePreference, saveThemePreference } from "./storage";
+} from 'react';
+import type { Theme } from '@warp/core';
+import { defaultTheme } from '@warp/core/theme';
+import { getThemePreference, saveThemePreference } from './storage';
 
 /**
  * Extended theme mode that includes 'system' option
  */
-export type ExtendedThemeMode = "light" | "dark" | "system";
+export type ExtendedThemeMode = 'light' | 'dark' | 'system';
 
 /**
  * Web theme context value
@@ -26,7 +26,7 @@ interface ThemeContextValue {
   /** Current theme mode */
   mode: ExtendedThemeMode;
   /** Effective theme mode (resolved from system preference if mode is 'system') */
-  effectiveMode: "light" | "dark";
+  effectiveMode: 'light' | 'dark';
   /** Set theme mode (supports 'light', 'dark', or 'system') */
   setMode: (mode: ExtendedThemeMode) => void;
   /** The core theme object */
@@ -68,26 +68,26 @@ export function ThemeProvider({
   defaultMode,
   children,
 }: ThemeProviderProps) {
-  const [mode, setModeState] = useState<ExtendedThemeMode>("system");
+  const [mode, setModeState] = useState<ExtendedThemeMode>('system');
   const [coreTheme, setCoreTheme] = useState<Theme>(theme);
   const [isLoading, setIsLoading] = useState(true);
 
   // Get system color scheme
-  const [systemColorScheme, setSystemColorScheme] = useState<"light" | "dark">(
+  const [systemColorScheme, setSystemColorScheme] = useState<'light' | 'dark'>(
     () => {
-      if (typeof window === "undefined") {
-        return "light";
+      if (typeof window === 'undefined') {
+        return 'light';
       }
-      return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-    }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+    },
   );
 
   // Load theme preference from localStorage on mount
   // This runs only on the client after hydration
   useEffect(() => {
-    if (typeof window === "undefined") {
+    if (typeof window === 'undefined') {
       setIsLoading(false);
       return;
     }
@@ -102,12 +102,12 @@ export function ThemeProvider({
           setModeState(defaultMode);
         } else {
           // Default to system if no preference and no defaultMode provided
-          setModeState("system");
+          setModeState('system');
         }
       } catch (error) {
-        console.error("Error loading theme preference:", error);
+        console.error('Error loading theme preference:', error);
         // Fallback to defaultMode or system
-        setModeState(defaultMode ?? "system");
+        setModeState(defaultMode ?? 'system');
       } finally {
         setIsLoading(false);
       }
@@ -118,25 +118,25 @@ export function ThemeProvider({
 
   // Listen to system color scheme changes
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
 
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
     const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
-      setSystemColorScheme(e.matches ? "dark" : "light");
+      setSystemColorScheme(e.matches ? 'dark' : 'light');
     };
 
     // Set initial value
     handleChange(mediaQuery);
 
     // Listen for changes
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
   // Calculate effective mode (resolved from system if mode is 'system')
   const effectiveMode = useMemo(() => {
-    if (mode === "system") {
+    if (mode === 'system') {
       return systemColorScheme;
     }
     return mode;
@@ -145,15 +145,15 @@ export function ThemeProvider({
   // Update CSS class based on effective mode
   // Only update if it's different from what's already set (to avoid hydration issues)
   useEffect(() => {
-    if (typeof document === "undefined") return;
+    if (typeof document === 'undefined') return;
 
     const htmlElement = document.documentElement;
-    const hasDarkClass = htmlElement.classList.contains("dark");
+    const hasDarkClass = htmlElement.classList.contains('dark');
 
-    if (effectiveMode === "dark" && !hasDarkClass) {
-      htmlElement.classList.add("dark");
-    } else if (effectiveMode === "light" && hasDarkClass) {
-      htmlElement.classList.remove("dark");
+    if (effectiveMode === 'dark' && !hasDarkClass) {
+      htmlElement.classList.add('dark');
+    } else if (effectiveMode === 'light' && hasDarkClass) {
+      htmlElement.classList.remove('dark');
     }
   }, [effectiveMode]);
 
@@ -172,7 +172,7 @@ export function ThemeProvider({
       setCoreTheme,
       isLoading,
     }),
-    [mode, effectiveMode, coreTheme, isLoading]
+    [mode, effectiveMode, coreTheme, isLoading],
   );
 
   return (
@@ -187,7 +187,7 @@ export function ThemeProvider({
 export function useTheme(): ThemeContextValue {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
 }

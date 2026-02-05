@@ -1,25 +1,25 @@
-import type { Metadata } from "next";
-import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@warp/react";
+import type { Metadata } from 'next';
+import { JetBrains_Mono, Space_Grotesk } from 'next/font/google';
+import './globals.css';
+import { ThemeProvider } from '@warp/react';
 
-import { AnimatedBackground } from "@/components/animated-background";
+import { AnimatedBackground } from '@/components/animated-background';
 
 const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-space-grotesk",
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-space-grotesk',
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-jetbrains-mono",
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-jetbrains-mono',
 });
 
 export const metadata: Metadata = {
-  title: "Warp UI - Component Library",
-  description: "Cross-platform UI components for React and React Native",
+  title: 'Warp UI - Component Library',
+  description: 'Cross-platform UI components for React and React Native',
 };
 
 export default function RootLayout({

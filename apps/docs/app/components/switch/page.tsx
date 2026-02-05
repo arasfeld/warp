@@ -1,30 +1,34 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Switch } from "@warp/react";
+import { useState } from 'react';
+import { Switch } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function SwitchPage() {
   const [checked, setChecked] = useState(false);
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "controlled", title: "Controlled", level: 2 },
-    { id: "label-position", title: "Label Position", level: 2 },
-    { id: "label-description-error", title: "Label, Description, Error", level: 2 },
-    { id: "internal-labels", title: "Internal Labels", level: 2 },
-    { id: "thumb-icon", title: "Thumb Icon", level: 2 },
-    { id: "color", title: "Color", level: 2 },
-    { id: "size", title: "Size", level: 2 },
-    { id: "disabled", title: "Disabled", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'controlled', title: 'Controlled', level: 2 },
+    { id: 'label-position', title: 'Label Position', level: 2 },
+    {
+      id: 'label-description-error',
+      title: 'Label, Description, Error',
+      level: 2,
+    },
+    { id: 'internal-labels', title: 'Internal Labels', level: 2 },
+    { id: 'thumb-icon', title: 'Thumb Icon', level: 2 },
+    { id: 'color', title: 'Color', level: 2 },
+    { id: 'size', title: 'Size', level: 2 },
+    { id: 'disabled', title: 'Disabled', level: 2 },
   ];
 
   return (
@@ -131,17 +135,8 @@ export default function SwitchPage() {
           subtitle="Display on/off labels inside the track"
         />
         <DemoArea className="flex-col items-start gap-4">
-          <Switch
-            defaultChecked
-            onLabel="ON"
-            offLabel="OFF"
-            size="md"
-          />
-          <Switch
-            onLabel="I"
-            offLabel="O"
-            size="lg"
-          />
+          <Switch defaultChecked onLabel="ON" offLabel="OFF" size="md" />
+          <Switch onLabel="I" offLabel="O" size="lg" />
         </DemoArea>
         <CodeBlock
           code={`<Switch defaultChecked onLabel="ON" offLabel="OFF" size="md" />
@@ -167,7 +162,11 @@ export default function SwitchPage() {
                 stroke="currentColor"
                 strokeWidth={2}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
             }
           />

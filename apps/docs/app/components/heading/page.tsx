@@ -1,23 +1,23 @@
-import { Heading } from "@warp/react";
+import { Heading } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function HeadingPage() {
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "size", title: "Size", level: 2 },
-    { id: "text-wrap", title: "Text Wrap", level: 2 },
-    { id: "line-clamp", title: "Line Clamp", level: 2 },
-    { id: "font-weight", title: "Font Weight", level: 2 },
-    { id: "colors", title: "Colors", level: 2 },
-    { id: "gradient", title: "Gradient Variant", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'size', title: 'Size', level: 2 },
+    { id: 'text-wrap', title: 'Text Wrap', level: 2 },
+    { id: 'line-clamp', title: 'Line Clamp', level: 2 },
+    { id: 'font-weight', title: 'Font Weight', level: 2 },
+    { id: 'colors', title: 'Colors', level: 2 },
+    { id: 'gradient', title: 'Gradient Variant', level: 2 },
   ];
 
   return (
@@ -188,7 +188,7 @@ export default function HeadingPage() {
             size="xl"
             fw={900}
             variant="gradient"
-            gradient={{ from: "blue", to: "cyan", deg: 90 }}
+            gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
           >
             Gradient Heading
           </Heading>
@@ -196,7 +196,7 @@ export default function HeadingPage() {
             order={2}
             fw={700}
             variant="gradient"
-            gradient={{ from: "#a855f7", to: "#22d3ee", deg: 135 }}
+            gradient={{ from: '#a855f7', to: '#22d3ee', deg: 135 }}
           >
             Purple to Cyan Gradient
           </Heading>

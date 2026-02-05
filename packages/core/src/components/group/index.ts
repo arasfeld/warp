@@ -4,4 +4,4 @@ export type {
   GroupJustify,
   GroupSpacing,
   GroupWrap,
-} from "./types";
+} from './types';

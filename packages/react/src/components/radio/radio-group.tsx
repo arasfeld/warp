@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { createContext, useContext, useCallback, useMemo } from "react";
+import React, { createContext, useContext, useCallback, useMemo } from 'react';
 
-import { cn } from "../../utils/cn";
-import { InputWrapper, InputLabel } from "../input/input";
+import { cn } from '../../utils/cn';
+import { InputWrapper, InputLabel } from '../input/input';
 
 /**
  * Radio.Group context value
@@ -36,7 +36,7 @@ function useRadioGroup() {
 /**
  * Gap size type
  */
-type GapSize = "xs" | "sm" | "md" | "lg" | "xl";
+type GapSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Radio.Group props
@@ -59,7 +59,7 @@ export interface RadioGroupProps {
   /** Sets disabled attribute on all radios */
   disabled?: boolean;
   /** Controls size of the Input.Wrapper */
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   /** Adds required attribute to the input and a red asterisk on the right side of label */
   required?: boolean;
   /** If set, the required asterisk is displayed next to the label */
@@ -67,7 +67,7 @@ export interface RadioGroupProps {
   /** Name attribute for all radios (auto-generated if not provided) */
   name?: string;
   /** Orientation of radio buttons (default: vertical) */
-  orientation?: "horizontal" | "vertical";
+  orientation?: 'horizontal' | 'vertical';
   /** Gap between radio buttons (default: sm) */
   gap?: GapSize;
   /** Additional className */
@@ -80,11 +80,11 @@ export interface RadioGroupProps {
  */
 // Gap classes for different sizes
 const gapClasses: Record<GapSize, { vertical: string; horizontal: string }> = {
-  xs: { vertical: "space-y-1", horizontal: "gap-2" },
-  sm: { vertical: "space-y-2", horizontal: "gap-4" },
-  md: { vertical: "space-y-3", horizontal: "gap-6" },
-  lg: { vertical: "space-y-4", horizontal: "gap-8" },
-  xl: { vertical: "space-y-5", horizontal: "gap-10" },
+  xs: { vertical: 'space-y-1', horizontal: 'gap-2' },
+  sm: { vertical: 'space-y-2', horizontal: 'gap-4' },
+  md: { vertical: 'space-y-3', horizontal: 'gap-6' },
+  lg: { vertical: 'space-y-4', horizontal: 'gap-8' },
+  xl: { vertical: 'space-y-5', horizontal: 'gap-10' },
 };
 
 export function RadioGroup({
@@ -96,12 +96,12 @@ export function RadioGroup({
   description,
   error,
   disabled = false,
-  size = "sm",
+  size = 'sm',
   required = false,
   withAsterisk = false,
   name: providedName,
-  orientation = "vertical",
-  gap = "sm",
+  orientation = 'vertical',
+  gap = 'sm',
   className,
 }: RadioGroupProps) {
   const generatedName = React.useId();
@@ -118,7 +118,7 @@ export function RadioGroup({
     (radioValue: string): boolean => {
       return currentValue === radioValue;
     },
-    [currentValue]
+    [currentValue],
   );
 
   const handleChange = useCallback(
@@ -128,7 +128,7 @@ export function RadioGroup({
       }
       onChange?.(radioValue);
     },
-    [isControlled, onChange]
+    [isControlled, onChange],
   );
 
   const contextValue = useMemo<RadioGroupContextValue>(
@@ -140,15 +140,16 @@ export function RadioGroup({
       size,
       name,
     }),
-    [currentValue, handleChange, isChecked, disabled, size, name]
+    [currentValue, handleChange, isChecked, disabled, size, name],
   );
 
   const showAsterisk = withAsterisk || required;
 
   const gapConfig = gapClasses[gap];
-  const layoutClasses = orientation === "horizontal"
-    ? cn("flex flex-wrap items-center", gapConfig.horizontal)
-    : cn("flex flex-col", gapConfig.vertical);
+  const layoutClasses =
+    orientation === 'horizontal'
+      ? cn('flex flex-wrap items-center', gapConfig.horizontal)
+      : cn('flex flex-col', gapConfig.vertical);
 
   const content = (
     <RadioGroupContext.Provider value={contextValue}>
@@ -163,7 +164,11 @@ export function RadioGroup({
     return (
       <div className="w-full">
         {label && (
-          <InputLabel required={showAsterisk || required} labelElement="div" className="mb-1">
+          <InputLabel
+            required={showAsterisk || required}
+            labelElement="div"
+            className="mb-1"
+          >
             {label}
           </InputLabel>
         )}

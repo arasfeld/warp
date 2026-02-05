@@ -1,18 +1,24 @@
-"use client";
+'use client';
 
-import React, { forwardRef, useState, useCallback } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import React, { forwardRef, useState, useCallback } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 
-import { cn } from "../../utils/cn";
-import { Input, InputWrapper } from "../input/input";
-import type { InputProps, InputSize, InputVariant, InputWrapperProps } from "../input/input";
+import { cn } from '../../utils/cn';
+import { Input, InputWrapper } from '../input/input';
+import type {
+  InputProps,
+  InputSize,
+  InputVariant,
+  InputWrapperProps,
+} from '../input/input';
 
 /**
  * PasswordInput component props
  */
 export interface PasswordInputProps
-  extends Omit<InputProps, "component" | "multiline" | "type" | "rightSection">,
-    Omit<InputWrapperProps, "children" | "id" | "size" | "error"> {
+  extends
+    Omit<InputProps, 'component' | 'multiline' | 'type' | 'rightSection'>,
+    Omit<InputWrapperProps, 'children' | 'id' | 'size' | 'error'> {
   /** Input size */
   size?: InputSize;
   /** Input variant */
@@ -28,7 +34,7 @@ export interface PasswordInputProps
   /** Custom visibility toggle icon */
   visibilityToggleIcon?: (props: { reveal: boolean }) => React.ReactNode;
   /** Button label for accessibility */
-  visibilityToggleButtonProps?: React.ComponentPropsWithoutRef<"button">;
+  visibilityToggleButtonProps?: React.ComponentPropsWithoutRef<'button'>;
   /** Hide visibility toggle button */
   hideToggle?: boolean;
 }
@@ -83,8 +89,8 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
       visibilityToggleButtonProps,
       hideToggle = false,
       // Input props
-      size = "sm",
-      variant = "default",
+      size = 'sm',
+      variant = 'default',
       radius,
       disabled,
       error,
@@ -104,9 +110,10 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
       id,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const [uncontrolledVisible, setUncontrolledVisible] = useState(defaultVisible);
+    const [uncontrolledVisible, setUncontrolledVisible] =
+      useState(defaultVisible);
 
     // Determine if controlled or uncontrolled
     const isControlled = controlledVisible !== undefined;
@@ -128,11 +135,11 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
         type="button"
         onClick={toggleVisibility}
         className={cn(
-          "flex items-center justify-center rounded transition-colors",
-          "text-text-secondary hover:text-text-primary",
-          "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          'flex items-center justify-center rounded transition-colors',
+          'text-text-secondary hover:text-text-primary',
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary',
         )}
-        aria-label={visible ? "Hide password" : "Show password"}
+        aria-label={visible ? 'Hide password' : 'Show password'}
         tabIndex={-1}
         {...visibilityToggleButtonProps}
       >
@@ -144,7 +151,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
       <Input
         ref={ref}
         id={id}
-        type={visible ? "text" : "password"}
+        type={visible ? 'text' : 'password'}
         size={size}
         variant={variant}
         radius={radius}
@@ -178,7 +185,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
         id={id}
         label={label}
         description={description}
-        error={typeof error === "boolean" ? undefined : error}
+        error={typeof error === 'boolean' ? undefined : error}
         required={required}
         withAsterisk={withAsterisk}
         size={size}
@@ -192,7 +199,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
         {inputElement}
       </InputWrapper>
     );
-  }
+  },
 );
 
-PasswordInput.displayName = "PasswordInput";
+PasswordInput.displayName = 'PasswordInput';

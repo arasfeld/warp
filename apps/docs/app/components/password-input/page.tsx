@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { PasswordInput, Stack, Button, Group } from "@warp/react";
-import { Lock } from "lucide-react";
+import { useState } from 'react';
+import { PasswordInput, Stack, Button, Group } from '@warp/react';
+import { Lock } from 'lucide-react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function PasswordInputPage() {
   const [visible, setVisible] = useState(false);
 
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "controlled", title: "Controlled Visibility", level: 2 },
-    { id: "with-icon", title: "With Icon", level: 2 },
-    { id: "error-state", title: "Error State", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'controlled', title: 'Controlled Visibility', level: 2 },
+    { id: 'with-icon', title: 'With Icon', level: 2 },
+    { id: 'error-state', title: 'Error State', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
   ];
 
   return (
@@ -39,10 +39,7 @@ export default function PasswordInputPage() {
         />
         <DemoArea>
           <Stack gap="md" className="w-full max-w-sm">
-            <PasswordInput
-              label="Password"
-              placeholder="Enter your password"
-            />
+            <PasswordInput label="Password" placeholder="Enter your password" />
             <PasswordInput
               label="Confirm Password"
               placeholder="Confirm your password"
@@ -79,8 +76,12 @@ export default function PasswordInputPage() {
               onVisibilityChange={setVisible}
             />
             <Group gap="sm">
-              <Button size="sm" variant="outline" onClick={() => setVisible(!visible)}>
-                {visible ? "Hide" : "Show"} Password
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setVisible(!visible)}
+              >
+                {visible ? 'Hide' : 'Show'} Password
               </Button>
             </Group>
           </Stack>
@@ -103,10 +104,7 @@ export default function PasswordInputPage() {
 
       {/* With Icon */}
       <Section id="with-icon">
-        <SectionHeader
-          title="With Icon"
-          subtitle="Add a left section icon"
-        />
+        <SectionHeader title="With Icon" subtitle="Add a left section icon" />
         <DemoArea>
           <PasswordInput
             label="Password"
@@ -169,11 +167,19 @@ export default function PasswordInputPage() {
         />
         <DemoArea>
           <Stack gap="md" className="w-full max-w-sm">
-            <PasswordInput size="xs" label="Extra small" placeholder="xs size" />
+            <PasswordInput
+              size="xs"
+              label="Extra small"
+              placeholder="xs size"
+            />
             <PasswordInput size="sm" label="Small" placeholder="sm size" />
             <PasswordInput size="md" label="Medium" placeholder="md size" />
             <PasswordInput size="lg" label="Large" placeholder="lg size" />
-            <PasswordInput size="xl" label="Extra large" placeholder="xl size" />
+            <PasswordInput
+              size="xl"
+              label="Extra large"
+              placeholder="xl size"
+            />
           </Stack>
         </DemoArea>
         <CodeBlock

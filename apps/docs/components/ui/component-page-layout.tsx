@@ -1,5 +1,5 @@
-import { Layout } from "@/components/layout";
-import { TableOfContents } from "@/components/table-of-contents";
+import { Layout } from '@/components/layout';
+import { TableOfContents } from '@/components/table-of-contents';
 
 interface TocItem {
   id: string;

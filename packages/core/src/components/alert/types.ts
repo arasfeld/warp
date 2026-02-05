@@ -6,7 +6,12 @@
 /**
  * Alert variant types
  */
-export type AlertVariant = "default" | "destructive" | "warning" | "info" | "success";
+export type AlertVariant =
+  | 'default'
+  | 'destructive'
+  | 'warning'
+  | 'info'
+  | 'success';
 
 /**
  * Base Alert props (platform-agnostic)

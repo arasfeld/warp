@@ -7,7 +7,7 @@
  * Container size presets
  * Maps to common max-width breakpoints
  */
-export type ContainerSize = "xs" | "sm" | "md" | "lg" | "xl" | "full";
+export type ContainerSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
 /**
  * Base props shared between web and native Container implementations
@@ -35,17 +35,17 @@ export interface ContainerBaseProps {
    * Horizontal padding
    * @default "md"
    */
-  px?: "none" | "xs" | "sm" | "md" | "lg" | "xl";
+  px?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
 /**
  * Container size configuration (max-width in pixels)
  */
-export const CONTAINER_SIZE_MAP: Record<ContainerSize, number | "100%"> = {
+export const CONTAINER_SIZE_MAP: Record<ContainerSize, number | '100%'> = {
   xs: 540,
   sm: 720,
   md: 960,
   lg: 1140,
   xl: 1320,
-  full: "100%",
+  full: '100%',
 };

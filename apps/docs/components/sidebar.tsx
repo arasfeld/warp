@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   AlertCircle,
   Badge,
@@ -33,10 +33,10 @@ import {
   Type,
   Users,
   Radio,
-} from "lucide-react";
-import { cn } from "@warp/react";
+} from 'lucide-react';
+import { cn } from '@warp/react';
 
-import { List, ListItem } from "./ui";
+import { List, ListItem } from './ui';
 
 const componentIconMap: Record<string, typeof ButtonIcon> = {
   Alert: AlertCircle,
@@ -72,56 +72,56 @@ const componentIconMap: Record<string, typeof ButtonIcon> = {
 
 const componentGroups = [
   {
-    title: "Layout",
+    title: 'Layout',
     icon: LayoutDashboard,
     items: [
-      { name: "Container", href: "/components/container" },
-      { name: "Stack", href: "/components/stack" },
-      { name: "Group", href: "/components/group" },
+      { name: 'Container', href: '/components/container' },
+      { name: 'Stack', href: '/components/stack' },
+      { name: 'Group', href: '/components/group' },
     ],
   },
   {
-    title: "Inputs",
+    title: 'Inputs',
     icon: MousePointerClick,
     items: [
-      { name: "Autocomplete", href: "/components/autocomplete" },
-      { name: "Button", href: "/components/button" },
-      { name: "Checkbox", href: "/components/checkbox" },
-      { name: "FileInput", href: "/components/file-input" },
-      { name: "Input", href: "/components/input" },
-      { name: "NumberInput", href: "/components/number-input" },
-      { name: "PasswordInput", href: "/components/password-input" },
-      { name: "Radio", href: "/components/radio" },
-      { name: "Rating", href: "/components/rating" },
-      { name: "SegmentedControl", href: "/components/segmented-control" },
-      { name: "Select", href: "/components/select" },
-      { name: "Slider", href: "/components/slider" },
-      { name: "Switch", href: "/components/switch" },
-      { name: "TagsInput", href: "/components/tags-input" },
-      { name: "TextInput", href: "/components/text-input" },
-      { name: "Textarea", href: "/components/textarea" },
+      { name: 'Autocomplete', href: '/components/autocomplete' },
+      { name: 'Button', href: '/components/button' },
+      { name: 'Checkbox', href: '/components/checkbox' },
+      { name: 'FileInput', href: '/components/file-input' },
+      { name: 'Input', href: '/components/input' },
+      { name: 'NumberInput', href: '/components/number-input' },
+      { name: 'PasswordInput', href: '/components/password-input' },
+      { name: 'Radio', href: '/components/radio' },
+      { name: 'Rating', href: '/components/rating' },
+      { name: 'SegmentedControl', href: '/components/segmented-control' },
+      { name: 'Select', href: '/components/select' },
+      { name: 'Slider', href: '/components/slider' },
+      { name: 'Switch', href: '/components/switch' },
+      { name: 'TagsInput', href: '/components/tags-input' },
+      { name: 'TextInput', href: '/components/text-input' },
+      { name: 'Textarea', href: '/components/textarea' },
     ],
   },
   {
-    title: "Data Display",
+    title: 'Data Display',
     icon: FileText,
     items: [
-      { name: "Card", href: "/components/card" },
-      { name: "Heading", href: "/components/heading" },
-      { name: "Text", href: "/components/text" },
-      { name: "Chip", href: "/components/chip" },
-      { name: "Badge", href: "/components/badge" },
-      { name: "Table", href: "/components/table" },
+      { name: 'Card', href: '/components/card' },
+      { name: 'Heading', href: '/components/heading' },
+      { name: 'Text', href: '/components/text' },
+      { name: 'Chip', href: '/components/chip' },
+      { name: 'Badge', href: '/components/badge' },
+      { name: 'Table', href: '/components/table' },
     ],
   },
   {
-    title: "Feedback",
+    title: 'Feedback',
     icon: MessageSquare,
     items: [
-      { name: "Alert", href: "/components/alert" },
-      { name: "Toast", href: "/components/toast" },
-      { name: "Dialog", href: "/components/dialog" },
-      { name: "Skeleton", href: "/components/skeleton" },
+      { name: 'Alert', href: '/components/alert' },
+      { name: 'Toast', href: '/components/toast' },
+      { name: 'Dialog', href: '/components/dialog' },
+      { name: 'Skeleton', href: '/components/skeleton' },
     ],
   },
 ];
@@ -175,15 +175,15 @@ export function Sidebar() {
                         <Link
                           href={item.href}
                           className={cn(
-                            "flex items-center gap-3 px-6 py-3 text-[0.95rem] transition-all duration-300 relative",
-                            "text-muted-foreground hover:text-foreground",
+                            'flex items-center gap-3 px-6 py-3 text-[0.95rem] transition-all duration-300 relative',
+                            'text-muted-foreground hover:text-foreground',
                             "before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[3px]",
-                            "before:bg-gradient-to-b before:from-purple-500 before:to-cyan-400",
-                            "before:opacity-0 before:transition-opacity before:duration-300",
+                            'before:bg-gradient-to-b before:from-purple-500 before:to-cyan-400',
+                            'before:opacity-0 before:transition-opacity before:duration-300',
                             isActive &&
-                              "text-foreground bg-black/5 dark:bg-white/5 before:opacity-100",
+                              'text-foreground bg-black/5 dark:bg-white/5 before:opacity-100',
                             !isActive &&
-                              "hover:bg-black/5 dark:hover:bg-white/5"
+                              'hover:bg-black/5 dark:hover:bg-white/5',
                           )}
                         >
                           {ItemIcon && (

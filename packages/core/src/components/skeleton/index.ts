@@ -1,1 +1,1 @@
-export type { SkeletonAnimation, SkeletonBaseProps } from "./types";
+export type { SkeletonAnimation, SkeletonBaseProps } from './types';

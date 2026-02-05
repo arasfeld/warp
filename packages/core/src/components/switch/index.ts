@@ -7,6 +7,6 @@ export type {
   SwitchLabelPosition,
   SwitchSize,
   SwitchSizeConfig,
-} from "./types";
+} from './types';
 
-export { SWITCH_SIZE_CONFIG } from "./types";
+export { SWITCH_SIZE_CONFIG } from './types';

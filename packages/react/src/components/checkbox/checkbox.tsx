@@ -1,9 +1,14 @@
-"use client";
+'use client';
 
-import React, { useId, useRef, forwardRef } from "react";
-import { cn } from "../../utils/cn";
-import { useCheckboxGroup } from "./checkbox-group";
-import { InputWrapper, InputLabel, InputDescription, InputError } from "../input/input";
+import React, { useId, useRef, forwardRef } from 'react';
+import { cn } from '../../utils/cn';
+import { useCheckboxGroup } from './checkbox-group';
+import {
+  InputWrapper,
+  InputLabel,
+  InputDescription,
+  InputError,
+} from '../input/input';
 
 /**
  * Theme color type (theme color key or CSS color)
@@ -13,7 +18,7 @@ export type ThemeColor = string;
 /**
  * Theme size type
  */
-export type ThemeSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type ThemeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Radius type (theme key or CSS value)
@@ -23,7 +28,7 @@ export type Radius = string | number;
 /**
  * Checkbox variant
  */
-export type CheckboxVariant = "filled" | "outline";
+export type CheckboxVariant = 'filled' | 'outline';
 
 /**
  * Icon component props
@@ -36,15 +41,14 @@ export interface CheckboxIconProps {
 /**
  * Checkbox component props
  */
-export interface CheckboxProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    "size" | "type" | "color"
-  > {
+export interface CheckboxProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'size' | 'type' | 'color'
+> {
   /** Label associated with the checkbox */
   label?: React.ReactNode;
   /** Position of the label relative to the input */
-  labelPosition?: "left" | "right";
+  labelPosition?: 'left' | 'right';
   /** Description displayed below the label */
   description?: React.ReactNode;
   /** Error message displayed below the label */
@@ -94,16 +98,16 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
     {
       label,
-      labelPosition = "right",
+      labelPosition = 'right',
       description,
       error,
       checked: controlledChecked,
       defaultChecked,
       onChange,
-      color = "primary",
-      variant = "filled",
-      size = "sm",
-      radius = "sm",
+      color = 'primary',
+      variant = 'filled',
+      size = 'sm',
+      radius = 'sm',
       indeterminate = false,
       icon: IconComponent,
       iconColor,
@@ -116,24 +120,27 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       value,
       ...props
     },
-    ref
+    ref,
   ) => {
     const generatedId = useId();
     const inputId = id || generatedId;
     const checkboxRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const checkboxGroup = useCheckboxGroup();
-    
+
     // Combine external ref with internal ref
     React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
 
     // Combine rootRef with internal ref
-    React.useImperativeHandle(rootRef, () => checkboxRef.current as HTMLDivElement);
+    React.useImperativeHandle(
+      rootRef,
+      () => checkboxRef.current as HTMLDivElement,
+    );
 
     // Internal state for uncontrolled checkboxes
     const isControlled = controlledChecked !== undefined;
     const [uncontrolledChecked, setUncontrolledChecked] = React.useState(
-      defaultChecked ?? false
+      defaultChecked ?? false,
     );
 
     // Handle click on the visual checkbox to trigger the input
@@ -150,12 +157,12 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     // When in Checkbox.Group, use group state
     const isInGroup = checkboxGroup !== null && value !== undefined;
-    
+
     // Determine checked state
     let checked: boolean;
     let inputChecked: boolean | undefined;
     let inputDefaultChecked: boolean | undefined;
-    
+
     if (isInGroup) {
       // In group: use group's checked state
       checked = checkboxGroup!.isChecked(value!);
@@ -176,9 +183,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     // Handle change
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (disabled) return;
-      
+
       const newChecked = e.target.checked;
-      
+
       if (isInGroup && value !== undefined) {
         // Checkbox.Group handles the state
         checkboxGroup!.onChange(value, newChecked);
@@ -197,37 +204,40 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     };
 
     // Size classes
-    const sizeClasses: Record<string, { container: string; input: string; icon: string }> = {
+    const sizeClasses: Record<
+      string,
+      { container: string; input: string; icon: string }
+    > = {
       xs: {
-        container: "h-4 w-4",
-        input: "h-4 w-4",
-        icon: "w-2.5 h-2.5",
+        container: 'h-4 w-4',
+        input: 'h-4 w-4',
+        icon: 'w-2.5 h-2.5',
       },
       sm: {
-        container: "h-5 w-5",
-        input: "h-5 w-5",
-        icon: "w-3 h-3",
+        container: 'h-5 w-5',
+        input: 'h-5 w-5',
+        icon: 'w-3 h-3',
       },
       md: {
-        container: "h-6 w-6",
-        input: "h-6 w-6",
-        icon: "w-4 h-4",
+        container: 'h-6 w-6',
+        input: 'h-6 w-6',
+        icon: 'w-4 h-4',
       },
       lg: {
-        container: "h-7 w-7",
-        input: "h-7 w-7",
-        icon: "w-5 h-5",
+        container: 'h-7 w-7',
+        input: 'h-7 w-7',
+        icon: 'w-5 h-5',
       },
       xl: {
-        container: "h-8 w-8",
-        input: "h-8 w-8",
-        icon: "w-6 h-6",
+        container: 'h-8 w-8',
+        input: 'h-8 w-8',
+        icon: 'w-6 h-6',
       },
     };
 
-    const sizeKey = typeof size === "string" ? size : "sm";
+    const sizeKey = typeof size === 'string' ? size : 'sm';
     const sizeConfig = sizeClasses[sizeKey] || sizeClasses.sm;
-    
+
     if (!sizeConfig) {
       // This should never happen, but TypeScript needs this check
       throw new Error(`Invalid size: ${size}`);
@@ -235,86 +245,93 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     // Radius classes
     const getRadiusClass = () => {
-      if (typeof radius === "number") {
-        return "";
+      if (typeof radius === 'number') {
+        return '';
       }
       const radiusMap: Record<string, string> = {
-        xs: "rounded-sm",
-        sm: "rounded",
-        md: "rounded-md",
-        lg: "rounded-lg",
-        xl: "rounded-xl",
-        "2xl": "rounded-2xl",
-        full: "rounded-full",
+        xs: 'rounded-sm',
+        sm: 'rounded',
+        md: 'rounded-md',
+        lg: 'rounded-lg',
+        xl: 'rounded-xl',
+        '2xl': 'rounded-2xl',
+        full: 'rounded-full',
       };
-      return radiusMap[radius] || "";
+      return radiusMap[radius] || '';
     };
 
     const radiusClass = getRadiusClass();
     const radiusStyle: React.CSSProperties =
-      typeof radius === "number" ? { borderRadius: `${radius}px` } : {};
+      typeof radius === 'number' ? { borderRadius: `${radius}px` } : {};
 
     // Variant and color classes
     const getVariantClasses = () => {
-      const baseClasses = "inline-flex items-center justify-center transition-all duration-200 border-2";
-      
+      const baseClasses =
+        'inline-flex items-center justify-center transition-all duration-200 border-2';
+
       const isChecked = indeterminate || checked;
-      
-      if (variant === "filled") {
-        const colorMap: Record<string, { checked: string; unchecked: string }> = {
-          primary: {
-            checked: "bg-primary border-primary",
-            unchecked: "bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600",
-          },
-          blue: {
-            checked: "bg-blue-500 border-blue-500",
-            unchecked: "bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600",
-          },
-          red: {
-            checked: "bg-red-500 border-red-500",
-            unchecked: "bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600",
-          },
-        };
-        
+
+      if (variant === 'filled') {
+        const colorMap: Record<string, { checked: string; unchecked: string }> =
+          {
+            primary: {
+              checked: 'bg-primary border-primary',
+              unchecked:
+                'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600',
+            },
+            blue: {
+              checked: 'bg-blue-500 border-blue-500',
+              unchecked:
+                'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600',
+            },
+            red: {
+              checked: 'bg-red-500 border-red-500',
+              unchecked:
+                'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600',
+            },
+          };
+
         const colorConfig = colorMap[color] || {
           checked: `bg-[${color}] border-[${color}]`,
-          unchecked: "bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600",
+          unchecked:
+            'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600',
         };
 
         return cn(
           baseClasses,
           isChecked ? colorConfig.checked : colorConfig.unchecked,
-          !disabled && "hover:opacity-80",
-          disabled && "opacity-50 cursor-not-allowed"
+          !disabled && 'hover:opacity-80',
+          disabled && 'opacity-50 cursor-not-allowed',
         );
       }
 
-      if (variant === "outline") {
-        const colorMap: Record<string, { checked: string; unchecked: string }> = {
-          primary: {
-            checked: "bg-primary/10 border-primary",
-            unchecked: "bg-transparent border-gray-300 dark:border-gray-600",
-          },
-          blue: {
-            checked: "bg-blue-500/10 border-blue-500",
-            unchecked: "bg-transparent border-gray-300 dark:border-gray-600",
-          },
-          red: {
-            checked: "bg-red-500/10 border-red-500",
-            unchecked: "bg-transparent border-gray-300 dark:border-gray-600",
-          },
-        };
+      if (variant === 'outline') {
+        const colorMap: Record<string, { checked: string; unchecked: string }> =
+          {
+            primary: {
+              checked: 'bg-primary/10 border-primary',
+              unchecked: 'bg-transparent border-gray-300 dark:border-gray-600',
+            },
+            blue: {
+              checked: 'bg-blue-500/10 border-blue-500',
+              unchecked: 'bg-transparent border-gray-300 dark:border-gray-600',
+            },
+            red: {
+              checked: 'bg-red-500/10 border-red-500',
+              unchecked: 'bg-transparent border-gray-300 dark:border-gray-600',
+            },
+          };
 
         const colorConfig = colorMap[color] || {
           checked: `bg-[${color}]/10 border-[${color}]`,
-          unchecked: "bg-transparent border-gray-300 dark:border-gray-600",
+          unchecked: 'bg-transparent border-gray-300 dark:border-gray-600',
         };
 
         return cn(
           baseClasses,
           isChecked ? colorConfig.checked : colorConfig.unchecked,
-          !disabled && "hover:opacity-80",
-          disabled && "opacity-50 cursor-not-allowed"
+          !disabled && 'hover:opacity-80',
+          disabled && 'opacity-50 cursor-not-allowed',
         );
       }
 
@@ -322,7 +339,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     };
 
     // Default check icon
-    const DefaultCheckIcon: React.FC<CheckboxIconProps> = ({ indeterminate, className }) => {
+    const DefaultCheckIcon: React.FC<CheckboxIconProps> = ({
+      indeterminate,
+      className,
+    }) => {
       if (indeterminate) {
         return (
           <svg
@@ -344,7 +364,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           stroke="currentColor"
           strokeWidth={3}
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M5 13l4 4L19 7"
+          />
         </svg>
       );
     };
@@ -356,16 +380,24 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const iconColorStyle: React.CSSProperties = iconColor
       ? { color: iconColor }
       : {
-          color: isChecked ? (variant === "filled" ? "#ffffff" : undefined) : undefined,
+          color: isChecked
+            ? variant === 'filled'
+              ? '#ffffff'
+              : undefined
+            : undefined,
         };
 
     const checkboxElement = (
       <div
         ref={checkboxRef}
-        className={cn("inline-flex items-center gap-2", labelPosition === "left" && "flex-row-reverse", className)}
+        className={cn(
+          'inline-flex items-center gap-2',
+          labelPosition === 'left' && 'flex-row-reverse',
+          className,
+        )}
         {...wrapperProps}
       >
-        <div className={cn("relative flex-shrink-0", sizeConfig.container)}>
+        <div className={cn('relative flex-shrink-0', sizeConfig.container)}>
           <input
             ref={inputRef}
             id={inputId}
@@ -384,17 +416,23 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               getVariantClasses(),
               radiusClass,
               sizeConfig.container,
-              "cursor-pointer peer-focus:ring-2 peer-focus:ring-primary/20 peer-focus:ring-offset-2",
-              disabled && "cursor-not-allowed"
+              'cursor-pointer peer-focus:ring-2 peer-focus:ring-primary/20 peer-focus:ring-offset-2',
+              disabled && 'cursor-not-allowed',
             )}
             style={radiusStyle}
           >
             {isChecked && (
               <div
-                className={cn(sizeConfig.icon, "flex items-center justify-center")}
+                className={cn(
+                  sizeConfig.icon,
+                  'flex items-center justify-center',
+                )}
                 style={iconColorStyle}
               >
-                <IconToRender indeterminate={indeterminate} className="w-full h-full" />
+                <IconToRender
+                  indeterminate={indeterminate}
+                  className="w-full h-full"
+                />
               </div>
             )}
           </div>
@@ -403,9 +441,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <label
             htmlFor={inputId}
             className={cn(
-              "text-sm font-medium cursor-pointer select-none",
-              disabled && "cursor-not-allowed opacity-50",
-              error && "text-error"
+              'text-sm font-medium cursor-pointer select-none',
+              disabled && 'cursor-not-allowed opacity-50',
+              error && 'text-error',
             )}
           >
             {label}
@@ -416,9 +454,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     // If we have description or error, wrap with InputWrapper
     if (description || error) {
-      const normalizedSize = typeof sizeKey === "string" 
-        ? (sizeKey as "xs" | "sm" | "md" | "lg" | "xl")
-        : "sm";
+      const normalizedSize =
+        typeof sizeKey === 'string'
+          ? (sizeKey as 'xs' | 'sm' | 'md' | 'lg' | 'xl')
+          : 'sm';
       return (
         <InputWrapper
           id={inputId}
@@ -432,7 +471,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }
 
     return checkboxElement;
-  }
+  },
 );
 
-Checkbox.displayName = "Checkbox";
+Checkbox.displayName = 'Checkbox';

@@ -1,25 +1,25 @@
-import { Text } from "@warp/react";
+import { Text } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function TextPage() {
   const tocItems = [
-    { id: "sizes", title: "Text Sizes", level: 2 },
-    { id: "font-weights", title: "Font Weights", level: 2 },
-    { id: "font-styles", title: "Font Styles", level: 2 },
-    { id: "colors", title: "Text Colors", level: 2 },
-    { id: "transform-align", title: "Text Transform & Alignment", level: 2 },
-    { id: "gradient", title: "Gradient Variant", level: 2 },
-    { id: "truncate", title: "Truncate & Line Clamp", level: 2 },
-    { id: "inherit-inline", title: "Inherit & Inline", level: 2 },
-    { id: "polymorphic", title: "Polymorphic Component", level: 2 },
+    { id: 'sizes', title: 'Text Sizes', level: 2 },
+    { id: 'font-weights', title: 'Font Weights', level: 2 },
+    { id: 'font-styles', title: 'Font Styles', level: 2 },
+    { id: 'colors', title: 'Text Colors', level: 2 },
+    { id: 'transform-align', title: 'Text Transform & Alignment', level: 2 },
+    { id: 'gradient', title: 'Gradient Variant', level: 2 },
+    { id: 'truncate', title: 'Truncate & Line Clamp', level: 2 },
+    { id: 'inherit-inline', title: 'Inherit & Inline', level: 2 },
+    { id: 'polymorphic', title: 'Polymorphic Component', level: 2 },
   ];
 
   return (
@@ -31,10 +31,7 @@ export default function TextPage() {
 
       {/* Text Sizes */}
       <Section id="sizes">
-        <SectionHeader
-          title="Text Sizes"
-          subtitle="Size variants"
-        />
+        <SectionHeader title="Text Sizes" subtitle="Size variants" />
         <DemoArea className="flex-col items-start">
           <Text size="xs">Extra small text</Text>
           <Text size="sm">Small text</Text>
@@ -75,10 +72,7 @@ export default function TextPage() {
 
       {/* Font Styles */}
       <Section id="font-styles">
-        <SectionHeader
-          title="Font Styles"
-          subtitle="Using fs and td props"
-        />
+        <SectionHeader title="Font Styles" subtitle="Using fs and td props" />
         <DemoArea className="flex-col items-start">
           <Text fs="italic">Italic text</Text>
           <Text td="underline">Underlined text</Text>
@@ -146,7 +140,7 @@ export default function TextPage() {
             size="xl"
             fw={900}
             variant="gradient"
-            gradient={{ from: "blue", to: "cyan", deg: 90 }}
+            gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
           >
             Gradient Text
           </Text>
@@ -154,7 +148,7 @@ export default function TextPage() {
             size="lg"
             fw={700}
             variant="gradient"
-            gradient={{ from: "#a855f7", to: "#22d3ee", deg: 135 }}
+            gradient={{ from: '#a855f7', to: '#22d3ee', deg: 135 }}
           >
             Purple to Cyan Gradient
           </Text>
@@ -188,11 +182,16 @@ export default function TextPage() {
         <DemoArea className="flex-col items-start">
           <div className="w-64">
             <Text truncate="end">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde provident eos fugiat id necessitatibus magni ducimus molestias.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
+              provident eos fugiat id necessitatibus magni ducimus molestias.
             </Text>
           </div>
           <Text lineClamp={3} className="max-w-md">
-            From Bulbapedia: Bulbasaur is a small, quadrupedal Pokémon that has blue-green skin with darker patches. It has red eyes with white pupils, pointed, ear-like structures on top of its head, and a short, blunt snout with a wide mouth. A pair of small, pointed teeth are visible in the upper jaw when its mouth is open.
+            From Bulbapedia: Bulbasaur is a small, quadrupedal Pokémon that has
+            blue-green skin with darker patches. It has red eyes with white
+            pupils, pointed, ear-like structures on top of its head, and a
+            short, blunt snout with a wide mouth. A pair of small, pointed teeth
+            are visible in the upper jaw when its mouth is open.
           </Text>
         </DemoArea>
         <CodeBlock
@@ -216,13 +215,15 @@ export default function TextPage() {
         />
         <DemoArea className="flex-col items-start">
           <h3 className="text-2xl font-bold mb-2">
-            Title in which you want to{" "}
+            Title in which you want to{' '}
             <Text span c="blue" inherit>
               highlight
-            </Text>{" "}
+            </Text>{' '}
             something
           </h3>
-          <Text inline c="dimmed">Inline text with line-height: 1</Text>
+          <Text inline c="dimmed">
+            Inline text with line-height: 1
+          </Text>
         </DemoArea>
         <CodeBlock
           code={`<h3>
@@ -246,7 +247,11 @@ export default function TextPage() {
           <Text component="span">Rendered as span</Text>
           <Text span>Shorthand for component="span"</Text>
           <Text component="div">Rendered as div</Text>
-          <Text component="a" href="#" className="text-blue-500 hover:underline">
+          <Text
+            component="a"
+            href="#"
+            className="text-blue-500 hover:underline"
+          >
             Rendered as link
           </Text>
         </DemoArea>

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Button,
   Card,
@@ -10,7 +10,7 @@ import {
   InputWrapper,
   Chip,
   Checkbox,
-} from "@warp/react";
+} from '@warp/react';
 
 export default function Home() {
   const [selectedChips, setSelectedChips] = useState<string[]>([]);
@@ -41,28 +41,28 @@ export default function Home() {
                 <Button
                   variant="filled"
                   size="md"
-                  onClick={() => console.log("primary clicked")}
+                  onClick={() => console.log('primary clicked')}
                 >
                   Primary Button
                 </Button>
                 <Button
                   variant="default"
                   size="md"
-                  onClick={() => console.log("secondary clicked")}
+                  onClick={() => console.log('secondary clicked')}
                 >
                   Secondary Button
                 </Button>
                 <Button
                   variant="outline"
                   size="md"
-                  onClick={() => console.log("outline clicked")}
+                  onClick={() => console.log('outline clicked')}
                 >
                   Outline Button
                 </Button>
                 <Button
                   variant="light"
                   size="md"
-                  onClick={() => console.log("light clicked")}
+                  onClick={() => console.log('light clicked')}
                 >
                   Light Button
                 </Button>
@@ -172,7 +172,7 @@ export default function Home() {
                 <Text td="underline">Underlined text</Text>
                 <Text
                   variant="gradient"
-                  gradient={{ from: "#a855f7", to: "#06b6d4" }}
+                  gradient={{ from: '#a855f7', to: '#06b6d4' }}
                 >
                   Gradient text
                 </Text>

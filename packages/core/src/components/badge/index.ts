@@ -3,4 +3,4 @@ export type {
   BadgeVariant,
   BadgePosition,
   BadgeBaseProps,
-} from "./types";
+} from './types';

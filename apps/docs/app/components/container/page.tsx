@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { Container, Text } from "@warp/react";
+import { Container, Text } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function ContainerPage() {
   const tocItems = [
-    { id: "usage", title: "Usage", level: 2 },
-    { id: "size", title: "Size", level: 2 },
-    { id: "fluid", title: "Fluid", level: 2 },
-    { id: "padding", title: "Padding", level: 2 },
+    { id: 'usage', title: 'Usage', level: 2 },
+    { id: 'size', title: 'Size', level: 2 },
+    { id: 'fluid', title: 'Fluid', level: 2 },
+    { id: 'padding', title: 'Padding', level: 2 },
   ];
 
   return (
@@ -32,7 +32,9 @@ export default function ContainerPage() {
         <DemoArea className="!p-0 overflow-hidden">
           <div className="w-full bg-surface/30">
             <Container className="bg-primary/10 py-8">
-              <Text className="text-center">Content is centered with max-width</Text>
+              <Text className="text-center">
+                Content is centered with max-width
+              </Text>
             </Container>
           </div>
         </DemoArea>
@@ -49,27 +51,37 @@ export default function ContainerPage() {
         <DemoArea className="flex-col !p-0 gap-4 overflow-hidden">
           <div className="w-full bg-surface/30 py-2">
             <Container size="xs" className="bg-primary/20 py-4">
-              <Text size="sm" className="text-center">xs - 540px</Text>
+              <Text size="sm" className="text-center">
+                xs - 540px
+              </Text>
             </Container>
           </div>
           <div className="w-full bg-surface/30 py-2">
             <Container size="sm" className="bg-primary/20 py-4">
-              <Text size="sm" className="text-center">sm - 720px</Text>
+              <Text size="sm" className="text-center">
+                sm - 720px
+              </Text>
             </Container>
           </div>
           <div className="w-full bg-surface/30 py-2">
             <Container size="md" className="bg-primary/20 py-4">
-              <Text size="sm" className="text-center">md - 960px (default)</Text>
+              <Text size="sm" className="text-center">
+                md - 960px (default)
+              </Text>
             </Container>
           </div>
           <div className="w-full bg-surface/30 py-2">
             <Container size="lg" className="bg-primary/20 py-4">
-              <Text size="sm" className="text-center">lg - 1140px</Text>
+              <Text size="sm" className="text-center">
+                lg - 1140px
+              </Text>
             </Container>
           </div>
           <div className="w-full bg-surface/30 py-2">
             <Container size="xl" className="bg-primary/20 py-4">
-              <Text size="sm" className="text-center">xl - 1320px</Text>
+              <Text size="sm" className="text-center">
+                xl - 1320px
+              </Text>
             </Container>
           </div>
         </DemoArea>
@@ -84,7 +96,10 @@ export default function ContainerPage() {
 
       {/* Fluid */}
       <Section id="fluid">
-        <SectionHeader title="Fluid" subtitle="Full width container that ignores size" />
+        <SectionHeader
+          title="Fluid"
+          subtitle="Full width container that ignores size"
+        />
         <DemoArea className="!p-0 overflow-hidden">
           <div className="w-full bg-surface/30">
             <Container fluid className="bg-primary/10 py-8">

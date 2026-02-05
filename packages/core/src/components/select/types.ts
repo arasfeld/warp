@@ -16,12 +16,12 @@ export interface SelectOption {
 /**
  * Select size variants (matches Input size)
  */
-export type SelectSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type SelectSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Select variant styles (matches Input variant)
  */
-export type SelectVariant = "default" | "filled" | "unstyled";
+export type SelectVariant = 'default' | 'filled' | 'unstyled';
 
 /**
  * Base Select props (platform-agnostic)

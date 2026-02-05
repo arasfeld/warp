@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Palette, Rocket, Settings, Zap } from "lucide-react";
-import { cn } from "@warp/react";
+import { Palette, Rocket, Settings, Zap } from 'lucide-react';
+import { cn } from '@warp/react';
 
-import { FeatureCard } from "./feature-card";
+import { FeatureCard } from './feature-card';
 
 interface Feature {
   icon: typeof Rocket;
@@ -16,35 +16,35 @@ interface Feature {
 const features: Feature[] = [
   {
     icon: Rocket,
-    title: "Cross-Platform",
+    title: 'Cross-Platform',
     description:
-      "Write once, run everywhere. Use the same components across React web and React Native mobile apps with zero configuration.",
-    actionLabel: "Learn More",
-    actionHref: "/components",
+      'Write once, run everywhere. Use the same components across React web and React Native mobile apps with zero configuration.',
+    actionLabel: 'Learn More',
+    actionHref: '/components',
   },
   {
     icon: Palette,
-    title: "Shared Theming",
+    title: 'Shared Theming',
     description:
-      "Consistent design system across all platforms. Define your theme once and watch it work everywhere seamlessly.",
-    actionLabel: "View Themes",
-    actionHref: "/components",
+      'Consistent design system across all platforms. Define your theme once and watch it work everywhere seamlessly.',
+    actionLabel: 'View Themes',
+    actionHref: '/components',
   },
   {
     icon: Zap,
-    title: "Performance First",
+    title: 'Performance First',
     description:
-      "Optimized for speed and efficiency. Lightning-fast rendering with minimal bundle size for maximum performance.",
-    actionLabel: "Benchmarks",
-    actionHref: "/components",
+      'Optimized for speed and efficiency. Lightning-fast rendering with minimal bundle size for maximum performance.',
+    actionLabel: 'Benchmarks',
+    actionHref: '/components',
   },
   {
     icon: Settings,
-    title: "Fully Customizable",
+    title: 'Fully Customizable',
     description:
-      "Every component is built to be customized. Override styles, behaviors, and functionality with ease using our powerful API.",
-    actionLabel: "Customize",
-    actionHref: "/components",
+      'Every component is built to be customized. Override styles, behaviors, and functionality with ease using our powerful API.',
+    actionLabel: 'Customize',
+    actionHref: '/components',
   },
 ];
 
@@ -54,8 +54,8 @@ export function FeaturesGrid() {
       <div className="text-center mb-20 animate-[fadeInUp_0.8s_cubic-bezier(0.16,1,0.3,1)_both]">
         <h2
           className={cn(
-            "text-[clamp(2.5rem,6vw,4rem)] mb-4 font-extrabold",
-            "bg-gradient-to-r from-text-primary to-purple-500 bg-clip-text text-transparent"
+            'text-[clamp(2.5rem,6vw,4rem)] mb-4 font-extrabold',
+            'bg-gradient-to-r from-text-primary to-purple-500 bg-clip-text text-transparent',
           )}
         >
           Powerful Features

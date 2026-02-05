@@ -1,10 +1,10 @@
-export { Input } from "./input";
+export { Input } from './input';
 export type {
   InputProps,
   InputSize,
   InputVariant,
   InputWrapperProps,
-} from "./input";
+} from './input';
 export {
   InputWrapper,
   InputLabel,
@@ -12,4 +12,4 @@ export {
   InputError,
   InputPlaceholder,
   InputClearButton,
-} from "./input";
+} from './input';

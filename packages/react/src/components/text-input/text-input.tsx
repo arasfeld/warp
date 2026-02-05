@@ -1,17 +1,23 @@
-"use client";
+'use client';
 
-import React, { forwardRef } from "react";
+import React, { forwardRef } from 'react';
 
-import { Input, InputWrapper } from "../input/input";
-import type { InputProps, InputSize, InputVariant, InputWrapperProps } from "../input/input";
+import { Input, InputWrapper } from '../input/input';
+import type {
+  InputProps,
+  InputSize,
+  InputVariant,
+  InputWrapperProps,
+} from '../input/input';
 
 /**
  * TextInput component props
  * Combines Input and Input.Wrapper props
  */
 export interface TextInputProps
-  extends Omit<InputProps, "component" | "multiline">,
-    Omit<InputWrapperProps, "children" | "id" | "size" | "error"> {
+  extends
+    Omit<InputProps, 'component' | 'multiline'>,
+    Omit<InputWrapperProps, 'children' | 'id' | 'size' | 'error'> {
   /** Input size */
   size?: InputSize;
   /** Input variant */
@@ -54,8 +60,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       errorProps,
       inputContainer,
       // Input props
-      size = "sm",
-      variant = "default",
+      size = 'sm',
+      variant = 'default',
       radius,
       disabled,
       error,
@@ -76,7 +82,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       id,
       ...props
     },
-    ref
+    ref,
   ) => {
     const hasWrapper = label || description || error;
 
@@ -118,7 +124,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         id={id}
         label={label}
         description={description}
-        error={typeof error === "boolean" ? undefined : error}
+        error={typeof error === 'boolean' ? undefined : error}
         required={required}
         withAsterisk={withAsterisk}
         size={size}
@@ -132,7 +138,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         {inputElement}
       </InputWrapper>
     );
-  }
+  },
 );
 
-TextInput.displayName = "TextInput";
+TextInput.displayName = 'TextInput';

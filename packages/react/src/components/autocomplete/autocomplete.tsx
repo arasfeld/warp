@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, {
   forwardRef,
@@ -6,13 +6,17 @@ import React, {
   useCallback,
   useRef,
   useEffect,
-} from "react";
-import { createPortal } from "react-dom";
-import { Check, ChevronDown, Loader2, X } from "lucide-react";
+} from 'react';
+import { createPortal } from 'react-dom';
+import { Check, ChevronDown, Loader2, X } from 'lucide-react';
 
-import { cn } from "../../utils/cn";
-import { InputWrapper } from "../input/input";
-import type { InputSize, InputVariant, InputWrapperProps } from "../input/input";
+import { cn } from '../../utils/cn';
+import { InputWrapper } from '../input/input';
+import type {
+  InputSize,
+  InputVariant,
+  InputWrapperProps,
+} from '../input/input';
 
 /**
  * Autocomplete option type
@@ -28,8 +32,9 @@ export interface AutocompleteOption {
  * Autocomplete component props
  */
 export interface AutocompleteProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "onChange">,
-    Omit<InputWrapperProps, "children" | "id" | "size" | "error"> {
+  extends
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange'>,
+    Omit<InputWrapperProps, 'children' | 'id' | 'size' | 'error'> {
   /** Options data */
   data: (string | AutocompleteOption)[];
   /** Input size */
@@ -79,8 +84,10 @@ export interface AutocompleteProps
 /**
  * Normalize option to AutocompleteOption format
  */
-function normalizeOption(option: string | AutocompleteOption): AutocompleteOption {
-  if (typeof option === "string") {
+function normalizeOption(
+  option: string | AutocompleteOption,
+): AutocompleteOption {
+  if (typeof option === 'string') {
     return { value: option, label: option };
   }
   return { ...option, label: option.label ?? option.value };
@@ -123,12 +130,12 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       inputContainer,
       // Autocomplete-specific props
       data,
-      size = "sm",
-      variant = "default",
+      size = 'sm',
+      variant = 'default',
       radius,
       error,
       value: controlledValue,
-      defaultValue = "",
+      defaultValue = '',
       onChange,
       onOptionSubmit,
       placeholder,
@@ -141,7 +148,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       filter = defaultFilter,
       limit,
       selectFirstOptionOnChange = false,
-      nothingFoundMessage = "Nothing found",
+      nothingFoundMessage = 'Nothing found',
       clearable = false,
       className,
       id,
@@ -150,7 +157,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       onKeyDown,
       ...props
     },
-    ref
+    ref,
   ) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -158,7 +165,11 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
     const [internalValue, setInternalValue] = useState(defaultValue);
     const [isOpen, setIsOpen] = useState(dropdownOpenedByDefault);
     const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
-    const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
+    const [dropdownPosition, setDropdownPosition] = useState({
+      top: 0,
+      left: 0,
+      width: 0,
+    });
 
     const isControlled = controlledValue !== undefined;
     const currentValue = isControlled ? controlledValue : internalValue;
@@ -166,9 +177,11 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
     // Normalize and filter options
     const normalizedOptions = data.map(normalizeOption);
     const filteredOptions = normalizedOptions.filter(
-      (option) => !option.disabled && filter(option, currentValue)
+      (option) => !option.disabled && filter(option, currentValue),
     );
-    const displayedOptions = limit ? filteredOptions.slice(0, limit) : filteredOptions;
+    const displayedOptions = limit
+      ? filteredOptions.slice(0, limit)
+      : filteredOptions;
 
     // Mount check for portal
     useEffect(() => {
@@ -191,11 +204,11 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
     useEffect(() => {
       if (isOpen) {
         updateDropdownPosition();
-        window.addEventListener("scroll", updateDropdownPosition, true);
-        window.addEventListener("resize", updateDropdownPosition);
+        window.addEventListener('scroll', updateDropdownPosition, true);
+        window.addEventListener('resize', updateDropdownPosition);
         return () => {
-          window.removeEventListener("scroll", updateDropdownPosition, true);
-          window.removeEventListener("resize", updateDropdownPosition);
+          window.removeEventListener('scroll', updateDropdownPosition, true);
+          window.removeEventListener('resize', updateDropdownPosition);
         };
       }
     }, [isOpen, updateDropdownPosition]);
@@ -213,8 +226,9 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         }
       };
 
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => document.removeEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
+      return () =>
+        document.removeEventListener('mousedown', handleClickOutside);
     }, [isOpen]);
 
     // Update value
@@ -225,7 +239,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         }
         onChange?.(newValue);
       },
-      [isControlled, onChange]
+      [isControlled, onChange],
     );
 
     // Handle input change
@@ -234,9 +248,11 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         const newValue = e.target.value;
         setValue(newValue);
         setIsOpen(true);
-        setHighlightedIndex(selectFirstOptionOnChange && displayedOptions.length > 0 ? 0 : -1);
+        setHighlightedIndex(
+          selectFirstOptionOnChange && displayedOptions.length > 0 ? 0 : -1,
+        );
       },
-      [setValue, selectFirstOptionOnChange, displayedOptions.length]
+      [setValue, selectFirstOptionOnChange, displayedOptions.length],
     );
 
     // Handle option select
@@ -248,17 +264,17 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         setHighlightedIndex(-1);
         inputRef.current?.focus();
       },
-      [setValue, onOptionSubmit]
+      [setValue, onOptionSubmit],
     );
 
     // Handle clear
     const handleClear = useCallback(
       (e: React.MouseEvent) => {
         e.stopPropagation();
-        setValue("");
+        setValue('');
         inputRef.current?.focus();
       },
-      [setValue]
+      [setValue],
     );
 
     // Handle focus
@@ -268,7 +284,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         updateDropdownPosition();
         onFocus?.(e);
       },
-      [onFocus, updateDropdownPosition]
+      [onFocus, updateDropdownPosition],
     );
 
     // Handle blur
@@ -282,7 +298,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         }, 200);
         onBlur?.(e);
       },
-      [onBlur]
+      [onBlur],
     );
 
     // Handle keyboard navigation
@@ -291,103 +307,114 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         if (disabled) return;
 
         switch (e.key) {
-          case "ArrowDown":
+          case 'ArrowDown':
             e.preventDefault();
             if (!isOpen) {
               setIsOpen(true);
               updateDropdownPosition();
             }
             setHighlightedIndex((prev) =>
-              prev < displayedOptions.length - 1 ? prev + 1 : 0
+              prev < displayedOptions.length - 1 ? prev + 1 : 0,
             );
             break;
-          case "ArrowUp":
+          case 'ArrowUp':
             e.preventDefault();
             setHighlightedIndex((prev) =>
-              prev > 0 ? prev - 1 : displayedOptions.length - 1
+              prev > 0 ? prev - 1 : displayedOptions.length - 1,
             );
             break;
-          case "Enter":
+          case 'Enter':
             e.preventDefault();
             if (highlightedIndex >= 0 && displayedOptions[highlightedIndex]) {
               handleOptionSelect(displayedOptions[highlightedIndex]);
             }
             break;
-          case "Escape":
+          case 'Escape':
             setIsOpen(false);
             setHighlightedIndex(-1);
             break;
-          case "Tab":
+          case 'Tab':
             setIsOpen(false);
             break;
         }
 
         onKeyDown?.(e);
       },
-      [disabled, isOpen, displayedOptions, highlightedIndex, handleOptionSelect, onKeyDown, updateDropdownPosition]
+      [
+        disabled,
+        isOpen,
+        displayedOptions,
+        highlightedIndex,
+        handleOptionSelect,
+        onKeyDown,
+        updateDropdownPosition,
+      ],
     );
 
     const hasWrapper = label || description || error;
 
     // Size classes
     const sizeClasses: Record<InputSize, string> = {
-      xs: "h-7 text-xs",
-      sm: "h-9 text-sm",
-      md: "h-10 text-base",
-      lg: "h-11 text-base",
-      xl: "h-12 text-lg",
+      xs: 'h-7 text-xs',
+      sm: 'h-9 text-sm',
+      md: 'h-10 text-base',
+      lg: 'h-11 text-base',
+      xl: 'h-12 text-lg',
     };
 
-    const paddingClasses: Record<InputSize, { base: string; left: string; right: string }> = {
-      xs: { base: "px-2", left: "pl-7", right: "pr-7" },
-      sm: { base: "px-3", left: "pl-9", right: "pr-9" },
-      md: { base: "px-4", left: "pl-10", right: "pr-10" },
-      lg: { base: "px-4", left: "pl-11", right: "pr-11" },
-      xl: { base: "px-5", left: "pl-12", right: "pr-12" },
+    const paddingClasses: Record<
+      InputSize,
+      { base: string; left: string; right: string }
+    > = {
+      xs: { base: 'px-2', left: 'pl-7', right: 'pr-7' },
+      sm: { base: 'px-3', left: 'pl-9', right: 'pr-9' },
+      md: { base: 'px-4', left: 'pl-10', right: 'pr-10' },
+      lg: { base: 'px-4', left: 'pl-11', right: 'pr-11' },
+      xl: { base: 'px-5', left: 'pl-12', right: 'pr-12' },
     };
 
     // Radius classes
     const getRadiusClass = () => {
-      if (radius === undefined) return "rounded-md";
-      if (typeof radius === "number") return "";
+      if (radius === undefined) return 'rounded-md';
+      if (typeof radius === 'number') return '';
       const radiusMap: Record<string, string> = {
-        xs: "rounded-sm",
-        sm: "rounded",
-        md: "rounded-md",
-        lg: "rounded-lg",
-        xl: "rounded-xl",
-        full: "rounded-full",
+        xs: 'rounded-sm',
+        sm: 'rounded',
+        md: 'rounded-md',
+        lg: 'rounded-lg',
+        xl: 'rounded-xl',
+        full: 'rounded-full',
       };
-      return radiusMap[radius] || "rounded-md";
+      return radiusMap[radius] || 'rounded-md';
     };
 
     // Variant classes
     const getVariantClasses = () => {
-      if (variant === "unstyled") {
-        return "border-0 bg-transparent p-0";
+      if (variant === 'unstyled') {
+        return 'border-0 bg-transparent p-0';
       }
 
       const variantMap: Record<InputVariant, string> = {
         default:
-          "border border-divider bg-background-default focus:ring-2 focus:ring-primary focus:ring-offset-2",
+          'border border-divider bg-background-default focus:ring-2 focus:ring-primary focus:ring-offset-2',
         filled:
-          "border-0 bg-background-paper focus:ring-2 focus:ring-primary focus:ring-offset-2",
-        unstyled: "",
+          'border-0 bg-background-paper focus:ring-2 focus:ring-primary focus:ring-offset-2',
+        unstyled: '',
       };
 
       return variantMap[variant];
     };
 
-    const errorClasses = error ? "border-error focus:ring-error" : "";
+    const errorClasses = error ? 'border-error focus:ring-error' : '';
 
     const radiusStyle: React.CSSProperties =
-      typeof radius === "number" ? { borderRadius: `${radius}px` } : {};
+      typeof radius === 'number' ? { borderRadius: `${radius}px` } : {};
 
     const showClear = clearable && currentValue && !disabled && !loading;
     const showRightSection = rightSection || loading || showClear;
 
     const inputElement = (
-      <div className={cn("relative", className)}>
+      <div className={cn('relative', className)}>
         {/* Left section */}
         {leftSection && (
           <div className="absolute left-0 top-0 bottom-0 flex items-center justify-center pl-3 pointer-events-none">
@@ -398,8 +425,10 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         {/* Input */}
         <input
           ref={(node) => {
-            (inputRef as React.MutableRefObject<HTMLInputElement | null>).current = node;
-            if (typeof ref === "function") {
+            (
+              inputRef as React.MutableRefObject<HTMLInputElement | null>
+            ).current = node;
+            if (typeof ref === 'function') {
               ref(node);
             } else if (ref) {
               ref.current = node;
@@ -412,22 +441,24 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
           aria-autocomplete="list"
           aria-controls={isOpen ? `${id}-listbox` : undefined}
           aria-activedescendant={
-            highlightedIndex >= 0 ? `${id}-option-${highlightedIndex}` : undefined
+            highlightedIndex >= 0
+              ? `${id}-option-${highlightedIndex}`
+              : undefined
           }
           value={currentValue}
           placeholder={placeholder}
           disabled={disabled}
           className={cn(
-            "w-full transition-colors outline-none",
-            "placeholder:text-text-secondary",
-            "disabled:cursor-not-allowed disabled:opacity-50",
+            'w-full transition-colors outline-none',
+            'placeholder:text-text-secondary',
+            'disabled:cursor-not-allowed disabled:opacity-50',
             sizeClasses[size],
             paddingClasses[size].base,
             leftSection && paddingClasses[size].left,
             showRightSection && paddingClasses[size].right,
             getRadiusClass(),
             getVariantClasses(),
-            errorClasses
+            errorClasses,
           )}
           style={radiusStyle}
           onChange={handleInputChange}
@@ -440,7 +471,9 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         {/* Right section */}
         {showRightSection && (
           <div className="absolute right-0 top-0 bottom-0 flex items-center justify-center pr-3 gap-1">
-            {loading && <Loader2 className="h-4 w-4 animate-spin text-text-secondary" />}
+            {loading && (
+              <Loader2 className="h-4 w-4 animate-spin text-text-secondary" />
+            )}
             {showClear && (
               <button
                 type="button"
@@ -456,23 +489,27 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         )}
 
         {/* Dropdown */}
-        {mounted && isOpen && (
+        {mounted &&
+          isOpen &&
           createPortal(
             <div
               ref={dropdownRef}
               id={`${id}-listbox`}
               role="listbox"
               className={cn(
-                "absolute z-[9999] border border-divider shadow-lg overflow-auto",
-                "bg-white dark:bg-gray-900",
-                getRadiusClass()
+                'absolute z-[9999] border border-divider shadow-lg overflow-auto',
+                'bg-white dark:bg-gray-900',
+                getRadiusClass(),
               )}
               style={{
                 ...radiusStyle,
                 top: dropdownPosition.top,
                 left: dropdownPosition.left,
                 width: dropdownPosition.width,
-                maxHeight: typeof maxDropdownHeight === "number" ? `${maxDropdownHeight}px` : maxDropdownHeight,
+                maxHeight:
+                  typeof maxDropdownHeight === 'number'
+                    ? `${maxDropdownHeight}px`
+                    : maxDropdownHeight,
               }}
             >
               {displayedOptions.length > 0 ? (
@@ -483,10 +520,12 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                     role="option"
                     aria-selected={highlightedIndex === index}
                     className={cn(
-                      "px-3 py-2 cursor-pointer transition-colors",
-                      "text-text-primary",
-                      highlightedIndex === index ? "bg-gray-100 dark:bg-gray-800" : "bg-white dark:bg-gray-900",
-                      option.disabled && "opacity-50 cursor-not-allowed"
+                      'px-3 py-2 cursor-pointer transition-colors',
+                      'text-text-primary',
+                      highlightedIndex === index
+                        ? 'bg-gray-100 dark:bg-gray-800'
+                        : 'bg-white dark:bg-gray-900',
+                      option.disabled && 'opacity-50 cursor-not-allowed',
                     )}
                     onMouseDown={(e) => {
                       e.preventDefault(); // Prevent blur from firing before selection
@@ -505,9 +544,8 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                 </div>
               )}
             </div>,
-            document.body
-          )
-        )}
+            document.body,
+          )}
       </div>
     );
 
@@ -520,7 +558,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         id={id}
         label={label}
         description={description}
-        error={typeof error === "boolean" ? undefined : error}
+        error={typeof error === 'boolean' ? undefined : error}
         required={required}
         withAsterisk={withAsterisk}
         size={size}
@@ -534,7 +572,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         {inputElement}
       </InputWrapper>
     );
-  }
+  },
 );
 
-Autocomplete.displayName = "Autocomplete";
+Autocomplete.displayName = 'Autocomplete';

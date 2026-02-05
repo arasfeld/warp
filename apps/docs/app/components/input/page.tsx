@@ -1,21 +1,21 @@
-import { Input, InputWrapper } from "@warp/react";
+import { Input, InputWrapper } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function InputPage() {
   const tocItems = [
-    { id: "basic", title: "Basic Input", level: 2 },
-    { id: "sizes", title: "Sizes", level: 2 },
-    { id: "variants", title: "Variants", level: 2 },
-    { id: "states", title: "States", level: 2 },
-    { id: "sections", title: "Left and Right Sections", level: 2 },
+    { id: 'basic', title: 'Basic Input', level: 2 },
+    { id: 'sizes', title: 'Sizes', level: 2 },
+    { id: 'variants', title: 'Variants', level: 2 },
+    { id: 'states', title: 'States', level: 2 },
+    { id: 'sections', title: 'Left and Right Sections', level: 2 },
   ];
 
   return (
@@ -52,10 +52,7 @@ export default function InputPage() {
 
       {/* Sizes */}
       <Section id="sizes">
-        <SectionHeader
-          title="Sizes"
-          subtitle="Different input sizes"
-        />
+        <SectionHeader title="Sizes" subtitle="Different input sizes" />
         <DemoArea className="flex-col items-stretch gap-4">
           <InputWrapper label="Small" size="sm">
             <Input size="sm" placeholder="Small input" />
@@ -116,10 +113,7 @@ export default function InputPage() {
 
       {/* States */}
       <Section id="states">
-        <SectionHeader
-          title="States"
-          subtitle="Error and helper text states"
-        />
+        <SectionHeader title="States" subtitle="Error and helper text states" />
         <DemoArea className="flex-col items-stretch gap-4">
           <InputWrapper
             label="With Helper Text"
@@ -127,10 +121,7 @@ export default function InputPage() {
           >
             <Input placeholder="Enter value" />
           </InputWrapper>
-          <InputWrapper
-            label="With Error"
-            error="This field is required"
-          >
+          <InputWrapper label="With Error" error="This field is required">
             <Input placeholder="Enter value" error />
           </InputWrapper>
           <InputWrapper label="Disabled">

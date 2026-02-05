@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { cn } from "@warp/react";
+import { useEffect, useState } from 'react';
+import { cn } from '@warp/react';
 
-import { List, ListItem } from "./ui";
+import { List, ListItem } from './ui';
 
 interface TableOfContentsItem {
   id: string;
@@ -17,7 +17,7 @@ interface TableOfContentsProps {
 }
 
 export function TableOfContents({ items, className }: TableOfContentsProps) {
-  const [activeId, setActiveId] = useState<string>("");
+  const [activeId, setActiveId] = useState<string>('');
 
   useEffect(() => {
     if (items.length === 0) return;
@@ -30,7 +30,7 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
       (entries) => {
         // Find the section that's most visible in the viewport
         let maxIntersection = 0;
-        let activeSection = "";
+        let activeSection = '';
 
         entries.forEach((entry) => {
           if (
@@ -59,8 +59,8 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
       },
       {
         threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
-        rootMargin: "-100px 0px -60% 0px",
-      }
+        rootMargin: '-100px 0px -60% 0px',
+      },
     );
 
     sections.forEach((section) => {
@@ -79,14 +79,14 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Initial check
 
     return () => {
       sections.forEach((section) => {
         observer.unobserve(section);
       });
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [items]);
 
@@ -121,11 +121,11 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
       />
       <aside
         className={cn(
-          "component-toc fixed right-0 top-[70px] bottom-0 w-[260px]",
-          "bg-white/40 dark:bg-[#16161f]/30 backdrop-blur-[20px]",
-          "border-l border-gray-200/50 dark:border-white/5",
-          "overflow-y-auto z-[100] px-6 py-8",
-          className
+          'component-toc fixed right-0 top-[70px] bottom-0 w-[260px]',
+          'bg-white/40 dark:bg-[#16161f]/30 backdrop-blur-[20px]',
+          'border-l border-gray-200/50 dark:border-white/5',
+          'overflow-y-auto z-[100] px-6 py-8',
+          className,
         )}
       >
         <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-6">
@@ -137,19 +137,19 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
               <a
                 href={`#${item.id}`}
                 className={cn(
-                  "block py-2 pl-3 pr-0 text-[0.9rem] transition-all duration-300",
-                  "border-l-2",
+                  'block py-2 pl-3 pr-0 text-[0.9rem] transition-all duration-300',
+                  'border-l-2',
                   activeId === item.id
-                    ? "text-foreground dark:text-[#e0e0ff] border-l-[#a855f7] pl-4 font-medium"
-                    : "text-muted-foreground dark:text-[#8888aa] border-l-gray-300/50 dark:border-l-white/10 hover:text-foreground dark:hover:text-[#e0e0ff] hover:border-l-[#a855f7] hover:pl-4"
+                    ? 'text-foreground dark:text-[#e0e0ff] border-l-[#a855f7] pl-4 font-medium'
+                    : 'text-muted-foreground dark:text-[#8888aa] border-l-gray-300/50 dark:border-l-white/10 hover:text-foreground dark:hover:text-[#e0e0ff] hover:border-l-[#a855f7] hover:pl-4',
                 )}
                 onClick={(e) => {
                   e.preventDefault();
                   const target = document.getElementById(item.id);
                   if (target) {
                     target.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
+                      behavior: 'smooth',
+                      block: 'start',
                     });
                   }
                 }}

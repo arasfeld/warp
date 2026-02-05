@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, {
   forwardRef,
@@ -6,14 +6,14 @@ import React, {
   useCallback,
   useRef,
   useEffect,
-} from "react";
+} from 'react';
 
-import { cn } from "../../utils/cn";
+import { cn } from '../../utils/cn';
 
 /**
  * Slider size options
  */
-export type SliderSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type SliderSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Slider mark definition
@@ -26,8 +26,10 @@ export interface SliderMark {
 /**
  * Slider component props
  */
-export interface SliderProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+export interface SliderProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'onChange'
+> {
   /** Current value (controlled) */
   value?: number;
   /** Default value (uncontrolled) */
@@ -82,7 +84,7 @@ function clamp(value: number, min: number, max: number): number {
  */
 function getDecimalPlaces(num: number): number {
   const str = num.toString();
-  const decimalIndex = str.indexOf(".");
+  const decimalIndex = str.indexOf('.');
   return decimalIndex === -1 ? 0 : str.length - decimalIndex - 1;
 }
 
@@ -111,7 +113,7 @@ function getValueFromPosition(
   position: number,
   min: number,
   max: number,
-  step: number
+  step: number,
 ): number {
   const raw = min + (position / 100) * (max - min);
   return roundToStep(raw, step, min);
@@ -147,7 +149,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       min = 0,
       max = 100,
       step = 1,
-      size = "md",
+      size = 'md',
       color,
       radius,
       disabled = false,
@@ -162,7 +164,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [internalValue, setInternalValue] = useState(defaultValue);
     const [isDragging, setIsDragging] = useState(false);
@@ -173,7 +175,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
     const currentValue = clamp(
       isControlled ? controlledValue : internalValue,
       min,
-      max
+      max,
     );
 
     const position = getPositionFromValue(currentValue, min, max);
@@ -192,7 +194,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         }
         onChange?.(rounded);
       },
-      [isControlled, onChange, min, max, step, precision]
+      [isControlled, onChange, min, max, step, precision],
     );
 
     // Get value from mouse/touch position
@@ -201,10 +203,14 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         if (!trackRef.current) return currentValue;
 
         const rect = trackRef.current.getBoundingClientRect();
-        const percent = clamp(((clientX - rect.left) / rect.width) * 100, 0, 100);
+        const percent = clamp(
+          ((clientX - rect.left) / rect.width) * 100,
+          0,
+          100,
+        );
         return getValueFromPosition(percent, min, max, step);
       },
-      [currentValue, min, max, step]
+      [currentValue, min, max, step],
     );
 
     // Handle mouse/touch move
@@ -214,7 +220,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         const newValue = getValueFromEvent(clientX);
         setValue(newValue);
       },
-      [disabled, getValueFromEvent, setValue]
+      [disabled, getValueFromEvent, setValue],
     );
 
     // Handle mouse down on track
@@ -225,7 +231,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         setIsDragging(true);
         handleMove(e.clientX);
       },
-      [disabled, handleMove]
+      [disabled, handleMove],
     );
 
     // Handle touch start on track
@@ -237,7 +243,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         setIsDragging(true);
         handleMove(touch.clientX);
       },
-      [disabled, handleMove]
+      [disabled, handleMove],
     );
 
     // Handle drag end
@@ -266,16 +272,16 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         handleDragEnd();
       };
 
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleEnd);
-      document.addEventListener("touchmove", handleTouchMove);
-      document.addEventListener("touchend", handleEnd);
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleEnd);
+      document.addEventListener('touchmove', handleTouchMove);
+      document.addEventListener('touchend', handleEnd);
 
       return () => {
-        document.removeEventListener("mousemove", handleMouseMove);
-        document.removeEventListener("mouseup", handleEnd);
-        document.removeEventListener("touchmove", handleTouchMove);
-        document.removeEventListener("touchend", handleEnd);
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleEnd);
+        document.removeEventListener('touchmove', handleTouchMove);
+        document.removeEventListener('touchend', handleEnd);
       };
     }, [isDragging, handleMove, handleDragEnd]);
 
@@ -287,21 +293,21 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         let newValue = currentValue;
 
         switch (e.key) {
-          case "ArrowRight":
-          case "ArrowUp":
+          case 'ArrowRight':
+          case 'ArrowUp':
             e.preventDefault();
             newValue = currentValue + step;
             break;
-          case "ArrowLeft":
-          case "ArrowDown":
+          case 'ArrowLeft':
+          case 'ArrowDown':
             e.preventDefault();
             newValue = currentValue - step;
             break;
-          case "Home":
+          case 'Home':
             e.preventDefault();
             newValue = min;
             break;
-          case "End":
+          case 'End':
             e.preventDefault();
             newValue = max;
             break;
@@ -312,58 +318,89 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         setValue(newValue);
         onChangeEnd?.(clamp(newValue, min, max));
       },
-      [disabled, currentValue, step, min, max, setValue, onChangeEnd]
+      [disabled, currentValue, step, min, max, setValue, onChangeEnd],
     );
 
     // Size classes
     const sizeConfig: Record<SliderSize, { track: string; thumb: string }> = {
-      xs: { track: "h-1", thumb: "h-3 w-3" },
-      sm: { track: "h-1.5", thumb: "h-4 w-4" },
-      md: { track: "h-2", thumb: "h-5 w-5" },
-      lg: { track: "h-2.5", thumb: "h-6 w-6" },
-      xl: { track: "h-3", thumb: "h-7 w-7" },
+      xs: { track: 'h-1', thumb: 'h-3 w-3' },
+      sm: { track: 'h-1.5', thumb: 'h-4 w-4' },
+      md: { track: 'h-2', thumb: 'h-5 w-5' },
+      lg: { track: 'h-2.5', thumb: 'h-6 w-6' },
+      xl: { track: 'h-3', thumb: 'h-7 w-7' },
     };
 
     // Radius classes
     const getRadiusClass = () => {
-      if (radius === undefined) return "rounded-full";
-      if (typeof radius === "number") return "";
+      if (radius === undefined) return 'rounded-full';
+      if (typeof radius === 'number') return '';
       const radiusMap: Record<string, string> = {
-        xs: "rounded-sm",
-        sm: "rounded",
-        md: "rounded-md",
-        lg: "rounded-lg",
-        xl: "rounded-xl",
-        full: "rounded-full",
+        xs: 'rounded-sm',
+        sm: 'rounded',
+        md: 'rounded-md',
+        lg: 'rounded-lg',
+        xl: 'rounded-xl',
+        full: 'rounded-full',
       };
-      return radiusMap[radius] || "rounded-full";
+      return radiusMap[radius] || 'rounded-full';
     };
 
     const radiusStyle: React.CSSProperties =
-      typeof radius === "number" ? { borderRadius: `${radius}px` } : {};
+      typeof radius === 'number' ? { borderRadius: `${radius}px` } : {};
 
     // Format label
     const formatLabel = (val: number): React.ReactNode => {
       if (label === null) return null;
-      if (typeof label === "function") return label(val);
+      if (typeof label === 'function') return label(val);
       if (label !== undefined) return label;
       return val;
     };
 
     const showLabel =
-      label !== null && (labelAlwaysOn || (showLabelOnHover && (isDragging || isHovered)));
+      label !== null &&
+      (labelAlwaysOn || (showLabelOnHover && (isDragging || isHovered)));
 
     // Color classes for theme colors
     const getColorClasses = () => {
-      if (!color) return { track: "bg-primary", border: "border-primary", mark: "bg-primary" };
-      const colorMap: Record<string, { track: string; border: string; mark: string }> = {
-        primary: { track: "bg-primary", border: "border-primary", mark: "bg-primary" },
-        secondary: { track: "bg-secondary", border: "border-secondary", mark: "bg-secondary" },
-        success: { track: "bg-success", border: "border-success", mark: "bg-success" },
-        warning: { track: "bg-warning", border: "border-warning", mark: "bg-warning" },
-        error: { track: "bg-error", border: "border-error", mark: "bg-error" },
+      if (!color)
+        return {
+          track: 'bg-primary',
+          border: 'border-primary',
+          mark: 'bg-primary',
+        };
+      const colorMap: Record<
+        string,
+        { track: string; border: string; mark: string }
+      > = {
+        primary: {
+          track: 'bg-primary',
+          border: 'border-primary',
+          mark: 'bg-primary',
+        },
+        secondary: {
+          track: 'bg-secondary',
+          border: 'border-secondary',
+          mark: 'bg-secondary',
+        },
+        success: {
+          track: 'bg-success',
+          border: 'border-success',
+          mark: 'bg-success',
+        },
+        warning: {
+          track: 'bg-warning',
+          border: 'border-warning',
+          mark: 'bg-warning',
+        },
+        error: { track: 'bg-error', border: 'border-error', mark: 'bg-error' },
       };
-      return colorMap[color] || { track: "bg-primary", border: "border-primary", mark: "bg-primary" };
+      return (
+        colorMap[color] || {
+          track: 'bg-primary',
+          border: 'border-primary',
+          mark: 'bg-primary',
+        }
+      );
     };
 
     const colorClasses = getColorClasses();
@@ -372,9 +409,9 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       <div
         ref={ref}
         className={cn(
-          "relative py-4",
-          disabled && "opacity-50 cursor-not-allowed",
-          className
+          'relative py-4',
+          disabled && 'opacity-50 cursor-not-allowed',
+          className,
         )}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -384,11 +421,11 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         <div
           ref={trackRef}
           className={cn(
-            "relative w-full cursor-pointer",
+            'relative w-full cursor-pointer',
             sizeConfig[size].track,
             getRadiusClass(),
-            "bg-gray-200 dark:bg-gray-700",
-            disabled && "cursor-not-allowed"
+            'bg-gray-200 dark:bg-gray-700',
+            disabled && 'cursor-not-allowed',
           )}
           style={radiusStyle}
           onMouseDown={handleTrackMouseDown}
@@ -397,9 +434,9 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
           {/* Filled track */}
           <div
             className={cn(
-              "absolute top-0 h-full",
+              'absolute top-0 h-full',
               getRadiusClass(),
-              colorClasses.track
+              colorClasses.track,
             )}
             style={{
               ...radiusStyle,
@@ -424,8 +461,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
               >
                 <div
                   className={cn(
-                    "w-1.5 h-1.5 rounded-full -translate-x-1/2",
-                    isActive ? colorClasses.mark : "bg-gray-400 dark:bg-gray-500"
+                    'w-1.5 h-1.5 rounded-full -translate-x-1/2',
+                    isActive
+                      ? colorClasses.mark
+                      : 'bg-gray-400 dark:bg-gray-500',
                   )}
                 />
                 {mark.label && (
@@ -447,15 +486,16 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
             aria-label={thumbLabel}
             aria-disabled={disabled}
             className={cn(
-              "absolute top-1/2 -translate-y-1/2 -translate-x-1/2",
-              "bg-white border-2 shadow-md",
-              "transition-transform",
-              !disabled && "hover:scale-110 focus:scale-110",
-              !disabled && "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-              isDragging && "scale-110",
+              'absolute top-1/2 -translate-y-1/2 -translate-x-1/2',
+              'bg-white border-2 shadow-md',
+              'transition-transform',
+              !disabled && 'hover:scale-110 focus:scale-110',
+              !disabled &&
+                'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+              isDragging && 'scale-110',
               sizeConfig[size].thumb,
               getRadiusClass(),
-              colorClasses.border
+              colorClasses.border,
             )}
             style={{
               left: `${position}%`,
@@ -467,12 +507,12 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
             {showLabel && (
               <div
                 className={cn(
-                  "absolute bottom-full left-1/2 -translate-x-1/2 mb-2",
-                  "px-2 py-1 rounded text-xs font-medium",
-                  "bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900",
-                  "whitespace-nowrap",
-                  labelTransition && "transition-opacity duration-150",
-                  showLabel ? "opacity-100" : "opacity-0"
+                  'absolute bottom-full left-1/2 -translate-x-1/2 mb-2',
+                  'px-2 py-1 rounded text-xs font-medium',
+                  'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900',
+                  'whitespace-nowrap',
+                  labelTransition && 'transition-opacity duration-150',
+                  showLabel ? 'opacity-100' : 'opacity-0',
                 )}
               >
                 {formatLabel(currentValue)}
@@ -484,7 +524,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
-Slider.displayName = "Slider";
+Slider.displayName = 'Slider';

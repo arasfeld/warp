@@ -1,23 +1,23 @@
-import { Button, Card, Text } from "@warp/react";
+import { Button, Card, Text } from '@warp/react';
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from '@/components/code-block';
 import {
   ComponentPageLayout,
   ContentHeader,
   DemoArea,
   Section,
   SectionHeader,
-} from "@/components/ui";
+} from '@/components/ui';
 
 export default function CardPage() {
   const tocItems = [
-    { id: "basic", title: "Basic Card", level: 2 },
-    { id: "with-sections", title: "Card with Sections", level: 2 },
-    { id: "padding", title: "Padding", level: 2 },
-    { id: "radius", title: "Radius", level: 2 },
-    { id: "shadow", title: "Shadow", level: 2 },
-    { id: "with-border", title: "With Border", level: 2 },
-    { id: "polymorphic", title: "Polymorphic Component", level: 2 },
+    { id: 'basic', title: 'Basic Card', level: 2 },
+    { id: 'with-sections', title: 'Card with Sections', level: 2 },
+    { id: 'padding', title: 'Padding', level: 2 },
+    { id: 'radius', title: 'Radius', level: 2 },
+    { id: 'shadow', title: 'Shadow', level: 2 },
+    { id: 'with-border', title: 'With Border', level: 2 },
+    { id: 'polymorphic', title: 'Polymorphic Component', level: 2 },
   ];
 
   return (
@@ -95,10 +95,7 @@ export default function CardPage() {
 
       {/* Padding */}
       <Section id="padding">
-        <SectionHeader
-          title="Padding"
-          subtitle="Different padding values"
-        />
+        <SectionHeader title="Padding" subtitle="Different padding values" />
         <DemoArea className="flex-col items-stretch gap-4">
           <Card padding="xs" withBorder>
             <Text size="sm">Padding: xs</Text>
@@ -201,10 +198,7 @@ export default function CardPage() {
 
       {/* Shadow */}
       <Section id="shadow">
-        <SectionHeader
-          title="Shadow"
-          subtitle="Different shadow values"
-        />
+        <SectionHeader title="Shadow" subtitle="Different shadow values" />
         <DemoArea className="grid grid-cols-2 md:grid-cols-3 gap-4">
           <Card padding="md" shadow="xs" withBorder>
             <Text size="sm">xs</Text>
