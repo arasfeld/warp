@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import {
-  Pressable,
-  View,
-  Text,
-  type StyleProp,
-  type ViewStyle,
-} from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { withUniwind } from 'uniwind';
+
+const StyledAnimatedView = withUniwind(Animated.View);
 
 import type { SwitchBaseProps, SwitchSize } from '@warp/core';
 import { SWITCH_SIZE_CONFIG } from '@warp/core';
@@ -220,7 +218,7 @@ export function Switch({
         </View>
 
         {/* Thumb */}
-        <Animated.View
+        <StyledAnimatedView
           style={[
             {
               position: 'absolute',
@@ -238,7 +236,7 @@ export function Switch({
               {thumbIcon}
             </View>
           )}
-        </Animated.View>
+        </StyledAnimatedView>
       </Pressable>
 
       {/* External label */}

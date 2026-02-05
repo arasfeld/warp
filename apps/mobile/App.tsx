@@ -1,13 +1,13 @@
 import './global.css';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { ThemeProvider, Button } from '@warp/react-native';
 
 export default function App() {
   return (
     <ThemeProvider>
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.buttonGroup}>
+      <ScrollView contentContainerClassName="flex-grow bg-background items-center justify-center p-5 gap-6">
+        <View className="gap-4 w-full items-center">
           <Button
             variant="primary"
             size="md"
@@ -33,7 +33,7 @@ export default function App() {
           </Button>
         </View>
 
-        <View style={styles.buttonGroup}>
+        <View className="gap-4 w-full items-center">
           <Button
             variant="primary"
             size="sm"
@@ -59,7 +59,7 @@ export default function App() {
           </Button>
         </View>
 
-        <View style={styles.buttonGroup}>
+        <View className="gap-4 w-full items-center">
           <Button
             variant="primary"
             size="md"
@@ -74,19 +74,3 @@ export default function App() {
     </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-    gap: 24,
-  },
-  buttonGroup: {
-    gap: 16,
-    width: '100%',
-    alignItems: 'center',
-  },
-});

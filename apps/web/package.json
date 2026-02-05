@@ -20,6 +20,6 @@
   "devDependencies": {
     "@warp/eslint-config": "workspace:*",
     "@warp/typescript-config": "workspace:*",
-    "@tailwindcss/postcss": "^4.0.0"
+    "@tailwindcss/postcss": "^4.1.18"
   }
 }

@@ -1,17 +1,15 @@
 import React, {
   createContext,
+  useCallback,
   useContext,
   useState,
   useMemo,
-  useEffect,
   type ReactNode,
 } from 'react';
-import { View } from 'react-native';
-import { useColorScheme, colorScheme } from 'nativewind';
+import { useColorScheme, View } from 'react-native';
 import type { Theme, ThemeMode } from '@warp/core';
-import { defaultTheme, getPalette } from '@warp/core/theme';
+import { defaultTheme } from '@warp/core/theme';
 import { adaptTheme, type RNTheme } from './adapter';
-import { createThemeVars } from './css-vars';
 
 /**
  * Theme context value
@@ -27,7 +25,7 @@ interface ThemeContextValue {
   coreTheme: Theme;
   /** Set core theme */
   setCoreTheme: (theme: Theme) => void;
-  /** NativeWind color scheme value */
+  /** Color scheme value */
   colorScheme: 'light' | 'dark' | null;
 }
 
@@ -50,7 +48,6 @@ export interface ThemeProviderProps {
 /**
  * Theme provider component
  * Provides theme context to all children
- * Follows NativeWind v4 best practices for dynamic theming
  */
 export function ThemeProvider({
   theme = defaultTheme,
@@ -58,10 +55,8 @@ export function ThemeProvider({
   enableManualToggle = true,
   children,
 }: ThemeProviderProps) {
-  // Use NativeWind's useColorScheme to get system preference
-  const { colorScheme: systemColorScheme } = useColorScheme();
+  const systemColorScheme = useColorScheme();
 
-  // Determine initial mode: use defaultMode if provided, otherwise follow system
   const initialMode =
     defaultMode || (systemColorScheme === 'dark' ? 'dark' : 'light');
 
@@ -70,7 +65,6 @@ export function ThemeProvider({
   );
   const [coreTheme, setCoreTheme] = useState<Theme>(theme);
 
-  // Current mode: manual override takes precedence, then system preference
   const currentMode: ThemeMode = useMemo(() => {
     if (manualMode !== null) {
       return manualMode;
@@ -78,28 +72,18 @@ export function ThemeProvider({
     return systemColorScheme === 'dark' ? 'dark' : 'light';
   }, [manualMode, systemColorScheme]);
 
-  // Sync NativeWind colorScheme with our mode
-  useEffect(() => {
-    if (enableManualToggle && manualMode !== null) {
-      colorScheme.set(manualMode);
-    }
-  }, [manualMode, enableManualToggle]);
-
   const adaptedTheme = useMemo(() => {
     return adaptTheme(coreTheme, currentMode);
   }, [coreTheme, currentMode]);
 
-  // Create CSS variables object using NativeWind's vars()
-  const themeVars = useMemo(() => {
-    const palette = getPalette(coreTheme, currentMode);
-    return createThemeVars(palette);
-  }, [coreTheme, currentMode]);
-
-  const setMode = (mode: ThemeMode) => {
-    if (enableManualToggle) {
-      setManualMode(mode);
-    }
-  };
+  const setMode = useCallback(
+    (mode: ThemeMode) => {
+      if (enableManualToggle) {
+        setManualMode(mode);
+      }
+    },
+    [enableManualToggle],
+  );
 
   const value: ThemeContextValue = useMemo(
     () => ({
@@ -110,14 +94,12 @@ export function ThemeProvider({
       setCoreTheme,
       colorScheme: systemColorScheme ?? null,
     }),
-    [adaptedTheme, currentMode, coreTheme, systemColorScheme],
+    [adaptedTheme, currentMode, setMode, coreTheme, systemColorScheme],
   );
 
-  // Apply theme vars via inline styles (NativeWind v4 recommended approach)
-  // The wrapper View needs to take full space and pass through layout
   return (
     <ThemeContext.Provider value={value}>
-      <View style={[themeVars, { flex: 1 }]}>{children}</View>
+      <View style={{ flex: 1 }}>{children}</View>
     </ThemeContext.Provider>
   );
 }

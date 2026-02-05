@@ -17,13 +17,12 @@
     "@warp/core": "workspace:*"
   },
   "peerDependencies": {
-    "nativewind": "^4.0.0",
-    "react": "^18.0.0 || ^19.0.0",
-    "react-native": ">=0.70.0"
+    "react": "^19.0.0",
+    "react-native": ">=0.70.0",
+    "uniwind": "^1.3.0"
   },
   "devDependencies": {
     "@warp/eslint-config": "workspace:*",
-    "@warp/typescript-config": "workspace:*",
-    "nativewind": "^4.0.1"
+    "@warp/typescript-config": "workspace:*"
   }
 }
